@@ -1,0 +1,20 @@
+{
+  "name": "intbizth/toro-app",
+  "authors": [
+    "ツ Liverbool <nukboon@gmail.com>"
+  ],
+  "description": "Balltoro Backend App.",
+  "main": "",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

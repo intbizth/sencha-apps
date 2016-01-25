@@ -1,0 +1,69 @@
+.mce-panel {
+    background-color: #fff;
+    border: 0;
+}
+
+.mce-panel.mce-foot {
+    border: 0 solid rgba(0, 0, 0, .2);
+}
+
+.mce-panel.mce-menu {
+    border: 1px solid #cbcbcb;
+}
+
+.mce-toolbar .mce-btn {
+    background: #fff;
+    border: 0;
+}
+
+.mce-toolbar .mce-btn i {
+    color: #555;
+}
+
+.mce-toolbar .mce-btn:hover i {
+    color: #333;
+}
+
+.mce-primary {
+    background: #6ba72b;
+}
+
+.mce-primary:hover {
+    background: #68a029;
+}
+
+.mce-btn-group:not(:first-child) {
+    border-left: 3px solid #fff;
+}
+
+.mce-menu-item:hover {
+    background: #eee;
+}
+
+.mce-menu-item.mce-disabled * {
+    color: #ddd !important;
+}
+
+.mce-edit-area {
+    border: 0 solid #ddd;
+}
+
+.mce-tinymce.mce-panel {
+    border-width: 0 !important;
+}
+
+.mce-toolbar-grp.mce-panel {
+    background-color: #fff !important;
+}
+
+i.mce-i-backcolor {
+    background: inherit !important;
+}
+
+.mce-colorbtn-trans div {
+    line-height: 10px;
+}
+
+.mce-splitbtn .mce-open.mce-active {
+    outline: none;
+}
