@@ -15,6 +15,7 @@ class DefaultController extends Controller
      */
     public function userInfoAction()
     {
+        // TODO: set runtime user & password
         $response = $this->get('app.api_client')->get('me');
         $responseType = $response->getHeader('Content-Type');
 
@@ -30,6 +31,7 @@ class DefaultController extends Controller
      */
     public function resourceAction()
     {
+        // TODO: set runtime user & password
         $users = $this->get('app.api_resolver')->getApi('me');
         $data = $users->get(1);
 
