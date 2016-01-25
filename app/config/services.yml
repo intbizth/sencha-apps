@@ -1,6 +1,6 @@
 parameters:
-    app.http_client.base_url: 'http://127.0.0.1:8000/app_dev.php/'
-    app.http_client.api_url: 'http://127.0.0.1:8000/app_dev.php/api/'
+    app.http_client.base_url: 'http://127.0.0.1:8001/app_dev.php/'
+    app.http_client.api_url: 'http://127.0.0.1:8001/app_dev.php/api/'
     app.http_client.token_url: 'oauth/v2/token'
 
     app.client.id: 1oacj6ctnl8kg8kw4g0048wgkcws0c888cgck0g8844cs8oggo
@@ -28,14 +28,14 @@ services:
 
     # Password credentials that use http client to authenticate user with given data
     app.oauth2.grant_type.password_credentials:
-        class: CommerceGuys\Guzzle\Oauth2\GrantType\PasswordCredentials
+        class: AppBundle\OAuth\PasswordCredentialsGrantType
         arguments:
             - "@app.http_client_oauth"
             - { token_url: %app.http_client.token_url%, client_id: %app.client.id%, client_secret: %app.client.secret%, username: %app.client.username%, password: %app.client.password% }
 
     # Refresh token that use http client to refresh oauth2 token
     app.oauth2.grant_type.refresh_token:
-        class: CommerceGuys\Guzzle\Oauth2\GrantType\RefreshToken
+        class: AppBundle\OAuth\RefreshTokenGrantType
         arguments:
             - "@app.http_client_oauth"
             - { token_url: %app.http_client.token_url%, client_id: %app.client.id%, client_secret: %app.client.secret%, username: %app.client.username%, password: %app.client.password% }
