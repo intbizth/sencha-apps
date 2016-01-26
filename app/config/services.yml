@@ -5,8 +5,8 @@ parameters:
 
     app.client.id: 1oacj6ctnl8kg8kw4g0048wgkcws0c888cgck0g8844cs8oggo
     app.client.secret: 5qswyupaj78ccwwks40cc0o8soo88ko4scwc0wo0owwcwo0ook
-    app.client.username: admin
-    app.client.password: admin0hk
+    app.client.username: ~
+    app.client.password: ~
 
     app.uri_map:
         product-variants: 'products/{productId}/variants'
@@ -29,6 +29,8 @@ services:
     # Password credentials that use http client to authenticate user with given data
     app.oauth2.grant_type.password_credentials:
         class: AppBundle\OAuth\PasswordCredentialsGrantType
+        calls:
+            - [setTokenStorage, ["@security.token_storage"]]
         arguments:
             - "@app.http_client_oauth"
             - { token_url: %app.http_client.token_url%, client_id: %app.client.id%, client_secret: %app.client.secret%, username: %app.client.username%, password: %app.client.password% }
@@ -36,20 +38,26 @@ services:
     # Refresh token that use http client to refresh oauth2 token
     app.oauth2.grant_type.refresh_token:
         class: AppBundle\OAuth\RefreshTokenGrantType
+        calls:
+            - [setTokenStorage, ["@security.token_storage"]]
         arguments:
             - "@app.http_client_oauth"
-            - { token_url: %app.http_client.token_url%, client_id: %app.client.id%, client_secret: %app.client.secret%, username: %app.client.username%, password: %app.client.password% }
+            - { token_url: %app.http_client.token_url%, client_id: %app.client.id%, client_secret: %app.client.secret% }
 
     # Subscriber used by Sylius API Client to provide OAuth2 authentication
     app.oauth2.subscriber.api:
         class: CommerceGuys\Guzzle\Oauth2\Oauth2Subscriber
         arguments: ["@app.oauth2.grant_type.password_credentials", "@app.oauth2.grant_type.refresh_token"]
 
+    app.oauth2.subscriber.api_token:
+        class: AppBundle\OAuth\TokenSubscriber
+        arguments: ["@security.token_storage", "@app.oauth2.subscriber.api"]
+
     # Http client that is used to connect with Sylius API
     app.http_client_api:
         class: GuzzleHttp\Client
         arguments:
-            - { base_url: '%app.http_client.api_url%', defaults: { auth: 'oauth2', subscribers: ["@app.oauth2.subscriber.api"] } }
+            - { base_url: '%app.http_client.api_url%', defaults: { auth: 'oauth2', subscribers: ["@app.oauth2.subscriber.api", "@app.oauth2.subscriber.api_token"] } }
 
     # Sylius API Client
     app.api_client:

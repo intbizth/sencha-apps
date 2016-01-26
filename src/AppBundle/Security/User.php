@@ -10,22 +10,32 @@ class User implements UserInterface, EquatableInterface
     /**
      * @var string
      */
-    private $username;
+    protected $username;
 
     /**
      * @var string
      */
-    private $password;
+    protected $password;
 
     /**
      * @var string
      */
-    private $salt;
+    protected $accessToken;
+
+    /**
+     * @var string
+     */
+    protected $refreshToken;
+
+    /**
+     * @var string
+     */
+    protected $salt;
 
     /**
      * @var array
      */
-    private $roles = array();
+    protected $roles = array();
 
     /**
      * User constructor.
@@ -106,5 +116,37 @@ class User implements UserInterface, EquatableInterface
         }
 
         return true;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAccessToken()
+    {
+        return $this->accessToken;
+    }
+
+    /**
+     * @param string $accessToken
+     */
+    public function setAccessToken($accessToken)
+    {
+        $this->accessToken = $accessToken;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRefreshToken()
+    {
+        return $this->refreshToken;
+    }
+
+    /**
+     * @param string $refreshToken
+     */
+    public function setRefreshToken($refreshToken)
+    {
+        $this->refreshToken = $refreshToken;
     }
 }

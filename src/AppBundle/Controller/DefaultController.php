@@ -2,41 +2,68 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use GuzzleHttp\Message\ResponseInterface;
 use Sylius\Api\InvalidResponseFormatException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/me", name="user_info")
+     * @param ResponseInterface $response
+     *
+     * @return Response|static
+     *
+     * @throws InvalidResponseFormatException
      */
-    public function userInfoAction()
+    private static function createResponse(ResponseInterface $response)
     {
-        // TODO: set runtime user & password
-        $response = $this->get('app.api_client')->get('me');
         $responseType = $response->getHeader('Content-Type');
 
         if ((false === strpos($responseType, 'application/json')) && (false === strpos($responseType, 'application/xml'))) {
             throw new InvalidResponseFormatException((string) $response->getBody(), $response->getStatusCode());
         }
 
-        return (strpos($responseType, 'application/json') !== false) ? $response->json() : $response->xml();
+        if (strpos($responseType, 'application/json') !== false) {
+            return JsonResponse::create($response->json());
+        }
+
+        return Response::create($response->xml());
     }
 
     /**
-     * @Route("/v1/{path}", name="resource_api")
+     * @param $path
+     * @param array|null $queryParameters
+     *
+     * @return ResponseInterface
      */
-    public function resourceAction()
+    private function getResource($path, array $queryParameters = null)
     {
-        // TODO: set runtime user & password
-        $users = $this->get('app.api_resolver')->getApi('me');
-        $data = $users->get(1);
+        return $this->get('app.api_client')->get($path, $queryParameters);
+    }
 
-        // TODO: other format
-        return JsonResponse::create($data);
+    /**
+     * @Route("/me", name="user_info")
+     */
+    public function userInfoAction()
+    {
+        return self::createResponse($this->getResource('me'));
+    }
+
+    /**
+     * @Route("/v1/{path}", name="resource_api", requirements={"path"=".*"})
+     *
+     * @param Request $request
+     * @param string $path
+     *
+     * @return Response|static
+     */
+    public function apiAction(Request $request, $path)
+    {
+        return self::createResponse($this->getResource($path, $request->query->all()));
     }
 
     /**
@@ -44,9 +71,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
         ]);
     }
 }

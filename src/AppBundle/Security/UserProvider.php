@@ -30,11 +30,11 @@ class UserProvider implements UserProviderInterface
         return $this->connection->createQueryBuilder()
             ->select('*')
             ->from('sylius_user', 'u')
-            ->where('u.enabled = :enabled')
-            ->andWhere('u.locked = :locked')
+            //->where('u.enabled = :enabled')
+            //->andWhere('u.locked = :locked')
             ->andWhere('u.username = :username')
-            ->setParameter('enabled', true)
-            ->setParameter('locked', false)
+            //->setParameter('enabled', true)
+            //->setParameter('locked', false)
             ->setParameter('username', $username)
             ->execute()
             ->fetch()
@@ -61,7 +61,7 @@ class UserProvider implements UserProviderInterface
             );
         }
 
-        return $this->loadUserByUsername($user->getUsername());
+        return $user; //$this->loadUserByUsername($user->getUsername());
     }
 
     public function supportsClass($class)
