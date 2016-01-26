@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Message\ResponseInterface;
 use Sylius\Api\InvalidResponseFormatException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -27,6 +28,15 @@ class DefaultController extends Controller
             throw new InvalidResponseFormatException((string) $response->getBody(), $response->getStatusCode());
         }
 
+        $status = $response->getStatusCode();
+
+        if ($status >= 400) {
+            return JsonResponse::create(array(
+                'code' => $status,
+                'message' => $response->getReasonPhrase(),
+            ), $status);
+        }
+
         if (strpos($responseType, 'application/json') !== false) {
             return JsonResponse::create($response->json());
         }
@@ -40,17 +50,13 @@ class DefaultController extends Controller
      *
      * @return ResponseInterface
      */
-    private function getResource($path, array $queryParameters = null)
+    private function getResource($path, array $queryParameters = array())
     {
-        return $this->get('app.api_client')->get($path, $queryParameters);
-    }
-
-    /**
-     * @Route("/me", name="user_info")
-     */
-    public function userInfoAction()
-    {
-        return self::createResponse($this->getResource('me'));
+        try {
+            return $this->get('app.api_client')->get($path, $queryParameters);
+        } catch (RequestException $e) {
+            return $e->getResponse();
+        }
     }
 
     /**
@@ -71,7 +77,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('default/index.html.twig', [
-        ]);
+        return $this->render('default/index.html.twig');
     }
 }

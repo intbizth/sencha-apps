@@ -26,6 +26,9 @@ class TokenSubscriber implements SubscriberInterface
         $this->oauth2Subscriber = $oauth2Subscriber;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getEvents()
     {
         return [

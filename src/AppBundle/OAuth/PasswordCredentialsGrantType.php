@@ -20,6 +20,9 @@ class PasswordCredentialsGrantType extends PasswordCredentials
         $this->tokenStorage = $tokenStorage;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getToken()
     {
         if (!$token = $this->tokenStorage->getToken()) {

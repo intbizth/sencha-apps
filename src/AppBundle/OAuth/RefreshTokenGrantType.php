@@ -21,6 +21,9 @@ class RefreshTokenGrantType extends RefreshToken
         $this->tokenStorage = $tokenStorage;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getToken()
     {
         $user = $this->tokenStorage->getToken()->getUser();
