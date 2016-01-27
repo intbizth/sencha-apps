@@ -4,3 +4,4 @@ Ext.define 'Toro.view.main.ViewportModel',
 
     data:
         currentView: null
+        userDisplayName: 'anon.'

@@ -2,13 +2,18 @@ Ext.define 'Toro.init.OAuth',
     constructor: (app, profile) ->
         Ext.Ajax.on 'requestexception', (conn, response, options, eOpts) ->
             return if response.status isnt 401
-            app.redirectTo 'authen.login'
+            app.fireEvent Toro.Application.events.LOGIN_REQUIRED
+            app.expired()
             return
 
-        app.getStore('Settings').load
-            callback: ->
-                authen = @getById 'authen.user'
-
-                if app.authen.isLogged = !!authen
-                    Toro.authen.LoginManager.addAccessTokenHeader()
-                    Toro.authen.LoginManager.keepAliveMe()
+        Ext.Ajax.request
+            cors: yes
+            async: yes
+            useDefaultXhrHeader: no
+            url: Toro.cfg.get 'api.info'
+            method: 'GET'
+            success: (res, opt) ->
+                userInfo = Ext.decode(res.responseText)
+                app.fireEvent Toro.Application.events.LOGIN_SUCCESS, userInfo
+                app.splashscreen.hide()
+                app.authen.user = userInfo

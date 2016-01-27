@@ -14,5 +14,6 @@ Ext.define 'Toro.cfg',
     config:
         api:
             baseUrl: 'http://127.0.0.1:8000'
-            client: '1oacj6ctnl8kg8kw4g0048wgkcws0c888cgck0g8844cs8oggo'
-            secret: '5qswyupaj78ccwwks40cc0o8soo88ko4scwc0wo0owwcwo0ook'
+            info: 'http://127.0.0.1:8000/api/me'
+            login: 'http://127.0.0.1:8000/login'
+            logout: 'http://127.0.0.1:8000/logout'

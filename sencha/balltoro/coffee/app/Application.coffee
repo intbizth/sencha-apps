@@ -13,13 +13,14 @@ Ext.define 'Toro.Application',
     defaultToken: 'dashboard'
 
     authen:
-        isLogged: no
+        user: null
 
     routingToken:
         previous: null
         current: null
 
     requires: [
+        'Toro.cfg'
         'Toro.*'
     ]
 
@@ -27,16 +28,40 @@ Ext.define 'Toro.Application',
     stores: [
         'Menus'
         'Settings'
+        'Users'
     ]
 
     statics:
-        isDebug: no
+        API_VERSION: 'v1'
+        IS_DEBUG: no
+        events:
+            LOGIN_SUCCESS: 'LOGIN_SUCCESS'
+            LOGIN_REQUIRED: 'LOGIN_REQUIRED'
+
+    splashscreen: null
+
+    init: ->
+        @splashscreen = Ext.getBody().mask('Loading, please stand by ...');
 
     launch: (profile) ->
-
         Ext.create 'Toro.init.Ajax', @, profile
         Ext.create 'Toro.init.OAuth', @, profile
 
     onAppUpdate: ->
         Ext.Msg.confirm "Application Update", "This application has an update, reload?", (choice) ->
             window.location.reload()  if choice is "yes"
+
+    logout: ->
+        @authen.user = null
+        Ext.Msg.confirm "Logout", "Do you want to logout?", (choice) ->
+            window.location.href = Toro.cfg.get 'api.logout'  if choice is "yes"
+
+    expired: ->
+        @authen.user = null
+        Ext.MessageBox.show
+            title: 'Session Expired!'
+            msg: "Your logged session was expired, Please login again."
+            icon: Ext.MessageBox.ERROR
+            buttons: Ext.Msg.OK
+            closable: false
+            fn: -> window.location.href = Toro.cfg.get 'api.login'

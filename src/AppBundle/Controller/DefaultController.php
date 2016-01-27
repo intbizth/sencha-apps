@@ -45,15 +45,48 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $path
-     * @param array|null $queryParameters
+     * @param Request $request
+     * @param string $path
      *
-     * @return ResponseInterface
+     * @return ResponseInterface|null
      */
-    private function getResource($path, array $queryParameters = array())
+    private function resource(Request $request, $path)
     {
         try {
-            return $this->get('app.api_client')->get($path, $queryParameters);
+            $client = $this->get('app.api_client');
+
+            if ($request->query->count()) {
+                $path .= '?' . $request->getQueryString();
+            }
+
+            $method = $request->getMethod();
+
+            if ($request->query->has('_method')) {
+                $method = $request->query->get('_method');
+            }
+
+            switch(strtoupper($method)) {
+                case 'POST':
+                    $result = $client->post($path, $request->request->all());
+                    break;
+
+                case 'PUT':
+                    $result = $client->put($path, $request->request->all());
+                    break;
+
+                case 'PATCH':
+                    $result = $client->patch($path, $request->request->all());
+                    break;
+
+                case 'DELETE':
+                    $result = $client->delete($path);
+                    break;
+
+                default:
+                    $result = $client->get($path, $request->query->all());
+            }
+
+            return $result;
         } catch (RequestException $e) {
             return $e->getResponse();
         }
@@ -69,7 +102,7 @@ class DefaultController extends Controller
      */
     public function apiAction(Request $request, $path)
     {
-        return self::createResponse($this->getResource($path, $request->query->all()));
+        return self::createResponse($this->resource($request, $path));
     }
 
     /**

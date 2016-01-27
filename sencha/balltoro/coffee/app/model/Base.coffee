@@ -131,12 +131,6 @@ Ext.define 'Toro.model.Base',
 
                     options.params = {} if !options.params
                     Ext.merge options.params, '_method': options.method
-
-                    userData = Toro.authen.LoginManager.data
-
-                    if userData.access_token
-                        Ext.merge options.params, 'access_token': userData.access_token
-
                     query = Ext.urlEncode options.params
 
                     if /\?/.test options.url

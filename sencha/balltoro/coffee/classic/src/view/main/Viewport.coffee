@@ -62,9 +62,8 @@ Ext.define 'Toro.view.main.Viewport',
             handler: 'onSignOut'
         ,
             xtype: 'tbtext'
-            text: ''
-            reference: 'refUsernameText'
             cls: 'top-user-name'
+            bind: '{userDisplayName}'
         ,
             xtype: 'image'
             cls: 'header-right-profile-image'

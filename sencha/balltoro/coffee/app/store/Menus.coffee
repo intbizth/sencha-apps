@@ -62,12 +62,4 @@ Ext.define 'Toro.store.Menus',
             iconCls: 'fa fa-users'
             leaf: true
             routeId: 'profiles'
-        ,
-            # TODO: hiddle
-            hiddle: yes
-            text: 'Login'
-            view: 'authen.Login'
-            leaf: true
-            iconCls: 'x-fa fa-check'
-            routeId:'authen.login'
         ]

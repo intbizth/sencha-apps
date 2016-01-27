@@ -9,6 +9,13 @@ Ext.define 'Toro.view.main.ViewportController',
     routes:
         ':node': 'onRouteChange'
 
+    init: ->
+        Toro.app.on 'LOGIN_SUCCESS', @updateUserView, @
+
+    updateUserView: (userData) ->
+        vm = @getViewModel()
+        vm.set 'userDisplayName', userData.displayname
+
     activateView: (hashTag) ->
         hashTag = (hashTag || '').toLowerCase()
         mainCard = @referTo 'MainCardPanel'
@@ -111,23 +118,12 @@ Ext.define 'Toro.view.main.ViewportController',
                         navigationList.setMicro yes
         return
 
-    onSignOut: ->
-        new Toro.view.authen.Logout()
+    onSignOut: -> Toro.app.logout()
 
     onMainViewRender: ->
         @redirectTo 'dashboard' if !window.location.hash
 
     onRouteChange: (id) ->
-        isLogged = Toro.app.authen.isLogged
-
-        # cannot enter login page when aready logged-in
-        if id == 'authen.login' and isLogged
-            return @redirectTo 'dashboard'
-
-        # require login
-        if id != 'authen.login' and !isLogged
-            return @redirectTo 'authen.login'
-
         @activateView id
 
     onSearchRouteChange: ->
