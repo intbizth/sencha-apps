@@ -92,6 +92,7 @@ Ext.define 'Toro.view.main.Viewport',
         ,
             xtype: 'container'
             flex: 1
+            #padding: 20
             reference: 'refMainCardPanel'
             cls: 'ui-dash-right-main-container'
             itemId: 'contentPanel'

@@ -3,6 +3,7 @@ Ext.define 'Toro.view.user.LayoutView',
     xtype: 'ux-user-layout'
 
     controller: 'ctrl-user'
+    cls: 'ui-shadow-panel'
 
     layout:
         type: 'hbox'
