@@ -4,48 +4,36 @@ Ext.define 'Toro.view.profile.Controller',
 
     init: -> #..
 
+    # @private
+    createDialogTitle: (r) ->
+        if r.phantom
+            return 'เพิ่มประวัติใหม่'
+        else r.getUser().get 'displayname'
+
+    # @private
     createDialog: (record) ->
-        model = @referTo('ProfileList').getStore().getModel()
-        userRecord = if record then record.get 'user' else Ext.create 'Toro.model.User'
+        vm = @getViewModel()
+        record = vm.prepareData(record)
+        console.log record
+
         @dialog = @getView().add
             xtype: 'wg-profile-form'
+            ownerView: @getView()
+            ownerDataKey: 'profile'
             viewModel:
+                type: 'vm-profile-form'
                 data:
-                    title:  if record then 'แก้ไข: ' + record.get('first_name') else 'เพิ่มประวัติใหม่'
-                    profile: record || new model()
-                    user: userRecord || record.getUser()
-
-            listeners:
-                afterrender: =>
-                    @dialog.changeSize()
-
-                resize: =>
-                    @dialog.changeSize()
-
-                beforeclose: (panel, eOpts) =>
-                    if record and record.dirty
-                        @showConfirmMessage
-                            title: 'ข้อมูลมีการเปลี่ยนแปลง'
-                            message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
-                            fn: (pressed) =>
-                                if pressed == 'ok'
-                                    record.store.rejectChanges()
-                                    @dialog.close()
-
-                        return no
-
-            changeSize: =>
-                box = @getView().getBox()
-                @dialog.setBox(box)
+                    "title":  @createDialogTitle record
+                    "profile": record
+                    "user": record.getUser()
+                    "countries": vm.getStore('countries')
+                    "groups": vm.getStore('groups')
 
         @dialog.show()
 
+    onCancel: -> @dialog.close()
     onAddNew: -> @createDialog()
-
-    onEdit: ->
-        list = @referTo 'ProfileList'
-        record = list.getSelection()[0]
-        @createDialog record
+    onEdit: -> @createDialog @referTo('ProfileList').getSelection()[0]
 
     onDelete: ->
         @showConfirmMessage
@@ -70,82 +58,56 @@ Ext.define 'Toro.view.profile.Controller',
                             list.unmask()
                             @alertFailure('ขออภัย! เกิดปัญหาขณะลบประวัติ กรุณาลองใหม่อีกครั้งค่ะ')
 
-    onSelectionChange: (eOpts, selected) ->
-        editButton = @referTo('EditButton')
-        editButton.setDisabled(selected.length != 1)
-
-        removeButton = @referTo('DeleteButton')
-        removeButton.setDisabled(!selected.length)
-
-    onCancel: -> @dialog.close()
-
     onSubmit: ->
+        vm = @dialog.getViewModel()
         form = @dialog.down 'form'
+        record = vm.get 'profile'
 
-        profileRecord = @dialog.getViewModel().get 'profile'
-        profilesStore = @referTo('ProfileList').getStore()
+        vm.preSubmit record
 
-        userRecord = @dialog.getViewModel().get 'user'
-        usersStore = Ext.getStore('users-store')
-
-        isNewRecord = profileRecord.phantom
-
-        if isNewRecord
-            userData = userRecord.getData()
-        else
-            userData = userRecord.getChanges()
-
-        if userData.hasOwnProperty('id')
-            delete userData['id']
-
-        profileRecord.set 'user', userData
-
-        if form.isValid() and profileRecord.dirty
-            form.mask('Submitting..')
-
-            profileRecord.save
-                failure: (rec, o) =>
-                    form.unmask()
-
-                    titleMessage = 'ผิดพลาด'
-                    errorMessage = 'ขออภัย! เกิดปัญหาขณะจัดการประวัติ กรุณาลองใหม่อีกครั้งค่ะ'
-
-                    if response = o.error.response
-                        # internal server error
-                        if response.status == 500
-                            titleMessage = response.statusText
-                            errorMessage = 'Sorry, something went wrong.'
-
-                        # sf validation error.
-                        if response.status == 400
-                            obj = Ext.decode response.responseText
-                            titleMessage = obj.message
-
-                            Ext.Object.each obj.errors.children, (key, value, item) ->
-                                if value.hasOwnProperty('errors')
-                                    errorMessage = value.errors[0]
-
-                    @alertFailure
-                        title: titleMessage
-                        message: errorMessage
-
-                success: (rec, o) =>
-                    form.unmask()
-
-                    if isNewRecord
-                        profilesStore.add rec
-                        profilesStore.commitChanges()
-
-                        usersStore.add rec.get 'user'
-                        usersStore.commitChanges()
-                        @alertSuccess('เพิ่มผู้ใช้ระบบเรียบร้อยแล้ว')
-
-                    else
-                        @alertSuccess('แก้ไขผู้ใช้ระบบเรียบร้อยแล้ว')
-
-                    @dialog.close()
-        else
+        if !(form.isValid() and record.isSubmitReady())
             @dialog.close()
+            return
+
+        form.mask('กำลังบันทึกข้อมูล ..')
+
+        record.save
+            failure: (rec, o) =>
+                form.unmask()
+
+                titleMessage = 'ผิดพลาด'
+                errorMessage = 'ขออภัย! เกิดปัญหาขณะจัดการประวัติ กรุณาลองใหม่อีกครั้งค่ะ'
+
+                if response = o.error.response
+                    # internal server error
+                    if response.status == 500
+                        titleMessage = response.statusText
+                        errorMessage = 'Sorry, something went wrong.'
+
+                    # sf validation error.
+                    if response.status == 400
+                        obj = Ext.decode response.responseText
+                        titleMessage = obj.message
+
+                        Ext.Object.each obj.errors.children, (key, value, item) ->
+                            if value.hasOwnProperty('errors')
+                                errorMessage = value.errors[0]
+
+                @alertFailure
+                    title: titleMessage
+                    message: errorMessage
+
+            success: (rec, o) =>
+                form.unmask()
+
+                vm.postSubmit rec
+
+                if record.phantom
+                    @alertSuccess('เพิ่มผู้ใช้ระบบเรียบร้อยแล้ว')
+                else
+                    @alertSuccess('แก้ไขผู้ใช้ระบบเรียบร้อยแล้ว')
+
+                @dialog.close()
 
     onPlainPasswordBeforeRender: (field) ->
         userRecord = @dialog.getViewModel().get 'user'

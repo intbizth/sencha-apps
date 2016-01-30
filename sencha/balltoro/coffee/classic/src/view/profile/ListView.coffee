@@ -2,9 +2,6 @@ Ext.define 'Toro.view.profile.ListView',
     extend: 'Ext.grid.Panel'
     alias: 'widget.wg-profile-list'
 
-    viewModel:
-        type: 'vm-profile'
-
     bind:
         store: '{profiles}'
 
@@ -14,11 +11,7 @@ Ext.define 'Toro.view.profile.ListView',
         emptyText: 'Empty Data'
         deferEmptyText: no
 
-    listeners:
-        selectionchange: 'onSelectionChange'
-
     reference: 'refProfileList'
-    headerBorders: no
     title: 'ผู้ใช้งานระบบ'
 
     columns: [
@@ -56,43 +49,39 @@ Ext.define 'Toro.view.profile.ListView',
     ]
 
     tbar:
-        defaultButtonUI: 'default'
-        scrollable: yes
         items: [
-            xtype: 'button'
             text: 'เพิ่มผู้ใช้งาน'
+            xtype: 'button'
             iconCls: 'fa fa-pencil'
-            ui: 'default-toolbar'
             handler: 'onAddNew'
         ,
             '-'
         ,
+            text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            text: 'แก้ไข'
             iconCls:'fa fa-pencil-square-o '
-            ui: 'default-toolbar'
-            disabled: yes
+            bind:
+                disabled: '{!refProfileList.selection}'
             handler: 'onEdit'
         ,
             '-'
         ,
+            text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            text: 'ลบ'
             iconCls:'fa fa-minus-square'
-            ui: 'default-toolbar'
-            disabled: yes
+            bind:
+                disabled: '{!refProfileList.selection}'
             handler: 'onDelete'
         ,
             '->'
         ,
+            fieldLabel: 'ค้นหา'
             xtype: 'searchfield'
             reference: 'refSearchField'
-            fieldLabel: 'ค้นหา'
             labelWidth: 50
-            bind:
-                store: '{profiles}'
+            bind: store: '{profiles}'
             margin: '0 10 0 0'
         ]
 
@@ -100,6 +89,5 @@ Ext.define 'Toro.view.profile.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{profiles}'
+        bind: store: '{profiles}'
         displayInfo: yes

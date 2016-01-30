@@ -25,6 +25,19 @@ Ext.define 'Toro.store.Base',
 
         return apis['update']
 
+    # get all model's id
+    getIds: ->
+        return null if !@count()
+        ids = []
+        @each (rec) -> ids.push rec.getId()
+        return ids
+
+    getByIds: (ids) ->
+        rs = []
+        @each (rec) ->
+            rs.push rec if Ext.Array.contains ids, rec.getId()
+        return if rs.length then rs else null
+
     ## delete records
     deletes: (records, options) ->
 

@@ -27,20 +27,19 @@ Ext.define 'Toro.model.Profile',
     ,
         name: 'user'
         reference: 'User'
-    ,
-        name: 'groups'
-        type: 'auto'
-        critical: yes
-        convert: (groups, rec) ->
-            # reader
-            rec.arrayConverter(@, groups, rec, 'id')
-        serialize: (groups, rec) ->
-            # writer
-            if !groups.length
-                return null
-
-            rec.arrayConverter(@, groups, rec, 'id')
     ]
+
+    updateGroups: (rs) ->
+        @groups().loadData rs || []
+
+    getGroupIds: ->
+        @groups().getIds()
+
+    hasMany:
+        name: 'groups'
+        model: 'ProfileGroup'
+        storeConfig:
+            type: 'store-profile-groups'
 
     validators:
         first_name: 'presence'

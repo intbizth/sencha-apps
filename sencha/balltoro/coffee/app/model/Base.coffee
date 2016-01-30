@@ -9,6 +9,21 @@ Ext.define 'Toro.model.Base',
 
     rawData: null
 
+    getSubmitData: ->
+        data = if @phantom then @getData() else @getChanges()
+        return null if Ext.Object.isEmpty(data)
+        return data
+
+    # using for associations save
+    def: (key, value) -> @set key, value
+
+    undef: ->
+        for k in arguments
+            delete @data[k] if @data.hasOwnProperty(k)
+            delete @previousValues[k] if @previousValues.hasOwnProperty(k)
+
+    isSubmitReady: (form) -> form.isValid() && (@dirty && @isValid())
+
     # private function
     doRequest: (config) ->
         return Ext.Ajax.request
@@ -82,16 +97,16 @@ Ext.define 'Toro.model.Base',
             data = def if def and data is null
             return data
 
-    arrayConverter: (field, mutimodel, record, key) ->
-        record.setRawData(field.name, mutimodel)
+    arrayConverter: (field, models, record, key) ->
+        record.setRawData(field.name, models)
 
         if !key || !Ext.isString key
             key = 'name'
 
         _store = []
 
-        if mutimodel?
-            for model in mutimodel
+        if models?
+            for model in models
                 _store.push model[key] || model
         return _store
 
@@ -130,13 +145,8 @@ Ext.define 'Toro.model.Base',
                 when 'POST', 'PUT', 'PATCH', 'DELETE'
 
                     options.params = {} if !options.params
+
                     Ext.merge options.params, '_method': options.method
-                    query = Ext.urlEncode options.params
-
-                    if /\?/.test options.url
-                        options.url += ('&' + query)
-                    else options.url += ('?' + query)
-
 
                     if options.jsonData
                         # remove id property no need on server side

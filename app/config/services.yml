@@ -57,11 +57,20 @@ services:
     app.http_client_api:
         class: GuzzleHttp\Client
         arguments:
-            - { base_url: '%app.http_client.api_url%', defaults: { auth: 'oauth2', subscribers: ["@app.oauth2.subscriber.api", "@app.oauth2.subscriber.api_token"] } }
+            -
+                base_url: '%app.http_client.api_url%'
+                defaults:
+                    auth: "oauth2"
+                    subscribers: ["@app.oauth2.subscriber.api", "@app.oauth2.subscriber.api_token"]
+                    exceptions: false
+                    headers:
+                        Accept: "application/json"
+                        Content-Type: "application/json"
+                        User-Agent: "DoSAPI/0.1"
 
     # Sylius API Client
     app.api_client:
-        class: Sylius\Api\Client
+        class: AppBundle\OAuth\Client
         arguments: ["@app.http_client_api"]
 
     # Uri map with custom uris

@@ -75,16 +75,14 @@ Ext.define 'Toro.view.profile.FormView',
             ,
                 xtype: 'tagfield'
                 fieldLabel: 'กลุ่มผู้ใช้งาน '
-                name: 'groups'
                 allowBlank: yes
                 displayField: 'name'
                 valueField: 'id'
                 queryMode: 'local'
-                bind: '{profile.groups}'
                 multiSelect: yes
-                store:
-                    type: 'store-profile-groups'
-                    autoLoad: yes
+                bind:
+                    store: '{groups}'
+                    value: '{groupsIds}'
             ]
         ,
             region:'west'
@@ -120,19 +118,15 @@ Ext.define 'Toro.view.profile.FormView',
             ,
                 xtype: 'combobox'
                 fieldLabel: 'ประเทศ '
-                name: 'country'
                 displayField: 'name'
                 valueField: 'id'
                 queryMode: 'local'
-                bind: '{user.country}'
                 forceSelection: yes
-                store:
-                    type: 'store-countries'
-                    autoLoad: yes
-                    pageSize: 100
+                bind:
+                    store: '{countries}'
+                    selection: '{country}'
             ,
                 xtype: 'checkboxfield'
-                name: 'enabled'
                 boxLabel: 'เปิดการใช้งาน '
                 bind: '{user.enabled}'
             ]
