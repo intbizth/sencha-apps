@@ -26,20 +26,45 @@ Ext.define 'Toro.model.Profile',
         type: 'string'
     ,
         name: 'user'
-        reference: 'User'
+        reference:
+            type: 'User'
+            role: 'user'
+            unique: yes
+            associationKey: 'user'
+            getterName: 'getUser'
+            setterName: 'setUser'
+    ,
+        name: 'fullname'
+        persist: no
+        calculate: (d) -> "#{d.first_name}  #{d.last_name}"
     ]
 
-    updateGroups: (rs) ->
-        @groups().loadData rs || []
-
-    getGroupIds: ->
-        @groups().getIds()
-
-    hasMany:
+    hasMany: [
         name: 'groups'
         model: 'ProfileGroup'
+        role: 'groups'
+        associationKey: 'groups'
+        getterName: 'getGroups'
+        setterName: 'setGroups'
         storeConfig:
             type: 'store-profile-groups'
+    ]
+
+    writerTransform: fn: (data) ->
+        delete data.user if Ext.Object.isEmpty(data.user)
+        delete data.user.id if data.user
+
+        if data.user.country
+            data.user.country = data.user.country.id
+
+        groups = data.groups
+
+        if !Ext.isEmpty groups
+            data.groups = []
+            for group in groups
+                data.groups.push group.id
+
+        return data
 
     validators:
         first_name: 'presence'

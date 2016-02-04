@@ -35,7 +35,7 @@ Ext.define 'Toro.store.Base',
     getByIds: (ids) ->
         rs = []
         @each (rec) ->
-            rs.push rec if Ext.Array.contains ids, rec.getId()
+            rs.push rec if Ext.Array.contains (ids || []), rec.getId()
         return if rs.length then rs else null
 
     ## delete records

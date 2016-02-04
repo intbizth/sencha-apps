@@ -17,6 +17,11 @@ Ext.define 'Toro.view.profile.Model',
             autoLoad: yes
             pageSize: 200
 
+    formulas:
+        isLoading:
+            get: ->
+
+
     createUser: (record) ->
         return record.getUser() if record
         return Ext.create 'Toro.model.User'
@@ -28,6 +33,12 @@ Ext.define 'Toro.view.profile.Model',
     prepareData: (record) ->
         user = @createUser record
         record = @createRecord record
+        country = user.getCountry()
+
+        if country and user.get('country_id') != country.getId()
+            user.set('country_id', country.getId())
+            user.commit()
+
         record.setUser user
 
         return record

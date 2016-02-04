@@ -7,7 +7,7 @@ Ext.define 'Toro.view.profile.Controller',
     # @private
     createDialogTitle: (r) ->
         if r.phantom
-            return 'เพิ่มประวัติใหม่'
+           return 'เพิ่มประวัติใหม่'
         else r.getUser().get 'displayname'
 
     # @private
@@ -19,15 +19,11 @@ Ext.define 'Toro.view.profile.Controller',
         @dialog = @getView().add
             xtype: 'wg-profile-form'
             ownerView: @getView()
-            ownerDataKey: 'profile'
             viewModel:
                 type: 'vm-profile-form'
                 data:
-                    "title":  @createDialogTitle record
-                    "profile": record
-                    "user": record.getUser()
-                    "countries": vm.getStore('countries')
-                    "groups": vm.getStore('groups')
+                    title:  @createDialogTitle record
+                    record: record
 
         @dialog.show()
 
@@ -61,11 +57,9 @@ Ext.define 'Toro.view.profile.Controller',
     onSubmit: ->
         vm = @dialog.getViewModel()
         form = @dialog.down 'form'
-        record = vm.get 'profile'
+        record = vm.get 'record'
 
-        vm.preSubmit record
-
-        if !(form.isValid() and record.isSubmitReady())
+        if !(form.isValid() && vm.isDirty())
             @dialog.close()
             return
 
@@ -85,6 +79,7 @@ Ext.define 'Toro.view.profile.Controller',
                         errorMessage = 'Sorry, something went wrong.'
 
                     # sf validation error.
+                    # TODO: handle form error with custom fn.
                     if response.status == 400
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
@@ -98,9 +93,8 @@ Ext.define 'Toro.view.profile.Controller',
                     message: errorMessage
 
             success: (rec, o) =>
+                vm.commit()
                 form.unmask()
-
-                vm.postSubmit rec
 
                 if record.phantom
                     @alertSuccess('เพิ่มผู้ใช้ระบบเรียบร้อยแล้ว')
@@ -109,8 +103,3 @@ Ext.define 'Toro.view.profile.Controller',
 
                 @dialog.close()
 
-    onPlainPasswordBeforeRender: (field) ->
-        userRecord = @dialog.getViewModel().get 'user'
-
-        if !userRecord.phantom
-            field.setVisible no

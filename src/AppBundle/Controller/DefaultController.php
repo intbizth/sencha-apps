@@ -62,7 +62,6 @@ class DefaultController extends Controller
     {
         $request->query->remove('_dc');
         $request->query->remove('_method');
-        $request->query->remove('page');
         $request->query->remove('start');
     }
 

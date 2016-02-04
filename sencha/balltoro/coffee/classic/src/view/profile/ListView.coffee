@@ -9,43 +9,41 @@ Ext.define 'Toro.view.profile.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        deferEmptyText: no
+        #deferEmptyText: no
 
-    reference: 'refProfileList'
     title: 'ผู้ใช้งานระบบ'
+    reference: 'refProfileList'
+    headerBorders: no
+
+    listeners:
+        selectionchange: ->
+            console.log arguments
 
     columns: [
         text: 'สถานะ'
         align: 'center'
         width: 80
         renderer: (v, c, r) ->
-            if r.getUser().get('enabled')
+            if r.getUser().isEnabled()
                 return '<span style="color:green;">เปิด</span>'
 
             return '<span style="color:red;">ปิด</span>'
     ,
         text: 'ชื่อ - นามสกุล'
-        flex: 1
-        minWidth: 200
-        renderer: (v, c, r) ->
-            return r.get('first_name') + '  ' + r.get('last_name')
+        width: 200
+        dataIndex: 'fullname'
     ,
         text: 'Username'
         width: 200
-        renderer: (v, c, r) ->
-            return r.getUser().get('username')
+        renderer: (v, c, r) -> r.getUser().get('username')
     ,
         dataIndex: 'email'
         text: 'อีเมล์'
         width: 200
     ,
         text: 'สิทธิ์การใช้งาน'
-        width: 200
-        renderer: (v, c, r) ->
-            roles = r.getUser().get('roles')
-
-            if roles
-                return roles.join ', '
+        flex: 1
+        renderer: (v, c, r) -> r.getUser().getReadableRoles()
     ]
 
     tbar:

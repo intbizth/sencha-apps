@@ -31,31 +31,31 @@ Ext.define 'Toro.view.profile.FormView',
                 xtype: 'textfield'
                 fieldLabel: '* ชื่อ'
                 allowBlank: no
-                bind: '{profile.first_name}'
+                bind: '{record.first_name}'
                 minLength: 2
                 maxLength: 255
             ,
                 xtype: 'textfield'
                 fieldLabel: '* นามสกุล'
                 allowBlank: no
-                bind: '{profile.last_name}'
+                bind: '{record.last_name}'
                 minLength: 2
                 maxLength: 255
             ,
                 xtype: 'textfield'
                 fieldLabel: '* อีเมล '
                 allowBlank: no
-                bind: '{profile.email}'
+                bind: '{record.email}'
                 vtype: 'email'
             ,
                 xtype: 'datefield'
                 fieldLabel: 'วันเกิด'
                 format: 'd M Y'
-                bind: '{profile.birthday}'
+                bind: '{record.birthday}'
             ,
                 xtype: 'textfield'
                 fieldLabel: 'เบอร์มือถือ'
-                bind: '{profile.mobile}'
+                bind: '{record.mobile}'
                 emptyText: '08123456789'
                 # maxLength: 10
                 enforceMaxLength: true
@@ -64,7 +64,8 @@ Ext.define 'Toro.view.profile.FormView',
                 fieldLabel: '* เพศ'
                 name: 'gender'
                 allowBlank: no
-                bind: '{profile.gender}'
+                editable: no
+                bind: '{record.gender}'
                 store: [
                     ['u', 'ไม่ระบุ']
                 ,
@@ -82,7 +83,7 @@ Ext.define 'Toro.view.profile.FormView',
                 multiSelect: yes
                 bind:
                     store: '{groups}'
-                    value: '{groupsIds}'
+                    value: '{currentGroups}'
             ]
         ,
             region:'west'
@@ -101,20 +102,20 @@ Ext.define 'Toro.view.profile.FormView',
                 xtype: 'textfield'
                 fieldLabel: 'Username'
                 allowBlank: no
-                bind: '{user.username}'
+                bind: '{record.user.username}'
             ,
                 xtype: 'textfield'
                 fieldLabel: 'Displayname'
                 allowBlank: yes
-                bind: '{user.displayname}'
+                bind: '{record.user.displayname}'
             ,
                 xtype: 'textfield'
+                inputType: 'password'
                 fieldLabel: 'รหัสผ่าน '
-                allowBlank: no
-                minLength: 6
-                bind: '{user.plainPassword}'
-                listeners:
-                    beforerender: 'onPlainPasswordBeforeRender'
+                minLength: 4
+                bind:
+                    value: '{record.user.plain_password}'
+                    required: '{isPhantom}'
             ,
                 xtype: 'combobox'
                 fieldLabel: 'ประเทศ '
@@ -128,7 +129,7 @@ Ext.define 'Toro.view.profile.FormView',
             ,
                 xtype: 'checkboxfield'
                 boxLabel: 'เปิดการใช้งาน '
-                bind: '{user.enabled}'
+                bind: '{record.user.enabled}'
             ]
         ,
             region: 'south'

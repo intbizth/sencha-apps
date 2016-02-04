@@ -1,30 +1,37 @@
 Ext.define 'Toro.view.profile.ModelForm',
-    extend: 'Ext.app.ViewModel'
+    extend: 'Toro.view.base.ViewModel'
     alias: 'viewmodel.vm-profile-form'
 
     formulas:
-        "country":
-            get: (get) -> get('user').getCountry()
-            set: (val) -> console.log val; @get('user').setCountry(val)
-        "groupsIds":
-            get: (get) -> get('profile').groups().getIds()
-            set: (ids) -> @get('profile').updateGroups @get('groups').getByIds(ids)
+        currentGroups:
+           get: -> @get('record').getGroups().getIds()
+           set: (v) -> @get('record').getGroups().loadData @get('groups').getByIds(v)
 
-    preSubmit: (profile) ->
-        # can't track ref change! :(, isDirty will away to be `true`
-        user = @get('user')
-        console.log user
-        return
-        #userData = user.getSubmitData() || {}
-        #userData.country = if @get('country') then @get('country').getId() else null
+        country:
+            get: ->
+                user = @get('record.user')
+                user.getCountry() if user
+            set: (val) ->
+                @get('record.user').setCountry val
 
-        profile.def 'groups', profile.getGroupIds()
-        profile.def 'user', userData
+        isPhantom:
+            get: -> @get('record').phantom
 
-    postSubmit: (profile) ->
-        profile.undef 'user', 'groups'
+    isDirty: ->
+        user = @get('record.user')
+        @get('record').dirty || (user && user.dirty)
 
-        if profile.phantom
-            profiles = @get('profiles')
-            profiles.add profile
-            profiles.commitChanges()
+    commit: ->
+        @get('record').commit(); @get('record.user').commit()
+
+    reject: ->
+        @get('record').reject()
+
+        return if !user = @get('record').getUser()
+
+        countryId = user.getPrevious('country_id')
+        user.reject()
+
+        if countryId
+            user.setCountry @get('countries').getById(countryId)
+            user.commit()

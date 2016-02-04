@@ -14,16 +14,6 @@ Ext.define 'Toro.model.Base',
         return null if Ext.Object.isEmpty(data)
         return data
 
-    # using for associations save
-    def: (key, value) -> @set key, value
-
-    undef: ->
-        for k in arguments
-            delete @data[k] if @data.hasOwnProperty(k)
-            delete @previousValues[k] if @previousValues.hasOwnProperty(k)
-
-    isSubmitReady: (form) -> form.isValid() && (@dirty && @isValid())
-
     # private function
     doRequest: (config) ->
         return Ext.Ajax.request
@@ -148,9 +138,14 @@ Ext.define 'Toro.model.Base',
 
                     Ext.merge options.params, '_method': options.method
 
-                    if options.jsonData
-                        # remove id property no need on server side
-                        delete options.jsonData[options.proxy.model.idProperty]
+                    # runtime writer transform
+                    if options.jsonData and options.writerTransform
+                        options.jsonData = options.writerTransform(options.jsonData)
+
+                    # sloved by writer.writeRecordId = no
+                    # if options.jsonData
+                    #     # remove id property no need on server side
+                    #     delete options.jsonData[options.proxy.model.idProperty]
 
                     # if options.jsonData
                     #     options.params = {}
@@ -208,6 +203,21 @@ Ext.define 'Toro.model.Base',
                     read: 'GET'
                     update: config.updateMethod || 'PATCH'
                     destroy: 'DELETE'
+                writer:
+                    type: 'json'
+                    writeRecordId: no
+                    allDataOptions:
+                        associated: yes
+                        persist: yes
+                    partialDataOptions:
+                        changes: yes
+                        critical: yes
+                        associated: yes
+                        persist: yes
+                        serialize: yes
                 reader:
                     type: 'json'
                     rootProperty: '_embedded.items'
+
+            if config.writerTransform
+                cls.proxyConfig.writer.transform = config.writerTransform

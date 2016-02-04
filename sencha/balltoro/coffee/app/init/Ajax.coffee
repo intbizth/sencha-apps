@@ -4,6 +4,10 @@ Ext.define 'Toro.init.Ajax',
 
         # debug
         Ext.Ajax.on 'beforerequest', (conn, options, eOpts) ->
+            # custom path
+            options.url = Toro.cfg.get('api.baseUrl') + options.path if options.path
+
+            # custom api proxy
             options.url = options.url.replace '/api/', '/' + Toro.Application.API_VERSION + '/'
 
             if options.proxy and options.proxy.model and options.proxy.model.xhrOverrideOptions

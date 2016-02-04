@@ -12,28 +12,44 @@ Ext.define 'Toro.model.User',
         name: 'displayname'
         type: 'string'
     ,
-        name: 'plainPassword'
-        mapping: 'password'
+        name: 'plain_password'
         type: 'string'
     ,
         name: 'enabled'
         type: 'boolean'
     ,
+        name: 'roles'
+        type: 'auto'
+    ,
         name: '_links'
         type: 'auto'
     ,
         name: 'club'
-        reference: 'Club'
+        reference:
+            type: 'Club'
+            role: 'club'
+            associationKey: 'club'
+            getterName: 'getClub'
+            setterName: 'setClub'
     ,
         name: 'country'
-        reference: 'Country'
-    ,
-        name: 'roles'
-        type: 'auto'
+        reference:
+            type: 'Country'
+            role: 'country'
+            associationKey: 'country'
+            getterName: 'getCountry'
+            setterName: 'setCountry'
     ]
 
     validators:
         username: 'presence'
+
+    isEnabled: -> @get('enabled')
+
+    getReadableRoles: ->
+        roles = @get('roles') || null
+        return roles.join(', ').replace(/ROLE_/g, '') if roles
+        return ''
 
     getProfilePictureUrl: ->
         if link = @get('_links')

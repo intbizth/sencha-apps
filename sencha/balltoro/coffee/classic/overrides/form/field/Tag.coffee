@@ -1,7 +1,7 @@
 Ext.define 'Ext.overrides.form.field.Tag',
     override: 'Ext.form.field.Tag'
 
-    setValue: (value, add, skipLoad) ->
+    XsetValue: (value, add, skipLoad) ->
         me = this
         valueStore = me.valueStore
         valueField = me.valueField

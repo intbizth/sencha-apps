@@ -41,22 +41,35 @@ Ext.define 'Toro.view.base.Window',
 
     # @private
     dirtyClose: (win, eOpts) ->
-        return no if !@ownerDataKey
 
-        record = @viewModel.get @ownerDataKey
-        record.reject()
-        record.store.rejectChanges()
-        return
-
-        #@viewModel.preSubmit(record) if @viewModel.preSubmit
-        # TODO: Now not work!
-        if record and record.dirty
+        if @viewModel.isDirty()
             @showConfirmMessage
                 title: 'ข้อมูลมีการเปลี่ยนแปลง'
                 message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
                 fn: (pressed) =>
                     if pressed == 'ok'
-                        record.store.rejectChanges()
-                        @dialog.close()
+                        @viewModel.reject()
+                        @close()
 
             return no
+
+    showConfirmMessage: (options, func) ->
+        if Ext.isString options
+            options = message: options
+
+        if !options.title
+            options.title = 'Confirm ?'
+
+        if !options.icon
+            options.icon = Ext.Msg.QUESTION
+
+        if !options.buttons
+            options.buttons = Ext.Msg.OKCANCEL
+
+        if Ext.isObject func
+            func.scope = @
+            options.fn = (pressed) =>
+                options.fn.call func.scope, pressed
+
+        msg = Ext.create xtype: 'messagebox'
+        msg.show options
