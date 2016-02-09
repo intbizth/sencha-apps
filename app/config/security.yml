@@ -6,7 +6,7 @@ security:
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         remote_data:
-            id: app.user_provider
+            id: api.user_provider
 
     encoders:
         AppBundle\Security\User: sha512

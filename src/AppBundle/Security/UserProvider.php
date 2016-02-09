@@ -2,7 +2,8 @@
 
 namespace AppBundle\Security;
 
-use Doctrine\DBAL\Connection;
+use League\OAuth2\Client\Provider\GenericProvider;
+use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -11,41 +12,28 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 class UserProvider implements UserProviderInterface
 {
     /**
-     * @var Connection
+     * @var GenericProvider
      */
-    private $connection;
+    private $provider;
 
-    public function __construct(Connection $connection)
+    public function __construct(GenericProvider $provider)
     {
-        $this->connection = $connection;
-    }
-
-    /**
-     * @param $username
-     *
-     * @return array|false
-     */
-    private function getUserData($username)
-    {
-        return $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from('sylius_user', 'u')
-            //->where('u.enabled = :enabled')
-            //->andWhere('u.locked = :locked')
-            ->andWhere('u.username = :username')
-            //->setParameter('enabled', true)
-            //->setParameter('locked', false)
-            ->setParameter('username', $username)
-            ->execute()
-            ->fetch()
-        ;
+        $this->provider = $provider;
     }
 
     public function loadUserByUsername($username)
     {
-        // pretend it returns an array on success, false if there is no user
-        if ($userData = $this->getUserData($username)) {
-            return new User($userData['username'], $userData['password'], $userData['salt'], unserialize($userData['roles']));
+        /** @var AccessToken $token */
+        $accessToken = unserialize($username);
+
+        if ($userData = $this->provider->getResourceOwner($accessToken)->toArray()) {
+            return new User(
+                $userData['username'],
+                $userData['password'],
+                $userData['salt'],
+                $userData['roles'],
+                $accessToken
+            );
         }
 
         throw new UsernameNotFoundException(

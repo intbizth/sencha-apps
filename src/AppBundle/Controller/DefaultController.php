@@ -2,9 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\OAuth\Response as OAuthResponse;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Message\ResponseInterface;
-use Sylius\Api\InvalidResponseFormatException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -15,44 +14,35 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends Controller
 {
     /**
-     * @param ResponseInterface $response
+     * @param OAuthResponse $response
      *
      * @return Response|static
-     *
-     * @throws InvalidResponseFormatException
      */
-    private static function createResponse(ResponseInterface $response)
+    private static function createResponse(OAuthResponse $response)
     {
         $status = $response->getStatusCode();
 
-        if ($status === 204) {
+        if ($response->isStatus(204)) {
             return Response::create('', $status);
         }
 
-        if (in_array($status, [301, 302])) {
+        if ($response->isStatus([301, 302])) {
             // TODO: location?
             return RedirectResponse::create('', $status);
         }
 
-        $responseType = $response->getHeader('Content-Type');
-
-        if ((false === strpos($responseType, 'application/json')) && (false === strpos($responseType, 'application/xml'))) {
-            throw new InvalidResponseFormatException((string) $response->getBody(), $response->getStatusCode());
-        }
-
-
-        if ($status >= 400) {
+        if ($response->isStatus(400)) {
             return JsonResponse::create(array(
                 'code' => $status,
-                'message' => $response->getReasonPhrase(),
+                'message' => $response->getStatusText(),
             ), $status);
         }
 
-        if (strpos($responseType, 'application/json') !== false) {
-            return JsonResponse::create($response->json());
+        if ($response->isJson()) {
+            return JsonResponse::create($response->getContent());
         }
 
-        return Response::create($response->xml());
+        return Response::create($response->getContent());
     }
 
     /**
@@ -69,11 +59,11 @@ class DefaultController extends Controller
      * @param Request $request
      * @param string $path
      *
-     * @return ResponseInterface|null
+     * @return OAuthResponse
      */
     private function resource(Request $request, $path)
     {
-        $client = $this->get('app.api_client');
+        $client = $this->get('api.client');
         $method = $request->getMethod();
 
         if ($request->query->has('_method')) {
@@ -113,7 +103,7 @@ class DefaultController extends Controller
 
             return $result;
         } catch (RequestException $e) {
-            return $e->getResponse();
+            return new OAuthResponse($e->getResponse());
         }
     }
 

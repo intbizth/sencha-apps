@@ -1,84 +1,59 @@
 parameters:
-    app.http_client.base_url: 'http://127.0.0.1:8001/app_dev.php/'
-    app.http_client.api_url: 'http://127.0.0.1:8001/app_dev.php/api/'
-    app.http_client.token_url: 'oauth/v2/token'
-
-    app.client.id: 1oacj6ctnl8kg8kw4g0048wgkcws0c888cgck0g8844cs8oggo
-    app.client.secret: 5qswyupaj78ccwwks40cc0o8soo88ko4scwc0wo0owwcwo0ook
-    app.client.username: ~
-    app.client.password: ~
-
-    app.uri_map:
-        product-variants: 'products/{productId}/variants'
-        taxons: 'taxonomies/{taxonomyId}/taxons'
-        items: 'orders/{orderId}/items'
-        coupons: 'promotions/{promotionId}/coupons'
-        provinces: 'countries/{countryId}/provinces'
+    api_configs:
+        clientId: "%api.client.id%"
+        clientSecret: "%api.client.secret%"
+        redirectUri: "%api.client.url_redirect%"
+        urlAuthorize: "%api.client.url_authorize%"
+        urlAccessToken: "%api.client.url_token%"
+        urlResourceOwnerDetails: "%api.client.url_owner%"
 
 services:
-    app.user_provider:
-        class: AppBundle\Security\UserProvider
-        arguments: [ "@database_connection" ]
-
-    # Http client that is used to obtain OAuth2 token
-    app.http_client_oauth:
-        class: GuzzleHttp\Client
-        arguments:
-            - { base_url: %app.http_client.base_url% }
-
-    # Password credentials that use http client to authenticate user with given data
-    app.oauth2.grant_type.password_credentials:
-        class: AppBundle\OAuth\PasswordCredentialsGrantType
+    guzzle.stack:
+        public: false
+        class: GuzzleHttp\HandlerStack
+        factory: [ GuzzleHttp\HandlerStack, create ]
         calls:
-            - [setTokenStorage, ["@security.token_storage"]]
-        arguments:
-            - "@app.http_client_oauth"
-            - { token_url: %app.http_client.token_url%, client_id: %app.client.id%, client_secret: %app.client.secret%, username: %app.client.username%, password: %app.client.password% }
+            - [ push, [ "@guzzle.logger" ] ]
 
-    # Refresh token that use http client to refresh oauth2 token
-    app.oauth2.grant_type.refresh_token:
-        class: AppBundle\OAuth\RefreshTokenGrantType
-        calls:
-            - [setTokenStorage, ["@security.token_storage"]]
-        arguments:
-            - "@app.http_client_oauth"
-            - { token_url: %app.http_client.token_url%, client_id: %app.client.id%, client_secret: %app.client.secret% }
+    guzzle.message_formatter:
+        public: false
+        class: GuzzleHttp\MessageFormatter
 
-    # Subscriber used by Sylius API Client to provide OAuth2 authentication
-    app.oauth2.subscriber.api:
-        class: CommerceGuys\Guzzle\Oauth2\Oauth2Subscriber
-        arguments: ["@app.oauth2.grant_type.password_credentials", "@app.oauth2.grant_type.refresh_token"]
+    guzzle.logger:
+        public: false
+        class: callback
+        arguments: ["@logger", "@guzzle.message_formatter"]
+        factory: [GuzzleHttp\Middleware, log]
 
-    app.oauth2.subscriber.api_token:
-        class: AppBundle\OAuth\TokenSubscriber
-        arguments: ["@security.token_storage", "@app.oauth2.subscriber.api"]
+    guzzle.oauth2:
+        public: false
+        class: AppBundle\OAuth\OAuth2HandlerStack
+        arguments: [ "@guzzle.stack", "@api.provider", "@security.token_storage" ]
 
-    # Http client that is used to connect with Sylius API
-    app.http_client_api:
+    guzzle.http_client:
         class: GuzzleHttp\Client
         arguments:
             -
-                base_url: '%app.http_client.api_url%'
-                defaults:
+                handler: "@guzzle.stack"
+                base_uri: %api.client.url_base%
+                headers:
                     auth: "oauth2"
-                    subscribers: ["@app.oauth2.subscriber.api", "@app.oauth2.subscriber.api_token"]
                     exceptions: false
-                    headers:
-                        Accept: "application/json"
-                        Content-Type: "application/json"
-                        User-Agent: "DoSAPI/0.1"
+                    Accept: "application/json"
+                    Content-Type: "application/json"
+                    User-Agent: "DoSAPI/0.1"
 
-    # Sylius API Client
-    app.api_client:
+    api.client:
         class: AppBundle\OAuth\Client
-        arguments: ["@app.http_client_api"]
+        arguments:
+            - "@guzzle.http_client"
+            - "@guzzle.oauth2"
 
-    # Uri map with custom uris
-    app.api_resolver.uri_map:
-        class: Sylius\Api\Map\ArrayUriMap
-        arguments: [ %app.uri_map% ]
+    api.provider:
+        class: League\OAuth2\Client\Provider\GenericProvider
+        arguments: [ "%api_configs%", { httpClient: "@guzzle.http_client" } ]
 
-    # Initialize Api resolver with uri map
-    app.api_resolver:
-        class: Sylius\Api\ApiResolver
-        arguments: ["@app.api_client", "@app.api_resolver.uri_map"]
+    api.user_provider:
+        class: AppBundle\Security\UserProvider
+        arguments: [ "@api.provider" ]
+

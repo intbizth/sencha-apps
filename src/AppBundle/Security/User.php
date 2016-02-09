@@ -2,6 +2,7 @@
 
 namespace AppBundle\Security;
 
+use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 
@@ -18,14 +19,9 @@ class User implements UserInterface, EquatableInterface
     protected $password;
 
     /**
-     * @var string
+     * @var AccessToken
      */
     protected $accessToken;
-
-    /**
-     * @var string
-     */
-    protected $refreshToken;
 
     /**
      * @var string
@@ -44,13 +40,15 @@ class User implements UserInterface, EquatableInterface
      * @param string $password
      * @param string $salt
      * @param array $roles
+     * @param AccessToken $accessToken
      */
-    public function __construct($username, $password, $salt, array $roles)
+    public function __construct($username, $password, $salt, array $roles, AccessToken $accessToken)
     {
         $this->username = $username;
         $this->password = $password;
         $this->salt = $salt;
         $this->roles = $roles;
+        $this->accessToken = $accessToken;
     }
 
     /**
@@ -119,7 +117,7 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * @return string
+     * @return AccessToken
      */
     public function getAccessToken()
     {
@@ -127,26 +125,10 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * @param string $accessToken
+     * @param AccessToken $accessToken
      */
-    public function setAccessToken($accessToken)
+    public function setAccessToken(AccessToken $accessToken)
     {
         $this->accessToken = $accessToken;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRefreshToken()
-    {
-        return $this->refreshToken;
-    }
-
-    /**
-     * @param string $refreshToken
-     */
-    public function setRefreshToken($refreshToken)
-    {
-        $this->refreshToken = $refreshToken;
     }
 }

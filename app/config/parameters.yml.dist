@@ -17,3 +17,11 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    api.client.url_base: 'http://127.0.0.1:9999/app_dev.php/api'
+    api.client.url_authorize: 'http://127.0.0.1:9999/app_dev.php/oauth/v2/authorize'
+    api.client.url_token: 'http://127.0.0.1:9999/app_dev.php/oauth/v2/token'
+    api.client.url_owner: 'http://127.0.0.1:9999/app_dev.php/api/me'
+    api.client.url_redirect: ~
+    api.client.id: 'EDITME'
+    api.client.secret: 'EDITME'

@@ -2,83 +2,108 @@
 
 namespace AppBundle\OAuth;
 
-use GuzzleHttp\ClientInterface as HttpClientInterface;
-use GuzzleHttp\Post\PostBodyInterface;
-use GuzzleHttp\Url;
-use Sylius\Api\Factory\PostFileFactory;
-use Sylius\Api\Factory\PostFileFactoryInterface;
-use Sylius\Api\ClientInterface;
+use GuzzleHttp\Client as GuzzleClient;
+use Psr\Http\Message\ResponseInterface;
 
-class Client implements ClientInterface
+class Client
 {
     /**
-     * @var Url $baseUrl
+     * @var string $baseUrl
      */
     private $baseUrl;
+
     /**
-     * @var HttpClientInterface $httpClient
+     * @var GuzzleClient $httpClient
      */
     private $httpClient;
-    /**
-     * @var PostFileFactoryInterface $postFileFactory
-     */
-    private $postFileFactory;
 
-    public function __construct(HttpClientInterface $httpClient, PostFileFactoryInterface $postFileFactory = null)
+    /**
+     * @var string
+     */
+    private $prefix;
+
+    public function __construct(GuzzleClient $httpClient, OAuth2HandlerStack $auth2HandlerStack, $prefix = 'api')
     {
         $this->httpClient = $httpClient;
-        $this->postFileFactory = $postFileFactory ?: new PostFileFactory();
-        $this->baseUrl = Url::fromString($httpClient->getBaseUrl());
+        $this->prefix = $prefix;
+        $this->baseUrl = $httpClient->getConfig('base_uri');
+
+        $auth2HandlerStack->pushHandlers();
     }
 
     /**
-     * {@inheritdoc }
+     * @param $path
+     *
+     * @return string
+     */
+    private function buildUri($path)
+    {
+        return sprintf('%s/%s', $this->prefix, $path);
+    }
+
+    /**
+     * @param $url
+     * @param array $queryParameters
+     *
+     * @return Response
      */
     public function get($url, array $queryParameters = [])
     {
-        return $this->httpClient->get($url, ['query' => $queryParameters]);
+        return $this->parseResponse(
+            $this->httpClient->get($this->buildUri($url), ['query' => $queryParameters])
+        );
     }
 
     /**
-     * {@inheritdoc }
+     * @param $url
+     * @param array $body
+     *
+     * @return Response
      */
     public function patch($url, array $body)
     {
-        return $this->httpClient->patch($url, ['json' => $body]);
+        return $this->parseResponse(
+            $this->httpClient->patch($this->buildUri($url), ['json' => $body])
+        );
     }
 
     /**
-     * {@inheritdoc }
+     * @param $url
+     * @param array $body
+     *
+     * @return Response
      */
     public function put($url, array $body)
     {
-        return $this->httpClient->put($url, ['json' => $body]);
+        return $this->parseResponse(
+            $this->httpClient->put($this->buildUri($url), ['json' => $body])
+        );
     }
 
     /**
-     * {@inheritdoc }
+     * @param $url
+     *
+     * @return Response
      */
     public function delete($url)
     {
-        return $this->httpClient->delete($url);
+        return $this->parseResponse(
+            $this->httpClient->delete($this->buildUri($url))
+        );
     }
 
     /**
-     * {@inheritdoc }
+     * @param $url
+     * @param $body
+     * @param array $files
+     *
+     * @return Response
      */
     public function post($url, $body, array $files = array())
     {
-        $request = $this->httpClient->createRequest('POST', $url, ['json' => $body]);
-
-        /** @var PostBodyInterface $postBody */
-        $postBody = $request->getBody();
-        foreach ($files as $key => $filePath) {
-            $file = $this->postFileFactory->create($key, $filePath);
-            $postBody->addFile($file);
-        }
-        $response = $this->httpClient->send($request);
-
-        return $response;
+        return $this->parseResponse(
+            $this->httpClient->post($this->buildUri($url), ['json' => $body])
+        );
     }
 
     /**
@@ -87,5 +112,15 @@ class Client implements ClientInterface
     public function getSchemeAndHost()
     {
         return sprintf('%s://%s', $this->baseUrl->getScheme(), $this->baseUrl->getHost());
+    }
+
+    /**
+     * @param ResponseInterface $response
+     *
+     * @return Response
+     */
+    protected function parseResponse(ResponseInterface $response)
+    {
+        return new Response($response);
     }
 }

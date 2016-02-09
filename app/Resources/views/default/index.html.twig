@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Welcome to the jungle!</h1>
+    <h1>Projects</h1>
+    <ul>
+        <li><a href="/sencha/balltoro/index.html">Balltoro</a></li>
+        <li><a href="/sencha/moboque/index.html">Moboque</a></li>
+        <li><a href="/sencha/vcare/index.html">Vcare</a></li>
+    </ul>
+    {{ dump(app.user) }}
 {% endblock %}
 
 {% block stylesheets %}
