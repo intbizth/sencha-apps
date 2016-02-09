@@ -77,7 +77,6 @@ class DefaultController extends Controller
         }
 
         try {
-
             $data = json_decode($request->getContent(), true);
 
             switch($method) {

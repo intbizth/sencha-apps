@@ -65,7 +65,6 @@ class OAuth2AuthenticationProvider extends DaoAuthenticationProvider
             return $user;
 
         } catch (IdentityProviderException $e) {
-            dump($e);
             if (is_array($message = $e->getResponseBody())) {
                 $message = $message['error_description'];
             }
@@ -74,7 +73,6 @@ class OAuth2AuthenticationProvider extends DaoAuthenticationProvider
             $e->setToken($token);
             throw $e;
         } catch (\Exception $e) {
-            dump($e);
             $e = new AuthenticationServiceException($e->getMessage(), 0, $e);
             $e->setToken($token);
             throw $e;
