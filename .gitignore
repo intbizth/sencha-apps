@@ -52,3 +52,5 @@ node_modules/
 
 /web/media/*
 !web/media/.gitkeep
+
+web/sencha
