@@ -23,22 +23,6 @@ Ext.define 'Vcare.model.User',
     ,
         name: '_links'
         type: 'auto'
-    ,
-        name: 'club'
-        reference:
-            type: 'Club'
-            role: 'club'
-            associationKey: 'club'
-            getterName: 'getClub'
-            setterName: 'setClub'
-    ,
-        name: 'country'
-        reference:
-            type: 'Country'
-            role: 'country'
-            associationKey: 'country'
-            getterName: 'getCountry'
-            setterName: 'setCountry'
     ]
 
     validators:

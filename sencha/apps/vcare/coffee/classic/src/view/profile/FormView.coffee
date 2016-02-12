@@ -117,16 +117,6 @@ Ext.define 'Vcare.view.profile.FormView',
                     value: '{record.user.plain_password}'
                     required: '{isPhantom}'
             ,
-                xtype: 'combobox'
-                fieldLabel: 'ประเทศ '
-                displayField: 'name'
-                valueField: 'id'
-                queryMode: 'local'
-                forceSelection: yes
-                bind:
-                    store: '{countries}'
-                    selection: '{country}'
-            ,
                 xtype: 'checkboxfield'
                 boxLabel: 'เปิดการใช้งาน '
                 bind: '{record.user.enabled}'

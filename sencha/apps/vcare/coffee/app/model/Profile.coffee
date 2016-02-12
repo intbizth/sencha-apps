@@ -54,9 +54,6 @@ Ext.define 'Vcare.model.Profile',
         delete data.user if Ext.Object.isEmpty(data.user)
         delete data.user.id if data.user
 
-        if data.user.country
-            data.user.country = data.user.country.id
-
         groups = data.groups
 
         if !Ext.isEmpty groups

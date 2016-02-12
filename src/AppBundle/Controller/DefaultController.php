@@ -39,10 +39,10 @@ class DefaultController extends Controller
         }
 
         if ($response->isJson()) {
-            return JsonResponse::create($response->getContent());
+            return JsonResponse::create($response->getContent(), $status);
         }
 
-        return Response::create($response->getContent());
+        return Response::create($response->getContent(), $status);
     }
 
     /**

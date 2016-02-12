@@ -28,10 +28,3 @@ Ext.define 'Vcare.view.profile.ModelForm',
         @get('record').reject()
 
         return if !user = @get('record').getUser()
-
-        countryId = user.getPrevious('country_id')
-        user.reject()
-
-        if countryId
-            user.setCountry @get('countries').getById(countryId)
-            user.commit()
