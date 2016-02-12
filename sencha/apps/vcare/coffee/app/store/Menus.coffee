@@ -1,4 +1,4 @@
-Ext.define 'Balltoro.store.Menus',
+Ext.define 'Vcare.store.Menus',
     extend: 'Ext.data.TreeStore'
     storeId: 'store-menus'
 
