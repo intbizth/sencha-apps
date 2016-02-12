@@ -29,8 +29,6 @@ class UserProvider implements UserProviderInterface
         if ($userData = $this->provider->getResourceOwner($accessToken)->toArray()) {
             return new User(
                 $userData['username'],
-                $userData['password'],
-                $userData['salt'],
                 $userData['roles'],
                 $accessToken
             );

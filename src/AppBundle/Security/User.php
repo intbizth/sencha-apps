@@ -14,19 +14,9 @@ class User implements UserInterface, EquatableInterface
     protected $username;
 
     /**
-     * @var string
-     */
-    protected $password;
-
-    /**
      * @var AccessToken
      */
     protected $accessToken;
-
-    /**
-     * @var string
-     */
-    protected $salt;
 
     /**
      * @var array
@@ -37,22 +27,18 @@ class User implements UserInterface, EquatableInterface
      * User constructor.
      *
      * @param string $username
-     * @param string $password
-     * @param string $salt
      * @param array $roles
      * @param AccessToken $accessToken
      */
-    public function __construct($username, $password, $salt, array $roles, AccessToken $accessToken)
+    public function __construct($username, array $roles, AccessToken $accessToken)
     {
         $this->username = $username;
-        $this->password = $password;
-        $this->salt = $salt;
         $this->roles = $roles;
         $this->accessToken = $accessToken;
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getRoles()
     {
@@ -60,23 +46,7 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getUsername()
     {
@@ -84,36 +54,34 @@ class User implements UserInterface, EquatableInterface
     }
 
     /**
-     * Erase Credentials
+     * {@inheritdoc}
      */
     public function eraseCredentials()
     {
     }
 
     /**
-     * @param UserInterface $user
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function isEqualTo(UserInterface $user)
     {
-        if (!$user instanceof User) {
-            return false;
-        }
-
-        if ($this->password !== $user->getPassword()) {
-            return false;
-        }
-
-        if ($this->salt !== $user->getSalt()) {
-            return false;
-        }
-
-        if ($this->username !== $user->getUsername()) {
-            return false;
-        }
-
         return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPassword()
+    {
+        return;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSalt()
+    {
+        return;
     }
 
     /**

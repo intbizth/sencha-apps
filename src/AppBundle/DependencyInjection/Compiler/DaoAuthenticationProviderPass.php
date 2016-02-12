@@ -14,7 +14,6 @@ class DaoAuthenticationProviderPass implements CompilerPassInterface
         $container->getDefinition('security.authentication.provider.dao')
             ->setClass(OAuth2AuthenticationProvider::class)
             ->addMethodCall('setApiProvider', [new Reference('api.provider')])
-            ->addMethodCall('setUserProvider', [new Reference('api.user_provider')])
         ;
     }
 }

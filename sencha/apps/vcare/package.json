@@ -1,13 +1,13 @@
 {
-  "name": "balltoro-admin",
+  "name": "vcare-admin",
   "version": "1.0.0",
-  "description": "Balltoro Admin UI.",
+  "description": "Vcare Admin UI.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "balltoro",
+    "vcare",
     "admin"
   ],
   "author": "Liverbool <nukboon@gmail.com>",
