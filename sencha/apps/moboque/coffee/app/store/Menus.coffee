@@ -20,4 +20,10 @@ Ext.define 'Moboque.store.Menus',
             iconCls: 'fa fa-users'
             leaf: true
             routeId: 'profiles'
+        ,
+            text: 'Events'
+            view: 'profile.LayoutView'
+            iconCls: 'fa fa-male'
+            leaf: true
+            routeId: 'profiles'
         ]

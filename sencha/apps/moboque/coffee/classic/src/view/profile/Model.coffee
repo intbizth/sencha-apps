@@ -7,10 +7,10 @@ Ext.define 'Moboque.view.profile.Model',
             type: 'store-profiles'
             autoLoad: yes
 
-        countries:
-            type: 'store-countries'
-            autoLoad: yes
-            pageSize: 200
+        # countries:
+        #     type: 'store-countries'
+        #     autoLoad: yes
+        #     pageSize: 200
 
         groups:
             type: 'store-profile-groups'
@@ -33,11 +33,11 @@ Ext.define 'Moboque.view.profile.Model',
     prepareData: (record) ->
         user = @createUser record
         record = @createRecord record
-        country = user.getCountry()
+        # country = user.getCountry()
 
-        if country and user.get('country_id') != country.getId()
-            user.set('country_id', country.getId())
-            user.commit()
+        # if country and user.get('country_id') != country.getId()
+        #     user.set('country_id', country.getId())
+        #     user.commit()
 
         record.setUser user
 

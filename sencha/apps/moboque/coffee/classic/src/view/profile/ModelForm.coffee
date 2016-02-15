@@ -29,9 +29,9 @@ Ext.define 'Moboque.view.profile.ModelForm',
 
         return if !user = @get('record').getUser()
 
-        countryId = user.getPrevious('country_id')
-        user.reject()
+        # countryId = user.getPrevious('country_id')
+        # user.reject()
 
-        if countryId
-            user.setCountry @get('countries').getById(countryId)
-            user.commit()
+        # if countryId
+        #     user.setCountry @get('countries').getById(countryId)
+        #     user.commit()
