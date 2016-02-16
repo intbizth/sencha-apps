@@ -22,8 +22,8 @@ Ext.define 'Moboque.store.Menus',
             routeId: 'profiles'
         ,
             text: 'Events'
-            view: 'profile.LayoutView'
+            view: 'event.LayoutView'
             iconCls: 'fa fa-male'
             leaf: true
-            routeId: 'profiles'
+            routeId: 'events'
         ]
