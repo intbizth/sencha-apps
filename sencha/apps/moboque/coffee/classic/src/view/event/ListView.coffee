@@ -76,7 +76,8 @@ Ext.define 'Moboque.view.event.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind: store: '{events}'
+            bind:
+                store: '{events}'
             margin: '0 10 0 0'
         ]
 

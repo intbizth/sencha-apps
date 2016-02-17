@@ -17,10 +17,5 @@ Ext.define 'Moboque.view.event.Model',
 
     prepareData: (record) ->
         record = @createRecord record
-        # country = user.getCountry()
-
-        # if country and user.get('country_id') != country.getId()
-        #     user.set('country_id', country.getId())
-        #     user.commit()
 
         return record
