@@ -1,96 +1,82 @@
 Ext.define 'Moboque.view.event.FormView',
-    extend: 'Moboque.view.base.Window'
+    extend: 'Ext.window.Window'
     alias: 'widget.wg-event-form'
+
+    width: 600
+    valign: 'top'
+    modal: yes
 
     bind:
         title: '{title}'
 
     items:
         xtype: 'form'
-        layout: 'border'
+        layout: 'vbox'
         referenceHolder: yes
+        margin: '10 10 10 10'
+        modelValidation: yes
 
-        defaults:
-            split: yes
-            bodyPadding: 10
-
+        # TODO allowBlank is not working !
         items: [
-            region: 'center'
-            collapsible: no
-            margin: '5 5 0 0'
-            scrollable: yes
-            modelValidation: yes
-            referenceHolder: yes
-            xtype: 'form'
-
-            defaults:
-                anchor : '100%'
-                labelAlign: 'top'
+            xtype: 'textfield'
+            fieldLabel: '* ชื่องานอีเวนท์'
+            emptyText: 'กรุณาระบุชื่องานอีเวนท์'
+            allowBlank: no
+            bind: '{record.name}'
+            width: 570
+            minLength: 2
+            maxLength: 255
+        ,
+            xtype: 'textareafield'
+            fieldLabel: '* สถานที่จัดงานอีเวนท์'
+            emptyText: 'กรุณาระบุสถานที่จัดงานอีเวนท์'
+            allowBlank: no
+            bind: '{record.location}'
+            width: 570
+            minLength: 2
+            maxLength: 255
+        ,
+            xtype: 'container'
+            layout: 'hbox'
+            margin: '10 0 10 0'
 
             items: [
-                xtype: 'textfield'
-                fieldLabel: '* ชื่องานอีเวนท์'
-                emptyText: 'กรุณาระบุชื่องานอีเวนท์'
-                allowBlank: no
-                bind: '{record.name}'
-                minLength: 2
-                maxLength: 255
+                xtype: 'datefield'
+                fieldLabel: '* วันเริ่มงาน'
+                bind: '{startDate}'
+                format: 'd/m/Y'
+                margin: '10 10 10 0'
             ,
-                xtype: 'textareafield'
-                fieldLabel: '* สถานที่จัดงานอีเวนท์'
-                emptyText: 'กรุณาระบุสถานที่จัดงานอีเวนท์'
-                allowBlank: no
-                bind: '{record.location}'
-                minLength: 2
-                maxLength: 255
-            ,
-                xtype: 'container'
-                layout: 'hbox'
-                margin: '10 0 10 0'
-
-                items: [
-                    xtype: 'datefield'
-                    fieldLabel: '* วันเริ่มงาน'
-                    bind: '{record.start_date}'
-                    format: 'd/m/Y'
-                    margin: '10 10 10 0'
-                ,
-                    xtype: 'timefield'
-                    fieldLabel: '* เวลาเริ่มงาน'
-                    bind: '{record.start_date}'
-                    margin: '10 0 10 10'
-                ]
-            ,
-                xtype: 'container'
-                layout: 'hbox'
-                margin: '0 0 10 0'
-
-                items: [
-                    xtype: 'datefield'
-                    fieldLabel: '* วันสิ้นสุดงาน'
-                    bind: '{record.end_date}'
-                    format: 'd/m/Y'
-                    margin: '0 10 10 0'
-                ,
-                    xtype: 'timefield'
-                    fieldLabel: '* เวลาสิ้นสุดงาน'
-                    bind: '{record.end_date}'
-                    margin: '0 0 10 10'
-                ]
-            ,
-                region: 'south'
-                collapsible: no
-                layout: 'fit'
-                split: no
-                bodyPadding: 0
-                buttons: [
-                    text: 'ยกเลิก'
-                    handler: 'onCancel'
-                ,
-                    text: 'บันทึก'
-                    handler: 'onSubmit'
-                    disabled: yes
-                    formBind: yes
-                ]
+                xtype: 'timefield'
+                fieldLabel: '* เวลาเริ่มงาน'
+                bind: '{startTime}'
+                margin: '10 0 10 10'
             ]
+        ,
+            xtype: 'container'
+            layout: 'hbox'
+            margin: '0 0 10 0'
+
+            items: [
+                xtype: 'datefield'
+                fieldLabel: '* วันสิ้นสุดงาน'
+                bind: '{endDate}'
+                format: 'd/m/Y'
+                margin: '0 10 10 0'
+            ,
+                xtype: 'timefield'
+                fieldLabel: '* เวลาสิ้นสุดงาน'
+                bind: '{endTime}'
+                margin: '0 0 10 10'
+            ]
+        ]
+
+        buttons: [
+            text: 'ยกเลิก'
+            handler: 'onCancel'
+        ,
+            text: 'บันทึก'
+            handler: 'onSubmit'
+            disabled: yes
+            formBind: yes
         ]

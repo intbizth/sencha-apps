@@ -24,6 +24,19 @@ Ext.define 'Moboque.view.event.Controller',
                     title: @createDialogTitle record
                     record: record
 
+            listeners:
+                beforeclose: (panel, eOpts) =>
+                    if record and record.dirty
+                        @showConfirmMessage
+                            title: 'ข้อมูลมีการเปลี่ยนแปลง'
+                            message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
+                            fn: (pressed) =>
+                                if pressed == 'ok'
+                                    record.store.rejectChanges()
+                                    @dialog.close()
+
+                        return no
+
         @dialog.show()
 
     onCancel: -> @dialog.close()
@@ -56,6 +69,7 @@ Ext.define 'Moboque.view.event.Controller',
 
     onSubmit: ->
         vm = @dialog.getViewModel()
+
         form = @dialog.down 'form'
         record = vm.get 'record'
 
