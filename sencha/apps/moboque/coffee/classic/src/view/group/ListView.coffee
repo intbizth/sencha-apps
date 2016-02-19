@@ -1,9 +1,9 @@
-Ext.define 'Moboque.view.event.ListView',
+Ext.define 'Moboque.view.group.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-event-list'
+    alias: 'widget.wg-group-list'
 
     bind:
-        store: '{events}'
+        store: '{groups}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,8 +11,8 @@ Ext.define 'Moboque.view.event.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'งานอีเวนท์'
-    reference: 'refEventList'
+    title: 'กลุ่ม'
+    reference: 'refGroupList'
     headerBorders: no
 
     listeners:
@@ -20,34 +20,22 @@ Ext.define 'Moboque.view.event.ListView',
             console.log arguments
 
     columns: [
-        text: 'ชื่ออีเวนท์'
+        text: 'ชื่อกลุ่ม'
         dataIndex: 'name'
-        width: 200
+        width: 300
     ,
-        text: 'สถานที่จัดงาน'
-        dataIndex: 'location'
+        text: 'สีประจำกลุ่ม'
+        dataIndex: 'color'
         flex: 1
         minWidth: 200
-    ,
-        xtype: 'datecolumn'
-        text: 'วันและเวลาเริ่มงาน'
-        dataIndex: 'start_date'
-        format: 'd-m-Y H:i'
-        width: 150
-    ,
-        xtype: 'datecolumn'
-        text: 'วันและเวลาสิ้นสุดงาน'
-        dataIndex: 'end_date'
-        format: 'd-m-Y H:i'
-        width: 150
     ]
 
     tbar:
         scrollable: yes
         items: [
-            text: 'เพิ่มงานอีเวนท์'
+            text: 'เพิ่มกลุ่ม'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'fa fa  -pencil'
             handler: 'onAddNew'
         ,
             '-'
@@ -57,7 +45,7 @@ Ext.define 'Moboque.view.event.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refEventList.selection}'
+                disabled: '{!refGroupList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -67,7 +55,7 @@ Ext.define 'Moboque.view.event.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refEventList.selection}'
+                disabled: '{!refGroupList.selection}'
             handler: 'onDelete'
         ,
             '->'
@@ -77,7 +65,7 @@ Ext.define 'Moboque.view.event.ListView',
             reference: 'refSearchField'
             labelWidth: 50
             bind:
-                store: '{events}'
+                store: '{groups}'
             margin: '0 10 0 0'
         ]
 
@@ -86,5 +74,5 @@ Ext.define 'Moboque.view.event.ListView',
         scrollable: yes
         pageSize: 25
         bind:
-            store: '{events}'
+            store: '{groups}'
         displayInfo: yes

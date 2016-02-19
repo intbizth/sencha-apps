@@ -20,6 +20,7 @@ Ext.define 'Moboque.view.event.FormView',
         items: [
             xtype: 'textfield'
             fieldLabel: '* ชื่องานอีเวนท์'
+            labelAlign: 'top'
             emptyText: 'กรุณาระบุชื่องานอีเวนท์'
             allowBlank: no
             bind: '{record.name}'
@@ -29,6 +30,7 @@ Ext.define 'Moboque.view.event.FormView',
         ,
             xtype: 'textareafield'
             fieldLabel: '* สถานที่จัดงานอีเวนท์'
+            labelAlign: 'top'
             emptyText: 'กรุณาระบุสถานที่จัดงานอีเวนท์'
             allowBlank: no
             bind: '{record.location}'
@@ -43,12 +45,14 @@ Ext.define 'Moboque.view.event.FormView',
             items: [
                 xtype: 'datefield'
                 fieldLabel: '* วันเริ่มงาน'
+                labelAlign: 'top'
                 bind: '{startDate}'
                 format: 'd/m/Y'
                 margin: '10 10 10 0'
             ,
                 xtype: 'timefield'
                 fieldLabel: '* เวลาเริ่มงาน'
+                labelAlign: 'top'
                 bind: '{startTime}'
                 margin: '10 0 10 10'
             ]
@@ -60,12 +64,14 @@ Ext.define 'Moboque.view.event.FormView',
             items: [
                 xtype: 'datefield'
                 fieldLabel: '* วันสิ้นสุดงาน'
+                labelAlign: 'top'
                 bind: '{endDate}'
                 format: 'd/m/Y'
                 margin: '0 10 10 0'
             ,
                 xtype: 'timefield'
                 fieldLabel: '* เวลาสิ้นสุดงาน'
+                labelAlign: 'top'
                 bind: '{endTime}'
                 margin: '0 0 10 10'
             ]

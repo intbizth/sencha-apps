@@ -21,9 +21,23 @@ Ext.define 'Moboque.store.Menus',
             leaf: true
             routeId: 'profiles'
         ,
-            text: 'Events'
-            view: 'event.LayoutView'
+            text: 'Appregisted'
             iconCls: 'fa fa-male'
-            leaf: true
-            routeId: 'events'
+            children: [
+                text: 'Events'
+                view: 'event.LayoutView'
+                iconCls: 'fa fa-male'
+                leaf: true
+                routeId: 'events'
+            ,
+                text: 'Groups'
+                view: 'group.LayoutView'
+                iconCls: 'fa fa-male'
+                leaf: true
+                routeId: 'groups'
+            ,
+                text: 'Members'
+                iconCls: 'fa fa-male'
+                leaf: true
+            ]
         ]
