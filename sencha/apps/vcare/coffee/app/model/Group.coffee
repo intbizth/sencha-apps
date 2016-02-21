@@ -1,6 +1,6 @@
-Ext.define 'Vcare.model.ProfileGroup',
+Ext.define 'Vcare.model.Group',
     extend: 'Vcare.model.Base'
-    api: '/api/profile-groups/'
+    api: '/api/groups/'
 
     fields: [
         name: 'id'

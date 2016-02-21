@@ -79,17 +79,23 @@ class DefaultController extends Controller
         try {
             $data = json_decode($request->getContent(), true);
 
+            $defaultOptions = [
+                'headers' => [
+                    'Accept' => 'groups=Default,Detailed'
+                ]
+            ];
+
             switch($method) {
                 case 'POST':
-                    $result = $client->post($path, $data);
+                    $result = $client->post($path, $data, $defaultOptions);
                     break;
 
                 case 'PUT':
-                    $result = $client->put($path, $data);
+                    $result = $client->put($path, $data, $defaultOptions);
                     break;
 
                 case 'PATCH':
-                    $result = $client->patch($path, $data);
+                    $result = $client->patch($path, $data, $defaultOptions);
                     break;
 
                 case 'DELETE':
@@ -97,7 +103,7 @@ class DefaultController extends Controller
                     break;
 
                 default:
-                    $result = $client->get($path, $request->query->all());
+                    $result = $client->get($path, $request->query->all(), $defaultOptions);
             }
 
             return $result;

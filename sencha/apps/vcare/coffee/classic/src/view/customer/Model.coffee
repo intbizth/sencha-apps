@@ -1,14 +1,14 @@
-Ext.define 'Vcare.view.profile.Model',
+Ext.define 'Vcare.view.customer.Model',
     extend: 'Ext.app.ViewModel'
-    alias: 'viewmodel.vm-profile'
+    alias: 'viewmodel.vm-customer'
 
     stores:
-        profiles:
-            type: 'store-profiles'
+        customers:
+            type: 'store-customers'
             autoLoad: yes
 
         groups:
-            type: 'store-profile-groups'
+            type: 'store-groups'
             autoLoad: yes
             pageSize: 200
 
@@ -23,7 +23,7 @@ Ext.define 'Vcare.view.profile.Model',
 
     createRecord: (record) ->
         return record if record
-        return new (@data.profiles.getModel())()
+        return new (@data.customers.getModel())()
 
     prepareData: (record) ->
         user = @createUser record

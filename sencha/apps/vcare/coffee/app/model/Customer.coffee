@@ -1,6 +1,6 @@
-Ext.define 'Vcare.model.Profile',
+Ext.define 'Vcare.model.Customer',
     extend: 'Vcare.model.Base'
-    api: '/api/profiles/'
+    api: '/api/customers/'
 
     fields: [
         name: 'id'
@@ -41,13 +41,13 @@ Ext.define 'Vcare.model.Profile',
 
     hasMany: [
         name: 'groups'
-        model: 'ProfileGroup'
+        model: 'Group'
         role: 'groups'
         associationKey: 'groups'
         getterName: 'getGroups'
         setterName: 'setGroups'
         storeConfig:
-            type: 'store-profile-groups'
+            type: 'store-groups'
     ]
 
     writerTransform: fn: (data) ->

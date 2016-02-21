@@ -1,6 +1,6 @@
-Ext.define 'Vcare.view.profile.ModelForm',
+Ext.define 'Vcare.view.customer.ModelForm',
     extend: 'Vcare.view.base.ViewModel'
-    alias: 'viewmodel.vm-profile-form'
+    alias: 'viewmodel.vm-customer-form'
 
     formulas:
         currentGroups:

@@ -1,11 +1,11 @@
-Ext.define 'Vcare.view.profile.LayoutView',
+Ext.define 'Vcare.view.customer.LayoutView',
     extend: 'Ext.container.Container'
-    xtype: 'ux-profile-layout'
+    xtype: 'ux-customer-layout'
 
     viewModel:
-        type: 'vm-profile'
+        type: 'vm-customer'
 
-    controller: 'ctrl-profile'
+    controller: 'ctrl-customer'
     cls: 'ui-shadow-panel'
 
     layout:
@@ -13,6 +13,6 @@ Ext.define 'Vcare.view.profile.LayoutView',
         align: 'stretch'
 
     items: [
-        xtype: 'wg-profile-list'
+        xtype: 'wg-customer-list'
         flex: 1
     ]
