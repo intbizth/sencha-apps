@@ -22,22 +22,24 @@ Ext.define 'Moboque.store.Menus',
             routeId: 'profiles'
         ,
             text: 'Appregisted'
-            iconCls: 'fa fa-male'
+            iconCls: 'fa fa-mobile'
             children: [
                 text: 'Events'
                 view: 'event.LayoutView'
-                iconCls: 'fa fa-male'
+                iconCls: 'fa fa-calendar'
                 leaf: true
                 routeId: 'events'
             ,
                 text: 'Groups'
                 view: 'group.LayoutView'
-                iconCls: 'fa fa-male'
+                iconCls: 'fa fa-cubes'
                 leaf: true
                 routeId: 'groups'
             ,
                 text: 'Members'
-                iconCls: 'fa fa-male'
+                # view: 'group.LayoutView'
+                iconCls: 'fa fa-user'
                 leaf: true
+                # routeId: 'groups'
             ]
         ]
