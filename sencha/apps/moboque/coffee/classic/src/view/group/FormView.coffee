@@ -3,7 +3,6 @@ Ext.define 'Moboque.view.group.FormView',
     alias: 'widget.wg-group-form'
 
     width: 600
-    valign: 'top'
     modal: yes
 
     bind:
@@ -11,7 +10,7 @@ Ext.define 'Moboque.view.group.FormView',
 
     items:
         xtype: 'form'
-        layout: 'vbox'
+        layout: 'anchor'
         referenceHolder: yes
         margin: '10 10 10 10'
         modelValidation: yes
@@ -20,6 +19,7 @@ Ext.define 'Moboque.view.group.FormView',
         items: [
             xtype: 'textfield'
             fieldLabel: '* ชื่อกลุ่ม'
+            anchor: '100%'
             labelAlign: 'top'
             emptyText: 'กรุณาระบุชื่องกลุ่ม'
             allowBlank: no
@@ -30,6 +30,7 @@ Ext.define 'Moboque.view.group.FormView',
         ,
             xtype: 'textfield'
             fieldLabel: '* สีกลุ่ม'
+            anchor: '100%'
             labelAlign: 'top'
             emptyText: 'กรุณาระบุสีกลุ่ม'
             allowBlank: no

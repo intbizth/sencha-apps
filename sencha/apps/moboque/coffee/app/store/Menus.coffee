@@ -37,9 +37,9 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'groups'
             ,
                 text: 'Members'
-                # view: 'group.LayoutView'
+                view: 'member.LayoutView'
                 iconCls: 'fa fa-user'
                 leaf: true
-                # routeId: 'groups'
+                routeId: 'members'
             ]
         ]

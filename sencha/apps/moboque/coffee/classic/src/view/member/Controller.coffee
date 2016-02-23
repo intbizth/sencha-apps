@@ -1,14 +1,14 @@
-Ext.define 'Moboque.view.group.Controller',
+Ext.define 'Moboque.view.member.Controller',
     extend: 'Moboque.view.base.Controller'
-    alias: 'controller.ctrl-group'
+    alias: 'controller.ctrl-member'
 
     init: -> #..
 
     # @private
     createDialogTitle: (r) ->
         if r.phantom
-            return 'เพิ่มกลุ่ม'
-        else r.get 'name'
+            return 'เพิ่มข้อมูลสมาชิก'
+        else r.get 'fullname'
 
     # @private
     createDialog: (record) ->
@@ -16,10 +16,10 @@ Ext.define 'Moboque.view.group.Controller',
         record = vm.prepareData(record)
 
         @dialog = @getView().add
-            xtype: 'wg-group-form'
+            xtype: 'wg-member-form'
             ownerView: @getView()
             viewModel:
-                type: 'vm-group-form'
+                type: 'vm-member-form'
                 data:
                     title: @createDialogTitle record
                     record: record
@@ -41,7 +41,7 @@ Ext.define 'Moboque.view.group.Controller',
 
     onCancel: -> @dialog.close()
     onAddNew: -> @createDialog()
-    onEdit: -> @createDialog @referTo('GroupList').getSelection()[0]
+    onEdit: -> @createDialog @referTo('MemberList').getSelection()[0]
 
     onDelete: ->
         @showConfirmMessage
@@ -49,20 +49,20 @@ Ext.define 'Moboque.view.group.Controller',
             message: 'คุณแน่ใจหรือไม่',
             fn: (pressed) =>
                 if pressed == 'ok'
-                    list = @referTo 'GroupList'
+                    list = @referTo 'MemberList'
                     list.mask('Deleting..')
 
-                    groupRecord = list.getSelection()[0]
+                    memberRecord = list.getSelection()[0]
                     store = list.getStore()
 
                     # for fix association and cascade.
                     # for fix association and cascade.
-                    groupRecord.drop(no)
-                    groupRecord.erasing = no
-                    groupRecord.save
+                    memberRecord.drop(no)
+                    memberRecord.erasing = no
+                    memberRecord.save
                         success: =>
                             list.unmask()
-                            @alertSuccess('ลบข้อมูลเรียบร้อยแล้วค่ะ')
+                            @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
                         failure: =>
                             list.unmask()
                             @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')
@@ -111,8 +111,9 @@ Ext.define 'Moboque.view.group.Controller',
                 form.unmask()
 
                 if record.phantom
-                    @alertSuccess('เพิ่มข้อมูลกลุ่มเรียบร้อยแล้ว')
+                    @alertSuccess('เพิ่มข้อมูลสมาชิกเรียบร้อยแล้ว')
                 else
-                    @alertSuccess('แก้ไขข้อมูลกลุ่มเรียบร้อยแล้ว')
+                    @alertSuccess('แก้ไขข้อมูลสมาชิกเรียบร้อยแล้ว')
 
                 @dialog.close()
+

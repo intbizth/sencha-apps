@@ -2,8 +2,7 @@ Ext.define 'Moboque.view.event.FormView',
     extend: 'Ext.window.Window'
     alias: 'widget.wg-event-form'
 
-    width: 600
-    valign: 'top'
+    width: 500
     modal: yes
 
     bind:
@@ -11,7 +10,7 @@ Ext.define 'Moboque.view.event.FormView',
 
     items:
         xtype: 'form'
-        layout: 'vbox'
+        layout: 'anchor'
         referenceHolder: yes
         margin: '10 10 10 10'
         modelValidation: yes
@@ -20,6 +19,7 @@ Ext.define 'Moboque.view.event.FormView',
         items: [
             xtype: 'textfield'
             fieldLabel: '* ชื่องานอีเวนท์'
+            anchor: '100%'
             labelAlign: 'top'
             emptyText: 'กรุณาระบุชื่องานอีเวนท์'
             allowBlank: no
@@ -30,6 +30,7 @@ Ext.define 'Moboque.view.event.FormView',
         ,
             xtype: 'textareafield'
             fieldLabel: '* สถานที่จัดงานอีเวนท์'
+            anchor: '100%'
             labelAlign: 'top'
             emptyText: 'กรุณาระบุสถานที่จัดงานอีเวนท์'
             allowBlank: no

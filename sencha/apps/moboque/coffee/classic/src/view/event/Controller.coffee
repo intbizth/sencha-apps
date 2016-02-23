@@ -65,7 +65,7 @@ Ext.define 'Moboque.view.event.Controller',
                             @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
                         failure: =>
                             list.unmask()
-                            @alertFailure('ขออภัย! เกิดปัญหาขณะลบประวัติ กรุณาลองใหม่อีกครั้งค่ะ')
+                            @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')
 
     onSubmit: ->
         vm = @dialog.getViewModel()
@@ -84,7 +84,7 @@ Ext.define 'Moboque.view.event.Controller',
                 form.unmask()
 
                 titleMessage = 'ผิดพลาด'
-                errorMessage = 'ขออภัย! เกิดปัญหาขณะจัดการประวัติ กรุณาลองใหม่อีกครั้งค่ะ'
+                errorMessage = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้งค่ะ'
 
                 if response = o.error.response
                     # internal server error
@@ -111,8 +111,8 @@ Ext.define 'Moboque.view.event.Controller',
                 form.unmask()
 
                 if record.phantom
-                    @alertSuccess('เพิ่มผู้ใช้ระบบเรียบร้อยแล้ว')
+                    @alertSuccess('เพิ่มข้อมูลงานอีเวนท์เรียบร้อยแล้ว')
                 else
-                    @alertSuccess('แก้ไขผู้ใช้ระบบเรียบร้อยแล้ว')
+                    @alertSuccess('แก้ไขข้อมูลงานอีเวนท์เรียบร้อยแล้ว')
 
                 @dialog.close()

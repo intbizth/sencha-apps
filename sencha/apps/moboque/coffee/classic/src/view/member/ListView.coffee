@@ -1,9 +1,9 @@
-Ext.define 'Moboque.view.group.ListView',
+Ext.define 'Moboque.view.member.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-group-list'
+    alias: 'widget.wg-member-list'
 
     bind:
-        store: '{groups}'
+        store: '{members}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,8 +11,8 @@ Ext.define 'Moboque.view.group.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'กลุ่ม'
-    reference: 'refGroupList'
+    title: 'ข้อมูลสมาชิก'
+    reference: 'refMemberList'
     headerBorders: no
 
     listeners:
@@ -20,20 +20,30 @@ Ext.define 'Moboque.view.group.ListView',
             console.log arguments
 
     columns: [
-        text: 'ชื่อกลุ่ม'
-        dataIndex: 'name'
+        text: 'ชื่อ - สกุล'
+        dataIndex: 'fullname'
         width: 300
     ,
-        text: 'สีประจำกลุ่ม'
-        dataIndex: 'color'
+        text: 'อีเมล์'
+        dataIndex: 'email'
+        width: 300
+    ,
+        text: 'รหัสประจำตัวประชาชน'
+        dataIndex: 'card_id'
         flex: 1
-        minWidth: 200
+        minWidth: 250
+    ,
+        text: 'วันที่เผยแพร่'
+        dataIndex: 'published_date'
+        width: 200
+        # flex: 1
+        # minWidth: 200
     ]
 
     tbar:
         scrollable: yes
         items: [
-            text: 'เพิ่มกลุ่ม'
+            text: 'เพิ่มข้อมูลสมาชิก'
             xtype: 'button'
             iconCls: 'fa fa-pencil'
             handler: 'onAddNew'
@@ -45,7 +55,7 @@ Ext.define 'Moboque.view.group.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refGroupList.selection}'
+                disabled: '{!refMemberList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -55,7 +65,7 @@ Ext.define 'Moboque.view.group.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refGroupList.selection}'
+                disabled: '{!refMemberList.selection}'
             handler: 'onDelete'
         ,
             '->'
@@ -65,7 +75,7 @@ Ext.define 'Moboque.view.group.ListView',
             reference: 'refSearchField'
             labelWidth: 50
             bind:
-                store: '{groups}'
+                store: '{members}'
             margin: '0 10 0 0'
         ]
 
@@ -74,5 +84,5 @@ Ext.define 'Moboque.view.group.ListView',
         scrollable: yes
         pageSize: 25
         bind:
-            store: '{groups}'
+            store: '{members}'
         displayInfo: yes
