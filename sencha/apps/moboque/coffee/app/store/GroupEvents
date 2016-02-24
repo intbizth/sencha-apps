@@ -1,4 +1,0 @@
-Ext.define 'Moboque.store.GroupEvents',
-    extend: 'Moboque.store.Base'
-    model: 'Moboque.model.GroupEvent'
-    alias: 'store.store-group-events'
