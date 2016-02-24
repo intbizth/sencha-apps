@@ -15,33 +15,26 @@ Ext.define 'Moboque.view.event.FormView',
         margin: '10 10 10 10'
         modelValidation: yes
 
+        defaults:
+            xtype: 'textfield'
+            anchor: '100%'
+            labelAlign: 'top'
+            allowBlank: no
+            minLength: 2
+            maxLength: 255
+
         # TODO allowBlank is not working !
         items: [
-            xtype: 'textfield'
             fieldLabel: '* ชื่องานอีเวนท์'
-            anchor: '100%'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุชื่องานอีเวนท์'
-            allowBlank: no
             bind: '{record.name}'
-            width: 570
-            minLength: 2
-            maxLength: 255
         ,
-            xtype: 'textareafield'
             fieldLabel: '* สถานที่จัดงานอีเวนท์'
-            anchor: '100%'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุสถานที่จัดงานอีเวนท์'
-            allowBlank: no
             bind: '{record.location}'
-            width: 570
-            minLength: 2
-            maxLength: 255
         ,
             xtype: 'container'
             layout: 'hbox'
-            margin: '10 0 10 0'
 
             items: [
                 xtype: 'datefield'

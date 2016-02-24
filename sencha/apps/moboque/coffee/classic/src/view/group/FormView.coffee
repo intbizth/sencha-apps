@@ -16,28 +16,22 @@ Ext.define 'Moboque.view.group.FormView',
         modelValidation: yes
 
         # TODO allowBlank is not working !
+        defaults:
+            xtype: 'textfield'
+            anchor: '100%'
+            labelAlign: 'top'
+            allowBlank: no
+            minLength: 2
+            maxLength: 255
+
         items: [
-            xtype: 'textfield'
             fieldLabel: '* ชื่อกลุ่ม'
-            anchor: '100%'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุชื่องกลุ่ม'
-            allowBlank: no
             bind: '{record.name}'
-            width: 570
-            minLength: 2
-            maxLength: 255
         ,
-            xtype: 'textfield'
             fieldLabel: '* สีกลุ่ม'
-            anchor: '100%'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุสีกลุ่ม'
-            allowBlank: no
             bind: '{record.color}'
-            width: 570
-            minLength: 2
-            maxLength: 255
         ]
 
         buttons: [

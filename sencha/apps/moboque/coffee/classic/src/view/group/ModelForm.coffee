@@ -3,16 +3,9 @@ Ext.define 'Moboque.view.group.ModelForm',
     alias: 'viewmodel.vm-group-form'
 
     formulas:
-    #     currentGroups:
-    #        get: -> @get('record').getGroups().getIds()
-    #        set: (v) -> @get('record').getGroups().loadData @get('groups').getByIds(v)
-
-    #     country:
-    #         get: ->
-    #             user = @get('record.user')
-    #             user.getCountry() if user
-    #         set: (val) ->
-    #             @get('record.user').setCountry val
+        # currentEvents:
+        #    get: -> @get('record').getEvents().getId()
+        #    set: (v) -> @get('record').getEvents().loadData @get('events').getById(v)
 
         isPhantom:
             get: -> @get('record').phantom

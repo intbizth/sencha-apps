@@ -10,6 +10,17 @@ Ext.define 'Moboque.model.Group',
         type: 'string'
     ]
 
+    hasMany: [
+        name: 'events'
+        model: 'Events'
+        role: 'events'
+        associationKey: 'events'
+        getterName: 'getEvents'
+        setterName: 'setEvents'
+        storeConfig:
+            type: 'store-events'
+    ]
+
     validators:
         name: 'presence'
         color: 'presence'

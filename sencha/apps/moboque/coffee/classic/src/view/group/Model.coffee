@@ -7,6 +7,10 @@ Ext.define 'Moboque.view.group.Model',
             type: 'store-groups'
             autoLoad: yes
 
+        events:
+            type: 'store-events'
+            autoLoad: yes
+
     formulas:
         isLoading:
             get: ->

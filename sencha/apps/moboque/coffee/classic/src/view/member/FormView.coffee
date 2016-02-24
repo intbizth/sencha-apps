@@ -3,8 +3,8 @@ Ext.define 'Moboque.view.member.FormView',
     alias: 'widget.wg-member-form'
 
     width: 600
-    scrollable: 'true'
     modal: yes
+    scrollable: 'true'
 
     bind:
         title: '{title}'
@@ -17,96 +17,50 @@ Ext.define 'Moboque.view.member.FormView',
         modelValidation: yes
 
         # TODO allowBlank is not working !
+        defaults:
+            xtype: 'textfield'
+            labelAlign: 'top'
+            anchor: '100%'
+            allowBlank: no
+            minLength: 2
+            maxLength: 255
+
         items: [
-            xtype: 'textfield'
             fieldLabel: '* ชื่อ'
-            anchor: '100%'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุชื่อจริง'
-            allowBlank: no
             bind: '{record.firstname}'
-            minLength: 2
-            maxLength: 255
         ,
-            xtype: 'textfield'
             fieldLabel: '* นามสกุล'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุนามสกุล'
-            allowBlank: no
             bind: '{record.lastname}'
-            anchor: '100%'
-            minLength: 2
-            maxLength: 255
         ,
-            xtype: 'textfield'
             fieldLabel: '* รหัสประจำตัวประชาชน'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุรหัสประจำตัวประชาชน'
-            allowBlank: no
             bind: '{record.card_id}'
-            anchor: '100%'
-            minLength: 2
-            maxLength: 255
         ,
-            xtype: 'textfield'
             fieldLabel: '* รหัสประจำตัวพนักงาน'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุรหัสประจำตัวพนักงาน'
-            allowBlank: no
             bind: '{record.employee_id}'
-            anchor: '100%'
-            minLength: 2
-            maxLength: 255
         ,
-            xtype: 'textfield'
             fieldLabel: '* ชื่อหน่วยงาน'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุชื่อหน่วยงาน'
-            allowBlank: no
             bind: '{record.company}'
-            anchor: '100%'
-            minLength: 2
-            maxLength: 255
         ,
-            xtype: 'textfield'
             fieldLabel: '* ที่อยู่'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุที่อยู่'
-            allowBlank: no
             bind: '{record.address}'
-            anchor: '100%'
-            minLength: 2
-            maxLength: 255
         ,
-            xtype: 'textfield'
             fieldLabel: '* อีเมล์'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุอีเมล์'
-            allowBlank: no
             bind: '{record.email}'
-            anchor: '100%'
-            minLength: 2
-            maxLength: 255
         ,
-            xtype: 'textfield'
             fieldLabel: 'เบอร์โทรศัพท์'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุเบอร์โทรศัพท์'
-            allowBlank: no
             bind: '{record.phone_number}'
-            anchor: '100%'
-            minLength: 2
-            maxLength: 255
         ,
-            xtype: 'textfield'
             fieldLabel: '* เบอร์มือถือ'
-            labelAlign: 'top'
             emptyText: 'กรุณาระบุเบอร์มือถือ'
-            allowBlank: no
             bind: '{record.mobile_number}'
-            anchor: '100%'
-            minLength: 2
-            maxLength: 255
         ]
 
         buttons: [

@@ -20,6 +20,10 @@ Ext.define 'Moboque.view.group.ListView',
             console.log arguments
 
     columns: [
+        text: 'ชื่องาน'
+        dataIndex: 'events.name'
+        width: 300
+    ,
         text: 'ชื่อกลุ่ม'
         dataIndex: 'name'
         width: 300
