@@ -72,6 +72,7 @@ Ext.define 'Moboque.view.event.Controller',
 
         form = @dialog.down 'form'
         record = vm.get 'record'
+        isPhantom = record.phantom
 
         if !(form.isValid() && vm.isDirty())
             @dialog.close()
@@ -110,7 +111,7 @@ Ext.define 'Moboque.view.event.Controller',
                 vm.commit()
                 form.unmask()
 
-                if record.phantom
+                if isPhantom
                     @alertSuccess('เพิ่มข้อมูลงานอีเวนท์เรียบร้อยแล้ว')
                 else
                     @alertSuccess('แก้ไขข้อมูลงานอีเวนท์เรียบร้อยแล้ว')

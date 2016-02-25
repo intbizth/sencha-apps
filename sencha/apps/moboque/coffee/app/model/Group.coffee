@@ -8,18 +8,22 @@ Ext.define 'Moboque.model.Group',
     ,
         name: 'color'
         type: 'string'
+    ,
+        name: 'event'
+        reference:
+            type: 'Event'
+            role: 'event'
+            associationKey: 'event'
+            getterName: 'getEvent'
+            setterName: 'setEvent'
     ]
 
-    hasMany: [
-        name: 'events'
-        model: 'Events'
-        role: 'events'
-        associationKey: 'events'
-        getterName: 'getEvents'
-        setterName: 'setEvents'
-        storeConfig:
-            type: 'store-events'
-    ]
+    writerTransform: fn: (data) ->
+
+        if data.event
+            data.event = data.event.id
+
+        return data
 
     validators:
         name: 'presence'

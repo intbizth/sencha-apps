@@ -72,6 +72,7 @@ Ext.define 'Moboque.view.group.Controller',
 
         form = @dialog.down 'form'
         record = vm.get 'record'
+        isPhantom = record.phantom
 
         if !(form.isValid() && vm.isDirty())
             @dialog.close()
@@ -110,9 +111,10 @@ Ext.define 'Moboque.view.group.Controller',
                 vm.commit()
                 form.unmask()
 
-                if record.phantom
+                if isPhantom
                     @alertSuccess('เพิ่มข้อมูลกลุ่มเรียบร้อยแล้ว')
                 else
                     @alertSuccess('แก้ไขข้อมูลกลุ่มเรียบร้อยแล้ว')
+                    console.log record
 
                 @dialog.close()

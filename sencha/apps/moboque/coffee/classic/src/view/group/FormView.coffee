@@ -21,10 +21,20 @@ Ext.define 'Moboque.view.group.FormView',
             anchor: '100%'
             labelAlign: 'top'
             allowBlank: no
-            minLength: 2
-            maxLength: 255
+            # minLength: 2
+            # maxLength: 255
 
         items: [
+            xtype: 'combobox'
+            fieldLabel: '* ชื่องานอีเวนท์'
+            displayField: 'name'
+            valueField: 'id'
+            queryMode: 'local'
+            bind:
+                store: '{events}'
+                selection: '{event}'
+                # value: '{record.event}'
+        ,
             fieldLabel: '* ชื่อกลุ่ม'
             emptyText: 'กรุณาระบุชื่องกลุ่ม'
             bind: '{record.name}'

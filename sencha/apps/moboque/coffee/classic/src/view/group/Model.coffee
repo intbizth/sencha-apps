@@ -7,10 +7,6 @@ Ext.define 'Moboque.view.group.Model',
             type: 'store-groups'
             autoLoad: yes
 
-        events:
-            type: 'store-events'
-            autoLoad: yes
-
     formulas:
         isLoading:
             get: ->
@@ -21,5 +17,10 @@ Ext.define 'Moboque.view.group.Model',
 
     prepareData: (record) ->
         record = @createRecord record
+        eventRecord = record.getEvent()
+
+        if eventRecord and record.get('event_id') != eventRecord.getId()
+            record.set('event_id', eventRecord.getId())
+            record.commit()
 
         return record
