@@ -44,39 +44,51 @@ class Client
     /**
      * @param $url
      * @param array $queryParameters
+     * @param array $options
      *
      * @return Response
      */
-    public function get($url, array $queryParameters = [])
+    public function get($url, array $queryParameters = [], array  $options = [])
     {
         return $this->parseResponse(
-            $this->httpClient->get($this->buildUri($url), ['query' => $queryParameters])
+            $this->httpClient->get(
+                $this->buildUri($url),
+                array_merge($this->applyOptions($options), ['query' => $queryParameters])
+            )
         );
     }
 
     /**
      * @param $url
      * @param array $body
+     * @param array $options
      *
      * @return Response
      */
-    public function patch($url, array $body)
+    public function patch($url, array $body = [], array  $options = [])
     {
         return $this->parseResponse(
-            $this->httpClient->patch($this->buildUri($url), ['json' => $body])
+            $this->httpClient->patch(
+                $this->buildUri($url),
+                array_merge($this->applyOptions($options), ['json' => $body])
+            )
         );
     }
 
     /**
      * @param $url
      * @param array $body
+     * @param array $options
      *
      * @return Response
      */
-    public function put($url, array $body)
+    public function put($url, array $body = [], array  $options = [])
     {
         return $this->parseResponse(
-            $this->httpClient->put($this->buildUri($url), ['json' => $body])
+            $this->httpClient->put(
+                $this->buildUri($url),
+                array_merge($this->applyOptions($options), ['json' => $body])
+            )
         );
     }
 
@@ -95,14 +107,17 @@ class Client
     /**
      * @param $url
      * @param $body
-     * @param array $files
+     * @param array $options
      *
      * @return Response
      */
-    public function post($url, $body, array $files = array())
+    public function post($url, $body, array $options = array())
     {
         return $this->parseResponse(
-            $this->httpClient->post($this->buildUri($url), ['json' => $body])
+            $this->httpClient->post(
+                $this->buildUri($url),
+                array_merge($this->applyOptions($options), ['json' => $body])
+            )
         );
     }
 
@@ -122,5 +137,23 @@ class Client
     protected function parseResponse(ResponseInterface $response)
     {
         return new Response($response);
+    }
+
+    /**
+     * @param array $options
+     *
+     * @return array
+     */
+    private function applyOptions(array $options = [])
+    {
+        if (array_key_exists('headers', $options)) {
+            $defaults = (array) $this->httpClient->getConfig('headers');
+
+            foreach($options['headers'] as $key => &$value) {
+                $value = sprintf('%s; %s', $defaults[$key], $value);
+            }
+        }
+
+        return $options;
     }
 }

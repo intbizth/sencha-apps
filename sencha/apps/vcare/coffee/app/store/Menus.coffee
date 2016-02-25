@@ -15,9 +15,9 @@ Ext.define 'Vcare.store.Menus',
             iconCls: 'right-icon new-icon x-fa fa-desktop'
             routeId: 'dashboard'
         ,
-            text: 'Users (Profile)'
-            view: 'profile.LayoutView'
+            text: 'Customers'
+            view: 'customer.LayoutView'
             iconCls: 'fa fa-users'
             leaf: true
-            routeId: 'profiles'
+            routeId: 'customers'
         ]

@@ -1,9 +1,9 @@
-Ext.define 'Vcare.view.profile.ListView',
+Ext.define 'Vcare.view.customer.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-profile-list'
+    alias: 'widget.wg-customer-list'
 
     bind:
-        store: '{profiles}'
+        store: '{customers}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -12,7 +12,7 @@ Ext.define 'Vcare.view.profile.ListView',
         #deferEmptyText: no
 
     title: 'ผู้ใช้งานระบบ'
-    reference: 'refProfileList'
+    reference: 'refCustomerList'
     headerBorders: no
 
     listeners:
@@ -60,7 +60,7 @@ Ext.define 'Vcare.view.profile.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refProfileList.selection}'
+                disabled: '{!refCustomerList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -70,7 +70,7 @@ Ext.define 'Vcare.view.profile.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refProfileList.selection}'
+                disabled: '{!refCustomerList.selection}'
             handler: 'onDelete'
         ,
             '->'
@@ -79,7 +79,7 @@ Ext.define 'Vcare.view.profile.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind: store: '{profiles}'
+            bind: store: '{customers}'
             margin: '0 10 0 0'
         ]
 
@@ -87,5 +87,5 @@ Ext.define 'Vcare.view.profile.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind: store: '{profiles}'
+        bind: store: '{customers}'
         displayInfo: yes

@@ -1,6 +1,6 @@
-Ext.define 'Vcare.view.profile.FormView',
+Ext.define 'Vcare.view.customer.FormView',
     extend: 'Vcare.view.base.Window'
-    alias: 'widget.wg-profile-form'
+    alias: 'widget.wg-customer-form'
 
     bind:
         title: '{title}'

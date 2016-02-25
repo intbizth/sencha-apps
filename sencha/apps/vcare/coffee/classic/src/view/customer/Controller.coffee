@@ -1,6 +1,6 @@
-Ext.define 'Vcare.view.profile.Controller',
+Ext.define 'Vcare.view.customer.Controller',
     extend: 'Vcare.view.base.Controller'
-    alias: 'controller.ctrl-profile'
+    alias: 'controller.ctrl-customer'
 
     init: -> #..
 
@@ -17,10 +17,10 @@ Ext.define 'Vcare.view.profile.Controller',
         console.log record
 
         @dialog = @getView().add
-            xtype: 'wg-profile-form'
+            xtype: 'wg-customer-form'
             ownerView: @getView()
             viewModel:
-                type: 'vm-profile-form'
+                type: 'vm-customer-form'
                 data:
                     title:  @createDialogTitle record
                     record: record
@@ -29,7 +29,7 @@ Ext.define 'Vcare.view.profile.Controller',
 
     onCancel: -> @dialog.close()
     onAddNew: -> @createDialog()
-    onEdit: -> @createDialog @referTo('ProfileList').getSelection()[0]
+    onEdit: -> @createDialog @referTo('CustomerList').getSelection()[0]
 
     onDelete: ->
         @showConfirmMessage
@@ -37,16 +37,16 @@ Ext.define 'Vcare.view.profile.Controller',
             message: 'คุณแน่ใจหรือไม่',
             fn: (pressed) =>
                 if pressed == 'ok'
-                    list = @referTo 'ProfileList'
+                    list = @referTo 'CustomerList'
                     list.mask('Deleting...')
 
-                    profileRecord = list.getSelection()[0]
+                    record = list.getSelection()[0]
                     store = list.getStore()
 
                     # for fix association and cascade.
-                    profileRecord.drop(no)
-                    profileRecord.erasing = no
-                    profileRecord.save
+                    record.drop(no)
+                    record.erasing = no
+                    record.save
                         success: =>
                             list.unmask()
                             @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
