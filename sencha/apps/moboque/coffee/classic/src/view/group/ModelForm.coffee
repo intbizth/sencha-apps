@@ -13,10 +13,11 @@ Ext.define 'Moboque.view.group.ModelForm',
         event:
             get: ->
                 @get('record').getEvent()
+
             set: (val) ->
-                console.log val
-                @get('record')
-                return
+                # console.log val
+                # @get('record')
+                # return
                 @get('record').setEvent val
 
         isPhantom:

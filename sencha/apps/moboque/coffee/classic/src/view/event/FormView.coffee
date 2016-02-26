@@ -25,11 +25,11 @@ Ext.define 'Moboque.view.event.FormView',
 
         # TODO allowBlank is not working !
         items: [
-            fieldLabel: '* ชื่องานอีเวนท์'
+            fieldLabel: '<span style="color:red;">*</span> ชื่องานอีเวนท์'
             emptyText: 'กรุณาระบุชื่องานอีเวนท์'
             bind: '{record.name}'
         ,
-            fieldLabel: '* สถานที่จัดงานอีเวนท์'
+            fieldLabel: '<span style="color:red;">*</span> สถานที่จัดงานอีเวนท์'
             emptyText: 'กรุณาระบุสถานที่จัดงานอีเวนท์'
             bind: '{record.location}'
         ,
@@ -38,14 +38,14 @@ Ext.define 'Moboque.view.event.FormView',
 
             items: [
                 xtype: 'datefield'
-                fieldLabel: '* วันเริ่มงาน'
+                fieldLabel: '<span style="color:red;">*</span> วันเริ่มงาน'
                 labelAlign: 'top'
                 bind: '{startDate}'
                 format: 'd/m/Y'
                 margin: '10 10 10 0'
             ,
                 xtype: 'timefield'
-                fieldLabel: '* เวลาเริ่มงาน'
+                fieldLabel: '<span style="color:red;">*</span> เวลาเริ่มงาน'
                 labelAlign: 'top'
                 bind: '{startTime}'
                 margin: '10 0 10 10'
@@ -57,14 +57,14 @@ Ext.define 'Moboque.view.event.FormView',
 
             items: [
                 xtype: 'datefield'
-                fieldLabel: '* วันสิ้นสุดงาน'
+                fieldLabel: '<span style="color:red;">*</span> วันสิ้นสุดงาน'
                 labelAlign: 'top'
                 bind: '{endDate}'
                 format: 'd/m/Y'
                 margin: '0 10 10 0'
             ,
                 xtype: 'timefield'
-                fieldLabel: '* เวลาสิ้นสุดงาน'
+                fieldLabel: '<span style="color:red;">*</span> เวลาสิ้นสุดงาน'
                 labelAlign: 'top'
                 bind: '{endTime}'
                 margin: '0 0 10 10'

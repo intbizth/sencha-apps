@@ -58,3 +58,6 @@ Ext.define 'Moboque.view.event.ModelForm',
         endTime:
             get: -> @getEndDate()
             set: (time) -> @setEndDate(null, time)
+
+        isPhantom:
+            get: -> @get('record').phantom

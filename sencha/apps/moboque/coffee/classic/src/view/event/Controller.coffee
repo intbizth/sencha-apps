@@ -99,9 +99,9 @@ Ext.define 'Moboque.view.event.Controller',
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
 
-                        Ext.Object.each obj.errors.children, (key, value, item) ->
-                            if value.hasOwnProperty('errors')
-                                errorMessage = value.errors[0]
+                        # Ext.Object.each obj.errors.children, (key, value, item) ->
+                        #     if value.hasOwnProperty('errors')
+                        #         errorMessage = value.errors[0]
 
                 @alertFailure
                     title: titleMessage

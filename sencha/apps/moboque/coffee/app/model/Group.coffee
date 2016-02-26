@@ -18,6 +18,12 @@ Ext.define 'Moboque.model.Group',
             setterName: 'setEvent'
     ]
 
+    getEventName: ->
+        event = @getEvent()
+
+        return event.get("name") if event
+        return ''
+
     writerTransform: fn: (data) ->
 
         if data.event

@@ -23,7 +23,7 @@ Ext.define 'Moboque.view.group.ListView',
         text: 'ชื่องาน'
         width: 300
         renderer: (value, metaData, record) ->
-            return record.getEvent().get 'name'
+            return record.getEventName()
     ,
         text: 'ชื่อกลุ่ม'
         dataIndex: 'name'
