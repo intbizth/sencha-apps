@@ -4,8 +4,10 @@ Ext.define 'Vcare.view.customer.ModelForm',
 
     formulas:
         currentGroups:
-           get: -> @get('record').getGroups().getIds()
-           set: (v) -> @get('record').getGroups().loadData @get('groups').getByIds(v)
+            get: -> @get('record').getGroups().getIds()
+            set: (v) ->
+                groups = @get('groups').getByIds(v)
+                @get('record').getGroups().loadData groups
 
         country:
             get: ->
@@ -22,9 +24,17 @@ Ext.define 'Vcare.view.customer.ModelForm',
         @get('record').dirty || (user && user.dirty)
 
     commit: ->
-        @get('record').commit(); @get('record.user').commit()
+        @get('record').commit()
+        @get('record.user').commit()
 
     reject: ->
         @get('record').reject()
 
         return if !user = @get('record').getUser()
+
+        localeId = user.getPrevious('locale')
+        user.reject()
+
+        if localeId
+            user.setLocale @get('locales').getById(localeId)
+            user.commit()

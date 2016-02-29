@@ -15,9 +15,6 @@ Ext.define 'Vcare.model.Customer',
         name: 'email'
         type: 'string'
     ,
-        name: 'mobile'
-        type: 'string'
-    ,
         name: 'birthday'
         type: 'date'
         dateWriteFormat: 'Y-m-d'
@@ -53,6 +50,12 @@ Ext.define 'Vcare.model.Customer',
     writerTransform: fn: (data) ->
         delete data.user if Ext.Object.isEmpty(data.user)
         delete data.user.id if data.user
+
+        if data.user.country
+            data.user.country = data.user.country.id
+
+        if data.user.locale
+            data.user.locale = data.user.locale.id
 
         groups = data.groups
 

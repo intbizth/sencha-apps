@@ -9,9 +9,6 @@ Ext.define 'Vcare.model.User',
         name: 'username'
         type: 'string'
     ,
-        name: 'displayname'
-        type: 'string'
-    ,
         name: 'plain_password'
         type: 'string'
     ,
@@ -21,8 +18,21 @@ Ext.define 'Vcare.model.User',
         name: 'roles'
         type: 'auto'
     ,
-        name: '_links'
-        type: 'auto'
+        name: 'locale'
+        reference:
+            type: 'Locale'
+            role: 'locale'
+            associationKey: 'locale'
+            getterName: 'getLocale'
+            setterName: 'setLocale'
+    ,
+        name: 'country'
+        reference:
+            type: 'Country'
+            role: 'country'
+            associationKey: 'country'
+            getterName: 'getCountry'
+            setterName: 'setCountry'
     ]
 
     validators:

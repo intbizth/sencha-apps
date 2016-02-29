@@ -8,13 +8,12 @@ Ext.define 'Vcare.view.customer.Controller',
     createDialogTitle: (r) ->
         if r.phantom
            return 'เพิ่มประวัติใหม่'
-        else r.getUser().get 'displayname'
+        else r.getUser().get 'username'
 
     # @private
     createDialog: (record) ->
         vm = @getViewModel()
         record = vm.prepareData(record)
-        console.log record
 
         @dialog = @getView().add
             xtype: 'wg-customer-form'
@@ -66,7 +65,7 @@ Ext.define 'Vcare.view.customer.Controller',
         form.mask('กำลังบันทึกข้อมูล ..')
 
         record.save
-            failure: (rec, o) =>
+            failure: (record, o) =>
                 form.unmask()
 
                 titleMessage = 'ผิดพลาด'
@@ -92,14 +91,15 @@ Ext.define 'Vcare.view.customer.Controller',
                     title: titleMessage
                     message: errorMessage
 
-            success: (rec, o) =>
-                vm.commit()
+            success: (record, o) =>
                 form.unmask()
 
                 if record.phantom
+                    @reloadStore('customers')
                     @alertSuccess('เพิ่มผู้ใช้ระบบเรียบร้อยแล้ว')
                 else
                     @alertSuccess('แก้ไขผู้ใช้ระบบเรียบร้อยแล้ว')
 
-                @dialog.close()
+                vm.commit()
 
+                @dialog.close()

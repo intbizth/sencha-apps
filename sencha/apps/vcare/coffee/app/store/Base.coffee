@@ -36,7 +36,7 @@ Ext.define 'Vcare.store.Base',
         rs = []
         @each (rec) ->
             rs.push rec if Ext.Array.contains (ids || []), rec.getId()
-        return if rs.length then rs else null
+        return rs
 
     ## delete records
     deletes: (records, options) ->

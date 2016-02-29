@@ -1,6 +1,8 @@
 Ext.define 'Vcare.view.base.Controller',
     extend: 'Ext.app.ViewController'
 
+    reloadStore: (key) -> @getViewModel().getStore(key).reload()
+
     setCurrentView: (view, itemId, params) ->
         contentPanel = @getView().down '#' + itemId
 

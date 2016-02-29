@@ -53,13 +53,6 @@ Ext.define 'Vcare.view.customer.FormView',
                 format: 'd M Y'
                 bind: '{record.birthday}'
             ,
-                xtype: 'textfield'
-                fieldLabel: 'เบอร์มือถือ'
-                bind: '{record.mobile}'
-                emptyText: '08123456789'
-                # maxLength: 10
-                enforceMaxLength: true
-            ,
                 xtype: 'combobox'
                 fieldLabel: '* เพศ'
                 name: 'gender'
@@ -105,17 +98,22 @@ Ext.define 'Vcare.view.customer.FormView',
                 bind: '{record.user.username}'
             ,
                 xtype: 'textfield'
-                fieldLabel: 'Displayname'
-                allowBlank: yes
-                bind: '{record.user.displayname}'
-            ,
-                xtype: 'textfield'
                 inputType: 'password'
                 fieldLabel: 'รหัสผ่าน '
                 minLength: 4
                 bind:
                     value: '{record.user.plain_password}'
                     required: '{isPhantom}'
+            ,
+                xtype: 'combobox'
+                fieldLabel: 'Locale '
+                allowBlank: yes
+                displayField: 'name'
+                valueField: 'id'
+                queryMode: 'local'
+                bind:
+                    store: '{locales}'
+                    selection: '{record.user.locale}'
             ,
                 xtype: 'checkboxfield'
                 boxLabel: 'เปิดการใช้งาน '
