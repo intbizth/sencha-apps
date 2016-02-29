@@ -42,4 +42,16 @@ Ext.define 'Moboque.store.Menus',
                 leaf: true
                 routeId: 'members'
             ]
+        ,
+
+            text: 'ContentBundle'
+            iconCls: 'fa fa-book'
+            children: [
+                text: 'เบอร์โทรฉุกเฉิน'
+                view: 'emergency-call.LayoutView'
+                iconCls: 'fa fa-ambulance'
+                leaf: true
+                routeId: 'emergency-call'
+            ]
         ]
+
