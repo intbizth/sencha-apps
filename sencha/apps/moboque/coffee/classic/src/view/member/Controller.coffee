@@ -1,14 +1,14 @@
-Ext.define 'Moboque.view.profile.Controller',
+Ext.define 'Moboque.view.member.Controller',
     extend: 'Moboque.view.base.Controller'
-    alias: 'controller.ctrl-profile'
+    alias: 'controller.ctrl-member'
 
     init: -> #..
 
     # @private
     createDialogTitle: (r) ->
         if r.phantom
-           return 'เพิ่มประวัติใหม่'
-        else r.getUser().get 'displayname'
+            return 'เพิ่มข้อมูลสมาชิก'
+        else r.get 'fullname'
 
     # @private
     createDialog: (record) ->
@@ -16,47 +16,63 @@ Ext.define 'Moboque.view.profile.Controller',
         record = vm.prepareData(record)
 
         @dialog = @getView().add
-            xtype: 'wg-profile-form'
+            xtype: 'wg-member-form'
             ownerView: @getView()
             viewModel:
-                type: 'vm-profile-form'
+                type: 'vm-member-form'
                 data:
-                    title:  @createDialogTitle record
+                    title: @createDialogTitle record
                     record: record
+
+            listeners:
+                beforeclose: (panel, eOpts) =>
+                    if record and record.dirty
+                        @showConfirmMessage
+                            title: 'ข้อมูลมีการเปลี่ยนแปลง'
+                            message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
+                            fn: (pressed) =>
+                                if pressed == 'ok'
+                                    record.store.rejectChanges()
+                                    @dialog.close()
+
+                        return no
 
         @dialog.show()
 
     onCancel: -> @dialog.close()
     onAddNew: -> @createDialog()
-    onEdit: -> @createDialog @referTo('ProfileList').getSelection()[0]
+    onEdit: -> @createDialog @referTo('MemberList').getSelection()[0]
 
     onDelete: ->
         @showConfirmMessage
-            title: 'ยืนยันการลบ !'
+            title: 'ยืนยันการลบ'
             message: 'คุณแน่ใจหรือไม่',
             fn: (pressed) =>
                 if pressed == 'ok'
-                    list = @referTo 'ProfileList'
-                    list.mask('Deleting...')
+                    list = @referTo 'MemberList'
+                    list.mask('Deleting..')
 
-                    profileRecord = list.getSelection()[0]
+                    memberRecord = list.getSelection()[0]
                     store = list.getStore()
 
                     # for fix association and cascade.
-                    profileRecord.drop(no)
-                    profileRecord.erasing = no
-                    profileRecord.save
+                    # for fix association and cascade.
+                    memberRecord.drop(no)
+                    memberRecord.erasing = no
+                    memberRecord.save
                         success: =>
                             list.unmask()
                             @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
                         failure: =>
                             list.unmask()
-                            @alertFailure('ขออภัย! เกิดปัญหาขณะลบประวัติ กรุณาลองใหม่อีกครั้งค่ะ')
+                            @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')
 
     onSubmit: ->
         vm = @dialog.getViewModel()
+
         form = @dialog.down 'form'
         record = vm.get 'record'
+        isPhantom = record.phantom
 
         if !(form.isValid() && vm.isDirty())
             @dialog.close()
@@ -69,7 +85,7 @@ Ext.define 'Moboque.view.profile.Controller',
                 form.unmask()
 
                 titleMessage = 'ผิดพลาด'
-                errorMessage = 'ขออภัย! เกิดปัญหาขณะจัดการประวัติ กรุณาลองใหม่อีกครั้งค่ะ'
+                errorMessage = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้งค่ะ'
 
                 if response = o.error.response
                     # internal server error
@@ -95,10 +111,10 @@ Ext.define 'Moboque.view.profile.Controller',
                 vm.commit()
                 form.unmask()
 
-                if record.phantom
-                    @alertSuccess('เพิ่มผู้ใช้ระบบเรียบร้อยแล้ว')
+                if isPhantom
+                    @alertSuccess('เพิ่มข้อมูลสมาชิกเรียบร้อยแล้ว')
                 else
-                    @alertSuccess('แก้ไขผู้ใช้ระบบเรียบร้อยแล้ว')
+                    @alertSuccess('แก้ไขข้อมูลสมาชิกเรียบร้อยแล้ว')
 
                 @dialog.close()
 

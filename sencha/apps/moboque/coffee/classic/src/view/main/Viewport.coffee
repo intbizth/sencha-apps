@@ -29,7 +29,7 @@ Ext.define 'Moboque.view.main.Viewport',
             xtype: 'component'
             reference: 'refLogo'
             cls: 'ui-logo'
-            html: '<div class="main-logo"><img src="resources/images/ui-logo.png">TORO</div>'
+            html: '<div class="main-logo"><img src="resources/images/ui-logo.png">MOBOQUE</div>'
             width: 250
         ,
             margin: '0 0 0 8'
@@ -92,7 +92,7 @@ Ext.define 'Moboque.view.main.Viewport',
         ,
             xtype: 'container'
             flex: 1
-            #padding: 20
+            # padding: 20
             reference: 'refMainCardPanel'
             cls: 'ui-dash-right-main-container'
             itemId: 'contentPanel'
