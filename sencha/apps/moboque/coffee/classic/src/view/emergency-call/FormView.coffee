@@ -36,7 +36,6 @@ Ext.define 'Moboque.view.emergency-call.FormView',
             fieldLabel: '<span style="color:red;">*</span> เบอร์ฉุกเฉิน'
             emptyText: 'กรุณาใส่หมายเลขฉุกเฉิน'
             bind: '{record.tel}'
-            xtype: 'numberfield'
 
         ]
 

@@ -32,7 +32,8 @@ Ext.define 'Moboque.view.emergency-call.Controller',
                             message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
                             fn: (pressed) =>
                                 if pressed == 'ok'
-                                    record.store.rejectChanges()
+                                    if record.store
+                                        record.store.rejectChanges()
                                     @dialog.close()
 
                         return no
@@ -41,7 +42,7 @@ Ext.define 'Moboque.view.emergency-call.Controller',
 
     onCancel: -> @dialog.close()
     onAddNew: -> @createDialog()
-    onEdit: -> @createDialog @referTo('EventList').getSelection()[0]
+    onEdit: -> @createDialog @referTo('EmergencyCallList').getSelection()[0]
 
     onDelete: ->
         @showConfirmMessage
@@ -49,7 +50,7 @@ Ext.define 'Moboque.view.emergency-call.Controller',
             message: 'คุณแน่ใจหรือไม่',
             fn: (pressed) =>
                 if pressed == 'ok'
-                    list = @referTo 'EventList'
+                    list = @referTo 'EmergencyCallList'
                     list.mask('Deleting..')
 
                     eventRecord = list.getSelection()[0]
