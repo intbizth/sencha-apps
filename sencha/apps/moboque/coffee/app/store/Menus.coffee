@@ -52,6 +52,12 @@ Ext.define 'Moboque.store.Menus',
                 iconCls: 'fa fa-ambulance'
                 leaf: true
                 routeId: 'emergency-call'
+            ,
+                text: 'ลิงค์'
+                view: 'link.LayoutView'
+                iconCls: 'fa fa-link'
+                leaf: true
+                routeId: 'link'
             ]
         ]
 
