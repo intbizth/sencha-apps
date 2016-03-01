@@ -30,10 +30,28 @@ Ext.define 'Moboque.model.Member',
         name: 'mobile_number'
         type: 'string'
     ,
+        name: 'created_at'
+        type: 'date'
+    ,
         name: 'fullname'
         persist: no
         calculate: (d) -> "#{d.firstname}  #{d.lastname}"
+    ,
+        name: 'group'
+        reference:
+            type: 'Group'
+            role: 'group'
+            associationKey: 'group'
+            getterName: 'getGroup'
+            setterName: 'setGroup'
     ]
+
+    writerTransform: fn: (data) ->
+
+        if data.group
+            data.group = data.group.id
+
+        return data
 
     validators:
         firstname: 'presence'

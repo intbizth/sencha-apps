@@ -8,16 +8,12 @@ Ext.define 'Moboque.view.group.ModelForm',
             autoLoad: yes
             pageSize: 25
 
-    # TODO Check this event GodoakBrutal & P.Yokky
     formulas:
         event:
             get: ->
                 @get('record').getEvent()
 
             set: (val) ->
-                # console.log val
-                # @get('record')
-                # return
                 @get('record').setEvent val
 
         isPhantom:
@@ -25,7 +21,6 @@ Ext.define 'Moboque.view.group.ModelForm',
 
     isDirty: ->
         @get('record').dirty
-        # @get('record').dirty || (events && events.dirty)
 
     commit: ->
         @get('record').commit()

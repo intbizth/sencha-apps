@@ -26,6 +26,15 @@ Ext.define 'Moboque.view.member.FormView',
             maxLength: 255
 
         items: [
+            xtype: 'combobox'
+            fieldLabel: '* ชื่องลุ่ม'
+            displayField: 'name'
+            valueField: 'id'
+            queryMode: 'local'
+            bind:
+                store: '{groups}'
+                selection: '{group}'
+        ,
             fieldLabel: '* ชื่อ'
             emptyText: 'กรุณาระบุชื่อจริง'
             bind: '{record.firstname}'

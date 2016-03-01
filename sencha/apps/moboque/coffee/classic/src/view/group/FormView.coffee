@@ -21,8 +21,6 @@ Ext.define 'Moboque.view.group.FormView',
             anchor: '100%'
             labelAlign: 'top'
             allowBlank: no
-            # minLength: 2
-            # maxLength: 255
 
         items: [
             xtype: 'combobox'
@@ -33,15 +31,19 @@ Ext.define 'Moboque.view.group.FormView',
             bind:
                 store: '{events}'
                 selection: '{event}'
-                # value: '{record.event}'
         ,
             fieldLabel: '* ชื่อกลุ่ม'
             emptyText: 'กรุณาระบุชื่องกลุ่ม'
             bind: '{record.name}'
         ,
+            xtype: 'colorfield'
             fieldLabel: '* สีกลุ่ม'
-            emptyText: 'กรุณาระบุสีกลุ่ม'
+            format: '#hex6'
+            allowBlank: no
             bind: '{record.color}'
+            # value: '#000000'
+            # emptyText: 'กรุณาระบุสีกลุ่ม'
+            # bind: '{record.color}'
         ]
 
         buttons: [

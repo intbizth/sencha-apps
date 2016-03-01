@@ -115,6 +115,5 @@ Ext.define 'Moboque.view.group.Controller',
                     @alertSuccess('เพิ่มข้อมูลกลุ่มเรียบร้อยแล้ว')
                 else
                     @alertSuccess('แก้ไขข้อมูลกลุ่มเรียบร้อยแล้ว')
-                    console.log record
 
                 @dialog.close()
