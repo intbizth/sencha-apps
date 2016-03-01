@@ -1,4 +1,4 @@
-Ext.define 'Moboque.model.EmergencyCall',
+Ext.define 'Moboque.model.Link',
     extend: 'Moboque.model.Base'
     api: '/api/link/'
 

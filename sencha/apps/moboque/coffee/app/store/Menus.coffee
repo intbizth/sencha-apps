@@ -58,6 +58,12 @@ Ext.define 'Moboque.store.Menus',
                 iconCls: 'fa fa-link'
                 leaf: true
                 routeId: 'link'
+            ,
+                text: 'นายกพบประชาชน'
+                view: 'meet.LayoutView'
+                iconCls: 'fa fa-weixin'
+                leaf: true
+                routeId: 'meet'
             ]
         ]
 
