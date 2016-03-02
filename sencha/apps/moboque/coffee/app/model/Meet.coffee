@@ -9,11 +9,11 @@ Ext.define 'Moboque.model.Meet',
         name: 'latitude'
         type: 'string'
     ,
-        name: 'created_at'
-        type: 'date'
-        dateWriteFormat: 'Y-m-d H:i:s'
+        name: 'longitude'
+        type: 'string'
     ]
 
     validators:
         description: 'presence'
-        created_at: 'presence'
+        latitude: 'presence'
+        longitude: 'presence'

@@ -23,9 +23,10 @@ Ext.define 'Moboque.view.meet.FormView',
             minLength: 2
             maxLength: 255
 
+        # TODO allowBlank is not working !
         items: [
-#            xtype: 'htmleditor'
-            fieldLabel: '<span style="color:red;">*</span> ทักทายประชาชน'
+            fieldLabel: '<span style="color:red;">*</span> ชื่อเว็บ'
+            emptyText: 'กรุณาระบุชื่อหรือคำอธิบายเว็บ'
             bind: '{record.description}'
         ]
 

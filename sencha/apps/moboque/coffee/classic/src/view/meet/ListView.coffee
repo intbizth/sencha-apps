@@ -11,7 +11,7 @@ Ext.define 'Moboque.view.meet.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'นายกพบประชาชน'
+    title: 'ลิงค์ภายนอก'
     reference: 'refMeetList'
     headerBorders: no
 
@@ -22,11 +22,10 @@ Ext.define 'Moboque.view.meet.ListView',
     columns: [
         text: 'คำอธิบาย'
         dataIndex: 'description'
-        flex: 1
-        minWidth: 300
+        width: 200
     ,
         xtype: 'datecolumn'
-        text: 'วันที่เขียน'
+        text: 'ลิงค์'
         dataIndex: 'created_at'
         format: 'd-m-Y H:i'
         flex: 1
@@ -48,7 +47,7 @@ Ext.define 'Moboque.view.meet.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refMeetList.selection}'
+                disabled: '{!refLinkList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -58,7 +57,7 @@ Ext.define 'Moboque.view.meet.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refMeetList.selection}'
+                disabled: '{!refLinkList.selection}'
             handler: 'onDelete'
         ,
             '->'
