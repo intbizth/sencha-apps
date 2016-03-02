@@ -13,10 +13,10 @@ Ext.define 'Moboque.view.promote.Model',
 
     prepareData: (record) ->
         record = @createRecord record
+        promoteCategoryRecord = record.getPromoteCategory()
 
-        promoteCatRecord = record.getPromoteCategory()
-        if promoteCatRecord and record.get('promoteCategory_id') != promoteCatRecord.getId()
-            record.set('promoteCategory_id', promoteCatRecord.getId())
+        if promoteCategoryRecord and record.get('promoteCategory_id') != promoteCategoryRecord.getId()
+            record.set('promoteCategory_id', promoteCategoryRecord.getId())
             record.commit()
 
         return record

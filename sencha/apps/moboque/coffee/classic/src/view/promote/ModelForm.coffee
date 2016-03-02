@@ -3,43 +3,38 @@ Ext.define 'Moboque.view.promote.ModelForm',
     alias: 'viewmodel.vm-promote-form'
 
     stores:
-        promotesCat:
+        promoteCategories:
             type: 'store-promote-category'
             autoLoad: yes
             pageSize: 25
 
-    # formulas:
-    #     currentGroups:
-    #        get: -> @get('record').getGroups().getIds()
-    #        set: (v) -> @get('record').getGroups().loadData @get('groups').getByIds(v)
-
-    #     country:
-    #         get: ->
-    #             user = @get('record.user')
-    #             user.getCountry() if user
-    #         set: (val) ->
-    #             @get('record.user').setCountry val
-
-    #     isPhantom:
-    #         get: -> @get('record').phantom
-
-    isDirty: ->
-        @get('record').dirty
-
+    # TODO Check this promoteCategory GodoakBrutal & P.Yokky
     formulas:
-        isPhantom:
-            get: -> @get('record').phantom
-
-        promoteSaveTitle:
+        promoteCategory:
             get: ->
                 @get('record').getPromoteCategory()
 
             set: (val) ->
+                # console.log val
+                # @get('record')
+                # return
                 @get('record').setPromoteCategory val
 
+        isPhantom:
+            get: -> @get('record').phantom
+
+    isDirty: ->
+        @get('record').dirty
+        # @get('record').dirty || (promoteCategories && promoteCategories.dirty)
+
+    commit: ->
+        @get('record').commit()
 
     reject: ->
-        promoteCatId = @get('record').getPrevious('promoteCategory_id')
-        if promoteCatId
-            @get('record').setPromoteCategory() @get('promotes').getById(promoteCatId)
+        @get('record').reject()
+
+        promoteCategoryId = @get('record').getPrevious('promoteCategory_id')
+
+        if promoteCategoryId
+            @get('record').setPromoteCategory @get('promoteCategories').getById(promoteCategoryId)
             record.commit()

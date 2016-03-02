@@ -11,7 +11,7 @@ Ext.define 'Moboque.view.promote.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'ลิงค์ภายนอก'
+    title: 'กลุ่ม'
     reference: 'refPromoteList'
     headerBorders: no
 
@@ -20,30 +20,25 @@ Ext.define 'Moboque.view.promote.ListView',
             console.log arguments
 
     columns: [
-        text: 'หัวเรื่อง'
+        text: 'ชื่อกลุ่ม'
         dataIndex: 'title'
-        width: 200
+        width: 300
     ,
-        text: 'คำอธิบาย'
+        text: 'สีประจำกลุ่ม'
         dataIndex: 'description'
-        width: 200
-    ,
-        text: 'หมวด'
-        renderer: (value, metaData, record) ->
-            return record.getPromoteCategoryTitle()
-    ,
-        xtype: 'datecolumn'
-        text: 'วันที่เขียน'
-        dataIndex: 'created_at'
-        format: 'd-m-Y H:i'
         flex: 1
         minWidth: 200
+    ,
+        text: 'หมวด'
+        width: 300
+        renderer: (value, metaData, record) ->
+            return record.getPromoteCategoryName()
     ]
 
     tbar:
         scrollable: yes
         items: [
-            text: 'เพิ่มรายการ'
+            text: 'เพิ่มกลุ่ม'
             xtype: 'button'
             iconCls: 'fa fa-pencil'
             handler: 'onAddNew'

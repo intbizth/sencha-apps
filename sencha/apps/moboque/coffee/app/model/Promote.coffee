@@ -18,12 +18,13 @@ Ext.define 'Moboque.model.Promote',
             setterName: 'setPromoteCategory'
     ]
 
-    getPromoteCategoryTitle: ->
+    getPromoteCategoryName: ->
         promote = @getPromoteCategory()
         return promote.get("title") if promote
         return ''
 
     validators:
+        title: 'presence'
         description: 'presence'
 
     writerTransform: fn: (data) ->

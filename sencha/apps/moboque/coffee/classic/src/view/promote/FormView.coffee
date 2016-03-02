@@ -2,7 +2,7 @@ Ext.define 'Moboque.view.promote.FormView',
     extend: 'Ext.window.Window'
     alias: 'widget.wg-promote-form'
 
-    width: 500
+    width: 600
     modal: yes
 
     bind:
@@ -15,32 +15,32 @@ Ext.define 'Moboque.view.promote.FormView',
         margin: '10 10 10 10'
         modelValidation: yes
 
+        # TODO allowBlank is not working !
         defaults:
             xtype: 'textfield'
             anchor: '100%'
             labelAlign: 'top'
             allowBlank: no
-            minLength: 2
-            maxLength: 255
-
+            # minLength: 2
+            # maxLength: 255
 
         items: [
-            fieldLabel: '<span style="color:red;">*</span> ชื่อเรื่อง'
-            emptyText: 'กรุณากรอกชื่อเรื่อง...'
+            fieldLabel: 'ชื่อเรื่อง'
+            emptyText: 'กรุณาระบุชื่องกลุ่ม'
             bind: '{record.title}'
         ,
-            fieldLabel: '<span style="color:red;">*</span> คำอธิบาย'
-            emptyText: 'กรุณากรอกคำอธิบาย...'
+            fieldLabel: '* สีกลุ่ม'
+            emptyText: 'ระบุคำอธิบาย'
             bind: '{record.description}'
         ,
-            fieldLabel: '<span style="color:red;">*</span> หมวด'
             xtype: 'combobox'
+            fieldLabel: '* ชื่องานอีเวนท์'
             displayField: 'title'
             valueField: 'id'
             queryMode: 'local'
             bind:
-                store: '{promotesCat}'
-                selection: '{promoteSaveTitle}'
+                store: '{promoteCategories}'
+                selection: '{promoteCategory}'
         ]
 
         buttons: [

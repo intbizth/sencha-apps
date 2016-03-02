@@ -7,7 +7,7 @@ Ext.define 'Moboque.view.promote.Controller',
     # @private
     createDialogTitle: (r) ->
         if r.phantom
-            return 'เพิ่มงานอีเวนท์'
+            return 'เพิ่มกลุ่ม'
         else r.get 'name'
 
     # @private
@@ -32,8 +32,7 @@ Ext.define 'Moboque.view.promote.Controller',
                             message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
                             fn: (pressed) =>
                                 if pressed == 'ok'
-                                    if record.store
-                                        record.store.rejectChanges()
+                                    record.store.rejectChanges()
                                     @dialog.close()
 
                         return no
@@ -53,17 +52,17 @@ Ext.define 'Moboque.view.promote.Controller',
                     list = @referTo 'PromoteList'
                     list.mask('Deleting..')
 
-                    eventRecord = list.getSelection()[0]
+                    promoteRecord = list.getSelection()[0]
                     store = list.getStore()
 
                     # for fix association and cascade.
                     # for fix association and cascade.
-                    eventRecord.drop(no)
-                    eventRecord.erasing = no
-                    eventRecord.save
+                    promoteRecord.drop(no)
+                    promoteRecord.erasing = no
+                    promoteRecord.save
                         success: =>
                             list.unmask()
-                            @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
+                            @alertSuccess('ลบข้อมูลเรียบร้อยแล้วค่ะ')
                         failure: =>
                             list.unmask()
                             @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')
@@ -100,9 +99,9 @@ Ext.define 'Moboque.view.promote.Controller',
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
 
-                        # Ext.Object.each obj.errors.children, (key, value, item) ->
-                        #     if value.hasOwnProperty('errors')
-                        #         errorMessage = value.errors[0]
+                        Ext.Object.each obj.errors.children, (key, value, item) ->
+                            if value.hasOwnProperty('errors')
+                                errorMessage = value.errors[0]
 
                 @alertFailure
                     title: titleMessage
@@ -113,8 +112,9 @@ Ext.define 'Moboque.view.promote.Controller',
                 form.unmask()
 
                 if isPhantom
-                    @alertSuccess('เพิ่มข้อมูลงานอีเวนท์เรียบร้อยแล้ว')
+                    @alertSuccess('เพิ่มข้อมูลกลุ่มเรียบร้อยแล้ว')
                 else
-                    @alertSuccess('แก้ไขข้อมูลงานอีเวนท์เรียบร้อยแล้ว')
+                    @alertSuccess('แก้ไขข้อมูลกลุ่มเรียบร้อยแล้ว')
+                    console.log record
 
                 @dialog.close()
