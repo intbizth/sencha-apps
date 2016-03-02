@@ -8,7 +8,20 @@ Ext.define 'Moboque.model.Promote',
     ,
         name: 'description'
         type: 'string'
+    ,
+        name: 'promote-category'
+        reference:
+            type: 'PromoteCategory'
+            role: 'promote-category'
+            associationKey: 'promote_category'
+            getterName: 'getPromoteCategory'
+            setterName: 'setPromoteCategory'
     ]
+
+    getPromoteCategoryTitle: ->
+        promote = @getPromoteCategory()
+        return promote.get("title") if promote
+        return ''
 
     validators:
         description: 'presence'

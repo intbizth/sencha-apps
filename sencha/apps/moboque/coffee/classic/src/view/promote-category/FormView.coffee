@@ -1,6 +1,6 @@
-Ext.define 'Moboque.view.promote.FormView',
+Ext.define 'Moboque.view.promote-category.FormView',
     extend: 'Ext.window.Window'
-    alias: 'widget.wg-promote-form'
+    alias: 'widget.wg-promote-category-form'
 
     width: 500
     modal: yes
@@ -31,13 +31,7 @@ Ext.define 'Moboque.view.promote.FormView',
             fieldLabel: '<span style="color:red;">*</span> ชื่อเรื่อง'
             emptyText: 'กรุณากรอกชื่อเรื่อง...'
             bind: '{record.title}'
-        ,
-            fieldLabel: '<span style="color:red;">*</span> คำอธิบาย'
-            emptyText: 'กรุณากรอกคำอธิบาย...'
-            bind: '{record.description}'
-        ,
-            fieldLabel: '<span style="color:red;">*</span> หมวด'
-        
+
         ]
 
         buttons: [

@@ -1,6 +1,6 @@
-Ext.define 'Moboque.view.promote.ListView',
+Ext.define 'Moboque.view.promote-category.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-promote-list'
+    alias: 'widget.wg-promote-category-list'
 
     bind:
         store: '{promotes}'
@@ -12,7 +12,7 @@ Ext.define 'Moboque.view.promote.ListView',
         #deferEmptyText: no
 
     title: 'ลิงค์ภายนอก'
-    reference: 'refPromoteList'
+    reference: 'refPromoteCategoryList'
     headerBorders: no
 
     listeners:
@@ -23,14 +23,6 @@ Ext.define 'Moboque.view.promote.ListView',
         text: 'หัวเรื่อง'
         dataIndex: 'title'
         width: 200
-    ,
-        text: 'คำอธิบาย'
-        dataIndex: 'description'
-        width: 200
-    ,
-        text: 'หมวด'
-        renderer: (value, metaData, record) ->
-            return record.getPromoteCategoryTitle()
     ,
         xtype: 'datecolumn'
         text: 'วันที่เขียน'
@@ -55,7 +47,7 @@ Ext.define 'Moboque.view.promote.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refPromoteList.selection}'
+                disabled: '{!refPromoteCategoryList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -65,7 +57,7 @@ Ext.define 'Moboque.view.promote.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refPromoteList.selection}'
+                disabled: '{!refPromoteCategoryList.selection}'
             handler: 'onDelete'
         ,
             '->'
@@ -75,7 +67,7 @@ Ext.define 'Moboque.view.promote.ListView',
             reference: 'refSearchField'
             labelWidth: 50
             bind:
-                store: '{promotes}'
+                store: '{promote-categories}'
             margin: '0 10 0 0'
         ]
 
