@@ -2,6 +2,12 @@ Ext.define 'Moboque.view.promote.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
     alias: 'viewmodel.vm-promote-form'
 
+    stores:
+        promotesCat:
+            type: 'store-promote-category'
+            autoLoad: yes
+            pageSize: 25
+
     # formulas:
     #     currentGroups:
     #        get: -> @get('record').getGroups().getIds()
@@ -20,44 +26,20 @@ Ext.define 'Moboque.view.promote.ModelForm',
     isDirty: ->
         @get('record').dirty
 
-    # commit: ->
-    #     @get('record').commit(); @get('record.user').commit()
-
-    # reject: ->
-    #     @get('record').reject()
-
-    getStartDate: -> @get('record').get('start_date')
-    setStartDate: (date, time) ->
-        originDate = @getStartDate()
-        date = @setDateTimeInRecord(originDate, date, time)
-
-        @get('record').set 'start_date', date
-        return
-
-    getEndDate: -> @get('record').get('end_date')
-    setEndDate: (date, time) ->
-        originDate = @getEndDate()
-        date = @setDateTimeInRecord(originDate, date, time)
-
-        @get('record').set 'end_date', date
-        return
-
     formulas:
-        startDate:
-            get: -> @getStartDate()
-            set: (date) -> @setStartDate(date, null)
-
-        startTime:
-            get: -> @getStartDate()
-            set: (time) -> @setStartDate(null, time)
-
-        endDate:
-            get: -> @getEndDate()
-            set: (date) -> @setEndDate(date, null)
-
-        endTime:
-            get: -> @getEndDate()
-            set: (time) -> @setEndDate(null, time)
-
         isPhantom:
             get: -> @get('record').phantom
+
+        promoteSaveTitle:
+            get: ->
+                @get('record').getPromoteCategory()
+
+            set: (val) ->
+                @get('record').setPromoteCategory val
+
+
+    reject: ->
+        promoteCatId = @get('record').getPrevious('promoteCategory_id')
+        if promoteCatId
+            @get('record').setPromoteCategory() @get('promotes').getById(promoteCatId)
+            record.commit()

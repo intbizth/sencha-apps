@@ -9,10 +9,10 @@ Ext.define 'Moboque.model.Promote',
         name: 'description'
         type: 'string'
     ,
-        name: 'promote-category'
+        name: 'promoteCategory'
         reference:
             type: 'PromoteCategory'
-            role: 'promote-category'
+            role: 'promoteCategory'
             associationKey: 'promote_category'
             getterName: 'getPromoteCategory'
             setterName: 'setPromoteCategory'
@@ -25,3 +25,8 @@ Ext.define 'Moboque.model.Promote',
 
     validators:
         description: 'presence'
+
+    writerTransform: fn: (data) ->
+        if data.promotes
+            data.promotes = date.promotes.id
+        return data

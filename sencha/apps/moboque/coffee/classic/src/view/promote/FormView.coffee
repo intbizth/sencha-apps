@@ -23,9 +23,6 @@ Ext.define 'Moboque.view.promote.FormView',
             minLength: 2
             maxLength: 255
 
-        # TODO allowBlank is not working !
-
-
 
         items: [
             fieldLabel: '<span style="color:red;">*</span> ชื่อเรื่อง'
@@ -37,7 +34,13 @@ Ext.define 'Moboque.view.promote.FormView',
             bind: '{record.description}'
         ,
             fieldLabel: '<span style="color:red;">*</span> หมวด'
-        
+            xtype: 'combobox'
+            displayField: 'title'
+            valueField: 'id'
+            queryMode: 'local'
+            bind:
+                store: '{promotesCat}'
+                selection: '{promoteSaveTitle}'
         ]
 
         buttons: [
