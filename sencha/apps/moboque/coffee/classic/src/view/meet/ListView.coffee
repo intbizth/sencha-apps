@@ -25,6 +25,7 @@ Ext.define 'Moboque.view.meet.ListView',
         flex: 1
         minWidth: 300
     ,
+        xtype: 'datecolumn'
         text: 'วันที่เขียน'
         dataIndex: 'created_at'
         format: 'd-m-Y H:i'

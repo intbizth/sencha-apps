@@ -6,6 +6,9 @@ Ext.define 'Moboque.model.Meet',
         name: 'description'
         type: 'string'
     ,
+        name: 'latitude'
+        type: 'string'
+    ,
         name: 'created_at'
         type: 'date'
         dateWriteFormat: 'Y-m-d H:i:s'

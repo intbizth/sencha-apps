@@ -11,7 +11,7 @@ Ext.define 'Moboque.view.link.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'เบอร์โทรฉุกเฉิน'
+    title: 'ลิงค์ภายนอก'
     reference: 'refLinkList'
     headerBorders: no
 
