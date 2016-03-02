@@ -30,9 +30,6 @@ Ext.define 'Moboque.model.Member',
         name: 'mobile_number'
         type: 'string'
     ,
-        name: 'created_at'
-        type: 'date'
-    ,
         name: 'fullname'
         persist: no
         calculate: (d) -> "#{d.firstname}  #{d.lastname}"

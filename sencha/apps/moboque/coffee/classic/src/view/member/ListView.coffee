@@ -32,13 +32,6 @@ Ext.define 'Moboque.view.member.ListView',
         dataIndex: 'card_id'
         flex: 1
         minWidth: 250
-    ,
-        xtype: 'datecolumn'
-        text: 'วันที่เผยแพร่'
-        dataIndex: 'created_at'
-        width: 200
-        # flex: 1
-        # minWidth: 200
     ]
 
     tbar:
