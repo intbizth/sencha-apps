@@ -14,6 +14,7 @@ Ext.define 'Vcare.model.Base',
         return null if Ext.Object.isEmpty(data)
         return data
 
+
     # private function
     doRequest: (config) ->
         return Ext.Ajax.request

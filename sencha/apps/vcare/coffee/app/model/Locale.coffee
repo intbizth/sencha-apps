@@ -8,13 +8,11 @@ Ext.define 'Vcare.model.Locale',
     ,
         name: 'code'
         type: 'string'
-    ,
-        name: 'name'
-        type: 'string'
-        mapping: (data) -> data.code
+        unique: true
     ,
         name: 'enabled'
         type: 'boolean'
+        persist: false
     ]
 
     validators:

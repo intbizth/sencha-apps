@@ -20,4 +20,10 @@ Ext.define 'Vcare.store.Menus',
             iconCls: 'fa fa-users'
             leaf: true
             routeId: 'customers'
+        ,
+            text: 'Locales'
+            view: 'locale.LayoutView'
+            iconCls: 'fa fa-users'
+            leaf: true
+            routeId: 'locales'
         ]
