@@ -1,6 +1,6 @@
-Ext.define 'Moboque.view.meet.FormView',
+Ext.define 'Moboque.view.promote.FormView',
     extend: 'Ext.window.Window'
-    alias: 'widget.wg-meet-form'
+    alias: 'widget.wg-promote-form'
 
     width: 500
     modal: yes
@@ -28,8 +28,12 @@ Ext.define 'Moboque.view.meet.FormView',
 
 
         items: [
-            fieldLabel: '<span style="color:red;">*</span> สถานะ'
-            emptyText: 'พูดทักทาย หรือสถานะ...'
+            fieldLabel: '<span style="color:red;">*</span> ชื่อเรื่อง'
+            emptyText: 'กรุณากรอกชื่อเรื่อง...'
+            bind: '{record.title}'
+        ,
+            fieldLabel: '<span style="color:red;">*</span> คำอธิบาย'
+            emptyText: 'กรุณากรอกคำอธิบาย...'
             bind: '{record.description}'
 
         ]

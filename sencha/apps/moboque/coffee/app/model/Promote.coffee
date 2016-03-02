@@ -1,8 +1,11 @@
-Ext.define 'Moboque.model.Meet',
+Ext.define 'Moboque.model.Promote',
     extend: 'Moboque.model.Base'
-    api: '/api/meet/'
+    api: '/api/promotes/'
 
     fields: [
+        name: 'title'
+        type: 'string'
+    ,
         name: 'description'
         type: 'string'
     ]

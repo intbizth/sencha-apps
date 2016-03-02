@@ -64,6 +64,12 @@ Ext.define 'Moboque.store.Menus',
                 iconCls: 'fa fa-weixin'
                 leaf: true
                 routeId: 'meet'
+            ,
+                text: 'การโปรโมท'
+                view: 'promote.LayoutView'
+                iconCls: 'fa fa-slideshare'
+                leaf: true
+                routeId: 'promotes'
             ]
         ]
 
