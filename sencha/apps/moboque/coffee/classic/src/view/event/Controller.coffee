@@ -55,11 +55,7 @@ Ext.define 'Moboque.view.event.Controller',
                     eventRecord = list.getSelection()[0]
                     store = list.getStore()
 
-                    # for fix association and cascade.
-                    # for fix association and cascade.
-                    eventRecord.drop(no)
-                    eventRecord.erasing = no
-                    eventRecord.save
+                    eventRecord.erase
                         success: =>
                             list.unmask()
                             @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
@@ -73,6 +69,8 @@ Ext.define 'Moboque.view.event.Controller',
         form = @dialog.down 'form'
         record = vm.get 'record'
         isPhantom = record.phantom
+        list = @referTo 'EventList'
+        store = list.getStore()
 
         if !(form.isValid() && vm.isDirty())
             @dialog.close()
@@ -113,6 +111,7 @@ Ext.define 'Moboque.view.event.Controller',
 
                 if isPhantom
                     @alertSuccess('เพิ่มข้อมูลงานอีเวนท์เรียบร้อยแล้ว')
+                    store.reload()
                 else
                     @alertSuccess('แก้ไขข้อมูลงานอีเวนท์เรียบร้อยแล้ว')
 

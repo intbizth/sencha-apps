@@ -43,6 +43,12 @@ Ext.define 'Moboque.model.Member',
             setterName: 'setGroup'
     ]
 
+    getGroupName: ->
+        group = @getGroup()
+
+        return group.get("name") if group
+        return ''
+
     writerTransform: fn: (data) ->
 
         if data.group
@@ -54,8 +60,6 @@ Ext.define 'Moboque.model.Member',
         firstname: 'presence'
         lastname: 'presence'
         card_id: 'presence'
-        employee_id: 'presence'
-        company: 'presence'
         address: 'presence'
         email: 'presence'
         mobile_number: 'presence'

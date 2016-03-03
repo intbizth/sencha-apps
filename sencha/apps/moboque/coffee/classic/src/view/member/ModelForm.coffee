@@ -15,6 +15,7 @@ Ext.define 'Moboque.view.member.ModelForm',
 
             set: (val) ->
                 @get('record').setGroup val
+                # console.log @get('record').getGroup()
 
         isPhantom:
             get: -> @get('record').phantom

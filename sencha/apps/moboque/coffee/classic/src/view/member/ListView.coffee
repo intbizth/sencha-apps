@@ -32,6 +32,11 @@ Ext.define 'Moboque.view.member.ListView',
         dataIndex: 'card_id'
         flex: 1
         minWidth: 250
+    ,
+        text: 'ชื่องาน'
+        width: 300
+        renderer: (value, metaData, record) ->
+            return record.getGroupName()
     ]
 
     tbar:

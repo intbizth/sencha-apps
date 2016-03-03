@@ -27,7 +27,7 @@ Ext.define 'Moboque.view.member.FormView',
 
         items: [
             xtype: 'combobox'
-            fieldLabel: '* ชื่องลุ่ม'
+            fieldLabel: '<span style="color:red;">*</span> ชื่อกลุ่ม'
             displayField: 'name'
             valueField: 'id'
             queryMode: 'local'
@@ -35,31 +35,31 @@ Ext.define 'Moboque.view.member.FormView',
                 store: '{groups}'
                 selection: '{group}'
         ,
-            fieldLabel: '* ชื่อ'
+            fieldLabel: '<span style="color:red;">*</span> ชื่อ'
             emptyText: 'กรุณาระบุชื่อจริง'
             bind: '{record.firstname}'
         ,
-            fieldLabel: '* นามสกุล'
+            fieldLabel: '<span style="color:red;">*</span> นามสกุล'
             emptyText: 'กรุณาระบุนามสกุล'
             bind: '{record.lastname}'
         ,
-            fieldLabel: '* รหัสประจำตัวประชาชน'
+            fieldLabel: '<span style="color:red;">*</span> รหัสประจำตัวประชาชน'
             emptyText: 'กรุณาระบุรหัสประจำตัวประชาชน'
             bind: '{record.card_id}'
         ,
-            fieldLabel: '* รหัสประจำตัวพนักงาน'
+            fieldLabel: 'รหัสประจำตัวพนักงาน'
             emptyText: 'กรุณาระบุรหัสประจำตัวพนักงาน'
             bind: '{record.employee_id}'
         ,
-            fieldLabel: '* ชื่อหน่วยงาน'
+            fieldLabel: 'ชื่อหน่วยงาน'
             emptyText: 'กรุณาระบุชื่อหน่วยงาน'
             bind: '{record.company}'
         ,
-            fieldLabel: '* ที่อยู่'
+            fieldLabel: '<span style="color:red;">*</span> ที่อยู่'
             emptyText: 'กรุณาระบุที่อยู่'
             bind: '{record.address}'
         ,
-            fieldLabel: '* อีเมล์'
+            fieldLabel: '<span style="color:red;">*</span> อีเมล์'
             emptyText: 'กรุณาระบุอีเมล์'
             bind: '{record.email}'
         ,
@@ -67,7 +67,7 @@ Ext.define 'Moboque.view.member.FormView',
             emptyText: 'กรุณาระบุเบอร์โทรศัพท์'
             bind: '{record.phone_number}'
         ,
-            fieldLabel: '* เบอร์มือถือ'
+            fieldLabel: '<span style="color:red;">*</span> เบอร์มือถือ'
             emptyText: 'กรุณาระบุเบอร์มือถือ'
             bind: '{record.mobile_number}'
         ]

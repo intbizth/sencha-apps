@@ -55,11 +55,7 @@ Ext.define 'Moboque.view.group.Controller',
                     groupRecord = list.getSelection()[0]
                     store = list.getStore()
 
-                    # for fix association and cascade.
-                    # for fix association and cascade.
-                    groupRecord.drop(no)
-                    groupRecord.erasing = no
-                    groupRecord.save
+                    groupRecord.erase
                         success: =>
                             list.unmask()
                             @alertSuccess('ลบข้อมูลเรียบร้อยแล้วค่ะ')
@@ -72,6 +68,8 @@ Ext.define 'Moboque.view.group.Controller',
 
         form = @dialog.down 'form'
         record = vm.get 'record'
+        list = @referTo 'GroupList'
+        store = list.getStore()
         isPhantom = record.phantom
 
         if !(form.isValid() && vm.isDirty())
@@ -98,10 +96,7 @@ Ext.define 'Moboque.view.group.Controller',
                     if response.status == 400
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
-
-                        Ext.Object.each obj.errors.children, (key, value, item) ->
-                            if value.hasOwnProperty('errors')
-                                errorMessage = value.errors[0]
+                        errorMessage = 'Validation Error.'
 
                 @alertFailure
                     title: titleMessage
@@ -113,6 +108,7 @@ Ext.define 'Moboque.view.group.Controller',
 
                 if isPhantom
                     @alertSuccess('เพิ่มข้อมูลกลุ่มเรียบร้อยแล้ว')
+                    store.reload()
                 else
                     @alertSuccess('แก้ไขข้อมูลกลุ่มเรียบร้อยแล้ว')
 

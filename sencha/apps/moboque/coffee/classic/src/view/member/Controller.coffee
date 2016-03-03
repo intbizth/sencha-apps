@@ -55,11 +55,7 @@ Ext.define 'Moboque.view.member.Controller',
                     memberRecord = list.getSelection()[0]
                     store = list.getStore()
 
-                    # for fix association and cascade.
-                    # for fix association and cascade.
-                    memberRecord.drop(no)
-                    memberRecord.erasing = no
-                    memberRecord.save
+                    memberRecord.erase
                         success: =>
                             list.unmask()
                             @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
@@ -72,6 +68,8 @@ Ext.define 'Moboque.view.member.Controller',
 
         form = @dialog.down 'form'
         record = vm.get 'record'
+        list = @referTo 'MemberList'
+        store = list.getStore()
         isPhantom = record.phantom
 
         if !(form.isValid() && vm.isDirty())
@@ -113,6 +111,7 @@ Ext.define 'Moboque.view.member.Controller',
 
                 if isPhantom
                     @alertSuccess('เพิ่มข้อมูลสมาชิกเรียบร้อยแล้ว')
+                    store.reload()
                 else
                     @alertSuccess('แก้ไขข้อมูลสมาชิกเรียบร้อยแล้ว')
 
