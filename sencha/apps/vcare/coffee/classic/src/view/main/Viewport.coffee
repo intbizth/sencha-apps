@@ -29,7 +29,7 @@ Ext.define 'Vcare.view.main.Viewport',
             xtype: 'component'
             reference: 'refLogo'
             cls: 'ui-logo'
-            html: '<div class="main-logo"><img src="resources/images/ui-logo.png">TORO</div>'
+            html: '<div class="main-logo"><img src="resources/images/ui-logo.png">Vcare</div>'
             width: 250
         ,
             margin: '0 0 0 8'
