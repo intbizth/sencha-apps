@@ -8,7 +8,6 @@ Ext.define 'Moboque.view.promote.ModelForm',
             autoLoad: yes
             pageSize: 25
 
-    # TODO Check this promoteCategory GodoakBrutal & P.Yokky
     formulas:
         promoteCategory:
             get: ->

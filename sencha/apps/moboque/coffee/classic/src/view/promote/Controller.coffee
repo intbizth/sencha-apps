@@ -55,11 +55,7 @@ Ext.define 'Moboque.view.promote.Controller',
                     promoteRecord = list.getSelection()[0]
                     store = list.getStore()
 
-                    # for fix association and cascade.
-                    # for fix association and cascade.
-                    promoteRecord.drop(no)
-                    promoteRecord.erasing = no
-                    promoteRecord.save
+                    promoteRecord.erase
                         success: =>
                             list.unmask()
                             @alertSuccess('ลบข้อมูลเรียบร้อยแล้วค่ะ')
@@ -94,14 +90,11 @@ Ext.define 'Moboque.view.promote.Controller',
                         errorMessage = 'Sorry, something went wrong.'
 
                     # sf validation error.
-                    # TODO: handle form error with custom fn.
+                    # TODO: เปลี่ยนเป็นแบบนี้
                     if response.status == 400
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
-
-                        Ext.Object.each obj.errors.children, (key, value, item) ->
-                            if value.hasOwnProperty('errors')
-                                errorMessage = value.errors[0]
+                        errorMessage = 'Validation Error.'
 
                 @alertFailure
                     title: titleMessage

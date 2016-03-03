@@ -28,6 +28,6 @@ Ext.define 'Moboque.model.Promote',
         description: 'presence'
 
     writerTransform: fn: (data) ->
-        if data.promotes
-            data.promotes = date.promotes.id
+        if data.promoteCategory
+            data.promoteCategory = data.promoteCategory.id
         return data
