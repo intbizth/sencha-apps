@@ -65,13 +65,13 @@ Ext.define 'Moboque.store.Menus',
                 leaf: true
                 routeId: 'meet'
             ,
-                text: 'การโปรโมท'
+                text: 'พื้นที่แนะนำสินค้าและบริการ'
                 view: 'promote.LayoutView'
                 iconCls: 'fa fa-slideshare'
                 leaf: true
                 routeId: 'promotes'
             ,
-                text: 'การโปรโมทCat'
+                text: 'หมวดหมู่แนะนำ'
                 view: 'promote-category.LayoutView'
                 iconCls: 'fa fa-slideshare'
                 leaf: true

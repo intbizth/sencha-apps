@@ -23,12 +23,8 @@ Ext.define 'Moboque.view.promote-category.FormView',
             minLength: 2
             maxLength: 255
 
-        # TODO allowBlank is not working !
-
-
-
         items: [
-            fieldLabel: '<span style="color:red;">*</span> ชื่อเรื่อง'
+            fieldLabel: 'ชื่อเรื่อง'
             emptyText: 'กรุณากรอกชื่อเรื่อง...'
             bind: '{record.title}'
 

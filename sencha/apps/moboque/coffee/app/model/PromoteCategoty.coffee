@@ -5,6 +5,7 @@ Ext.define 'Moboque.model.PromoteCategory',
     fields: [
         name: 'title'
         type: 'string'
+
     ]
 
     validators:
