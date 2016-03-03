@@ -234,3 +234,28 @@ Ext.define 'Moboque.view.base.Controller',
     enabledButtonWithSelection: (ref, value) ->
         button = @referTo(ref)
         button.setDisabled(value)
+
+    # Event on (onDelete, onEdit, onSubmit, etc..) Call here
+    baseDelete: (refer) ->
+        @showConfirmMessage
+            title: 'ยืนยันการลบ'
+            message: 'คุณแน่ใจหรือไม่',
+            fn: (pressed) =>
+                if pressed == 'ok'
+                    list = @referTo refer
+                    list.mask('Deleting..')
+
+                    eventRecord = list.getSelection()[0]
+                    store = list.getStore()
+
+                    # for fix association and cascade.
+                    # for fix association and cascade.
+                    eventRecord.drop(no)
+                    eventRecord.erasing = no
+                    eventRecord.save
+                        success: =>
+                            list.unmask()
+                            @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
+                        failure: =>
+                            list.unmask()
+                            @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')

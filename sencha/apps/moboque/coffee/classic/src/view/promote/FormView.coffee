@@ -21,20 +21,18 @@ Ext.define 'Moboque.view.promote.FormView',
             anchor: '100%'
             labelAlign: 'top'
             allowBlank: no
-            # minLength: 2
-            # maxLength: 255
 
         items: [
-            fieldLabel: 'ชื่อเรื่อง'
-            emptyText: 'กรุณาระบุชื่องกลุ่ม'
+            fieldLabel: 'ชื่อสถานที่-แหล่งท่องเที่ยว'
+            emptyText: 'กรุณาระบุชื่อสถานที่, ร้าน หรือ แหล่งท่องเที่ยว'
             bind: '{record.title}'
         ,
-            fieldLabel: '* สีกลุ่ม'
-            emptyText: 'ระบุคำอธิบาย'
+            fieldLabel: 'คำอธิบาย'
+            emptyText: 'ระบุคำอธิบายสถานที่ หรือ แหล่งท่องเที่ยว'
             bind: '{record.description}'
         ,
             xtype: 'combobox'
-            fieldLabel: '* ชื่องานอีเวนท์'
+            fieldLabel: 'ประเภทของสถานที่'
             displayField: 'title'
             valueField: 'id'
             queryMode: 'local'

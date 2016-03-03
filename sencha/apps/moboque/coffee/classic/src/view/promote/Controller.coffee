@@ -43,25 +43,7 @@ Ext.define 'Moboque.view.promote.Controller',
     onAddNew: -> @createDialog()
     onEdit: -> @createDialog @referTo('PromoteList').getSelection()[0]
 
-    onDelete: ->
-        @showConfirmMessage
-            title: 'ยืนยันการลบ'
-            message: 'คุณแน่ใจหรือไม่',
-            fn: (pressed) =>
-                if pressed == 'ok'
-                    list = @referTo 'PromoteList'
-                    list.mask('Deleting..')
-
-                    promoteRecord = list.getSelection()[0]
-                    store = list.getStore()
-
-                    promoteRecord.erase
-                        success: =>
-                            list.unmask()
-                            @alertSuccess('ลบข้อมูลเรียบร้อยแล้วค่ะ')
-                        failure: =>
-                            list.unmask()
-                            @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')
+    onDelete: -> @baseDelete('PromoteList')
 
     onSubmit: ->
         vm = @dialog.getViewModel()

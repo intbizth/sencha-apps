@@ -44,29 +44,7 @@ Ext.define 'Moboque.view.link.Controller',
     onAddNew: -> @createDialog()
     onEdit: -> @createDialog @referTo('LinkList').getSelection()[0]
 
-    onDelete: ->
-        @showConfirmMessage
-            title: 'ยืนยันการลบ'
-            message: 'คุณแน่ใจหรือไม่',
-            fn: (pressed) =>
-                if pressed == 'ok'
-                    list = @referTo 'LinkList'
-                    list.mask('Deleting..')
-
-                    eventRecord = list.getSelection()[0]
-                    store = list.getStore()
-
-                    # for fix association and cascade.
-                    # for fix association and cascade.
-                    eventRecord.drop(no)
-                    eventRecord.erasing = no
-                    eventRecord.save
-                        success: =>
-                            list.unmask()
-                            @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
-                        failure: =>
-                            list.unmask()
-                            @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')
+    onDelete: -> @baseDelete('LinkList')
 
     onSubmit: ->
         vm = @dialog.getViewModel()
@@ -99,10 +77,7 @@ Ext.define 'Moboque.view.link.Controller',
                     if response.status == 400
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
-
-                        # Ext.Object.each obj.errors.children, (key, value, item) ->
-                        #     if value.hasOwnProperty('errors')
-                        #         errorMessage = value.errors[0]
+                        errorMessage = 'Sorry, Validate Error.'
 
                 @alertFailure
                     title: titleMessage

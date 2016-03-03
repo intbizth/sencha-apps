@@ -8,15 +8,13 @@ Ext.define 'Moboque.view.promote.ModelForm',
             autoLoad: yes
             pageSize: 25
 
+    # TODO Check this promoteCategory GodoakBrutal & P.Yokky
     formulas:
         promoteCategory:
             get: ->
                 @get('record').getPromoteCategory()
 
             set: (val) ->
-                # console.log val
-                # @get('record')
-                # return
                 @get('record').setPromoteCategory val
 
         isPhantom:
@@ -24,7 +22,6 @@ Ext.define 'Moboque.view.promote.ModelForm',
 
     isDirty: ->
         @get('record').dirty
-        # @get('record').dirty || (promoteCategories && promoteCategories.dirty)
 
     commit: ->
         @get('record').commit()
