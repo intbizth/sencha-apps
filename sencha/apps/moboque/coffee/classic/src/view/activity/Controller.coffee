@@ -7,7 +7,7 @@ Ext.define 'Moboque.view.activity.Controller',
     # @private
     createDialogTitle: (r) ->
         if r.phantom
-            return 'เพิ่มแอคทิวิตี้'
+            return 'เพิ่มกิจกรรม'
         else r.get 'title'
 
     # @private
@@ -55,11 +55,7 @@ Ext.define 'Moboque.view.activity.Controller',
                     activityRecord = list.getSelection()[0]
                     store = list.getStore()
 
-                    # for fix association and cascade.
-                    # for fix association and cascade.
-                    activityRecord.drop(no)
-                    activityRecord.erasing = no
-                    activityRecord.save
+                    activityRecord.erase
                         success: =>
                             list.unmask()
                             @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
@@ -72,6 +68,8 @@ Ext.define 'Moboque.view.activity.Controller',
 
         form = @dialog.down 'form'
         record = vm.get 'record'
+        list = @referTo 'ActivityList'
+        store = list.getStore()
         isPhantom = record.phantom
 
         if !(form.isValid() && vm.isDirty())
@@ -99,10 +97,6 @@ Ext.define 'Moboque.view.activity.Controller',
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
 
-                        # Ext.Object.each obj.errors.children, (key, value, item) ->
-                        #     if value.hasOwnProperty('errors')
-                        #         errorMessage = value.errors[0]
-
                 @alertFailure
                     title: titleMessage
                     message: errorMessage
@@ -112,8 +106,9 @@ Ext.define 'Moboque.view.activity.Controller',
                 form.unmask()
 
                 if isPhantom
-                    @alertSuccess('เพิ่มข้อมูลงานอีเวนท์เรียบร้อยแล้ว')
+                    @alertSuccess('เพิ่มข้อมูลกิจกรรมเรียบร้อยแล้ว')
+                    store.add(record)
                 else
-                    @alertSuccess('แก้ไขข้อมูลงานอีเวนท์เรียบร้อยแล้ว')
+                    @alertSuccess('แก้ไขข้อมูลกิจกรรมเรียบร้อยแล้ว')
 
                 @dialog.close()

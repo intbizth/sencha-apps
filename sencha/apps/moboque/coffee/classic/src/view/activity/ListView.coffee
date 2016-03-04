@@ -10,7 +10,7 @@ Ext.define 'Moboque.view.activity.ListView',
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
 
-    title: 'แอคทิวิตี้'
+    title: 'กิจกรรม'
     reference: 'refActivityList'
     headerBorders: no
 
@@ -38,7 +38,7 @@ Ext.define 'Moboque.view.activity.ListView',
     tbar:
         scrollable: yes
         items: [
-            text: 'เพิ่มแอคทิวิตี้'
+            text: 'เพิ่มกิจกรรม'
             xtype: 'button'
             iconCls: 'fa fa-pencil'
             handler: 'onAddNew'

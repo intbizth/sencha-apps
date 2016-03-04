@@ -55,11 +55,7 @@ Ext.define 'Moboque.view.service.Controller',
                     serviceRecord = list.getSelection()[0]
                     store = list.getStore()
 
-                    # for fix association and cascade.
-                    # for fix association and cascade.
-                    serviceRecord.drop(no)
-                    serviceRecord.erasing = no
-                    serviceRecord.save
+                    serviceRecord.erase
                         success: =>
                             list.unmask()
                             @alertSuccess('ลบข้อมูลเรียบร้อยแล้วค่ะ')
@@ -72,6 +68,8 @@ Ext.define 'Moboque.view.service.Controller',
 
         form = @dialog.down 'form'
         record = vm.get 'record'
+        list = @referTo 'ServiceList'
+        store = list.getStore()
         isPhantom = record.phantom
 
         if !(form.isValid() && vm.isDirty())
@@ -99,10 +97,6 @@ Ext.define 'Moboque.view.service.Controller',
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
 
-                        Ext.Object.each obj.errors.children, (key, value, item) ->
-                            if value.hasOwnProperty('errors')
-                                errorMessage = value.errors[0]
-
                 @alertFailure
                     title: titleMessage
                     message: errorMessage
@@ -113,6 +107,7 @@ Ext.define 'Moboque.view.service.Controller',
 
                 if isPhantom
                     @alertSuccess('เพิ่มข้อมูลบริการแล้ว')
+                    store.add(record)
                 else
                     @alertSuccess('แก้ไขข้อมูลบริการเรียบร้อยแล้ว')
 

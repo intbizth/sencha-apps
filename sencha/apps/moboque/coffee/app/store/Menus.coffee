@@ -43,15 +43,15 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'members'
             ]
         ,
-            text: 'Activity'
-            view: 'activity.LayoutView'
+            text: 'InfoBundle'
             iconCls: 'fa fa-newspaper-o'
-            leaf: true
-            routeId: 'activities'
-        ,
-            text: 'Service'
-            iconCls: 'fa fa-cubes'
             children: [
+                text: 'Activity'
+                view: 'activity.LayoutView'
+                iconCls: 'fa fa-newspaper-o'
+                leaf: true
+                routeId: 'activities'
+            ,
                 text: 'Services'
                 view: 'service.LayoutView'
                 iconCls: 'fa fa-cube'
@@ -60,7 +60,7 @@ Ext.define 'Moboque.store.Menus',
             ,
                 text: 'ServiceCategories'
                 view: 'service_category.LayoutView'
-                iconCls: 'fa fa-cube'
+                iconCls: 'fa fa-cubes'
                 leaf: true
                 routeId: 'service-categories'
             ]

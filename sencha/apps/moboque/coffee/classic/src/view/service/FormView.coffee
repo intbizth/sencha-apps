@@ -33,8 +33,8 @@ Ext.define 'Moboque.view.service.FormView',
                 store: '{serviceCategories}'
                 selection: '{serviceCategory}'
         ,
-            fieldLabel: '<span style="color:red;">*</span> ชื่อเรื่อง'
-            emptyText: 'กรุณาระบุชื่อเรื่อง'
+            fieldLabel: '<span style="color:red;">*</span> ชื่อบริการ'
+            emptyText: 'กรุณาระบุชื่อบริการ'
             bind: '{record.title}'
         ,
             fieldLabel: 'หัวข้อย่อย'
@@ -57,6 +57,7 @@ Ext.define 'Moboque.view.service.FormView',
         ,
             fieldLabel: '<span style="color:red;">*</span> ลิงก์'
             emptyText: 'http://'
+            vtype: 'url'
             bind: '{record.link}'
         ]
 

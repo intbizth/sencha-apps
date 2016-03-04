@@ -25,8 +25,8 @@ Ext.define 'Moboque.view.activity.FormView',
 
         # TODO allowBlank is not working !
         items: [
-            fieldLabel: '<span style="color:red;">*</span> ชื่อเรื่อง'
-            emptyText: 'กรุณาระบุชื่อเรื่อง'
+            fieldLabel: '<span style="color:red;">*</span> ชื่อกิจกรรม'
+            emptyText: 'กรุณาระบุชื่อกิจกรรม'
             bind: '{record.title}'
         ,
             fieldLabel: 'หัวข้อย่อย'
@@ -41,6 +41,7 @@ Ext.define 'Moboque.view.activity.FormView',
         ,
             fieldLabel: '<span style="color:red;">*</span> ลิงก์'
             emptyText: 'http://'
+            vtype: 'url'
             bind: '{record.link}'
         ]
 
