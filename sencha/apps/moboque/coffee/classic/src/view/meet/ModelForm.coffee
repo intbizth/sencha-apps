@@ -1,6 +1,6 @@
-Ext.define 'Moboque.view.event.ModelForm',
+Ext.define 'Moboque.view.meet.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
-    alias: 'viewmodel.vm-event-form'
+    alias: 'viewmodel.vm-meet-form'
 
     isDirty: ->
         @get('record').dirty

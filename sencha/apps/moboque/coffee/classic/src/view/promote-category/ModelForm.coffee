@@ -1,6 +1,6 @@
-Ext.define 'Moboque.view.event.ModelForm',
+Ext.define 'Moboque.view.promote-category.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
-    alias: 'viewmodel.vm-event-form'
+    alias: 'viewmodel.vm-promote-category-form'
 
     isDirty: ->
         @get('record').dirty

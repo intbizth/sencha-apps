@@ -1,6 +1,6 @@
-Ext.define 'Moboque.view.event.ModelForm',
+Ext.define 'Moboque.view.emergency-call.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
-    alias: 'viewmodel.vm-event-form'
+    alias: 'viewmodel.vm-emergency-call-form'
 
     isDirty: ->
         @get('record').dirty

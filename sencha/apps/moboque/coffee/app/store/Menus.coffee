@@ -42,4 +42,40 @@ Ext.define 'Moboque.store.Menus',
                 leaf: true
                 routeId: 'members'
             ]
+        ,
+
+            text: 'ContentBundle'
+            iconCls: 'fa fa-book'
+            children: [
+                text: 'เบอร์โทรฉุกเฉิน'
+                view: 'emergency-call.LayoutView'
+                iconCls: 'fa fa-ambulance'
+                leaf: true
+                routeId: 'emergency-call'
+            ,
+                text: 'ลิงค์'
+                view: 'link.LayoutView'
+                iconCls: 'fa fa-link'
+                leaf: true
+                routeId: 'link'
+            ,
+                text: 'นายกพบประชาชน'
+                view: 'meet.LayoutView'
+                iconCls: 'fa fa-weixin'
+                leaf: true
+                routeId: 'meet'
+            ,
+                text: 'พื้นที่แนะนำสินค้าและบริการ'
+                view: 'promote.LayoutView'
+                iconCls: 'fa fa-slideshare'
+                leaf: true
+                routeId: 'promotes'
+            ,
+                text: 'หมวดหมู่แนะนำ'
+                view: 'promote-category.LayoutView'
+                iconCls: 'fa fa-slideshare'
+                leaf: true
+                routeId: 'promotes-category'
+            ]
         ]
+
