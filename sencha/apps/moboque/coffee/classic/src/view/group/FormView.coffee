@@ -4,6 +4,7 @@ Ext.define 'Moboque.view.group.FormView',
 
     width: 600
     modal: yes
+    scrollable: 'true'
 
     bind:
         title: '{title}'
@@ -21,26 +22,27 @@ Ext.define 'Moboque.view.group.FormView',
             anchor: '100%'
             labelAlign: 'top'
             allowBlank: no
-            # minLength: 2
-            # maxLength: 255
 
         items: [
-            xtype: 'combobox'
-            fieldLabel: '* ชื่องานอีเวนท์'
+            xtype: 'combo'
+            fieldLabel: '<span style="color:red;">*</span> ชื่องานอีเวนท์'
+            emptyText: 'กรุณาเลือกอีเวนท์..'
+            editable: no
             displayField: 'name'
             valueField: 'id'
             queryMode: 'local'
             bind:
                 store: '{events}'
                 selection: '{event}'
-                # value: '{record.event}'
         ,
-            fieldLabel: '* ชื่อกลุ่ม'
+            fieldLabel: '<span style="color:red;">*</span> ชื่อกลุ่ม'
             emptyText: 'กรุณาระบุชื่องกลุ่ม'
             bind: '{record.name}'
         ,
-            fieldLabel: '* สีกลุ่ม'
-            emptyText: 'กรุณาระบุสีกลุ่ม'
+            xtype: 'colorfield'
+            fieldLabel: '<span style="color:red;">*</span> สีกลุ่ม'
+            format: '#hex6'
+            allowBlank: no
             bind: '{record.color}'
         ]
 

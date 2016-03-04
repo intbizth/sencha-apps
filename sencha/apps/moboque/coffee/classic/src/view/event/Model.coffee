@@ -7,10 +7,6 @@ Ext.define 'Moboque.view.event.Model',
             type: 'store-events'
             autoLoad: yes
 
-    formulas:
-        isLoading:
-            get: ->
-
     createRecord: (record) ->
         return record if record
         return new (@data.events.getModel())()
