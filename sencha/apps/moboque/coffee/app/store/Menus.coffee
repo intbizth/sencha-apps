@@ -76,6 +76,12 @@ Ext.define 'Moboque.store.Menus',
                 iconCls: 'fa fa-slideshare'
                 leaf: true
                 routeId: 'promotes-category'
+            ,
+                text: 'รูปภาพ'
+                view: 'promote-image.LayoutView'
+                iconCls: 'fa fa-photo'
+                leaf: true
+                routeId: 'promotes-image'
             ]
         ]
 
