@@ -1,7 +1,9 @@
 Ext.define 'Moboque.view.event.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
     alias: 'viewmodel.vm-event-form'
+
     getStartDate: -> @get('record').get('start_date')
+
     setStartDate: (date, time) ->
         originDate = @getStartDate()
         date = @setDateTimeInRecord(originDate, date, time)
@@ -10,6 +12,7 @@ Ext.define 'Moboque.view.event.ModelForm',
         return
 
     getEndDate: -> @get('record').get('end_date')
+
     setEndDate: (date, time) ->
         originDate = @getEndDate()
         date = @setDateTimeInRecord(originDate, date, time)
