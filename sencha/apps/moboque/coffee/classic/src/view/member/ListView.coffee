@@ -20,7 +20,7 @@ Ext.define 'Moboque.view.member.ListView',
             console.log arguments
 
     columns: [
-        text: 'ชื่อ - สกุล'
+        text: 'ชื่อสมาชิก'
         dataIndex: 'fullname'
         width: 300
     ,
@@ -33,11 +33,10 @@ Ext.define 'Moboque.view.member.ListView',
         flex: 1
         minWidth: 250
     ,
-        text: 'วันที่เผยแพร่'
-        dataIndex: 'published_date'
-        width: 200
-        # flex: 1
-        # minWidth: 200
+        text: 'ชื่องาน'
+        width: 300
+        renderer: (v, m, r) ->
+            return r.getGroupName()
     ]
 
     tbar:

@@ -8,6 +8,7 @@ Ext.define 'Moboque.model.Group',
     ,
         name: 'color'
         type: 'string'
+        defaultValue: '#ff0000'
     ,
         name: 'event'
         reference:

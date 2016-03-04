@@ -22,45 +22,63 @@ Ext.define 'Moboque.view.member.FormView',
             labelAlign: 'top'
             anchor: '100%'
             allowBlank: no
-            minLength: 2
-            maxLength: 255
 
         items: [
-            fieldLabel: '* ชื่อ'
+            xtype: 'combo'
+            fieldLabel: '<span style="color:red;">*</span> ชื่อกลุ่ม'
+            emptyText: 'กรุณาเลือกกลุ่ม..'
+            editable: no
+            displayField: 'name'
+            valueField: 'id'
+            queryMode: 'local'
+            bind:
+                store: '{groups}'
+                selection: '{group}'
+        ,
+            fieldLabel: '<span style="color:red;">*</span> ชื่อ'
             emptyText: 'กรุณาระบุชื่อจริง'
             bind: '{record.firstname}'
         ,
-            fieldLabel: '* นามสกุล'
+            fieldLabel: '<span style="color:red;">*</span> นามสกุล'
             emptyText: 'กรุณาระบุนามสกุล'
             bind: '{record.lastname}'
         ,
-            fieldLabel: '* รหัสประจำตัวประชาชน'
+            fieldLabel: '<span style="color:red;">*</span> รหัสประจำตัวประชาชน'
             emptyText: 'กรุณาระบุรหัสประจำตัวประชาชน'
             bind: '{record.card_id}'
+            minLength: 13
+            maxLength: 13
         ,
-            fieldLabel: '* รหัสประจำตัวพนักงาน'
+            fieldLabel: 'รหัสประจำตัวพนักงาน'
             emptyText: 'กรุณาระบุรหัสประจำตัวพนักงาน'
+            allowBlank: yes
             bind: '{record.employee_id}'
         ,
-            fieldLabel: '* ชื่อหน่วยงาน'
+            fieldLabel: 'ชื่อหน่วยงาน'
             emptyText: 'กรุณาระบุชื่อหน่วยงาน'
+            allowBlank: yes
             bind: '{record.company}'
         ,
-            fieldLabel: '* ที่อยู่'
+            fieldLabel: '<span style="color:red;">*</span> ที่อยู่'
             emptyText: 'กรุณาระบุที่อยู่'
             bind: '{record.address}'
         ,
-            fieldLabel: '* อีเมล์'
+            fieldLabel: '<span style="color:red;">*</span> อีเมล์'
             emptyText: 'กรุณาระบุอีเมล์'
+            vtype: 'email'
             bind: '{record.email}'
         ,
             fieldLabel: 'เบอร์โทรศัพท์'
-            emptyText: 'กรุณาระบุเบอร์โทรศัพท์'
+            emptyText: 'กรุณาระบุเบอร์โทรศัพท์ '
+            allowBlank: yes
             bind: '{record.phone_number}'
         ,
-            fieldLabel: '* เบอร์มือถือ'
-            emptyText: 'กรุณาระบุเบอร์มือถือ'
+            fieldLabel: '<span style="color:red;">*</span> เบอร์มือถือ'
             bind: '{record.mobile_number}'
+            emptyText: 'กรุณาระบุเบอร์มือถือ'
+            maskRe: /[\d\-]/
+            regex: /^\d{3}\d{3}\d{4}$/
+            regexText: 'Must be in the format 0999999999'
         ]
 
         buttons: [
