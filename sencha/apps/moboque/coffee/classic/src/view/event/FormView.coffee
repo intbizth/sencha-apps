@@ -20,8 +20,6 @@ Ext.define 'Moboque.view.event.FormView',
             anchor: '100%'
             labelAlign: 'top'
             allowBlank: no
-            minLength: 2
-            maxLength: 255
 
         # TODO allowBlank is not working !
         items: [

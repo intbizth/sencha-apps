@@ -111,7 +111,7 @@ Ext.define 'Moboque.view.member.Controller',
 
                 if isPhantom
                     @alertSuccess('เพิ่มข้อมูลสมาชิกเรียบร้อยแล้ว')
-                    store.reload()
+                    store.add(record)
                 else
                     @alertSuccess('แก้ไขข้อมูลสมาชิกเรียบร้อยแล้ว')
 

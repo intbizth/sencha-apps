@@ -35,8 +35,8 @@ Ext.define 'Moboque.view.member.ListView',
     ,
         text: 'ชื่องาน'
         width: 300
-        renderer: (value, metaData, record) ->
-            return record.getGroupName()
+        renderer: (v, m, r) ->
+            return r.getGroupName()
     ]
 
     tbar:

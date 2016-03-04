@@ -22,8 +22,8 @@ Ext.define 'Moboque.view.group.ListView',
     columns: [
         text: 'ชื่องาน'
         width: 300
-        renderer: (view, metaData, record) ->
-            return record.getEventName()
+        renderer: (v, m, r) ->
+            return r.getEventName()
     ,
         text: 'ชื่อกลุ่ม'
         dataIndex: 'name'

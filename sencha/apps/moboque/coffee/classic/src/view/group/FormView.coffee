@@ -24,8 +24,10 @@ Ext.define 'Moboque.view.group.FormView',
             allowBlank: no
 
         items: [
-            xtype: 'combobox'
+            xtype: 'combo'
             fieldLabel: '<span style="color:red;">*</span> ชื่องานอีเวนท์'
+            emptyText: 'กรุณาเลือกอีเวนท์..'
+            editable: no
             displayField: 'name'
             valueField: 'id'
             queryMode: 'local'

@@ -108,7 +108,7 @@ Ext.define 'Moboque.view.group.Controller',
 
                 if isPhantom
                     @alertSuccess('เพิ่มข้อมูลกลุ่มเรียบร้อยแล้ว')
-                    store.reload()
+                    store.add(record)
                 else
                     @alertSuccess('แก้ไขข้อมูลกลุ่มเรียบร้อยแล้ว')
 

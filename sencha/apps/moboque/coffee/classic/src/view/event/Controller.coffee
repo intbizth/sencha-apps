@@ -111,7 +111,7 @@ Ext.define 'Moboque.view.event.Controller',
 
                 if isPhantom
                     @alertSuccess('เพิ่มข้อมูลงานอีเวนท์เรียบร้อยแล้ว')
-                    store.reload()
+                    store.add(record)
                 else
                     @alertSuccess('แก้ไขข้อมูลงานอีเวนท์เรียบร้อยแล้ว')
 
