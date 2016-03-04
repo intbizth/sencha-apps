@@ -7,8 +7,8 @@ Ext.define 'Moboque.view.link.Controller',
     # @private
     createDialogTitle: (r) ->
         if r.phantom
-            return 'เพิ่มงานอีเวนท์'
-        else r.get 'name'
+            return 'เพิ่มลิงค์'
+        else r.get 'label'
 
     # @private
     createDialog: (record) ->

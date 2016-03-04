@@ -7,8 +7,8 @@ Ext.define 'Moboque.view.promote-category.Controller',
     # @private
     createDialogTitle: (r) ->
         if r.phantom
-            return 'เพิ่มงานอีเวนท์'
-        else r.get 'name'
+            return 'เพิ่มประเภท'
+        else r.get 'title'
 
     # @private
     createDialog: (record) ->
