@@ -1,15 +1,16 @@
-Ext.define 'Moboque.view.event.Model',
+Ext.define 'Moboque.view.emergency-call.Model',
     extend: 'Ext.app.ViewModel'
-    alias: 'viewmodel.vm-event'
+    alias: 'viewmodel.vm-emergency-call'
 
     stores:
-        events:
-            type: 'store-events'
+        tels:
+            type: 'store-emergency-call'
             autoLoad: yes
+
 
     createRecord: (record) ->
         return record if record
-        return new (@data.events.getModel())()
+        return new (@data.tels.getModel())()
 
     prepareData: (record) ->
         record = @createRecord record

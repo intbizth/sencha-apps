@@ -1,9 +1,9 @@
-Ext.define 'Moboque.view.group.ListView',
+Ext.define 'Moboque.view.promote-category.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-group-list'
+    alias: 'widget.wg-promote-category-list'
 
     bind:
-        store: '{groups}'
+        store: '{promotes}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,8 +11,8 @@ Ext.define 'Moboque.view.group.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'กลุ่ม'
-    reference: 'refGroupList'
+    title: 'ลิงค์ภายนอก'
+    reference: 'refPromoteCategoryList'
     headerBorders: no
 
     listeners:
@@ -20,17 +20,14 @@ Ext.define 'Moboque.view.group.ListView',
             console.log arguments
 
     columns: [
-        text: 'ชื่องาน'
-        width: 300
-        renderer: (v, m, r) ->
-            return r.getEventName()
+        text: 'หัวเรื่อง'
+        dataIndex: 'title'
+        width: 200
     ,
-        text: 'ชื่อกลุ่ม'
-        dataIndex: 'name'
-        width: 300
-    ,
-        text: 'สีประจำกลุ่ม'
-        dataIndex: 'color'
+        xtype: 'datecolumn'
+        text: 'วันที่เขียน'
+        dataIndex: 'created_at'
+        format: 'd-m-Y H:i'
         flex: 1
         minWidth: 200
     ]
@@ -38,7 +35,7 @@ Ext.define 'Moboque.view.group.ListView',
     tbar:
         scrollable: yes
         items: [
-            text: 'เพิ่มกลุ่ม'
+            text: 'เพิ่มรายการ'
             xtype: 'button'
             iconCls: 'fa fa-pencil'
             handler: 'onAddNew'
@@ -50,7 +47,7 @@ Ext.define 'Moboque.view.group.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refGroupList.selection}'
+                disabled: '{!refPromoteCategoryList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -60,7 +57,7 @@ Ext.define 'Moboque.view.group.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refGroupList.selection}'
+                disabled: '{!refPromoteCategoryList.selection}'
             handler: 'onDelete'
         ,
             '->'
@@ -70,7 +67,7 @@ Ext.define 'Moboque.view.group.ListView',
             reference: 'refSearchField'
             labelWidth: 50
             bind:
-                store: '{groups}'
+                store: '{promote-categories}'
             margin: '0 10 0 0'
         ]
 
@@ -79,5 +76,5 @@ Ext.define 'Moboque.view.group.ListView',
         scrollable: yes
         pageSize: 25
         bind:
-            store: '{groups}'
+            store: '{promotes}'
         displayInfo: yes

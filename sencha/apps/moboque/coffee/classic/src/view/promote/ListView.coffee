@@ -1,9 +1,9 @@
-Ext.define 'Moboque.view.group.ListView',
+Ext.define 'Moboque.view.promote.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-group-list'
+    alias: 'widget.wg-promote-list'
 
     bind:
-        store: '{groups}'
+        store: '{promotes}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -12,7 +12,7 @@ Ext.define 'Moboque.view.group.ListView',
         #deferEmptyText: no
 
     title: 'กลุ่ม'
-    reference: 'refGroupList'
+    reference: 'refPromoteList'
     headerBorders: no
 
     listeners:
@@ -20,19 +20,19 @@ Ext.define 'Moboque.view.group.ListView',
             console.log arguments
 
     columns: [
-        text: 'ชื่องาน'
-        width: 300
-        renderer: (v, m, r) ->
-            return r.getEventName()
-    ,
         text: 'ชื่อกลุ่ม'
-        dataIndex: 'name'
+        dataIndex: 'title'
         width: 300
     ,
         text: 'สีประจำกลุ่ม'
-        dataIndex: 'color'
+        dataIndex: 'description'
         flex: 1
         minWidth: 200
+    ,
+        text: 'หมวด'
+        width: 300
+        renderer: (value, metaData, record) ->
+            return record.getPromoteCategoryName()
     ]
 
     tbar:
@@ -50,7 +50,7 @@ Ext.define 'Moboque.view.group.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refGroupList.selection}'
+                disabled: '{!refPromoteList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -60,7 +60,7 @@ Ext.define 'Moboque.view.group.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refGroupList.selection}'
+                disabled: '{!refPromoteList.selection}'
             handler: 'onDelete'
         ,
             '->'
@@ -70,7 +70,7 @@ Ext.define 'Moboque.view.group.ListView',
             reference: 'refSearchField'
             labelWidth: 50
             bind:
-                store: '{groups}'
+                store: '{promotes}'
             margin: '0 10 0 0'
         ]
 
@@ -79,5 +79,5 @@ Ext.define 'Moboque.view.group.ListView',
         scrollable: yes
         pageSize: 25
         bind:
-            store: '{groups}'
+            store: '{promotes}'
         displayInfo: yes

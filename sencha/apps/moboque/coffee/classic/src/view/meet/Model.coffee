@@ -1,15 +1,16 @@
-Ext.define 'Moboque.view.event.Model',
+Ext.define 'Moboque.view.meet.Model',
     extend: 'Ext.app.ViewModel'
-    alias: 'viewmodel.vm-event'
+    alias: 'viewmodel.vm-meet'
 
     stores:
-        events:
-            type: 'store-events'
+        meets:
+            type: 'store-meet'
             autoLoad: yes
+
 
     createRecord: (record) ->
         return record if record
-        return new (@data.events.getModel())()
+        return new (@data.meets.getModel())()
 
     prepareData: (record) ->
         record = @createRecord record

@@ -8,24 +8,22 @@ Ext.define 'Moboque.view.group.ModelForm',
             autoLoad: yes
             pageSize: 25
 
-    # TODO Check this event GodoakBrutal & P.Yokky
     formulas:
         event:
             get: ->
                 @get('record').getEvent()
+                # console.log 'get:::::: ', @get('record').getEvent()
 
             set: (val) ->
-                # console.log val
-                # @get('record')
-                # return
+                # console.log 'set:::::: ', val
                 @get('record').setEvent val
+                console.log @get('record').getEvent()
 
         isPhantom:
             get: -> @get('record').phantom
 
     isDirty: ->
         @get('record').dirty
-        # @get('record').dirty || (events && events.dirty)
 
     commit: ->
         @get('record').commit()

@@ -7,10 +7,6 @@ Ext.define 'Moboque.view.member.Model',
             type: 'store-members'
             autoLoad: yes
 
-    formulas:
-        isLoading:
-            get: ->
-
     createRecord: (record) ->
         return record if record
         return new (@data.members.getModel())()

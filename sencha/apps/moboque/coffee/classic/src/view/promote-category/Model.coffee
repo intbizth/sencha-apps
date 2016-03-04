@@ -1,15 +1,15 @@
-Ext.define 'Moboque.view.event.Model',
+Ext.define 'Moboque.view.promote-category.Model',
     extend: 'Ext.app.ViewModel'
-    alias: 'viewmodel.vm-event'
+    alias: 'viewmodel.vm-promote-category'
 
     stores:
-        events:
-            type: 'store-events'
+        promotes:
+            type: 'store-promote-category'
             autoLoad: yes
 
     createRecord: (record) ->
         return record if record
-        return new (@data.events.getModel())()
+        return new (@data.promotes.getModel())()
 
     prepareData: (record) ->
         record = @createRecord record

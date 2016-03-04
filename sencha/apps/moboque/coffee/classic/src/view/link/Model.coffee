@@ -1,15 +1,16 @@
-Ext.define 'Moboque.view.event.Model',
+Ext.define 'Moboque.view.link.Model',
     extend: 'Ext.app.ViewModel'
-    alias: 'viewmodel.vm-event'
+    alias: 'viewmodel.vm-link'
 
     stores:
-        events:
-            type: 'store-events'
+        links:
+            type: 'store-link'
             autoLoad: yes
+
 
     createRecord: (record) ->
         return record if record
-        return new (@data.events.getModel())()
+        return new (@data.links.getModel())()
 
     prepareData: (record) ->
         record = @createRecord record
