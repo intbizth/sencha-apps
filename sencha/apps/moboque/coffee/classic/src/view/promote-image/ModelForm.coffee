@@ -3,18 +3,18 @@ Ext.define 'Moboque.view.promote-image.ModelForm',
     alias: 'viewmodel.vm-promote-image-form'
 
     stores:
-        promote:
+        promoteList:
             type: 'store-promote'
             autoLoad: yes
             pageSize: 25
 
     formulas:
-        promote:
-            get: ->
-                @get('record').getPromoteImage()
-
-            set: (val) ->
-                @get('record').setPromoteImage val
+#        promote:
+#            get: ->
+#                @get('record').getPromoteImage()
+#
+#            set: (val) ->
+#                @get('record').setPromoteImage val
 
         isPhantom:
             get: -> @get('record').phantom
@@ -31,5 +31,5 @@ Ext.define 'Moboque.view.promote-image.ModelForm',
         promoteId = @get('record').getPrevious('promote_id')
 
         if promoteId
-            @get('record').setPromoteImage @get('promote').getById(promoteId)
+            @get('record').setPromoteImage @get('promoteList').getById(promoteId)
             record.commit()

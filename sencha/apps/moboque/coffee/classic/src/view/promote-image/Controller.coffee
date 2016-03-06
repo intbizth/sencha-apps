@@ -46,3 +46,43 @@ Ext.define 'Moboque.view.promote-image.Controller',
 
     onDelete: -> @baseDelete('PromoteImageList')
     onSubmit: -> @baseSubmit('form', 'record')
+
+    getDataInModel: (fieldName) ->
+        record = @dialog.getViewModel().get 'promote'
+        return record.get(fieldName)
+
+    fileReader: (inputfiles, record) ->
+        me = @
+
+        Ext.each inputfiles, (input, index) ->
+            reader = new FileReader()
+            reader.readAsDataURL input.files[0]
+
+            reader.onload = (e) ->
+                record.set(input.name, 'media': e.target.result)
+
+                if index == (inputfiles.length - 1)
+                    me.save(record)
+
+    onClickImage: (e, t, eOpts) ->
+        if image = @getDataInModel('image')
+            console.log t.src
+
+    setImagePreview: (imageComponent) ->
+        ref = imageComponent.getReference().toLowerCase()
+        name = ref.replace('ref', '')
+
+        if image = @getDataInModel(name)
+            imageComponent.setSrc(image.media.url)
+
+    manageImagePath: (field, value, ref) ->
+        field.setRawValue(value.replace(/C:\\fakepath\\/g, ''))
+
+        thumbnail = field.up().lookupReference(ref)
+        thumbnail.setSrc('')
+
+    imageUploadChanged: (field, value) ->
+        @manageImagePath(field, value, 'refImage')
+
+    coverUploadChanged: (field, value) ->
+        @manageImagePath(field, value, 'refCover')

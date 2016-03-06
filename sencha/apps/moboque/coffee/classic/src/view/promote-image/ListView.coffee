@@ -25,7 +25,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
         flex: 1
         minWidth: 200
     ,
-        text: 'หมวดที่อยู่'
+        text: 'ของโปรโมท'
         width: 300
         renderer: (value, metaData, record) ->
             return record.getPromoteTitle()

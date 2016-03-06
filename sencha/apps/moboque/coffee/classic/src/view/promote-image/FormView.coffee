@@ -23,20 +23,16 @@ Ext.define 'Moboque.view.promote-image.FormView',
 
         items: [
             fieldLabel: 'คำอธิบายภาพ'
-            emptyText: 'กรุณาระบุชื่อสถานที่, ร้าน หรือ แหล่งท่องเที่ยว'
-            bind: '{record.description}'
-        ,
-            fieldLabel: 'คำอธิบาย'
-            emptyText: 'ระบุคำอธิบายสถานที่ หรือ แหล่งท่องเที่ยว'
+            emptyText: 'คำธิบายภาพ'
             bind: '{record.description}'
         ,
             xtype: 'combobox'
-            fieldLabel: 'ประเภทของสถานที่'
+            fieldLabel: 'ภาพของโปรโมท'
             displayField: 'title'
             valueField: 'id'
             queryMode: 'local'
             bind:
-                store: '{promoteImage}'
+                store: '{promoteList}'
                 selection: '{promote}'
         ,
             xtype: 'fieldset'

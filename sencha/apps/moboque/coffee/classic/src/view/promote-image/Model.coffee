@@ -13,10 +13,10 @@ Ext.define 'Moboque.view.promote-image.Model',
 
     prepareData: (record) ->
         record = @createRecord record
-        promoteRecord = record.getPromoteImage()
-
-        if promoteRecord and record.get('promote_id') != promoteRecord.getId()
-            record.set('promote_id', promoteRecord.getId())
-            record.commit()
-
+#        promoteRecord = record.getPromoteImage()
+#
+#        if promoteRecord and record.get('promote_id') != promoteRecord.getId()
+#            record.set('promote_id', promoteRecord.getId())
+#            record.commit()
+#
         return record
