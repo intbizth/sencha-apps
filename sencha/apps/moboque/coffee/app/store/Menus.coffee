@@ -43,7 +43,28 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'members'
             ]
         ,
-
+            text: 'InfoBundle'
+            iconCls: 'fa fa-newspaper-o'
+            children: [
+                text: 'Activity'
+                view: 'activity.LayoutView'
+                iconCls: 'fa fa-newspaper-o'
+                leaf: true
+                routeId: 'activities'
+            ,
+                text: 'Services'
+                view: 'service.LayoutView'
+                iconCls: 'fa fa-cube'
+                leaf: true
+                routeId: 'services'
+            ,
+                text: 'ServiceCategories'
+                view: 'service_category.LayoutView'
+                iconCls: 'fa fa-cubes'
+                leaf: true
+                routeId: 'service-categories'
+            ]
+        ,
             text: 'ContentBundle'
             iconCls: 'fa fa-book'
             children: [

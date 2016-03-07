@@ -1,14 +1,14 @@
-Ext.define 'Moboque.view.member.Controller',
+Ext.define 'Moboque.view.service.Controller',
     extend: 'Moboque.view.base.Controller'
-    alias: 'controller.ctrl-member'
+    alias: 'controller.ctrl-service'
 
     init: -> #..
 
     # @private
     createDialogTitle: (r) ->
         if r.phantom
-            return 'เพิ่มข้อมูลสมาชิก'
-        else r.get 'fullname'
+            return 'เพิ่มบริการ'
+        else r.get 'title'
 
     # @private
     createDialog: (record) ->
@@ -16,10 +16,10 @@ Ext.define 'Moboque.view.member.Controller',
         record = vm.prepareData(record)
 
         @dialog = @getView().add
-            xtype: 'wg-member-form'
+            xtype: 'wg-service-form'
             ownerView: @getView()
             viewModel:
-                type: 'vm-member-form'
+                type: 'vm-service-form'
                 data:
                     title: @createDialogTitle record
                     record: record
@@ -41,7 +41,7 @@ Ext.define 'Moboque.view.member.Controller',
 
     onCancel: -> @dialog.close()
     onAddNew: -> @createDialog()
-    onEdit: -> @createDialog @referTo('MemberList').getSelection()[0]
+    onEdit: -> @createDialog @referTo('ServiceList').getSelection()[0]
 
     onDelete: ->
         @showConfirmMessage
@@ -49,16 +49,16 @@ Ext.define 'Moboque.view.member.Controller',
             message: 'คุณแน่ใจหรือไม่',
             fn: (pressed) =>
                 if pressed == 'ok'
-                    list = @referTo 'MemberList'
+                    list = @referTo 'ServiceList'
                     list.mask('Deleting..')
 
-                    memberRecord = list.getSelection()[0]
+                    serviceRecord = list.getSelection()[0]
                     store = list.getStore()
 
-                    memberRecord.erase
+                    serviceRecord.erase
                         success: =>
                             list.unmask()
-                            @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
+                            @alertSuccess('ลบข้อมูลเรียบร้อยแล้วค่ะ')
                         failure: =>
                             list.unmask()
                             @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')
@@ -68,7 +68,7 @@ Ext.define 'Moboque.view.member.Controller',
 
         form = @dialog.down 'form'
         record = vm.get 'record'
-        list = @referTo 'MemberList'
+        list = @referTo 'ServiceList'
         store = list.getStore()
         isPhantom = record.phantom
 
@@ -107,10 +107,9 @@ Ext.define 'Moboque.view.member.Controller',
                 form.unmask()
 
                 if isPhantom
-                    @alertSuccess('เพิ่มข้อมูลสมาชิกเรียบร้อยแล้ว')
+                    @alertSuccess('เพิ่มข้อมูลบริการแล้ว')
                     store.add(record)
                 else
-                    @alertSuccess('แก้ไขข้อมูลสมาชิกเรียบร้อยแล้ว')
+                    @alertSuccess('แก้ไขข้อมูลบริการเรียบร้อยแล้ว')
 
                 @dialog.close()
-

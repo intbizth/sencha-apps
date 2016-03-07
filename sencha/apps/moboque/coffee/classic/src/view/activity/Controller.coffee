@@ -1,14 +1,14 @@
-Ext.define 'Moboque.view.member.Controller',
+Ext.define 'Moboque.view.activity.Controller',
     extend: 'Moboque.view.base.Controller'
-    alias: 'controller.ctrl-member'
+    alias: 'controller.ctrl-activity'
 
     init: -> #..
 
     # @private
     createDialogTitle: (r) ->
         if r.phantom
-            return 'เพิ่มข้อมูลสมาชิก'
-        else r.get 'fullname'
+            return 'เพิ่มกิจกรรม'
+        else r.get 'title'
 
     # @private
     createDialog: (record) ->
@@ -16,10 +16,10 @@ Ext.define 'Moboque.view.member.Controller',
         record = vm.prepareData(record)
 
         @dialog = @getView().add
-            xtype: 'wg-member-form'
+            xtype: 'wg-activity-form'
             ownerView: @getView()
             viewModel:
-                type: 'vm-member-form'
+                type: 'vm-activity-form'
                 data:
                     title: @createDialogTitle record
                     record: record
@@ -41,7 +41,7 @@ Ext.define 'Moboque.view.member.Controller',
 
     onCancel: -> @dialog.close()
     onAddNew: -> @createDialog()
-    onEdit: -> @createDialog @referTo('MemberList').getSelection()[0]
+    onEdit: -> @createDialog @referTo('ActivityList').getSelection()[0]
 
     onDelete: ->
         @showConfirmMessage
@@ -49,13 +49,13 @@ Ext.define 'Moboque.view.member.Controller',
             message: 'คุณแน่ใจหรือไม่',
             fn: (pressed) =>
                 if pressed == 'ok'
-                    list = @referTo 'MemberList'
+                    list = @referTo 'ActivityList'
                     list.mask('Deleting..')
 
-                    memberRecord = list.getSelection()[0]
+                    activityRecord = list.getSelection()[0]
                     store = list.getStore()
 
-                    memberRecord.erase
+                    activityRecord.erase
                         success: =>
                             list.unmask()
                             @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
@@ -68,7 +68,7 @@ Ext.define 'Moboque.view.member.Controller',
 
         form = @dialog.down 'form'
         record = vm.get 'record'
-        list = @referTo 'MemberList'
+        list = @referTo 'ActivityList'
         store = list.getStore()
         isPhantom = record.phantom
 
@@ -107,10 +107,9 @@ Ext.define 'Moboque.view.member.Controller',
                 form.unmask()
 
                 if isPhantom
-                    @alertSuccess('เพิ่มข้อมูลสมาชิกเรียบร้อยแล้ว')
+                    @alertSuccess('เพิ่มข้อมูลกิจกรรมเรียบร้อยแล้ว')
                     store.add(record)
                 else
-                    @alertSuccess('แก้ไขข้อมูลสมาชิกเรียบร้อยแล้ว')
+                    @alertSuccess('แก้ไขข้อมูลกิจกรรมเรียบร้อยแล้ว')
 
                 @dialog.close()
-
