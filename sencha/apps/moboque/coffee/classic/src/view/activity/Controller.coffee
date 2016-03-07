@@ -96,6 +96,7 @@ Ext.define 'Moboque.view.activity.Controller',
                     if response.status == 400
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
+                        errorMessage = 'Validation Error.'
 
                 @alertFailure
                     title: titleMessage
