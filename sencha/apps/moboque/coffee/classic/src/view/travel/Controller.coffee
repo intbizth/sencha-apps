@@ -1,13 +1,13 @@
-Ext.define 'Moboque.view.promote-category.Controller',
+Ext.define 'Moboque.view.travel.Controller',
     extend: 'Moboque.view.base.Controller'
-    alias: 'controller.ctrl-promote-category'
+    alias: 'controller.ctrl-travel'
 
     init: -> #..
 
     # @private
     createDialogTitle: (r) ->
         if r.phantom
-            return 'เพิ่มประเภท'
+            return 'เพิ่มสถานะ'
         else r.get 'title'
 
     # @private
@@ -16,10 +16,10 @@ Ext.define 'Moboque.view.promote-category.Controller',
         record = vm.prepareData(record)
 
         @dialog = @getView().add
-            xtype: 'wg-promote-category-form'
+            xtype: 'wg-travel-form'
             ownerView: @getView()
             viewModel:
-                type: 'vm-promote-category-form'
+                type: 'vm-travel-form'
                 data:
                     title: @createDialogTitle record
                     record: record
@@ -42,7 +42,7 @@ Ext.define 'Moboque.view.promote-category.Controller',
 
     onCancel: -> @dialog.close()
     onAddNew: -> @createDialog()
-    onEdit: -> @createDialog @referTo('PromoteCategoryList').getSelection()[0]
+    onEdit: -> @createDialog @referTo('TravelList').getSelection()[0]
 
-    onDelete: -> @baseDelete('PromoteCategoryList')
+    onDelete: -> @baseDelete('TravelList')
     onSubmit: -> @baseSubmit('form', 'record')
