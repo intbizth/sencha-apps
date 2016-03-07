@@ -11,7 +11,7 @@ Ext.define 'Moboque.view.promote.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'กลุ่ม'
+    title: 'แนะนำสถานที่ท่องเที่ยว'
     reference: 'refPromoteList'
     headerBorders: no
 
@@ -24,13 +24,14 @@ Ext.define 'Moboque.view.promote.ListView',
         dataIndex: 'title'
         width: 300
     ,
-        text: 'สีประจำกลุ่ม'
+        text: 'คำอธิบาย'
         dataIndex: 'description'
         flex: 1
         minWidth: 200
     ,
         text: 'หมวด'
-        width: 300
+        maxWidth: 300
+        flex: 1
         renderer: (value, metaData, record) ->
             return record.getPromoteCategoryName()
     ]
