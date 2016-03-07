@@ -1,9 +1,9 @@
-Ext.define 'Moboque.view.promote.ListView',
+Ext.define 'Moboque.view.promote-image.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-promote-list'
+    alias: 'widget.wg-promote-image-list'
 
     bind:
-        store: '{promotes}'
+        store: '{promotesImage}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,8 +11,8 @@ Ext.define 'Moboque.view.promote.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'แนะนำสถานที่ท่องเที่ยว'
-    reference: 'refPromoteList'
+    title: 'รูปภาพ'
+    reference: 'refPromoteImageList'
     headerBorders: no
 
     listeners:
@@ -20,20 +20,24 @@ Ext.define 'Moboque.view.promote.ListView',
             console.log arguments
 
     columns: [
-        text: 'ชื่อกลุ่ม'
-        dataIndex: 'title'
-        width: 300
-    ,
-        text: 'คำอธิบาย'
+        text: 'คำอธิบายภาพ'
         dataIndex: 'description'
         flex: 1
         minWidth: 200
     ,
-        text: 'หมวด'
-        maxWidth: 300
-        flex: 1
+        text: 'ของโปรโมท'
+        width: 300
         renderer: (value, metaData, record) ->
-            return record.getPromoteCategoryName()
+            return record.getPromoteTitle()
+    ,
+        text: 'ลิงค์'
+        width: 300
+        renderer: (value, metaData, record) ->
+            if image = record.get 'image'
+                return image.media.url
+
+
+            return ''
     ]
 
     tbar:
@@ -51,7 +55,7 @@ Ext.define 'Moboque.view.promote.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refPromoteList.selection}'
+                disabled: '{!refPromoteImageList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -61,7 +65,7 @@ Ext.define 'Moboque.view.promote.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refPromoteList.selection}'
+                disabled: '{!refPromoteImageList.selection}'
             handler: 'onDelete'
         ,
             '->'
@@ -71,7 +75,7 @@ Ext.define 'Moboque.view.promote.ListView',
             reference: 'refSearchField'
             labelWidth: 50
             bind:
-                store: '{promotes}'
+                store: '{promotesImage}'
             margin: '0 10 0 0'
         ]
 
@@ -80,5 +84,5 @@ Ext.define 'Moboque.view.promote.ListView',
         scrollable: yes
         pageSize: 25
         bind:
-            store: '{promotes}'
+            store: '{promotesImage}'
         displayInfo: yes

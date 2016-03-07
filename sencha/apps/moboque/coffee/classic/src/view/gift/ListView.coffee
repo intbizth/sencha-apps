@@ -1,9 +1,9 @@
-Ext.define 'Moboque.view.promote.ListView',
+Ext.define 'Moboque.view.gift.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-promote-list'
+    alias: 'widget.wg-gift-list'
 
     bind:
-        store: '{promotes}'
+        store: '{gifts}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,8 +11,8 @@ Ext.define 'Moboque.view.promote.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'แนะนำสถานที่ท่องเที่ยว'
-    reference: 'refPromoteList'
+    title: 'ของฝากประจำจังหวัด'
+    reference: 'refGiftList'
     headerBorders: no
 
     listeners:
@@ -20,26 +20,27 @@ Ext.define 'Moboque.view.promote.ListView',
             console.log arguments
 
     columns: [
-        text: 'ชื่อกลุ่ม'
+        text: 'ชื่อของฝาก'
         dataIndex: 'title'
-        width: 300
+        minWidth: 300
+        flex: 1
     ,
         text: 'คำอธิบาย'
         dataIndex: 'description'
+        minWidth: 300
         flex: 1
-        minWidth: 200
     ,
-        text: 'หมวด'
-        maxWidth: 300
-        flex: 1
-        renderer: (value, metaData, record) ->
-            return record.getPromoteCategoryName()
+        xtype: 'datecolumn'
+        text: 'วันที่เขียน'
+        dataIndex: 'created_at'
+        format: 'd-m-Y H:i'
+        maxWidth: 250
     ]
 
     tbar:
         scrollable: yes
         items: [
-            text: 'เพิ่มกลุ่ม'
+            text: 'เพิ่มรายการ'
             xtype: 'button'
             iconCls: 'fa fa-pencil'
             handler: 'onAddNew'
@@ -51,7 +52,7 @@ Ext.define 'Moboque.view.promote.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refPromoteList.selection}'
+                disabled: '{!refLinkList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -61,7 +62,7 @@ Ext.define 'Moboque.view.promote.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refPromoteList.selection}'
+                disabled: '{!refLinkList.selection}'
             handler: 'onDelete'
         ,
             '->'
@@ -71,7 +72,7 @@ Ext.define 'Moboque.view.promote.ListView',
             reference: 'refSearchField'
             labelWidth: 50
             bind:
-                store: '{promotes}'
+                store: '{gifts}'
             margin: '0 10 0 0'
         ]
 
@@ -80,5 +81,5 @@ Ext.define 'Moboque.view.promote.ListView',
         scrollable: yes
         pageSize: 25
         bind:
-            store: '{promotes}'
+            store: '{gifts}'
         displayInfo: yes

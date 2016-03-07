@@ -11,7 +11,7 @@ Ext.define 'Moboque.view.meet.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'ลิงค์ภายนอก'
+    title: 'นายกพบประชาชน'
     reference: 'refMeetList'
     headerBorders: no
 
@@ -20,16 +20,16 @@ Ext.define 'Moboque.view.meet.ListView',
             console.log arguments
 
     columns: [
-        text: 'คำอธิบาย'
+        text: 'คำทักทาย'
         dataIndex: 'description'
-        width: 200
+        minWidth: 300
+        flex: 1
     ,
         xtype: 'datecolumn'
-        text: 'ลิงค์'
+        text: 'วันที่เขียน'
         dataIndex: 'created_at'
         format: 'd-m-Y H:i'
-        flex: 1
-        minWidth: 200
+        width: 200
     ]
 
     tbar:

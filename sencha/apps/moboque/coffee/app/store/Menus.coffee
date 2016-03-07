@@ -76,6 +76,29 @@ Ext.define 'Moboque.store.Menus',
                 iconCls: 'fa fa-slideshare'
                 leaf: true
                 routeId: 'promotes-category'
+            ,
+                text: 'รูปภาพ'
+                view: 'promote-image.LayoutView'
+                iconCls: 'fa fa-photo'
+                leaf: true
+                routeId: 'promotes-image'
+            ]
+        ,
+
+            text: 'AboutBundle'
+            iconCls: 'fa fa-shirtsinbulk'
+            children: [
+                text: 'ของฝากประจำจังหวัด'
+                view: 'gift.LayoutView'
+                iconCls: 'fa fa-gift'
+                leaf: true
+                routeId: 'gift'
+            ,
+                text: 'สถานที่ท่องเที่ยว'
+                view: 'travel.LayoutView'
+                iconCls: 'fa fa-car'
+                leaf: true
+                routeId: 'travel'
             ]
         ]
 
