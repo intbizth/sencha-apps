@@ -77,5 +77,26 @@ Ext.define 'Moboque.store.Menus',
                 leaf: true
                 routeId: 'promotes-category'
             ]
+        ,
+            text: 'LocaleBundle'
+            iconCls: 'fa fa-location-arrow'
+            children: [
+                text: 'Provinces'
+                view: 'province.LayoutView'
+                iconCls: 'fa fa-globe'
+                leaf: true
+                routeId: 'provinces'
+            ,
+                text: 'Districts'
+                view: 'district.LayoutView'
+                iconCls: 'fa fa-map-marker'
+                leaf: true
+                routeId: 'districts'
+            ,
+                text: 'SubDistricts'
+                view: 'sub-district.LayoutView'
+                iconCls: 'fa fa-street-view'
+                leaf: true
+                routeId: 'sub-districts'
+            ]
         ]
-

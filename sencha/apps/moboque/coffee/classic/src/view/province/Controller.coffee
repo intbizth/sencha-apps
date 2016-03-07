@@ -1,14 +1,14 @@
-Ext.define 'Moboque.view.member.Controller',
+Ext.define 'Moboque.view.province.Controller',
     extend: 'Moboque.view.base.Controller'
-    alias: 'controller.ctrl-member'
+    alias: 'controller.ctrl-province'
 
     init: -> #..
 
     # @private
     createDialogTitle: (r) ->
         if r.phantom
-            return 'เพิ่มข้อมูลสมาชิก'
-        else r.get 'fullname'
+            return 'เพิ่มข้อมูลจังหวัด'
+        else r.get 'name'
 
     # @private
     createDialog: (record) ->
@@ -16,10 +16,10 @@ Ext.define 'Moboque.view.member.Controller',
         record = vm.prepareData(record)
 
         @dialog = @getView().add
-            xtype: 'wg-member-form'
+            xtype: 'wg-province-form'
             ownerView: @getView()
             viewModel:
-                type: 'vm-member-form'
+                type: 'vm-province-form'
                 data:
                     title: @createDialogTitle record
                     record: record
@@ -41,7 +41,7 @@ Ext.define 'Moboque.view.member.Controller',
 
     onCancel: -> @dialog.close()
     onAddNew: -> @createDialog()
-    onEdit: -> @createDialog @referTo('MemberList').getSelection()[0]
+    onEdit: -> @createDialog @referTo('ProvinceList').getSelection()[0]
 
     onDelete: ->
         @showConfirmMessage
@@ -49,7 +49,7 @@ Ext.define 'Moboque.view.member.Controller',
             message: 'คุณแน่ใจหรือไม่',
             fn: (pressed) =>
                 if pressed == 'ok'
-                    list = @referTo 'MemberList'
+                    list = @referTo 'ProvinceList'
                     list.mask('Deleting..')
 
                     memberRecord = list.getSelection()[0]
@@ -68,7 +68,7 @@ Ext.define 'Moboque.view.member.Controller',
 
         form = @dialog.down 'form'
         record = vm.get 'record'
-        list = @referTo 'MemberList'
+        list = @referTo 'ProvinceList'
         store = list.getStore()
         isPhantom = record.phantom
 
@@ -96,6 +96,7 @@ Ext.define 'Moboque.view.member.Controller',
                     if response.status == 400
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
+                        errorMessage = 'Validation error.'
 
                         Ext.Object.each obj.errors.children, (key, value, item) ->
                             if value.hasOwnProperty('errors')
