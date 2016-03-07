@@ -23,10 +23,6 @@ Ext.define 'Moboque.view.gift.FormView',
             minLength: 2
             maxLength: 255
 
-        # TODO allowBlank is not working !
-
-
-
         items: [
             fieldLabel: '<span style="color:red;">*</span> ชื่อของฝาก'
             emptyText: 'ของฝาก...'

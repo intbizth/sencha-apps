@@ -11,7 +11,7 @@ Ext.define 'Moboque.view.travel.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'ของฝากประจำจังหวัด'
+    title: 'สถานที่ท่องเที่ยว'
     reference: 'refTravelList'
     headerBorders: no
 
@@ -20,7 +20,7 @@ Ext.define 'Moboque.view.travel.ListView',
             console.log arguments
 
     columns: [
-        text: 'ชื่อของฝาก'
+        text: 'ชื่อสถานที่'
         dataIndex: 'title'
         minWidth: 300
         flex: 1
@@ -52,7 +52,7 @@ Ext.define 'Moboque.view.travel.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refLinkList.selection}'
+                disabled: '{!refTravelList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -62,7 +62,7 @@ Ext.define 'Moboque.view.travel.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refLinkList.selection}'
+                disabled: '{!refTravelList.selection}'
             handler: 'onDelete'
         ,
             '->'
