@@ -1,6 +1,6 @@
-Ext.define 'Moboque.view.gift.Controller',
+Ext.define 'Moboque.view.travel.Controller',
     extend: 'Moboque.view.base.Controller'
-    alias: 'controller.ctrl-gift'
+    alias: 'controller.ctrl-travel'
 
     init: -> #..
 
@@ -16,10 +16,10 @@ Ext.define 'Moboque.view.gift.Controller',
         record = vm.prepareData(record)
 
         @dialog = @getView().add
-            xtype: 'wg-gift-form'
+            xtype: 'wg-travel-form'
             ownerView: @getView()
             viewModel:
-                type: 'vm-gift-form'
+                type: 'vm-travel-form'
                 data:
                     title: @createDialogTitle record
                     record: record
@@ -42,7 +42,7 @@ Ext.define 'Moboque.view.gift.Controller',
 
     onCancel: -> @dialog.close()
     onAddNew: -> @createDialog()
-    onEdit: -> @createDialog @referTo('GiftList').getSelection()[0]
+    onEdit: -> @createDialog @referTo('TravelList').getSelection()[0]
 
-    onDelete: -> @baseDelete('GiftList')
+    onDelete: -> @baseDelete('TravelList')
     onSubmit: -> @baseSubmit('form', 'record')

@@ -1,6 +1,6 @@
-Ext.define 'Moboque.model.Gift',
+Ext.define 'Moboque.model.Travel',
     extend: 'Moboque.model.Base'
-    api: '/api/gift/'
+    api: '/api/travel/'
 
     fields: [
         name: 'title'

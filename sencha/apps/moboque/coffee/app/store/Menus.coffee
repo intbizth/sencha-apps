@@ -90,10 +90,15 @@ Ext.define 'Moboque.store.Menus',
             children: [
                 text: 'ของฝากประจำจังหวัด'
                 view: 'gift.LayoutView'
-                iconCls: 'fa fa-cart'
+                iconCls: 'fa fa-gift'
                 leaf: true
                 routeId: 'gift'
-
+            ,
+                text: 'สถานที่ท่องเที่ยว'
+                view: 'travel.LayoutView'
+                iconCls: 'fa fa-car'
+                leaf: true
+                routeId: 'travel'
             ]
         ]
 
