@@ -52,7 +52,7 @@ Ext.define 'Moboque.view.gift.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refLinkList.selection}'
+                disabled: '{!refGiftList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -62,7 +62,7 @@ Ext.define 'Moboque.view.gift.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refLinkList.selection}'
+                disabled: '{!refGiftList.selection}'
             handler: 'onDelete'
         ,
             '->'
