@@ -83,5 +83,17 @@ Ext.define 'Moboque.store.Menus',
                 leaf: true
                 routeId: 'promotes-image'
             ]
+        ,
+
+            text: 'AboutBundle'
+            iconCls: 'fa fa-shirtsinbulk'
+            children: [
+                text: 'ของฝากประจำจังหวัด'
+                view: 'gift.LayoutView'
+                iconCls: 'fa fa-cart'
+                leaf: true
+                routeId: 'gift'
+
+            ]
         ]
 
