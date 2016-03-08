@@ -21,9 +21,9 @@ Ext.define 'Vcare.store.Menus',
             leaf: true
             routeId: 'customers'
         ,
-            text: 'Taxonomy'
-            view: 'taxonomy.LayoutView'
+            text: 'Taxons'
+            view: 'taxon.LayoutView'
             iconCls: 'fa fa-users'
             leaf: true
-            routeId: 'taxonomies'
+            routeId: 'taxons'
         ]

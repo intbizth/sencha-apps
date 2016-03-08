@@ -6,6 +6,11 @@ Ext.define('Ext.form.Translation', {
     msgTarget: 'side',
     layout: 'hbox',
 
+    defaults: {
+        hideLabel: true,
+        margin: '0 5 0 0'
+    },
+
     config: {
         locales: null,
         locale: null,
@@ -14,46 +19,28 @@ Ext.define('Ext.form.Translation', {
         itemConfig: {}
     },
 
-    defaults: {
-        hideLabel: true,
-        margin: '0 5 0 0'
+    publishes: {
+        locale: true,
+        locales: true
     },
 
-    getItemName: function(locale) {
-        return 'item-' + locale + '-' + this.getItemKey();
-    },
-
-    getItemByLocale: function(locale) {
-        return this.down('#' + this.getItemName(locale));
-    },
-
-    initComponent: function() {
-
-        var locales = [],
-            items = [],
-            data = {},
-            me = this,
-            binds = me.getBind(),
-            code = null
+    updateLocales: function(n, o)
+    {
+        var me = this,
+            items = []
         ;
 
-        if (binds.locales) {
-            me.setLocales(binds.locales.getValue());
-        }
+        me.add(me.createComboBox(n));
 
-        if (binds.locale) {
-            me.setLocale(binds.locale.getValue());
-        }
-
-        me.locales.each(function(locale) {
+        n.each(function(locale) {
             code = locale.getCode();
-            locales.push({name: locale.getName(), value: code});
+            console.log('{translations.' + code + '.' + me.itemKey + '}');
 
             items.push(Ext.merge({
                 xtype: me.getItemType(),
                 flex : 1,
                 allowBlank: false,
-                hidden: me.locale !== code,
+                hidden: true,
                 itemId: me.getItemName(code),
                 translatableItem: 'yes',
                 bind: {
@@ -62,20 +49,32 @@ Ext.define('Ext.form.Translation', {
             }, me.getItemConfig()));
         });
 
-        var combo = {
+        me.add(items);
+
+        me.updateLayout();
+    },
+
+    updateLocale: function(n, o)
+    {
+        // need to bind locales before this.
+        this.down('combo').setValue(n);
+        this.getItemByLocale(n).setHidden(false);
+    },
+
+    createComboBox: function(store)
+    {
+        var me = this;
+
+        return Ext.create({
             width: 100,
             xtype: 'combo',
             queryMode: 'local',
-            value: me.locale,
             triggerAction: 'all',
             forceSelection: true,
             editable: false,
-            displayField: 'name',
-            valueField: 'value',
-            store: {
-                fields: ['name', 'value'],
-                data: locales
-            },
+            displayField: 'code',
+            valueField: 'code',
+            store: store,
             listeners: {
                 change: function(cm, nValue, oValue) {
                     var i, item, founds = me.query('[translatableItem=yes]'),
@@ -88,10 +87,16 @@ Ext.define('Ext.form.Translation', {
                     }
                 }
             }
-        };
+        });
+    },
 
-        this.items = Ext.Array.merge([combo], items);
+    getItemName: function(locale)
+    {
+        return 'item-' + locale + '-' + this.getItemKey();
+    },
 
-        this.callParent(arguments);
-    }
+    getItemByLocale: function(locale)
+    {
+        return this.down('#' + this.getItemName(locale));
+    },
 });

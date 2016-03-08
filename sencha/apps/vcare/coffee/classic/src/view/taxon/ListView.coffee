@@ -1,4 +1,4 @@
-Ext.define 'Vcare.view.taxonomy.TaxonListView',
+Ext.define 'Vcare.view.taxon.ListView',
     extend: 'Ext.grid.Panel'
     alias: 'widget.wg-taxon-list'
 
@@ -33,7 +33,6 @@ Ext.define 'Vcare.view.taxonomy.TaxonListView',
     ]
 
     tbar:
-        bind: disabled: '{!refTaxonomyList.selection}'
         items: [
             text: 'เพิ่มรายการ'
             xtype: 'button'

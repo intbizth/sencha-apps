@@ -7,6 +7,7 @@ Ext.define 'Vcare.model.Translatable',
     ,
         name: 'current_locale'
         type: 'string'
+        persist: no
     ,
         name: 'translations'
         type: 'auto'

@@ -1,13 +1,10 @@
-Ext.define 'Vcare.view.taxonomy.TaxonomyModelForm',
+Ext.define 'Vcare.view.taxon.ModelForm',
     extend: 'Vcare.view.base.ViewModel'
-    alias: 'viewmodel.vm-taxonomy-form'
+    alias: 'viewmodel.vm-taxon-form'
 
     formulas:
-        isPhantom:
-            get: -> @get('record').phantom
-
         translations:
-            get: -> @get('record').get('translations');
+            get: -> @get('record').get('translations')
 
     isDirty: ->
         @get('record').dirty

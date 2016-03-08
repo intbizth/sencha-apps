@@ -1,6 +1,6 @@
 Ext.define 'Vcare.model.Taxon',
     extend: 'Vcare.model.Translatable'
-    api: '/api/taxonomies/{taxonomy}/taxons/'
+    api: '/api/taxons/'
 
     fields: [
         name: 'code'
