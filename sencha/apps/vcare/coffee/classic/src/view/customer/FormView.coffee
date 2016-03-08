@@ -6,7 +6,6 @@ Ext.define 'Vcare.view.customer.FormView',
         title: '{title}'
 
     items:
-        xtype: 'form'
         layout: 'border'
         referenceHolder: yes
 

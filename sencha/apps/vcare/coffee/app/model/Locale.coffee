@@ -17,5 +17,8 @@ Ext.define 'Vcare.model.Locale',
         type: 'boolean'
     ]
 
+    getCode: -> @get 'code'
+    getName: -> @get 'name'
+
     validators:
         code: 'presence'

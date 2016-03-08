@@ -15,10 +15,6 @@ Ext.define 'Vcare.view.customer.ListView',
     reference: 'refCustomerList'
     headerBorders: no
 
-    listeners:
-        selectionchange: ->
-            console.log arguments
-
     columns: [
         text: 'สถานะ'
         align: 'center'
