@@ -58,7 +58,7 @@ Ext.define 'Moboque.view.sub-district.Controller',
                     subDistrictRecord.erase
                         success: =>
                             list.unmask()
-                            @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
+                            @alertSuccess('ลบข้อมูลตำบลเรียบร้อยแล้วค่ะ')
                         failure: =>
                             list.unmask()
                             @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')
@@ -96,11 +96,7 @@ Ext.define 'Moboque.view.sub-district.Controller',
                     if response.status == 400
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
-                        errorMessage = 'Validation error.'
-
-                        Ext.Object.each obj.errors.children, (key, value, item) ->
-                            if value.hasOwnProperty('errors')
-                                errorMessage = value.errors[0]
+                        errorMessage = 'Validation Error.'
 
                 @alertFailure
                     title: titleMessage

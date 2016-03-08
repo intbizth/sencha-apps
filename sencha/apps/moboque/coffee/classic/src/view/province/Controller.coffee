@@ -58,7 +58,7 @@ Ext.define 'Moboque.view.province.Controller',
                     memberRecord.erase
                         success: =>
                             list.unmask()
-                            @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
+                            @alertSuccess('ลบข้อมูลจังหวัดเรียบร้อยแล้วค่ะ')
                         failure: =>
                             list.unmask()
                             @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')
@@ -96,11 +96,7 @@ Ext.define 'Moboque.view.province.Controller',
                     if response.status == 400
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
-                        errorMessage = 'Validation error.'
-
-                        Ext.Object.each obj.errors.children, (key, value, item) ->
-                            if value.hasOwnProperty('errors')
-                                errorMessage = value.errors[0]
+                        errorMessage = 'Validation Error.'
 
                 @alertFailure
                     title: titleMessage
@@ -111,9 +107,9 @@ Ext.define 'Moboque.view.province.Controller',
                 form.unmask()
 
                 if isPhantom
-                    @alertSuccess('เพิ่มข้อมูลสมาชิกเรียบร้อยแล้ว')
+                    @alertSuccess('เพิ่มข้อมูลจังหวัดเรียบร้อยแล้ว')
                     store.add(record)
                 else
-                    @alertSuccess('แก้ไขข้อมูลสมาชิกเรียบร้อยแล้ว')
+                    @alertSuccess('แก้ไขข้อมูลจังหวัดเรียบร้อยแล้ว')
 
                 @dialog.close()
