@@ -81,12 +81,12 @@ Ext.define 'Moboque.view.promote-image.Controller',
                 record.set(input.name, 'media': e.target.result)
 
                 if index == (inputfiles.length - 1)
-                    me.baseSubmit('form', 'record')
-                    #me.save(record)
+#                    me.baseSubmit('form', 'record')
+                    me.save(record)
 
     getDataInModel: (fieldName) ->
         record = @dialog.getViewModel().get 'promote'
-        return reco rd.get(fieldName)
+        return record.get(fieldName)
 
     setImagePreview: (imageComponent) ->
         ref = imageComponent.getReference().toLowerCase()
@@ -115,16 +115,6 @@ Ext.define 'Moboque.view.promote-image.Controller',
         fieldsChanged = record.getChanges()
 
         imageUpdated = fieldsChanged.hasOwnProperty('image')
-
-        # content // TODO use bind
-        contentField = form.getForm().findField('content')
-        extraContentField = form.getForm().findField('extraContent')
-
-        if content = contentField.getValue()
-            record.set 'content', content
-
-        if extraContent = extraContentField.getValue()
-            record.set 'extra_content', extraContent
 
         if form.isValid() and record.dirty
             form.mask('Submitting...')

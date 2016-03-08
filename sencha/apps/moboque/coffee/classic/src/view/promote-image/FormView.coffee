@@ -26,8 +26,10 @@ Ext.define 'Moboque.view.promote-image.FormView',
             emptyText: 'คำธิบายภาพ'
             bind: '{record.description}'
         ,
-            xtype: 'combobox'
+            xtype: 'combo'
+            editable: no
             fieldLabel: 'ภาพของโปรโมท'
+            emptyText: 'กรุณาเลือก....'
             displayField: 'title'
             valueField: 'id'
             queryMode: 'local'
@@ -64,7 +66,7 @@ Ext.define 'Moboque.view.promote-image.FormView',
                 buttonText: ''
                 buttonConfig:
                     iconCls: 'right-icon hot-icon x-fa fa-file-image-o'
-                bind: '{news.image}'
+                bind: '{image}'
                 listeners:
                     change: 'imageUploadChanged'
             ]

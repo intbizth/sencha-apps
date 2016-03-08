@@ -237,7 +237,7 @@ Ext.define 'Moboque.view.base.Controller',
 
     # Event on (onDelete, onEdit, onSubmit, etc..) Call here
 
-    baseDelete: (refer) ->
+    baseDelete: (refer, successMessage = 'ลบข้อมูลเรียบร้อยแล้ว', failedMessage = 'ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้ง') ->
         @showConfirmMessage
             title: 'ยืนยันการลบ'
             message: 'คุณแน่ใจหรือไม่',
@@ -246,21 +246,18 @@ Ext.define 'Moboque.view.base.Controller',
                     list = @referTo refer
                     list.mask('Deleting..')
 
-                    BaseRecord = list.getSelection()[0]
+                    baseRecord = list.getSelection()[0]
                     store = list.getStore()
 
-                    # for fix association and cascade.
-                    BaseRecord.drop(no)
-                    BaseRecord.erasing = no
-                    BaseRecord.save
+                    baseRecord.erase
                         success: =>
                             list.unmask()
-                            @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
+                            @alertSuccess(successMessage)
                         failure: =>
                             list.unmask()
-                            @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')
+                            @alertFailure(failedMessage)
 
-    baseSubmit: (pForm, pRecord) ->
+    baseSubmit: (pForm, pRecord, successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว', failedMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว') ->
         vm = @dialog.getViewModel()
 
         form = @dialog.down pForm
@@ -302,8 +299,8 @@ Ext.define 'Moboque.view.base.Controller',
                 form.unmask()
 
                 if isPhantom
-                    @alertSuccess('เพิ่มข้อมูลเรียบร้อยแล้ว')
+                    @alertSuccess(successMessage)
                 else
-                    @alertSuccess('แก้ไขข้อมูลเรียบร้อยแล้ว')
+                    @alertSuccess(failedMessage)
 
                 @dialog.close()
