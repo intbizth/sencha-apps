@@ -41,6 +41,12 @@ Ext.define 'Moboque.store.Menus',
                 iconCls: 'fa fa-user'
                 leaf: true
                 routeId: 'members'
+            ,
+                text: 'CheckTimes'
+                view: 'check-time.LayoutView'
+                iconCls: 'fa fa-clock-o'
+                leaf: true
+                routeId: 'check-times'
             ]
         ,
             text: 'InfoBundle'
