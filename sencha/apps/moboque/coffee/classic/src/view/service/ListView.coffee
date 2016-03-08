@@ -27,8 +27,8 @@ Ext.define 'Moboque.view.service.ListView',
     ,
         text: 'หมวดหมู่'
         width: 350
-        renderer: (value, metaData, record) ->
-            return record.getServiceCategoryName()
+        renderer: (v, m, r) ->
+            return r.getServiceCategoryName()
     ,
         text: 'ราคา'
         dataIndex: 'price'
