@@ -34,7 +34,6 @@ Ext.define('Ext.form.Translation', {
 
         n.each(function(locale) {
             code = locale.getCode();
-            console.log('{translations.' + code + '.' + me.itemKey + '}');
 
             items.push(Ext.merge({
                 xtype: me.getItemType(),

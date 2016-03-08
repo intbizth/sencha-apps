@@ -25,6 +25,21 @@ Ext.define 'Vcare.view.taxon.FormView',
             minLength: 3
             maxLength: 6
         ,
+            xtype: 'combo'
+            queryMode: 'local'
+            triggerAction: 'all'
+            fieldLabel: 'Parent'
+            forceSelection: yes
+            editable: no
+            displayField: 'name'
+            valueField: 'id'
+            width: 500
+            bind:
+                store: '{taxons}'
+                selection: '{record.parent}'
+            listConfig:
+                itemTpl: '<span style="padding-left: {level*20}px">{name}</span>'
+        ,
             xtype: 'fieldtranslation'
             fieldLabel: 'Name'
             itemKey: 'name'
