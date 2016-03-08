@@ -246,13 +246,13 @@ Ext.define 'Moboque.view.base.Controller',
                     list = @referTo refer
                     list.mask('Deleting..')
 
-                    eventRecord = list.getSelection()[0]
+                    BaseRecord = list.getSelection()[0]
                     store = list.getStore()
 
                     # for fix association and cascade.
-                    eventRecord.drop(no)
-                    eventRecord.erasing = no
-                    eventRecord.save
+                    BaseRecord.drop(no)
+                    BaseRecord.erasing = no
+                    BaseRecord.save
                         success: =>
                             list.unmask()
                             @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')

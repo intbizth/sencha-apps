@@ -49,25 +49,24 @@ Ext.define 'Moboque.view.promote-image.FormView',
                 style:
                     backgroundColor: '#d9d9d9'
                 margin: '22 0 0 0'
-                listeners:
+#                listeners:
 #                    beforerender: 'setImagePreview'
-                    click:
-                        element: 'el'
-                        fn: 'onClickImage'
+#                    click:
+#                        element: 'el'
+#                        fn: 'onClickImage'
             ,
-                allowBlank: no
-                fieldLabel: 'ชื่อ'
-            ,
-                xtype: 'filefield'
-                emptyText: 'คลิกไอคอน เพื่อเลือกรูปที่จะ Upload.'
-                fieldLabel: 'รูป'
-                name: 'photo-path'
+                name: 'image'
+                xtype: 'fileuploadfield'
+                emptyText: 'Select an image'
+                fieldLabel: 'Image '
+                labelAlign: 'top'
+                margin: '0 5 0 10'
                 buttonText: ''
                 buttonConfig:
-                    iconCls: 'fa fa-photo'
-            ,
-                xtype: 'button'
-                text: 'ลบรูป'
+                    iconCls: 'right-icon hot-icon x-fa fa-file-image-o'
+                bind: '{news.image}'
+                listeners:
+                    change: 'imageUploadChanged'
             ]
         ]
 

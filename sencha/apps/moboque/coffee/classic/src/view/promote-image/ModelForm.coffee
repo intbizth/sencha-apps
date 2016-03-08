@@ -9,12 +9,12 @@ Ext.define 'Moboque.view.promote-image.ModelForm',
             pageSize: 25
 
     formulas:
-#        promote:
-#            get: ->
-#                @get('record').getPromoteImage()
-#
-#            set: (val) ->
-#                @get('record').setPromoteImage val
+        promote:
+            get: ->
+                @get('record').getPromote()
+
+            set: (val) ->
+                @get('record').setPromote val
 
         isPhantom:
             get: -> @get('record').phantom
@@ -31,5 +31,5 @@ Ext.define 'Moboque.view.promote-image.ModelForm',
         promoteId = @get('record').getPrevious('promote_id')
 
         if promoteId
-            @get('record').setPromoteImage @get('promoteList').getById(promoteId)
+            @get('record').setPromote @get('promoteList').getById(promoteId)
             record.commit()
