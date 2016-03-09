@@ -2,6 +2,9 @@ Ext.define 'Vcare.view.taxon.Controller',
     extend: 'Vcare.view.base.Controller'
     alias: 'controller.ctrl-taxon'
 
+    currentStore: null
+    isPhantom: yes
+
     init: -> #..
 
     # @private
@@ -11,12 +14,17 @@ Ext.define 'Vcare.view.taxon.Controller',
         else "แก้ไข " + r.getName()
 
     # @private
-    createDialog: (record) ->
-        vm = @getViewModel()
-        record = vm.prepareData(record)
+    closeDialog: -> @dialog.close()
 
-        console.log(record)
-        console.log(record)
+    # @private
+    createDialog: (record, type) ->
+        @isPhantom = !!record
+        vm = @getViewModel()
+        record = vm.prepareData(record, type)
+
+        switch type
+            when 'brand' then @currentStore = 'brands'
+            else @currentStore = 'categories'
 
         @dialog = @getView().add
             xtype: 'wg-taxon-form'
@@ -24,15 +32,19 @@ Ext.define 'Vcare.view.taxon.Controller',
             viewModel:
                 type: 'vm-taxon-form'
                 data:
+                    type: type
                     title:  @createDialogTitle(record)
                     record: record
                     currentLocale: 'en_US'
+                    parents: vm.getStore(@currentStore)
 
         @dialog.show()
 
-    onCancel: -> @dialog.close()
-    onAddNew: -> @createDialog()
-    onEdit: -> @createDialog @referTo('TaxonList').getSelection()[0]
+    onCancel: -> @closeDialog()
+    onAddNew: -> @createDialog null, btn.up('grid').getTaxonType()
+    onEdit: (btn) ->
+        grid = btn.up('grid')
+        @createDialog grid.getSelection()[0], grid.getTaxonType()
 
     onSubmit: ->
         vm = @dialog.getViewModel()
@@ -74,13 +86,13 @@ Ext.define 'Vcare.view.taxon.Controller',
 
             success: (record, o) =>
                 form.unmask()
-                @reloadStore('taxons')
+                @reloadStore(@currentStore)
 
-                if record.phantom
+                if @isPhantom
                     @alertSuccess('เพิ่มผู้ใช้ระบบเรียบร้อยแล้ว')
                 else
                     @alertSuccess('แก้ไขผู้ใช้ระบบเรียบร้อยแล้ว')
 
                 vm.commit()
 
-                @dialog.close()
+                @closeDialog()

@@ -1,9 +1,9 @@
-Ext.define 'Vcare.view.taxon.ListView',
+Ext.define 'Vcare.view.taxon.CategoryListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-taxon-list'
+    alias: 'widget.wg-taxon-category-list'
 
     bind:
-        store: '{taxons}'
+        store: '{categories}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,9 +11,11 @@ Ext.define 'Vcare.view.taxon.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'Taxons'
-    reference: 'refTaxonList'
+    title: 'Category'
+    reference: 'refTaxonCategoryList'
     headerBorders: no
+
+    getTaxonType: -> 'category'
 
     getTreePadding: (meta, r, label) ->
         padding = (r.get('level') * 20) + 10
@@ -41,15 +43,13 @@ Ext.define 'Vcare.view.taxon.ListView',
         ,
             text: 'แก้ไข'
             xtype: 'button'
-            reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o'
-            bind: disabled: '{!refTaxonList.selection}'
+            bind: aclCheck: '{refTaxonCategoryList.selection}'
             handler: 'onEdit'
         ,
             text: 'ลบ'
             xtype: 'button'
-            reference: 'refDeleteButton'
             iconCls:'fa fa-trash-o'
-            bind: disabled: '{!refTaxonList.selection}'
+            bind: aclCheck: '{refTaxonCategoryList.selection}'
             handler: 'onDelete'
         ]

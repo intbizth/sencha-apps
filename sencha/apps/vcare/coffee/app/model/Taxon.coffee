@@ -1,6 +1,5 @@
 Ext.define 'Vcare.model.Taxon',
     extend: 'Vcare.model.Translatable'
-    api: '/api/taxons/'
 
     fields: [
         name: 'code'
@@ -20,10 +19,3 @@ Ext.define 'Vcare.model.Taxon',
     ]
 
     getName: -> @trans 'name'
-
-    writerTransform: fn: (data) ->
-
-        if data.parent
-            data.parent = data.parent.id
-
-        return data

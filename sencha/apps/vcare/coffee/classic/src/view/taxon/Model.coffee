@@ -3,19 +3,24 @@ Ext.define 'Vcare.view.taxon.Model',
     alias: 'viewmodel.vm-taxon'
 
     stores:
-        taxons:
-            type: 'store-taxons'
+        categories:
+            type: 'store-taxon-categories'
             autoLoad: yes
 
         locales:
             type: 'store-locales'
             autoLoad: yes
 
-    createRecord: (record) ->
+    createRecord: (record, type) ->
         return record if record
-        return new (@data.taxons.getModel())()
 
-    prepareData: (record) ->
-        record = @createRecord record
+        switch type
+            when 'brand' then store = 'brands'
+            else store = 'categories'
+
+        return new (@data[store].getModel())()
+
+    prepareData: (record, type) ->
+        record = @createRecord record, type
 
         return record

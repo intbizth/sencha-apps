@@ -97,5 +97,5 @@ Ext.define('Ext.form.Translation', {
     getItemByLocale: function(locale)
     {
         return this.down('#' + this.getItemName(locale));
-    },
+    }
 });

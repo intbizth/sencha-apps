@@ -10,5 +10,5 @@ Ext.define 'Vcare.view.taxon.LayoutView',
     layout: 'fit'
 
     items: [
-        xtype: 'wg-taxon-list'
+        xtype: 'wg-taxon-category-list'
     ]
