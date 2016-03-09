@@ -143,4 +143,21 @@ Ext.define 'Moboque.store.Menus',
                 leaf: true
                 routeId: 'sub-districts'
             ]
+        ,
+            text: 'Personals'
+            iconCls: 'fa fa-users'
+            children: [
+                text: 'PersonalDepartments'
+                view: 'personal-department.LayoutView'
+                iconCls: 'fa fa-server'
+                leaf: true
+                routeId: 'personal-departments'
+            ,
+                text: 'Personals'
+                view: 'personal.LayoutView'
+                iconCls: 'fa fa-male'
+                leaf: true
+                routeId: 'personals'
+            ,
+            ]
         ]
