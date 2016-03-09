@@ -143,4 +143,10 @@ Ext.define 'Moboque.store.Menus',
                 leaf: true
                 routeId: 'sub-districts'
             ]
+        ,
+            text: 'Reports'
+            view: 'report.LayoutView'
+            iconCls: 'fa fa-globe'
+            leaf: true
+            routeId: 'reports'
         ]
