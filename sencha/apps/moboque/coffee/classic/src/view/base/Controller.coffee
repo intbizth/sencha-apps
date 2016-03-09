@@ -257,7 +257,7 @@ Ext.define 'Moboque.view.base.Controller',
                             list.unmask()
                             @alertFailure(failedMessage)
 
-    baseSubmit: (pForm, pRecord, successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว', failedMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว') ->
+    baseSubmit: (pForm, pRecord, successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว', failedMessage = 'ไม่สามารถเพิ่มข้อมูลได้') ->
         vm = @dialog.getViewModel()
 
         form = @dialog.down pForm
@@ -300,6 +300,7 @@ Ext.define 'Moboque.view.base.Controller',
 
                 if isPhantom
                     @alertSuccess(successMessage)
+                    record.load()
                 else
                     @alertSuccess(failedMessage)
 
