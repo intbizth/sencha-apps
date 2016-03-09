@@ -163,11 +163,10 @@ Ext.define 'Moboque.model.Base',
 
                     options.method = 'POST'
 
-            #if (['POST', 'PUT', 'PATCH'].indexOf(options.method.toUpperCase()) isnt -1) and config.hasFileUpload
-            # temporary fix because DELETE method show up to POST instead.
-            if (['create', 'update'].indexOf(options.action.toLowerCase()) isnt -1) and config.hasFileUpload
-                options.params = {}
-                options.params['_fileupload'] = yes
+            if (['POST', 'PUT', 'PATCH'].indexOf(options.method.toUpperCase()) isnt -1) and config.hasFileUpload
+                #options.jsonData = {}
+                options.jsonData['_fileupload'] = yes
+                console.log options.jsonData
 
             return options
 

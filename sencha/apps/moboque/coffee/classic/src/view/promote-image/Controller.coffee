@@ -154,7 +154,7 @@ Ext.define 'Moboque.view.promote-image.Controller',
                         @alertSuccess('เพิ่มข่าวเรียบร้อยแล้วค่ะ')
 
                     else
-                        if imageUpdated or coverUpdated
+                        if imageUpdated
                             record.load()
 
                         @alertSuccess('แก้ไขข่าวเรียบร้อยแล้วค่ะ')
