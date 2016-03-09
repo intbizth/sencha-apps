@@ -59,12 +59,7 @@ Ext.define 'Moboque.view.promote-image.Controller',
         if imageInput.files and imageInput.files.length
             filesInput.push(imageInput)
 
-#        # cover field
-#        coverInput = @manageFiles(form, 'cover')
-#
-#        if coverInput.files and coverInput.files.length
-#            filesInput.push(coverInput)
-
+        # ตอน submit ถ้ามีการ add image? ให้แปลง image
         if filesInput.length
             @fileReader(filesInput, record)
         else
@@ -76,37 +71,32 @@ Ext.define 'Moboque.view.promote-image.Controller',
         Ext.each inputfiles, (input, index) ->
             reader = new FileReader()
             reader.readAsDataURL input.files[0]
-            console.log '>>>>' + input
+            console.log 'Reader', reader.result
             reader.onload = (e) ->
                 record.set(input.name, 'media': e.target.result)
-
+                console.log 'TARGET', e.target.result
+                return
                 if index == (inputfiles.length - 1)
 #                    me.baseSubmit('form', 'record')
                     me.save(record)
 
-    getDataInModel: (fieldName) ->
-        record = @dialog.getViewModel().get 'promote'
-        return record.get(fieldName)
-
     setImagePreview: (imageComponent) ->
-        ref = imageComponent.getReference().toLowerCase()
-        name = ref.replace('ref', '')
+        record = @dialog.getViewModel().get 'record'
 
-        if image = @getDataInModel(name)
+        if image = record.get 'image'
             imageComponent.setSrc(image.media.url)
+        else
+            imageComponent.setSrc('http://dummyimage.com/300x200/757575/242424.png&text=Image+Here')
 
     manageImagePath: (field, value, ref) ->
+        #------------
         field.setRawValue(value.replace(/C:\\fakepath\\/g, ''))
         console.log field
-#        thumbnail = field.up().lookupReference(ref)
-#        thumbnail.setSrc('')
+        thumbnail = field.up().lookupReference(ref)
+        thumbnail.setSrc('')
 
     imageUploadChanged: (field, value) ->
         @manageImagePath(field, value, 'refImage')
-
-    coverUploadChanged: (field, value) ->
-        @manageImagePath(field, value, 'refCover')
-
 
     save: (record) ->
         form = @dialog.down 'form'

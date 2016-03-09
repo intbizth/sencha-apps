@@ -51,8 +51,8 @@ Ext.define 'Moboque.view.promote-image.FormView',
                 style:
                     backgroundColor: '#d9d9d9'
                 margin: '22 0 0 0'
-#                listeners:
-#                    beforerender: 'setImagePreview'
+                listeners:
+                    beforerender: 'setImagePreview'
 #                    click:
 #                        element: 'el'
 #                        fn: 'onClickImage'

@@ -16,16 +16,7 @@ Ext.define 'Moboque.model.PromoteImage',
             setterName: 'setPromote'
     ,
         name: 'image'
-        mapping: '_link'
         type: 'auto'
-#    ,
-#        name: 'promoteUrl'
-#        reference:
-#            type: 'Promote'
-#            role: 'promote-url'
-#            associationsKey: 'image'
-#            getterName: 'getPromoteImage'
-#            setterName: 'setPromoteImage'
     ]
 
     getPromoteTitle: ->
