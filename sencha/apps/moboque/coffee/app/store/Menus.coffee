@@ -165,4 +165,10 @@ Ext.define 'Moboque.store.Menus',
                 leaf: true
                 routeId: 'personals'
             ]
+        ,
+            text: 'Reports'
+            view: 'report.LayoutView'
+            iconCls: 'fa fa-file-text-o'
+            leaf: true
+            routeId: 'reports'
         ]
