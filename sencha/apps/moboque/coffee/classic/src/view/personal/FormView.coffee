@@ -49,7 +49,6 @@ Ext.define 'Moboque.view.personal.FormView',
             fieldLabel: '<span style="color:red;">*</span> ที่อยู่'
             emptyText: 'กรุณากรอกรายละเอียดที่อยู่'
             bind: '{record.address}'
-
         ,
             xtype: 'datefield'
             fieldLabel: '<span style="color:red;">*</span> วันเกิด'

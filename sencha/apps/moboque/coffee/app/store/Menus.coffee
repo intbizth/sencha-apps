@@ -158,6 +158,5 @@ Ext.define 'Moboque.store.Menus',
                 iconCls: 'fa fa-male'
                 leaf: true
                 routeId: 'personals'
-            ,
             ]
         ]
