@@ -71,29 +71,13 @@ Ext.define 'Moboque.view.promote-image.Controller',
         Ext.each inputfiles, (input, index) ->
             reader = new FileReader()
             reader.readAsDataURL input.files[0]
-            console.log 'Reader', reader.result
+            console.log 'Reader', reader
             reader.onload = (e) ->
                 record.set(input.name, 'media': e.target.result)
-                console.log 'TARGET', e.target.result
 
                 if index == (inputfiles.length - 1)
 #                    me.baseSubmit('form', 'record')
                     me.save(record)
-
-    readImage: ->
-        form = @dialog.down 'form'
-        record = @dialog.getViewModel().get 'record'
-
-        # image field
-        imageInput = @manageFiles(form, 'image')
-
-        if imageInput.files and imageInput.files.length
-            Ext.each imageInput, (input) ->
-                reader = new FileReader()
-                reader.readAsDataURL input.files[0]
-                reader.onload = (e) ->
-                    thumbnail = form.lookupReference('refImage')
-                    thumbnail.setSrc(e.target.result)
 
     setImagePreview: (imageComponent) ->
         console.log 'img', imageComponent
@@ -104,18 +88,22 @@ Ext.define 'Moboque.view.promote-image.Controller',
         else
             imageComponent.setSrc('http://dummyimage.com/300x200/757575/242424.png&text=Image+Here')
 
-    manageImagePath: (field, value, ref) ->
-        field.setRawValue(value.replace(/C:\\fakepath\\/g, ''))
-#        thumbnail = field.up().lookupReference(ref)
-#        thumbnail.setSrc('')
-
     imageUploadChanged: (field, value) ->
-#        data.errorCode != 1
-#        @readImage()
-        console.log 'im here'
-        thumbnail = @dialog.down('form').lookupReference('refImage')
-        thumbnail.setSrc('http://dummyimage.com/300x200/757575/242424.png&text=56565656+HOHO')
-        @manageImagePath(field, value, 'refImage')
+        applyBtn = @dialog.down('form').lookupReference('refApply')
+        field.setRawValue(value.replace(/C:\\fakepath\\/g, ''))
+        applyBtn.setHidden(no)
+
+    applyImage: ->
+        form = @dialog.down 'form'
+        imageInput = @manageFiles(form, 'image')
+
+        if imageInput.files and imageInput.files.length
+            Ext.each imageInput, (input) ->
+                reader = new FileReader()
+                reader.readAsDataURL input.files[0]
+                reader.onload = (e) ->
+                    thumbnail = form.lookupReference('refImage')
+                    thumbnail.setSrc(e.target.result)
 
     save: (record) ->
         form = @dialog.down 'form'

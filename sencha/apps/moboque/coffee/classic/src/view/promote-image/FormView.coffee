@@ -53,7 +53,6 @@ Ext.define 'Moboque.view.promote-image.FormView',
                 margin: '22 0 0 0'
                 listeners:
                     beforerender: 'setImagePreview'
-                    change: 'readImage'
 #                    click:
 #                        element: 'el'
 #                        fn: 'onClickImage'
@@ -74,8 +73,10 @@ Ext.define 'Moboque.view.promote-image.FormView',
         ]
 
         buttons: [
-            text: 'อ่านรูป'
-            handler: 'readImage'
+            text: 'Preview'
+            handler: 'applyImage'
+            reference: 'refApply'
+            hidden: yes
         ,
             text: 'ยกเลิก'
             handler: 'onCancel'
