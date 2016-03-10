@@ -16,7 +16,7 @@ Ext.define 'Moboque.view.district.Model',
         provinceRecord = record.getProvince()
 
         if provinceRecord and record.get('province_id') != provinceRecord.getId()
-            record.set('eprovince_id', provinceRecord.getId())
+            record.set('province_id', provinceRecord.getId())
             record.commit()
 
         return record

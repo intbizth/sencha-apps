@@ -1,9 +1,9 @@
-Ext.define 'Vcare.view.customer.ListView',
+Ext.define 'Moboque.view.personal.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-customer-list'
+    alias: 'widget.wg-personal-list'
 
     bind:
-        store: '{customers}'
+        store: '{personals}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,40 +11,40 @@ Ext.define 'Vcare.view.customer.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'ผู้ใช้งานระบบ'
-    reference: 'refCustomerList'
+    title: 'ข้อมูลบุคคล'
+    reference: 'refPersonalList'
     headerBorders: no
 
-    columns: [
-        text: 'สถานะ'
-        align: 'center'
-        width: 80
-        renderer: (v, c, r) ->
-            if r.getUser().isEnabled()
-                return '<span style="color:green;">เปิด</span>'
+    listeners:
+        selectionchange: ->
+            console.log arguments
 
-            return '<span style="color:red;">ปิด</span>'
-    ,
-        text: 'ชื่อ - นามสกุล'
-        width: 200
+    columns: [
+        text: 'ชื่อ-นามสกุล'
         dataIndex: 'fullname'
+        width: 250
     ,
-        text: 'Username'
-        width: 200
-        renderer: (v, c, r) -> r.getUser().get('username')
+        text: 'ตำแหน่ง'
+        dataIndex: 'position'
+        width: 250
     ,
-        dataIndex: 'email'
-        text: 'อีเมล์'
-        width: 200
-    ,
-        text: 'สิทธิ์การใช้งาน'
+        text: 'แผนก'
         flex: 1
-        renderer: (v, c, r) -> r.getUser().getReadableRoles()
+        minWidth: 250
+        renderer: (v, m, r) ->
+            return r.getPersonalDepartmentTitle()
+    ,
+        xtype: 'datecolumn'
+        text: 'สร้างเมื่อ'
+        dataIndex: 'created_at'
+        format: 'd-m-Y H:i'
+        width: 200
     ]
 
     tbar:
+        scrollable: yes
         items: [
-            text: 'เพิ่มผู้ใช้งาน'
+            text: 'เพิ่มบุคคล'
             xtype: 'button'
             iconCls: 'fa fa-pencil'
             handler: 'onAddNew'
@@ -56,7 +56,7 @@ Ext.define 'Vcare.view.customer.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refCustomerList.selection}'
+                disabled: '{!refPersonalList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -66,7 +66,7 @@ Ext.define 'Vcare.view.customer.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refCustomerList.selection}'
+                disabled: '{!refPersonalList.selection}'
             handler: 'onDelete'
         ,
             '->'
@@ -75,7 +75,8 @@ Ext.define 'Vcare.view.customer.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind: store: '{customers}'
+            bind:
+                store: '{personals}'
             margin: '0 10 0 0'
         ]
 
@@ -83,5 +84,6 @@ Ext.define 'Vcare.view.customer.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind: store: '{customers}'
+        bind:
+            store: '{personals}'
         displayInfo: yes

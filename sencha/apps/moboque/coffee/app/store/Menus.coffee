@@ -41,6 +41,12 @@ Ext.define 'Moboque.store.Menus',
                 iconCls: 'fa fa-user'
                 leaf: true
                 routeId: 'members'
+            ,
+                text: 'CheckTimes'
+                view: 'check-time.LayoutView'
+                iconCls: 'fa fa-clock-o'
+                leaf: true
+                routeId: 'check-times'
             ]
         ,
             text: 'InfoBundle'
@@ -142,6 +148,22 @@ Ext.define 'Moboque.store.Menus',
                 iconCls: 'fa fa-street-view'
                 leaf: true
                 routeId: 'sub-districts'
+            ]
+        ,
+            text: 'Personals'
+            iconCls: 'fa fa-users'
+            children: [
+                text: 'PersonalDepartments'
+                view: 'personal-department.LayoutView'
+                iconCls: 'fa fa-server'
+                leaf: true
+                routeId: 'personal-departments'
+            ,
+                text: 'Personals'
+                view: 'personal.LayoutView'
+                iconCls: 'fa fa-male'
+                leaf: true
+                routeId: 'personals'
             ]
         ,
             text: 'Reports'

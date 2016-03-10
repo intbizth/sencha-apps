@@ -1,9 +1,9 @@
-Ext.define 'Vcare.view.customer.ListView',
+Ext.define 'Moboque.view.check-time.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-customer-list'
+    alias: 'widget.wg-check-time-list'
 
     bind:
-        store: '{customers}'
+        store: '{checkTimes}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,40 +11,36 @@ Ext.define 'Vcare.view.customer.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'ผู้ใช้งานระบบ'
-    reference: 'refCustomerList'
+    title: 'ตารางเวลาเข้าออก'
+    reference: 'refCheckTimeList'
     headerBorders: no
 
-    columns: [
-        text: 'สถานะ'
-        align: 'center'
-        width: 80
-        renderer: (v, c, r) ->
-            if r.getUser().isEnabled()
-                return '<span style="color:green;">เปิด</span>'
+    listeners:
+        selectionchange: ->
+            console.log arguments
 
-            return '<span style="color:red;">ปิด</span>'
+    columns: [
+        text: 'ชื่อสมาชิก'
+        width: 300
+        renderer: (v, m, r) ->
+            return r.getMemberName()
     ,
-        text: 'ชื่อ - นามสกุล'
-        width: 200
-        dataIndex: 'fullname'
-    ,
-        text: 'Username'
-        width: 200
-        renderer: (v, c, r) -> r.getUser().get('username')
-    ,
-        dataIndex: 'email'
-        text: 'อีเมล์'
-        width: 200
-    ,
-        text: 'สิทธิ์การใช้งาน'
+        text: 'ประเภทการลงเวลา'
+        dataIndex: 'type'
         flex: 1
-        renderer: (v, c, r) -> r.getUser().getReadableRoles()
+        minWidth: 200
+    ,
+        xtype: 'datecolumn'
+        text: 'เวลาเข้าออก'
+        dataIndex: 'checktime'
+        format: 'd-m-Y H:i'
+        width: 200
     ]
 
     tbar:
+        scrollable: yes
         items: [
-            text: 'เพิ่มผู้ใช้งาน'
+            text: 'เพิ่มข้อมูลเวลาเข้าออก'
             xtype: 'button'
             iconCls: 'fa fa-pencil'
             handler: 'onAddNew'
@@ -56,7 +52,7 @@ Ext.define 'Vcare.view.customer.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refCustomerList.selection}'
+                disabled: '{!CheckTimeList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -66,7 +62,7 @@ Ext.define 'Vcare.view.customer.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refCustomerList.selection}'
+                disabled: '{!CheckTimeList.selection}'
             handler: 'onDelete'
         ,
             '->'
@@ -75,7 +71,8 @@ Ext.define 'Vcare.view.customer.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind: store: '{customers}'
+            bind:
+                store: '{checkTimes}'
             margin: '0 10 0 0'
         ]
 
@@ -83,5 +80,6 @@ Ext.define 'Vcare.view.customer.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind: store: '{customers}'
+        bind:
+            store: '{checkTimes}'
         displayInfo: yes
