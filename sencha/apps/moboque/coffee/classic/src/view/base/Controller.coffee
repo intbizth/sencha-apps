@@ -257,19 +257,38 @@ Ext.define 'Moboque.view.base.Controller',
                             list.unmask()
                             @alertFailure(failedMessage)
 
-    baseSubmit: (refer, successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว', editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว') ->
+    baseSubmit: (refer, hasImage = no, successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว', editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว') ->
         vm = @dialog.getViewModel()
 
         form = @dialog.down 'form'
         record = vm.get 'record'
         isPhantom = record.phantom
 
-        # add item for make it look like it's added.
         list = @referTo refer
         store = list.getStore()
 
-        # check if add image
-        
+        # add item for make it look like it's added.
+#        imageUpdated = record.getChanges().hasOwnProperty('image')
+        if hasImage
+
+            # check if add image.
+            filesInput = []
+            imageInput = @manageFiles(form, 'image')
+
+            if imageInput.files and imageInput.files.length
+                filesInput.push(imageInput)
+
+            # if got image file, ENCODE them and submit.
+            if filesInput.length
+                Ext.each filesInput, (input) ->
+                    reader = new FileReader()
+                    reader.readAsDataURL input.files[0]
+                    reader.onload = (e) ->
+                        record.set(input.name, 'media': e.target.result)
+                return
+
+
+
 
         if !(form.isValid() && vm.isDirty())
             @dialog.close()
@@ -309,6 +328,18 @@ Ext.define 'Moboque.view.base.Controller',
                     @alertSuccess(successMessage)
                     store.add(record)
                 else
+                    store.reload()
                     @alertSuccess(editMessage)
 
                 @dialog.close()
+
+    fileReader: (inputfiles, record, refer) ->
+        me = @
+
+        Ext.each inputfiles, (input, index) ->
+            reader = new FileReader()
+            reader.readAsDataURL input.files[0]
+            reader.onload = (e) ->
+                record.set(input.name, 'media': e.target.result)
+#                if index == (inputfiles.length - 1)
+#                    me.baseSubmit(refer)
