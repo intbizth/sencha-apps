@@ -45,26 +45,7 @@ Ext.define 'Moboque.view.promote-image.Controller',
     onEdit: -> @createDialog @referTo('PromoteImageList').getSelection()[0]
 
     onDelete: -> @baseDelete('PromoteImageList')
-
-#------ Image ------#
-    onSubmit: ->
-        @baseSubmit('PromoteImageList', yes)
-#        form = @dialog.down 'form'
-#        record = @dialog.getViewModel().get 'record'
-#
-#        filesInput = []
-#
-#        # image field
-#        imageInput = @manageFiles(form, 'image')
-#
-#        if imageInput.files and imageInput.files.length
-#            filesInput.push(imageInput)
-#
-#        # ตอน submit ถ้ามีการ add image? ให้แปลง image
-#        if filesInput.length
-#            @fileReader(filesInput, record)
-#        else
-#            @save(record)
+    onSubmit: -> @baseSubmit('PromoteImageList', yes)
 
     setImagePreview: (imageComponent) ->
         console.log 'img', imageComponent

@@ -45,4 +45,4 @@ Ext.define 'Moboque.view.travel.Controller',
     onEdit: -> @createDialog @referTo('TravelList').getSelection()[0]
 
     onDelete: -> @baseDelete('TravelList')
-    onSubmit: -> @baseSubmit('form', 'record')
+    onSubmit: -> @baseSubmit('TravelList')
