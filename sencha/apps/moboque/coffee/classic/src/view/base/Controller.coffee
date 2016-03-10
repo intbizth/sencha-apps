@@ -237,7 +237,7 @@ Ext.define 'Moboque.view.base.Controller',
 
     # Event on (onDelete, onEdit, onSubmit, etc..) Call here
 
-    baseDelete: (refer) ->
+    baseDelete: (refer, successMessage = 'ลบข้อมูลเรียบร้อยแล้ว', failedMessage = 'ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้ง') ->
         @showConfirmMessage
             title: 'ยืนยันการลบ'
             message: 'คุณแน่ใจหรือไม่',
@@ -246,26 +246,49 @@ Ext.define 'Moboque.view.base.Controller',
                     list = @referTo refer
                     list.mask('Deleting..')
 
-                    eventRecord = list.getSelection()[0]
+                    baseRecord = list.getSelection()[0]
                     store = list.getStore()
 
-                    # for fix association and cascade.
-                    eventRecord.drop(no)
-                    eventRecord.erasing = no
-                    eventRecord.save
+                    baseRecord.erase
                         success: =>
                             list.unmask()
-                            @alertSuccess('ลบประวัติเรียบร้อยแล้วค่ะ')
+                            @alertSuccess(successMessage)
                         failure: =>
                             list.unmask()
-                            @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')
+                            @alertFailure(failedMessage)
 
-    baseSubmit: (pForm, pRecord) ->
+    baseSubmit: (refer, hasImage = no, successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว', editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว') ->
         vm = @dialog.getViewModel()
 
-        form = @dialog.down pForm
-        record = vm.get pRecord
+        form = @dialog.down 'form'
+        record = vm.get 'record'
         isPhantom = record.phantom
+
+        list = @referTo refer
+        store = list.getStore()
+
+        # add item for make it look like it's added.
+#        imageUpdated = record.getChanges().hasOwnProperty('image')
+        if hasImage
+
+            # check if add image.
+            filesInput = []
+            imageInput = @manageFiles(form, 'image')
+
+            if imageInput.files and imageInput.files.length
+                filesInput.push(imageInput)
+
+            # if got image file, ENCODE them and submit.
+            if filesInput.length
+                Ext.each filesInput, (input) ->
+                    reader = new FileReader()
+                    reader.readAsDataURL input.files[0]
+                    reader.onload = (e) ->
+                        record.set(input.name, 'media': e.target.result)
+                return
+
+
+
 
         if !(form.isValid() && vm.isDirty())
             @dialog.close()
@@ -302,8 +325,21 @@ Ext.define 'Moboque.view.base.Controller',
                 form.unmask()
 
                 if isPhantom
-                    @alertSuccess('เพิ่มข้อมูลเรียบร้อยแล้ว')
+                    @alertSuccess(successMessage)
+                    store.add(record)
                 else
-                    @alertSuccess('แก้ไขข้อมูลเรียบร้อยแล้ว')
+                    store.reload()
+                    @alertSuccess(editMessage)
 
                 @dialog.close()
+
+    fileReader: (inputfiles, record, refer) ->
+        me = @
+
+        Ext.each inputfiles, (input, index) ->
+            reader = new FileReader()
+            reader.readAsDataURL input.files[0]
+            reader.onload = (e) ->
+                record.set(input.name, 'media': e.target.result)
+#                if index == (inputfiles.length - 1)
+#                    me.baseSubmit(refer)

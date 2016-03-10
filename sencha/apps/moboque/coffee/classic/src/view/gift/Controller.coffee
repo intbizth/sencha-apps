@@ -45,4 +45,4 @@ Ext.define 'Moboque.view.gift.Controller',
     onEdit: -> @createDialog @referTo('GiftList').getSelection()[0]
 
     onDelete: -> @baseDelete('GiftList')
-    onSubmit: -> @baseSubmit('form', 'record')
+    onSubmit: -> @baseSubmit('GiftList')

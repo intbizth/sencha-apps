@@ -45,4 +45,4 @@ Ext.define 'Moboque.view.emergency-call.Controller',
     onEdit: -> @createDialog @referTo('EmergencyCallList').getSelection()[0]
 
     onDelete: -> @baseDelete('EmergencyCallList')
-    onSubmit: -> @baseSubmit('form', 'record')
+    onSubmit: -> @baseSubmit('EmergencyCallList')

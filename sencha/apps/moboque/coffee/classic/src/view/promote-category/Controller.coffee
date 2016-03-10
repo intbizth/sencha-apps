@@ -45,4 +45,4 @@ Ext.define 'Moboque.view.promote-category.Controller',
     onEdit: -> @createDialog @referTo('PromoteCategoryList').getSelection()[0]
 
     onDelete: -> @baseDelete('PromoteCategoryList')
-    onSubmit: -> @baseSubmit('form', 'record')
+    onSubmit: -> @baseSubmit('PromoteCategoryList')

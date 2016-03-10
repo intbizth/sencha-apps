@@ -1,6 +1,7 @@
 Ext.define 'Moboque.model.PromoteImage',
     extend: 'Moboque.model.Base'
     api: '/api/promote-images/'
+    hasFileUpload: true
 
     fields: [
         name: 'description'
@@ -15,28 +16,12 @@ Ext.define 'Moboque.model.PromoteImage',
             setterName: 'setPromote'
     ,
         name: 'image'
-        mapping: '_link'
         type: 'auto'
-#    ,
-#        name: 'promoteUrl'
-#        reference:
-#            type: 'Promote'
-#            role: 'promote-url'
-#            associationsKey: 'image'
-#            getterName: 'getPromoteImage'
-#            setterName: 'setPromoteImage'
     ]
 
     getPromoteTitle: ->
         promote = @getPromote()
-        console.log @get('image')
         return promote.get("title") if promote
-        return ''
-
-    getPromoteUrl: ->
-        promoteUrl = @getPromoteImage()
-        console.log @get('image')
-        return promoteUrl.get('url') if promoteUrl
         return ''
 
     validators:
