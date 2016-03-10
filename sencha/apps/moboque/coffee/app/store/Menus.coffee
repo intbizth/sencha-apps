@@ -146,7 +146,7 @@ Ext.define 'Moboque.store.Menus',
         ,
             text: 'Reports'
             view: 'report.LayoutView'
-            iconCls: 'fa fa-globe'
+            iconCls: 'fa fa-file-text-o'
             leaf: true
             routeId: 'reports'
         ]
