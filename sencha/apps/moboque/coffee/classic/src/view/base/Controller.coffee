@@ -257,12 +257,19 @@ Ext.define 'Moboque.view.base.Controller',
                             list.unmask()
                             @alertFailure(failedMessage)
 
-    baseSubmit: (pForm, pRecord, successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว', failedMessage = 'ไม่สามารถเพิ่มข้อมูลได้') ->
+    baseSubmit: (refer, successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว', editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว') ->
         vm = @dialog.getViewModel()
 
-        form = @dialog.down pForm
-        record = vm.get pRecord
+        form = @dialog.down 'form'
+        record = vm.get 'record'
         isPhantom = record.phantom
+
+        # add item for make it look like it's added.
+        list = @referTo refer
+        store = list.getStore()
+
+        # check if add image
+        
 
         if !(form.isValid() && vm.isDirty())
             @dialog.close()
@@ -300,8 +307,8 @@ Ext.define 'Moboque.view.base.Controller',
 
                 if isPhantom
                     @alertSuccess(successMessage)
-                    record.load()
+                    store.add(record)
                 else
-                    @alertSuccess(failedMessage)
+                    @alertSuccess(editMessage)
 
                 @dialog.close()

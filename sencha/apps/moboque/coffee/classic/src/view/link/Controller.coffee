@@ -45,4 +45,4 @@ Ext.define 'Moboque.view.link.Controller',
     onEdit: -> @createDialog @referTo('LinkList').getSelection()[0]
 
     onDelete: -> @baseDelete('LinkList')
-    onSubmit: -> @baseSubmit('form', 'record')
+    onSubmit: -> @baseSubmit('LinkList')

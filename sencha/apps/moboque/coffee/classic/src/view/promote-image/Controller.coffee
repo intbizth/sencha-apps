@@ -63,7 +63,8 @@ Ext.define 'Moboque.view.promote-image.Controller',
         if filesInput.length
             @fileReader(filesInput, record)
         else
-            @save(record)
+            @baseSubmit('form', 'record')
+#            @save(record)
 
     fileReader: (inputfiles, record) ->
         me = @
@@ -76,8 +77,8 @@ Ext.define 'Moboque.view.promote-image.Controller',
                 record.set(input.name, 'media': e.target.result)
 
                 if index == (inputfiles.length - 1)
-#                    me.baseSubmit('form', 'record')
-                    me.save(record)
+                    me.baseSubmit('form', 'record')
+#                    me.save(record)
 
     setImagePreview: (imageComponent) ->
         console.log 'img', imageComponent
