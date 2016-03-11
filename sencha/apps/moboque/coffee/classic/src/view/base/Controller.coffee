@@ -239,11 +239,11 @@ Ext.define 'Moboque.view.base.Controller',
 
     baseCreateDialog: (obj) ->
         # objectList [ obj.refer, obj.title, obj.xType, obj.vmType ]
-        console.log obj
-        vm = @getViewModel()
-        record = vm.prepareData(@referTo(obj.refer).getSelection()[0])
+        record = @getViewModel().prepareData()
 
-        console.log record
+        if obj.hasOwnProperty('refer')
+            record = @getViewModel().prepareData(@referTo(obj.refer).getSelection()[0])
+
         @dialog = @getView().add
             xtype: obj.xType
             ownerView: @getView()
