@@ -32,10 +32,7 @@ class DefaultController extends Controller
         }
 
         if ($response->isStatus(400)) {
-            return JsonResponse::create(array(
-                'code' => $status,
-                'message' => $response->getStatusText(),
-            ), $status);
+            return JsonResponse::create($response->getContent(), $status);
         }
 
         if ($response->isJson()) {
