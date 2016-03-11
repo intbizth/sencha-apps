@@ -7,6 +7,10 @@ Ext.define 'Vcare.view.taxon.Model',
             type: 'store-taxon-categories'
             autoLoad: yes
 
+        brands:
+            type: 'store-taxon-brands'
+            autoLoad: yes
+
         locales:
             type: 'store-locales'
             autoLoad: yes

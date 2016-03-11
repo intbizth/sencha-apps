@@ -14,3 +14,11 @@ Ext.define 'Vcare.view.taxon.ModelForm',
 
     reject: ->
         @get('record').reject()
+
+        #TODO: override model
+        record = @get('record')
+        parent = record.getPrevious('parent')
+        record.beginEdit()
+        record.setParent(parent)
+        record.endEdit(yes)
+

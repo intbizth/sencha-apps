@@ -22,6 +22,9 @@ Ext.define 'Vcare.view.taxon.Controller',
         vm = @getViewModel()
         record = vm.prepareData(record, type)
 
+        console.log record
+        console.log record
+
         switch type
             when 'brand' then @currentStore = 'brands'
             else @currentStore = 'categories'
