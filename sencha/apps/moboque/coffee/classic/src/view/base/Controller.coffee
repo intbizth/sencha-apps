@@ -263,6 +263,7 @@ Ext.define 'Moboque.view.base.Controller',
                                 if pressed == 'ok'
                                     if record.store
                                         record.store.rejectChanges()
+                                    console.log 'Close!'
                                     @dialog.close()
                         return no
         @dialog.show()
@@ -287,9 +288,10 @@ Ext.define 'Moboque.view.base.Controller',
                             list.unmask()
                             @alertFailure(failedMessage)
 
-    baseSubmit: (refer, hasImage = no, successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว', editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว') ->
+    baseSubmit: (refer, obj = null, successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว', editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว') ->
         vm = @dialog.getViewModel()
 
+        me = @
         form = @dialog.down 'form'
         record = vm.get 'record'
         isPhantom = record.phantom
@@ -298,9 +300,9 @@ Ext.define 'Moboque.view.base.Controller',
         store = list.getStore()
 
         # add item for make it look like it's added.
-#        imageUpdated = record.getChanges().hasOwnProperty('image')
-        if hasImage
-
+        # imageUpdated = record.getChanges().hasOwnProperty('image')
+        if obj != null && obj.hasOwnProperty('hasImage') && obj.hasImage == yes
+            console.log 'yes, have image'
             # check if add image.
             filesInput = []
             imageInput = @manageFiles(form, 'image')
@@ -315,50 +317,51 @@ Ext.define 'Moboque.view.base.Controller',
                     reader.readAsDataURL input.files[0]
                     reader.onload = (e) ->
                         record.set(input.name, 'media': e.target.result)
+                        me.baseSubmit(refer)
+        else
+
+            if !(form.isValid() && vm.isDirty())
+                @dialog.close()
                 return
 
-        if !(form.isValid() && vm.isDirty())
-            @dialog.close()
-            return
+            form.mask('กำลังบันทึกข้อมูล ..')
 
-        form.mask('กำลังบันทึกข้อมูล ..')
+            record.save
+                failure: (rec, o) =>
+                    form.unmask()
 
-        record.save
-            failure: (rec, o) =>
-                form.unmask()
+                    titleMessage = 'ผิดพลาด'
+                    errorMessage = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้งค่ะ'
 
-                titleMessage = 'ผิดพลาด'
-                errorMessage = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้งค่ะ'
+                    if response = o.error.response
+                        # internal server error
+                        if response.status == 500
+                            titleMessage = response.statusText
+                            errorMessage = 'Sorry, something went wrong.'
 
-                if response = o.error.response
-                    # internal server error
-                    if response.status == 500
-                        titleMessage = response.statusText
-                        errorMessage = 'Sorry, something went wrong.'
+                        # sf validation error.
+                        # TODO: handle form error with custom fn.
+                        if response.status == 400
+                            obj = Ext.decode response.responseText
+                            titleMessage = obj.message
+                            errorMessage = 'Sorry, Validate Error.'
 
-                    # sf validation error.
-                    # TODO: handle form error with custom fn.
-                    if response.status == 400
-                        obj = Ext.decode response.responseText
-                        titleMessage = obj.message
-                        errorMessage = 'Sorry, Validate Error.'
+                    @alertFailure
+                        title: titleMessage
+                        message: errorMessage
 
-                @alertFailure
-                    title: titleMessage
-                    message: errorMessage
+                success: (rec, o) =>
+                    vm.commit()
+                    form.unmask()
 
-            success: (rec, o) =>
-                vm.commit()
-                form.unmask()
+                    if isPhantom
+                        @alertSuccess(successMessage)
+                        store.add(record)
+                    else
+                        store.reload()
+                        @alertSuccess(editMessage)
 
-                if isPhantom
-                    @alertSuccess(successMessage)
-                    store.add(record)
-                else
-                    store.reload()
-                    @alertSuccess(editMessage)
-
-                @dialog.close()
+                    @dialog.close()
 
     fileReader: (inputfiles, record, refer) ->
         me = @
