@@ -237,6 +237,36 @@ Ext.define 'Moboque.view.base.Controller',
 
     # Event on (onDelete, onEdit, onSubmit, etc..) Call here
 
+    baseCreateDialog: (obj) ->
+        # objectList [ obj.refer, obj.title, obj.xType, obj.vmType ]
+        console.log obj
+        vm = @getViewModel()
+        record = vm.prepareData(@referTo(obj.refer).getSelection()[0])
+
+        console.log record
+        @dialog = @getView().add
+            xtype: obj.xType
+            ownerView: @getView()
+            viewModel:
+                type: obj.vmType
+                data:
+                    title: if record.phantom then 'เพิ่มรายการ' else record.get(obj.title)
+                    record: record
+
+            listeners:
+                beforeclose: (panel, eOpts) =>
+                    if record and record.dirty
+                        @showConfirmMessage
+                            title: 'ข้อมูลมีการเปลี่ยนแปลง'
+                            message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
+                            fn: (pressed) =>
+                                if pressed == 'ok'
+                                    if record.store
+                                        record.store.rejectChanges()
+                                    @dialog.close()
+                        return no
+        @dialog.show()
+
     baseDelete: (refer, successMessage = 'ลบข้อมูลเรียบร้อยแล้ว', failedMessage = 'ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้ง') ->
         @showConfirmMessage
             title: 'ยืนยันการลบ'
@@ -286,9 +316,6 @@ Ext.define 'Moboque.view.base.Controller',
                     reader.onload = (e) ->
                         record.set(input.name, 'media': e.target.result)
                 return
-
-
-
 
         if !(form.isValid() && vm.isDirty())
             @dialog.close()
