@@ -27,6 +27,7 @@ Ext.define 'Moboque.view.event.FormView',
             emptyText: 'กรุณาระบุชื่องานอีเวนท์'
             bind: '{record.name}'
         ,
+            xtype: 'textareafield'
             fieldLabel: '<span style="color:red;">*</span> สถานที่จัดงานอีเวนท์'
             emptyText: 'กรุณาระบุสถานที่จัดงานอีเวนท์'
             bind: '{record.location}'

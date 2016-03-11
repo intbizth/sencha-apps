@@ -36,6 +36,20 @@ Ext.define 'Moboque.view.report.FormView',
             fieldLabel: '<span style="color:red;">*</span> รายละเอียด'
             emptyText: 'กรุณาใส่รายละเอียด'
             bind: '{record.description}'
+        ,
+            xtype: 'fieldset'
+            title: 'อัพโหลดรูปภาพ'
+            defaults:
+                anchor: '100%'
+                labelAlign: 'top'
+            items: [
+                xtype: 'fileuploadfield'
+                emptyText: 'Select an image'
+                fieldLabel: 'File path'
+                name: 'photo-path'
+                buttonConfig:
+                    iconCls: 'fa fa-file-image-o'
+            ]
         ]
 
         buttons: [

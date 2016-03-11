@@ -268,7 +268,7 @@ Ext.define 'Moboque.view.base.Controller',
         store = list.getStore()
 
         # add item for make it look like it's added.
-#        imageUpdated = record.getChanges().hasOwnProperty('image')
+        # imageUpdated = record.getChanges().hasOwnProperty('image')
         if hasImage
 
             # check if add image.
