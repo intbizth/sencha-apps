@@ -30,9 +30,10 @@ Ext.define 'Moboque.view.service.ListView',
         renderer: (v, m, r) ->
             return r.getServiceCategoryName()
     ,
+        xtype: 'numbercolumn'
         text: 'ราคา'
         dataIndex: 'price'
-        format: 'number'
+        format: '0,000'
         width: 100
     ,
         text: 'สกุลเงิน'
