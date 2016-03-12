@@ -72,6 +72,7 @@ Ext.define 'Vcare.view.taxon.FormView',
             xtype: 'fieldtranslation'
             fieldLabel: 'Description'
             itemKey: 'description'
+            itemType: 'textarea'
             bind:
                 locales: '{locales}'
                 locale: '{defaultLocale}'

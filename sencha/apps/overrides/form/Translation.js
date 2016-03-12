@@ -42,14 +42,9 @@ Ext.define('Ext.form.Translation', {
                 hidden: true,
                 itemId: me.getItemName(code),
                 translatableItem: 'yes',
-                localeCode: code,
-                itemKey: me.itemKey,
-                translations: null,
-
                 bind: {
                     value: Ext.String.format('{record.translations.{0}.{1}}', code, me.itemKey)
                 }
-
 
             }, me.getItemConfig()));
         });
