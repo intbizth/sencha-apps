@@ -22,8 +22,14 @@ Ext.define 'Vcare.model.TaxonCategory',
     getName: -> @trans 'name'
 
     writerTransform: fn: (data) ->
-        console.log data
         if data.parent
             data.parent = data.parent.id
+
+        if data.translations
+            for locale of data.translations
+                for prop of data.translations[locale]
+                    # @see \Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType
+                    if -1 == Ext.Array.indexOf ['name', 'permalink', 'description'], prop
+                        delete data.translations[locale][prop]
 
         return data
