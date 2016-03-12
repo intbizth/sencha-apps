@@ -7,17 +7,18 @@ Ext.define 'Vcare.view.base.Window',
 
     layout: 'fit'
 
-    width: 200
-    height: 200
     frame: no
     border: no
     bodyPadding: 0
 
+    config:
+        fullsize: yes
+
     afterRender: ->
         @callParent arguments
-        @syncSize()
+        @syncSize() if @getFullsize()
 
-        @setBox @ownerView.getBox() if @ownerView
+        @setBox @ownerView.getBox() if @ownerView && @getFullsize()
 
         @on 'beforeclose', @dirtyClose, @
 

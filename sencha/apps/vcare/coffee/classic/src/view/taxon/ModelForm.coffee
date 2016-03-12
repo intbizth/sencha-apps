@@ -2,23 +2,16 @@ Ext.define 'Vcare.view.taxon.ModelForm',
     extend: 'Vcare.view.base.ViewModel'
     alias: 'viewmodel.vm-taxon-form'
 
-    formulas:
-        translations:
-            get: -> @get('record').get('translations')
+    isDirty: -> @get('record').dirty
+    commit: -> @get('record').commit()
+    reject: -> @get('record').reject()
 
-    isDirty: ->
-        @get('record').dirty
-
-    commit: ->
-        @get('record').commit()
-
-    reject: ->
-        @get('record').reject()
-
-        #TODO: override model
+    updateTranslations: ->
         record = @get('record')
-        parent = record.getPrevious('parent')
-        record.beginEdit()
-        record.setParent(parent)
-        record.endEdit(yes)
 
+        ## current bind (Translation.js)
+        ## will bind into main model property (model.translations)
+        if record.translations
+            translations = Ext.Object.merge(_copy(record.data.translations), record.translations)
+            record.set('translations', translations)
+            delete record.translations

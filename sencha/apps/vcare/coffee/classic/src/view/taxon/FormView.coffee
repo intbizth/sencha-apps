@@ -8,6 +8,11 @@ Ext.define 'Vcare.view.taxon.FormView',
     bind:
         title: '{title}'
 
+    fullsize: no
+
+    width: 600
+    height: 500
+
     items:
         xtype: 'form'
         referenceHolder: yes
@@ -33,8 +38,7 @@ Ext.define 'Vcare.view.taxon.FormView',
             editable: no
             displayField: 'name'
             valueField: 'id'
-            XXX: 'id'
-            width: 400
+            flex: 1
             bind:
                 store: '{parents}'
                 selection: '{record.parent}'
@@ -50,27 +54,28 @@ Ext.define 'Vcare.view.taxon.FormView',
                         if cb.record && (cb.record.getId() == r.getId())
                             Ext.Msg.alert('Cannot select.', 'You cannot select itself as parent.')
                             return no
-        # ,
-        #     xtype: 'fieldtranslation'
-        #     fieldLabel: 'Name'
-        #     itemKey: 'name'
-        #     bind:
-        #         locales: '{locales}'
-        #         locale: '{currentLocale}'
-        # ,
-        #     xtype: 'fieldtranslation'
-        #     fieldLabel: 'Permalink'
-        #     itemKey: 'permalink'
-        #     bind:
-        #         locales: '{locales}'
-        #         locale: '{currentLocale}'
-        # ,
-        #     xtype: 'fieldtranslation'
-        #     fieldLabel: 'Description'
-        #     itemKey: 'description'
-        #     bind:
-        #         locales: '{locales}'
-        #         locale: '{currentLocale}'
+        ,
+            xtype: 'fieldtranslation'
+            fieldLabel: 'Name'
+            itemKey: 'name'
+            bind:
+                locales: '{locales}'
+                locale: '{defaultLocale}'
+        ,
+            xtype: 'fieldtranslation'
+            fieldLabel: 'Permalink'
+            itemKey: 'permalink'
+            bind:
+                locales: '{locales}'
+                locale: '{defaultLocale}'
+        ,
+            xtype: 'fieldtranslation'
+            fieldLabel: 'Description'
+            itemKey: 'description'
+            itemType: 'textarea'
+            bind:
+                locales: '{locales}'
+                locale: '{defaultLocale}'
         ]
 
     buttons: [
