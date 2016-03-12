@@ -38,13 +38,17 @@ Ext.define 'Vcare.view.taxon.Controller',
                     type: type
                     title:  @createDialogTitle(record)
                     record: record
-                    currentLocale: 'en_US'
                     parents: vm.getStore(@currentStore)
 
         @dialog.show()
 
-    onCancel: -> @closeDialog()
-    onAddNew: -> @createDialog null, btn.up('grid').getTaxonType()
+    onCancel: ->
+        @dialog.getViewModel().updateTranslations()
+
+        @closeDialog()
+
+    onAddNew: (btn) -> @createDialog null, btn.up('grid').getTaxonType()
+
     onEdit: (btn) ->
         grid = btn.up('grid')
         @createDialog grid.getSelection()[0], grid.getTaxonType()
@@ -53,6 +57,8 @@ Ext.define 'Vcare.view.taxon.Controller',
         vm = @dialog.getViewModel()
         form = @dialog.down 'form'
         record = vm.get 'record'
+
+        vm.updateTranslations()
 
         if !(form.isValid() && vm.isDirty())
             @dialog.close()
