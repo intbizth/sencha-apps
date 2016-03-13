@@ -238,7 +238,7 @@ Ext.define 'Moboque.view.base.Controller',
     # Event on (onDelete, onEdit, onSubmit, etc..) Call here
 
     baseCreateDialog: (obj) ->
-        # objectList [ obj.refer, obj.title, obj.xType, obj.vmType ]
+        # obj = [refer: string, title: string, xType: string, vmType: string]
         record = @getViewModel().prepareData()
 
         if obj.hasOwnProperty('refer')
@@ -268,7 +268,10 @@ Ext.define 'Moboque.view.base.Controller',
                         return no
         @dialog.show()
 
-    baseDelete: (refer, successMessage = 'ลบข้อมูลเรียบร้อยแล้ว', failedMessage = 'ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้ง') ->
+    baseDelete: (refer, obj = null) ->
+        # obj = [success: string, error: string]
+        if !obj.hasOwnProperty('success') then obj.successMessage = 'ลบข้อมูลเรียบร้อยแล้ว!'
+        if !obj.hasOwnProperty('error') then obj.error = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้ง!'
         @showConfirmMessage
             title: 'ยืนยันการลบ'
             message: 'คุณแน่ใจหรือไม่',
@@ -283,12 +286,13 @@ Ext.define 'Moboque.view.base.Controller',
                     baseRecord.erase
                         success: =>
                             list.unmask()
-                            @alertSuccess(successMessage)
+                            @alertSuccess(obj.successMessage)
                         failure: =>
                             list.unmask()
-                            @alertFailure(failedMessage)
+                            @alertFailure(obj.error)
 
-    baseSubmit: (refer, obj = null, successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว', editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว') ->
+    baseSubmit: (refer, obj = null) ->
+        # obj = [hasImage: bool, success: string, edited: string, error: string]
         vm = @dialog.getViewModel()
 
         me = @
@@ -319,6 +323,9 @@ Ext.define 'Moboque.view.base.Controller',
                         record.set(input.name, 'media': e.target.result)
                         me.baseSubmit(refer)
         else
+            if !obj.hasOwnProperty('success') then obj.successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว'
+            if !obj.hasOwnProperty('edited') then obj.editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว'
+            if !obj.hasOwnProperty('error') then obj.error = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้ง!'
 
             if !(form.isValid() && vm.isDirty())
                 @dialog.close()
@@ -331,7 +338,7 @@ Ext.define 'Moboque.view.base.Controller',
                     form.unmask()
 
                     titleMessage = 'ผิดพลาด'
-                    errorMessage = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้งค่ะ'
+                    errorMessage = obj.error
 
                     if response = o.error.response
                         # internal server error
@@ -355,11 +362,11 @@ Ext.define 'Moboque.view.base.Controller',
                     form.unmask()
 
                     if isPhantom
-                        @alertSuccess(successMessage)
+                        @alertSuccess(obj.successMessage)
                         store.add(record)
                     else
                         store.reload()
-                        @alertSuccess(editMessage)
+                        @alertSuccess(obj.editMessage)
 
                     @dialog.close()
 

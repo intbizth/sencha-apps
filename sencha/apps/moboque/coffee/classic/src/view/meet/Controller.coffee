@@ -8,4 +8,4 @@ Ext.define 'Moboque.view.meet.Controller',
     onAddNew: -> @baseCreateDialog({xType: 'wg-meet-form', vmType: 'vm-meet-form'})
     onEdit: -> @baseCreateDialog({xType: 'wg-meet-form', vmType: 'vm-meet-form', refer: 'MeetList', title : 'description'})
     onDelete: -> @baseDelete('MeetList')
-    onSubmit: -> @baseSubmit('MeetList')
+    onSubmit: -> @baseSubmit('MeetList', {success: 'โพสคำทักทายแล้ว!', edited: 'แก้ไขคำทักทายเรียบร้อย', error: 'ไม่สามารถเพิ่มข้อมูลได้'})
