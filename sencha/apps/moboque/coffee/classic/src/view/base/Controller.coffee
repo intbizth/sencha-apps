@@ -237,7 +237,41 @@ Ext.define 'Moboque.view.base.Controller',
 
     # Event on (onDelete, onEdit, onSubmit, etc..) Call here
 
-    baseDelete: (refer, successMessage = 'ลบข้อมูลเรียบร้อยแล้ว', failedMessage = 'ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้ง') ->
+    baseCreateDialog: (obj) ->
+        # obj = [refer: string, title: string, xType: string, vmType: string]
+        record = @getViewModel().prepareData()
+
+        if obj.hasOwnProperty('refer')
+            record = @getViewModel().prepareData(@referTo(obj.refer).getSelection()[0])
+
+        @dialog = @getView().add
+            xtype: obj.xType
+            ownerView: @getView()
+            viewModel:
+                type: obj.vmType
+                data:
+                    title: if record.phantom then 'เพิ่มรายการ' else record.get(obj.title)
+                    record: record
+
+            listeners:
+                beforeclose: (panel, eOpts) =>
+                    if record and record.dirty
+                        @showConfirmMessage
+                            title: 'ข้อมูลมีการเปลี่ยนแปลง'
+                            message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
+                            fn: (pressed) =>
+                                if pressed == 'ok'
+                                    if record.store
+                                        record.store.rejectChanges()
+                                    console.log 'Close!'
+                                    @dialog.close()
+                        return no
+        @dialog.show()
+
+    baseDelete: (refer, obj = null) ->
+        # obj = [success: string, error: string]
+        if !obj.hasOwnProperty('success') then obj.successMessage = 'ลบข้อมูลเรียบร้อยแล้ว!'
+        if !obj.hasOwnProperty('error') then obj.error = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้ง!'
         @showConfirmMessage
             title: 'ยืนยันการลบ'
             message: 'คุณแน่ใจหรือไม่',
@@ -252,14 +286,16 @@ Ext.define 'Moboque.view.base.Controller',
                     baseRecord.erase
                         success: =>
                             list.unmask()
-                            @alertSuccess(successMessage)
+                            @alertSuccess(obj.successMessage)
                         failure: =>
                             list.unmask()
-                            @alertFailure(failedMessage)
+                            @alertFailure(obj.error)
 
-    baseSubmit: (refer, hasImage = no, successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว', editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว') ->
+    baseSubmit: (refer, obj = null) ->
+        # obj = [hasImage: bool, success: string, edited: string, error: string]
         vm = @dialog.getViewModel()
 
+        me = @
         form = @dialog.down 'form'
         record = vm.get 'record'
         isPhantom = record.phantom
@@ -268,9 +304,9 @@ Ext.define 'Moboque.view.base.Controller',
         store = list.getStore()
 
         # add item for make it look like it's added.
-#        imageUpdated = record.getChanges().hasOwnProperty('image')
-        if hasImage
-
+        # imageUpdated = record.getChanges().hasOwnProperty('image')
+        if obj != null && obj.hasOwnProperty('hasImage') && obj.hasImage == yes
+            console.log 'yes, have image'
             # check if add image.
             filesInput = []
             imageInput = @manageFiles(form, 'image')
@@ -285,53 +321,54 @@ Ext.define 'Moboque.view.base.Controller',
                     reader.readAsDataURL input.files[0]
                     reader.onload = (e) ->
                         record.set(input.name, 'media': e.target.result)
+                        me.baseSubmit(refer)
+        else
+            if !obj.hasOwnProperty('success') then obj.successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว'
+            if !obj.hasOwnProperty('edited') then obj.editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว'
+            if !obj.hasOwnProperty('error') then obj.error = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้ง!'
+
+            if !(form.isValid() && vm.isDirty())
+                @dialog.close()
                 return
 
+            form.mask('กำลังบันทึกข้อมูล ..')
 
+            record.save
+                failure: (rec, o) =>
+                    form.unmask()
 
+                    titleMessage = 'ผิดพลาด'
+                    errorMessage = obj.error
 
-        if !(form.isValid() && vm.isDirty())
-            @dialog.close()
-            return
+                    if response = o.error.response
+                        # internal server error
+                        if response.status == 500
+                            titleMessage = response.statusText
+                            errorMessage = 'Sorry, something went wrong.'
 
-        form.mask('กำลังบันทึกข้อมูล ..')
+                        # sf validation error.
+                        # TODO: handle form error with custom fn.
+                        if response.status == 400
+                            obj = Ext.decode response.responseText
+                            titleMessage = obj.message
+                            errorMessage = 'Sorry, Validate Error.'
 
-        record.save
-            failure: (rec, o) =>
-                form.unmask()
+                    @alertFailure
+                        title: titleMessage
+                        message: errorMessage
 
-                titleMessage = 'ผิดพลาด'
-                errorMessage = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้งค่ะ'
+                success: (rec, o) =>
+                    vm.commit()
+                    form.unmask()
 
-                if response = o.error.response
-                    # internal server error
-                    if response.status == 500
-                        titleMessage = response.statusText
-                        errorMessage = 'Sorry, something went wrong.'
+                    if isPhantom
+                        @alertSuccess(obj.successMessage)
+                        store.add(record)
+                    else
+                        store.reload()
+                        @alertSuccess(obj.editMessage)
 
-                    # sf validation error.
-                    # TODO: handle form error with custom fn.
-                    if response.status == 400
-                        obj = Ext.decode response.responseText
-                        titleMessage = obj.message
-                        errorMessage = 'Sorry, Validate Error.'
-
-                @alertFailure
-                    title: titleMessage
-                    message: errorMessage
-
-            success: (rec, o) =>
-                vm.commit()
-                form.unmask()
-
-                if isPhantom
-                    @alertSuccess(successMessage)
-                    store.add(record)
-                else
-                    store.reload()
-                    @alertSuccess(editMessage)
-
-                @dialog.close()
+                    @dialog.close()
 
     fileReader: (inputfiles, record, refer) ->
         me = @

@@ -4,48 +4,11 @@ Ext.define 'Moboque.view.promote-image.Controller',
 
     init: -> #..
 
-    # @private
-    createDialogTitle: (r) ->
-        if r.phantom
-            return 'เพิ่มรายการ'
-        else r.get 'title'
-
-    # @private
-    createDialog: (record) ->
-        vm = @getViewModel()
-        record = vm.prepareData(record)
-
-        @dialog = @getView().add
-            xtype: 'wg-promote-image-form'
-            ownerView: @getView()
-            viewModel:
-                type: 'vm-promote-image-form'
-                data:
-                    title: @createDialogTitle record
-                    record: record
-
-            listeners:
-                beforeclose: (panel, eOpts) =>
-                    if record and record.dirty
-                        @showConfirmMessage
-                            title: 'ข้อมูลมีการเปลี่ยนแปลง'
-                            message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
-                            fn: (pressed) =>
-                                if pressed == 'ok'
-                                    if record.store
-                                        record.store.rejectChanges()
-                                    @dialog.close()
-
-                        return no
-
-        @dialog.show()
-
     onCancel: -> @dialog.close()
-    onAddNew: -> @createDialog()
-    onEdit: -> @createDialog @referTo('PromoteImageList').getSelection()[0]
-
+    onAddNew: -> @baseCreateDialog({xType: 'wg-promote-image-form', vmType: 'vm-promote-image-form'})
+    onEdit: -> @baseCreateDialog({xType: 'wg-promote-image-form', vmType: 'vm-promote-image-form', refer: 'PromoteImageList', title : 'title'})
     onDelete: -> @baseDelete('PromoteImageList')
-    onSubmit: -> @baseSubmit('PromoteImageList', yes)
+    onSubmit: -> @baseSubmit('PromoteImageList', {hasImage: yes})
 
     setImagePreview: (imageComponent) ->
         console.log 'img', imageComponent
