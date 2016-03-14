@@ -85,13 +85,20 @@ Ext.define('Ext.overrides.data.Model', {
 
                 // ======== MY PATCH ========
                 if (reference && reference.cls) {
-                    currentValue = me[reference.getterName]();
-                    if (updateRefs) {
-                        session.updateReference(me, field, value, currentValue);
-                    }
-                    reference.onValueChange(me, session, value, currentValue);
+                    if ((value && value.isModel) || value === undefined) {
+                        me[reference.setterName](value);
+                    } else {
+                        currentValue = me[reference.getterName]();
 
-                    value = me[reference.getterName]();
+                        if (updateRefs) {
+                            session.updateReference(me, field, value, currentValue);
+                        }
+
+                        reference.onValueChange(me, session, value, currentValue);
+
+                        // now value should be `model`
+                        value = me[reference.getterName]();
+                    }
                 } else {
                     data[name] = value;
                 }

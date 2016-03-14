@@ -37,9 +37,13 @@ Ext.define 'Vcare.Application',
             LOGIN_SUCCESS: 'LOGIN_SUCCESS'
             LOGIN_REQUIRED: 'LOGIN_REQUIRED'
 
+    config:
+        locale: null
+
     splashscreen: null
 
     init: ->
+        @setLocale Vcare.cfg.get('locale')
         @splashscreen = Ext.getBody().mask('Loading, please stand by ...');
 
     launch: (profile) ->
@@ -64,3 +68,6 @@ Ext.define 'Vcare.Application',
             buttons: Ext.Msg.OK
             closable: false
             fn: -> window.location.href = Vcare.cfg.get 'api.login'
+
+# util
+_copy = (data) -> JSON.parse(JSON.stringify(data))

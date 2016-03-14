@@ -12,6 +12,7 @@ Ext.define 'Vcare.cfg',
             @get(path) + append
 
     config:
+        locale: 'en_US'
         api:
             version: 'v1'
             baseUrl: 'http://127.0.0.1:8080'
