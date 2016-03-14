@@ -45,35 +45,25 @@ Ext.define 'Vcare.view.customer.ListView',
     tbar:
         items: [
             text: 'เพิ่มผู้ใช้งาน'
-            xtype: 'button'
             iconCls: 'fa fa-pencil'
             handler: 'onAddNew'
         ,
-            '-'
-        ,
             text: 'แก้ไข'
-            xtype: 'button'
-            reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refCustomerList.selection}'
+            bind: widgetRecord: '{!refCustomerList.selection}'
             handler: 'onEdit'
-        ,
-            '-'
+            aclCheck: yes
         ,
             text: 'ลบ'
-            xtype: 'button'
-            reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refCustomerList.selection}'
+            bind: widgetRecord: '{!refCustomerList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
         ,
             '->'
         ,
             fieldLabel: 'ค้นหา'
             xtype: 'searchfield'
-            reference: 'refSearchField'
             labelWidth: 50
             bind: store: '{customers}'
             margin: '0 10 0 0'
