@@ -1,6 +1,7 @@
 Ext.define 'Moboque.model.Member',
     extend: 'Moboque.model.Base'
     api: '/api/members/'
+    hasFileUpload: true
 
     fields: [
         name: 'firstname'
@@ -33,6 +34,9 @@ Ext.define 'Moboque.model.Member',
         name: 'fullname'
         persist: no
         calculate: (d) -> "#{d.firstname}  #{d.lastname}"
+    ,
+        name: 'image'
+        type: 'auto'
     ,
         name: 'group'
         reference:
