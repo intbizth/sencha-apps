@@ -15,26 +15,22 @@ Ext.define 'Vcare.view.taxon.FormView',
 
     items:
         xtype: 'form'
-        referenceHolder: yes
-        modelValidation: yes
         padding: 10
-
-        #defaults:
-        #    labelAlign: 'top'
 
         items: [
             xtype: 'textfield'
             fieldLabel: 'Code'
-            allowBlank: no
+            required: yes
             bind: '{record.code}'
             minLength: 3
-            maxLength: 6
+            maxLength: 8
         ,
             xtype: 'combo'
             queryMode: 'local'
             triggerAction: 'all'
             fieldLabel: 'Parent'
             forceSelection: yes
+            required: yes
             editable: no
             displayField: 'name'
             valueField: 'id'
@@ -78,11 +74,12 @@ Ext.define 'Vcare.view.taxon.FormView',
                 locale: '{defaultLocale}'
         ]
 
-    buttons: [
-        text: 'ยกเลิก'
-        handler: 'onCancel'
-    ,
-        text: 'บันทึก'
-        handler: 'onSubmit'
-        formBind: yes
-    ]
+        buttons: [
+            text: 'ยกเลิก'
+            handler: 'onCancel'
+        ,
+            text: 'บันทึก'
+            handler: 'onSubmit'
+            disabled: yes
+            formBind: yes
+        ]

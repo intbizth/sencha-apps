@@ -4,15 +4,16 @@ Ext.define 'Vcare.view.base.Window',
 
     autoShow: yes
     modal: yes
-
+    closable: no
     layout: 'fit'
-
     frame: no
     border: no
     bodyPadding: 0
+    padding: 0
 
     config:
         fullsize: yes
+        widgetRecord: null
 
     afterRender: ->
         @callParent arguments
@@ -49,6 +50,7 @@ Ext.define 'Vcare.view.base.Window',
                 message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
                 fn: (pressed) =>
                     if pressed == 'ok'
+                        @setWidgetRecord(null)
                         @viewModel.reject()
                         @close()
 
