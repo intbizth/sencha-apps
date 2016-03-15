@@ -123,8 +123,14 @@ Ext.define 'Vcare.view.base.Controller',
             store.remove([record])
 
             store.sync
-                failure: (record, o) => grid.unmask()
-                success: (record, o) => grid.unmask(); @successAlert('ลบข้อมูลเรียบร้อยแล้ว')
+                failure: (record, o) =>
+                    grid.unmask()
+                    store.rejectChanges()
+                    @failureAlert('เกิดความผิดพลาด ในการลบข้อมูล')
+
+                success: (record, o) =>
+                    grid.unmask()
+                    @successAlert('ลบข้อมูลเรียบร้อยแล้ว')
 
     # @protected
     onSubmit: ->
