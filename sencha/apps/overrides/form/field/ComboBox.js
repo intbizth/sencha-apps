@@ -7,6 +7,15 @@ Ext.define('Ext.overrides.form.field.ComboBox', {
         record: null
     },
 
+    /*setSelection: function(rs)
+    {
+        if (rs && rs.isStore) {
+            rs = rs.getData().getRange();
+        }
+
+        this.callParent([rs]);
+    },*/
+
     /**
      * @private
      * Sets or adds a value/values

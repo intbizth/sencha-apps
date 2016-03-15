@@ -21,7 +21,9 @@ Ext.define 'Vcare.view.taxon.FormView',
             xtype: 'textfield'
             fieldLabel: 'Code'
             required: yes
-            bind: '{record.code}'
+            bind:
+                value: '{record.code}'
+                disabled: '{!isPhantom}'
             minLength: 3
             maxLength: 8
         ,

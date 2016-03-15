@@ -15,7 +15,6 @@ Ext.define 'Vcare.view.taxon.Controller',
             viewModel:
                 type: 'vm-taxon-form'
                 data:
-                    currentStore: store
                     record: record
                     parents: vm.getStore(store)
 

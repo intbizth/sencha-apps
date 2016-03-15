@@ -4,37 +4,33 @@ Ext.define 'Vcare.view.customer.ModelForm',
 
     formulas:
         currentGroups:
-            get: -> @get('record').getGroups().getIds()
-            set: (v) ->
-                groups = @get('groups').getByIds(v)
-                @get('record').getGroups().loadData groups
-
-        country:
-            get: ->
-                user = @get('record.user')
-                user.getCountry() if user
-            set: (val) ->
-                @get('record.user').setCountry val
+            get: -> @get('record.groups').getData().getRange()
+            set: (rs) ->
+                @get('record.groups').loadRecords(rs || [])
+                # to mask model dirty
+                @get('record').set('groups', rs)
 
         isPhantom:
             get: -> @get('record').phantom
 
+    onSubmitSuccess: -> @get('customers').reload()
+
+    beforeSubmit: (record) ->
+        if record.phantom
+            record.getUser().set(
+                'plain_password',
+                Math.random().toString(36).slice(-10)
+            )
+
     isDirty: ->
-        user = @get('record.user')
-        @get('record').dirty || (user && user.dirty)
+        @get('record').dirty || @get('record.user').dirty
 
     commit: ->
-        @get('record').commit()
+        # need to call user first
         @get('record.user').commit()
+        @get('record').commit()
 
     reject: ->
+        # need to call user first
+        @get('record').getUser().reject()
         @get('record').reject()
-
-        return if !user = @get('record').getUser()
-
-        localeId = user.getPrevious('locale')
-        user.reject()
-
-        if localeId
-            user.setLocale @get('locales').getById(localeId)
-            user.commit()
