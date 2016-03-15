@@ -1,5 +1,5 @@
-Ext.define 'Vcare.model.Locale',
-    extend: 'Vcare.model.Base'
+Ext.define 'Moboque.model.Locale',
+    extend: 'Moboque.model.Base'
     api: '/api/locales/'
 
     fields: [
