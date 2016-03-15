@@ -19,6 +19,7 @@ Ext.define 'Vcare.view.customer.ListView',
         text: 'สถานะ'
         align: 'center'
         width: 80
+        dataIndex: 'user'
         renderer: (v, c, r) ->
             if r.getUser().isEnabled()
                 return '<span style="color:green;">เปิด</span>'
@@ -50,13 +51,13 @@ Ext.define 'Vcare.view.customer.ListView',
         ,
             text: 'แก้ไข'
             iconCls:'fa fa-pencil-square-o '
-            bind: widgetRecord: '{!refCustomerList.selection}'
+            bind: widgetRecord: '{refCustomerList.selection}'
             handler: 'onEdit'
             aclCheck: yes
         ,
             text: 'ลบ'
             iconCls:'fa fa-minus-square'
-            bind: widgetRecord: '{!refCustomerList.selection}'
+            bind: widgetRecord: '{refCustomerList.selection}'
             handler: 'onDelete'
             aclCheck: yes
         ,

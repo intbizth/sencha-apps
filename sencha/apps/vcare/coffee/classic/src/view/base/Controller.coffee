@@ -173,12 +173,9 @@ Ext.define 'Vcare.view.base.Controller',
                 form.unmask()
 
                 vm.onSubmitSuccess(record, form)
+                vm.commit()
 
-                @successAlert(
-                    if @isPhantom then 'เพิ่มข้อมูลเรียบร้อยแล้ว'
-                    else 'แก้ไขข้อมูลเรียบร้อยแล้ว'
-                )
-
+                @successAlert(@getSuccessMessage())
                 @closeDialog()
 
 

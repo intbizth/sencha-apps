@@ -43,8 +43,6 @@ Ext.define 'Vcare.model.Customer',
         associationKey: 'groups'
         getterName: 'getGroups'
         setterName: 'setGroups'
-        storeConfig:
-            type: 'store-groups'
     ]
 
     writerTransform: fn: (data) ->
