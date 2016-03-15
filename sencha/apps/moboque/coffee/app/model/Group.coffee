@@ -1,6 +1,7 @@
 Ext.define 'Moboque.model.Group',
     extend: 'Moboque.model.Base'
     api: '/api/groups/'
+    hasFileUpload: true
 
     fields: [
         name: 'name'
@@ -9,6 +10,9 @@ Ext.define 'Moboque.model.Group',
         name: 'color'
         type: 'string'
         defaultValue: '#ff0000'
+    ,
+        name: 'image'
+        type: 'auto'
     ,
         name: 'event'
         reference:
