@@ -37,19 +37,18 @@ Ext.define 'Vcare.view.taxon.CategoryListView',
     tbar:
         items: [
             text: 'เพิ่มรายการ'
-            xtype: 'button'
             iconCls: 'fa fa-pencil'
             handler: 'onAddNew'
         ,
             text: 'แก้ไข'
-            xtype: 'button'
             iconCls:'fa fa-pencil-square-o'
-            bind: aclCheck: '{refTaxonCategoryList.selection}'
+            bind: widgetRecord: '{refTaxonCategoryList.selection}'
             handler: 'onEdit'
+            aclCheck: -> !!@getWidgetRecord().getParent()
         ,
             text: 'ลบ'
-            xtype: 'button'
             iconCls:'fa fa-trash-o'
-            bind: aclCheck: '{refTaxonCategoryList.selection}'
+            bind: widgetRecord: '{refTaxonCategoryList.selection}'
             handler: 'onDelete'
+            aclCheck: -> !!@getWidgetRecord().getParent()
         ]

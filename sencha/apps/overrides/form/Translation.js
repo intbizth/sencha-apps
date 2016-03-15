@@ -38,7 +38,7 @@ Ext.define('Ext.form.Translation', {
             items.push(Ext.merge({
                 xtype: me.getItemType(),
                 flex : 1,
-                allowBlank: false,
+                allowBlank: true,
                 hidden: true,
                 itemId: me.getItemName(code),
                 translatableItem: 'yes',

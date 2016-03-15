@@ -27,9 +27,12 @@ Ext.define 'Vcare.model.TaxonBrand',
 
         if data.translations
             for locale of data.translations
-                for prop of data.translations[locale]
-                    # @see \Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType
-                    if -1 == Ext.Array.indexOf ['name', 'permalink', 'description'], prop
-                        delete data.translations[locale][prop]
+                if !locale
+                    delete data.translations[locale]
+                else
+                    for prop of data.translations[locale]
+                        # @see \Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType
+                        if -1 == Ext.Array.indexOf ['name', 'permalink', 'description'], prop
+                            delete data.translations[locale][prop]
 
         return data
