@@ -2,106 +2,35 @@ Ext.define 'Vcare.view.taxon.Controller',
     extend: 'Vcare.view.base.Controller'
     alias: 'controller.ctrl-taxon'
 
-    currentStore: null
-    isPhantom: yes
-
-    init: -> #..
-
-    # @private
-    createDialogTitle: (r) ->
-        if r.phantom
-           return 'เพิ่มรายการใหม่'
-        else "แก้ไข " + r.getName()
-
-    # @private
-    closeDialog: -> @dialog.close()
-
-    # @private
+    # @override
     createDialog: (record, type) ->
-        @isPhantom = !!record
         vm = @getViewModel()
-        record = vm.prepareData(record, type)
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.getName()}"
+        record = vm.createRecord(record, type)
+        store = if type == 'brand' then 'brands' else 'categories'
 
-        console.log record
-        console.log record
-
-        switch type
-            when 'brand' then @currentStore = 'brands'
-            else @currentStore = 'categories'
-
-        @dialog = @getView().add
+        options =
             xtype: 'wg-taxon-form'
-            ownerView: @getView()
+            title: title
             viewModel:
                 type: 'vm-taxon-form'
                 data:
-                    type: type
-                    title:  @createDialogTitle(record)
+                    currentStore: store
                     record: record
-                    parents: vm.getStore(@currentStore)
+                    parents: vm.getStore(store)
 
-        @dialog.show()
+        @callParent([record, options])
 
-    onCancel: ->
-        @dialog.getViewModel().updateTranslations()
+    # @override
+    onAddNew: (btn) ->
+        @createDialog(
+            null,
+            btn.up('grid').getTaxonType()
+        )
 
-        @closeDialog()
-
-    onAddNew: (btn) -> @createDialog null, btn.up('grid').getTaxonType()
-
+    # @override
     onEdit: (btn) ->
-        grid = btn.up('grid')
-        @createDialog grid.getSelection()[0], grid.getTaxonType()
-
-    onSubmit: ->
-        vm = @dialog.getViewModel()
-        form = @dialog.down 'form'
-        record = vm.get 'record'
-
-        vm.updateTranslations()
-
-        if !(form.isValid() && vm.isDirty())
-            @dialog.close()
-            return
-
-        form.mask('กำลังบันทึกข้อมูล ..')
-
-        record.save
-            failure: (record, o) =>
-                form.unmask()
-
-                titleMessage = 'ผิดพลาด'
-                errorMessage = 'ขออภัย! เกิดปัญหาขณะจัดการประวัติ กรุณาลองใหม่อีกครั้งค่ะ'
-
-                if response = o.error.response
-                    # internal server error
-                    if response.status == 500
-                        titleMessage = response.statusText
-                        errorMessage = 'Sorry, something went wrong.'
-
-                    # sf validation error.
-                    # TODO: handle form error with custom fn.
-                    if response.status == 400
-                        obj = Ext.decode response.responseText
-                        titleMessage = obj.message
-
-                        Ext.Object.each obj.errors.children, (key, value, item) ->
-                            if value.hasOwnProperty('errors')
-                                errorMessage = value.errors[0]
-
-                @alertFailure
-                    title: titleMessage
-                    message: errorMessage
-
-            success: (record, o) =>
-                form.unmask()
-                @reloadStore(@currentStore)
-
-                if @isPhantom
-                    @alertSuccess('เพิ่มผู้ใช้ระบบเรียบร้อยแล้ว')
-                else
-                    @alertSuccess('แก้ไขผู้ใช้ระบบเรียบร้อยแล้ว')
-
-                vm.commit()
-
-                @closeDialog()
+        @createDialog(
+            btn.getSingleWidgetRecord(),
+            btn.up('grid').getTaxonType()
+        )

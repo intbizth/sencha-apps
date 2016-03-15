@@ -43,73 +43,32 @@ Ext.define 'Moboque.view.group.Controller',
     onAddNew: -> @createDialog()
     onEdit: -> @createDialog @referTo('GroupList').getSelection()[0]
 
-    onDelete: ->
-        @showConfirmMessage
-            title: 'ยืนยันการลบ'
-            message: 'คุณแน่ใจหรือไม่',
-            fn: (pressed) =>
-                if pressed == 'ok'
-                    list = @referTo 'GroupList'
-                    list.mask('Deleting..')
+    onDelete: -> @baseDelete('GroupList')
+    onSubmit: -> @baseSubmit('GroupList', hasImage: yes)
 
-                    groupRecord = list.getSelection()[0]
-                    store = list.getStore()
+    setImagePreview: (imageComponent) ->
+        console.log 'img', imageComponent
+        record = @dialog.getViewModel().get 'record'
 
-                    groupRecord.erase
-                        success: =>
-                            list.unmask()
-                            @alertSuccess('ลบข้อมูลเรียบร้อยแล้วค่ะ')
-                        failure: =>
-                            list.unmask()
-                            @alertFailure('ขออภัย! เกิดปัญหาขณะลบข้อมูล กรุณาลองใหม่อีกครั้งค่ะ')
+        if image = record.get 'image'
+            imageComponent.setSrc(image.media.url)
+        else
+            imageComponent.setSrc('http://dummyimage.com/300x200/757575/242424.png&text=Image+Here')
 
-    onSubmit: ->
-        vm = @dialog.getViewModel()
+    imageUploadChanged: (field, value) ->
+        applyBtn = @dialog.down('form').lookupReference('refApply')
+        field.setRawValue(value.replace(/C:\\fakepath\\/g, ''))
+        applyBtn.setHidden(no)
 
+    applyImage: ->
         form = @dialog.down 'form'
-        record = vm.get 'record'
-        list = @referTo 'GroupList'
-        store = list.getStore()
-        isPhantom = record.phantom
+        imageInput = @manageFiles(form, 'image')
 
-        if !(form.isValid() && vm.isDirty())
-            @dialog.close()
-            return
-
-        form.mask('กำลังบันทึกข้อมูล ..')
-
-        record.save
-            failure: (rec, o) =>
-                form.unmask()
-
-                titleMessage = 'ผิดพลาด'
-                errorMessage = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้งค่ะ'
-
-                if response = o.error.response
-                    # internal server error
-                    if response.status == 500
-                        titleMessage = response.statusText
-                        errorMessage = 'Sorry, something went wrong.'
-
-                    # sf validation error.
-                    # TODO: handle form error with custom fn.
-                    if response.status == 400
-                        obj = Ext.decode response.responseText
-                        titleMessage = obj.message
-                        errorMessage = 'Validation Error.'
-
-                @alertFailure
-                    title: titleMessage
-                    message: errorMessage
-
-            success: (rec, o) =>
-                vm.commit()
-                form.unmask()
-
-                if isPhantom
-                    @alertSuccess('เพิ่มข้อมูลกลุ่มเรียบร้อยแล้ว')
-                    store.add(record)
-                else
-                    @alertSuccess('แก้ไขข้อมูลกลุ่มเรียบร้อยแล้ว')
-
-                @dialog.close()
+        if imageInput.files and imageInput.files.length
+            Ext.each imageInput, (input) ->
+                reader = new FileReader()
+                reader.readAsDataURL input.files[0]
+                reader.onload = (e) ->
+                    thumbnail = form.lookupReference('refImage')
+                    thumbnail.setSrc(e.target.result)
+                    return

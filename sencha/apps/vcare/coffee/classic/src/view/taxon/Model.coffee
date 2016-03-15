@@ -18,17 +18,8 @@ Ext.define 'Vcare.view.taxon.Model',
     createRecord: (record, type) ->
         return record if record
 
-        switch type
-            when 'brand' then store = 'brands'
-            else store = 'categories'
-
-        console.log @get('defaultLocale')
+        store = if type == 'brand' then 'brands' else 'categories'
 
         return new (@data[store].getModel({
             current_locale: @get('defaultLocale')
         }))()
-
-    prepareData: (record, type) ->
-        record = @createRecord record, type
-
-        return record
