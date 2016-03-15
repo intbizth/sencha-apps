@@ -58,6 +58,12 @@ Ext.define 'Moboque.store.Menus',
                 leaf: true
                 routeId: 'activities'
             ,
+                text: 'ActivityImages'
+                view: 'activity-image.LayoutView'
+                iconCls: 'fa fa-newspaper-o'
+                leaf: true
+                routeId: 'activity-images'
+            ,
                 text: 'Services'
                 view: 'service.LayoutView'
                 iconCls: 'fa fa-cube'
