@@ -1,9 +1,9 @@
-Ext.define 'Moboque.view.travel.ListView',
+Ext.define 'Moboque.view.locale.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-travel-list'
+    alias: 'widget.wg-locale-list'
 
     bind:
-        store: '{travels}'
+        store: '{locales}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,8 +11,8 @@ Ext.define 'Moboque.view.travel.ListView',
         emptyText: 'Empty Data'
         #deferEmptyText: no
 
-    title: 'สถานที่ท่องเที่ยว'
-    reference: 'refTravelList'
+    title: 'ภาษาและการแปล'
+    reference: 'refLocaleList'
     headerBorders: no
 
     listeners:
@@ -20,30 +20,35 @@ Ext.define 'Moboque.view.travel.ListView',
             console.log arguments
 
     columns: [
-        text: 'id'
-        dataIndex: 'id'
-    ,
-        text: 'ชื่อสถานที่'
-        dataIndex: 'title'
-        minWidth: 100
-        flex: 1
-    ,
-        text: 'คำอธิบาย'
-        dataIndex: 'description'
-        minWidth: 300
-        flex: 1
+        text: 'ชื่อกลุ่ม'
+        dataIndex: 'code'
+        width: 300
     ,
         xtype: 'datecolumn'
-        text: 'วันที่เขียน'
+        text: 'วันที่สร้าง'
         dataIndex: 'created_at'
         format: 'd-m-Y H:i'
-        maxWidth: 250
+        width: 300
+    ,
+        text: 'enabled'
+        maxWidth: 300
+        filter: 'boolean'
+        flex: 1
+#        renderer: (value, metaData, record) ->
+#            return record.getLocaleCategoryName()
+#        xtype: 'widgetcolumn',
+#        widget: {
+#            xtype: 'combo',
+#            store: [
+#                'Local',
+#                'Remote'
+#            ]
     ]
 
     tbar:
         scrollable: yes
         items: [
-            text: 'เพิ่มรายการ'
+            text: 'เพิ่มกลุ่ม'
             xtype: 'button'
             iconCls: 'fa fa-pencil'
             handler: 'onAddNew'
@@ -55,7 +60,7 @@ Ext.define 'Moboque.view.travel.ListView',
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
             bind:
-                disabled: '{!refTravelList.selection}'
+                disabled: '{!refLocaleList.selection}'
             handler: 'onEdit'
         ,
             '-'
@@ -65,7 +70,7 @@ Ext.define 'Moboque.view.travel.ListView',
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
             bind:
-                disabled: '{!refTravelList.selection}'
+                disabled: '{!refLocaleList.selection}'
             handler: 'onDelete'
         ,
             '->'
@@ -75,7 +80,7 @@ Ext.define 'Moboque.view.travel.ListView',
             reference: 'refSearchField'
             labelWidth: 50
             bind:
-                store: '{travels}'
+                store: '{locales}'
             margin: '0 10 0 0'
         ]
 
@@ -84,5 +89,5 @@ Ext.define 'Moboque.view.travel.ListView',
         scrollable: yes
         pageSize: 25
         bind:
-            store: '{travels}'
+            store: '{locales}'
         displayInfo: yes
