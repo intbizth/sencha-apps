@@ -27,7 +27,7 @@ Ext.define 'Vcare.view.taxon.FormView',
             minLength: 3
             maxLength: 8
         ,
-            xtype: 'combo'
+            xtype: 'combo-tree'
             queryMode: 'local'
             triggerAction: 'all'
             fieldLabel: 'Parent'
@@ -41,17 +41,6 @@ Ext.define 'Vcare.view.taxon.FormView',
                 store: '{parents}'
                 selection: '{record.parent}'
                 record: '{record}'
-
-            listConfig:
-                itemTpl: '<span style="padding-left: {level*20}px">{name}</span>'
-                listeners:
-                    # don't select itself!
-                    beforeitemclick: (list, r) ->
-                        cb = list.ownerCmp
-
-                        if cb.record && (cb.record.getId() == r.getId())
-                            Ext.Msg.alert('Cannot select.', 'You cannot select itself as parent.')
-                            return no
         ,
             xtype: 'fieldtranslation'
             fieldLabel: 'Name'

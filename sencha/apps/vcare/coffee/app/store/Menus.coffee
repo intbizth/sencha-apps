@@ -26,4 +26,20 @@ Ext.define 'Vcare.store.Menus',
             iconCls: 'fa fa-users'
             leaf: true
             routeId: 'taxons'
+        ,
+            text: 'Rbac'
+            iconCls: 'fa fa-users'
+            children: [
+                text: 'Roles'
+                view: 'rbac.role.LayoutView'
+                iconCls: 'fa fa-calendar'
+                leaf: true
+                routeId: 'rbac-roles'
+            ,
+                text: 'Permissions'
+                view: 'rbac.permission.LayoutView'
+                iconCls: 'fa fa-calendar'
+                leaf: true
+                routeId: 'rbac-permissions'
+            ]
         ]
