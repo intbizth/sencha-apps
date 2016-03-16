@@ -26,7 +26,7 @@ Ext.define 'Vcare.view.rbac-permission.ListView',
         width: 40
         sortable: no
     ,
-        width: 300
+        width: 400
         text: 'Code'
         dataIndex: 'code'
         renderer: (v, m, r) -> @getTreePadding(m, r, v)
