@@ -237,8 +237,8 @@ Ext.define 'Moboque.view.base.Controller',
 
     # Event on (onDelete, onEdit, onSubmit, etc..) Call here
 
-    baseCreateDialog: (obj) ->
-        # obj = [refer: string, title: string, xType: string, vmType: string]
+    baseCreateDialog: (obj = null) ->
+        # obj = {refer: string, title: string, xType: string, vmType: string}
         record = @getViewModel().prepareData()
 
         if obj.hasOwnProperty('refer')
@@ -268,10 +268,11 @@ Ext.define 'Moboque.view.base.Controller',
                         return no
         @dialog.show()
 
-    baseDelete: (refer, obj = null) ->
+    baseDelete: (refer, obj) ->
         # obj = [success: string, error: string]
-        if !obj.hasOwnProperty('success') then obj.successMessage = 'ลบข้อมูลเรียบร้อยแล้ว!'
-        if !obj.hasOwnProperty('error') then obj.error = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้ง!'
+        if Ext.isObject(obj)
+            if !obj.hasOwnProperty("success") then obj.successMessage = 'ลบข้อมูลเรียบร้อยแล้ว!'
+            if !obj.hasOwnProperty("error") then obj.error = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้ง!'
         @showConfirmMessage
             title: 'ยืนยันการลบ'
             message: 'คุณแน่ใจหรือไม่',
@@ -291,7 +292,8 @@ Ext.define 'Moboque.view.base.Controller',
                             list.unmask()
                             @alertFailure(obj.error)
 
-    baseSubmit: (refer, obj = null) ->
+    baseSubmit: (refer, obj = null, successMessage = 'ลบข้อมูลเรียบร้อยแล้ว!', editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว', error = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้ง!') ->
+        UNDEFINED = 'undefined'
         # obj = [hasImage: bool, success: string, edited: string, error: string]
         vm = @dialog.getViewModel()
 
@@ -305,7 +307,8 @@ Ext.define 'Moboque.view.base.Controller',
 
         # add item for make it look like it's added.
         # imageUpdated = record.getChanges().hasOwnProperty('image')
-        if obj != null && obj.hasOwnProperty('hasImage') && obj.hasImage == yes
+        console.log obj
+        if obj != null && typeof obj.hasImage != UNDEFINED
             console.log 'yes, have image'
             # check if add image.
             filesInput = []
@@ -323,10 +326,6 @@ Ext.define 'Moboque.view.base.Controller',
                         record.set(input.name, 'media': e.target.result)
                         me.baseSubmit(refer)
         else
-            if !obj.hasOwnProperty('success') then obj.successMessage = 'เพิ่มข้อมูลเรียบร้อยแล้ว'
-            if !obj.hasOwnProperty('edited') then obj.editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว'
-            if !obj.hasOwnProperty('error') then obj.error = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้ง!'
-
             if !(form.isValid() && vm.isDirty())
                 @dialog.close()
                 return
@@ -338,7 +337,7 @@ Ext.define 'Moboque.view.base.Controller',
                     form.unmask()
 
                     titleMessage = 'ผิดพลาด'
-                    errorMessage = obj.error
+                    errorMessage = error
 
                     if response = o.error.response
                         # internal server error
@@ -350,7 +349,7 @@ Ext.define 'Moboque.view.base.Controller',
                         # TODO: handle form error with custom fn.
                         if response.status == 400
                             obj = Ext.decode response.responseText
-                            titleMessage = obj.message
+                            titleMessage = message
                             errorMessage = 'Sorry, Validate Error.'
 
                     @alertFailure
@@ -362,11 +361,11 @@ Ext.define 'Moboque.view.base.Controller',
                     form.unmask()
 
                     if isPhantom
-                        @alertSuccess(obj.successMessage)
+                        @alertSuccess(successMessage)
                         store.add(record)
                     else
                         store.reload()
-                        @alertSuccess(obj.editMessage)
+                        @alertSuccess(editMessage)
 
                     @dialog.close()
 

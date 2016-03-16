@@ -25,20 +25,12 @@ Ext.define 'Vcare.model.User',
             associationKey: 'locale'
             getterName: 'getLocale'
             setterName: 'setLocale'
-    ,
-        name: 'country'
-        reference:
-            type: 'Country'
-            role: 'country'
-            associationKey: 'country'
-            getterName: 'getCountry'
-            setterName: 'setCountry'
     ]
 
     validators:
         username: 'presence'
 
-    isEnabled: -> @get('enabled')
+    isEnabled: -> @data.enabled
 
     getReadableRoles: ->
         roles = @get('roles') || null

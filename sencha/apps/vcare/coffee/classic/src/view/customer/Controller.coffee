@@ -5,7 +5,7 @@ Ext.define 'Vcare.view.customer.Controller',
     # @private
     createDialog: (record) ->
         vm = @getViewModel()
-        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.getUser().get('username')}"
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.getUser() && record.getUser().get('username')}"
         record = vm.prepareData(record)
         console.log record
         console.log record

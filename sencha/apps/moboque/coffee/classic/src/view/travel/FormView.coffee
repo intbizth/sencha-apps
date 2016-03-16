@@ -2,7 +2,9 @@ Ext.define 'Moboque.view.travel.FormView',
     extend: 'Ext.window.Window'
     alias: 'widget.wg-travel-form'
 
-    width: 500
+    requires: 'Ext.form.Translation'
+
+    width: 510
     modal: yes
 
     bind:
@@ -10,28 +12,23 @@ Ext.define 'Moboque.view.travel.FormView',
 
     items:
         xtype: 'form'
-        layout: 'anchor'
-        referenceHolder: yes
-        margin: '10 10 10 10'
-        modelValidation: yes
-
-        defaults:
-            xtype: 'textfield'
-            anchor: '100%'
-            labelAlign: 'top'
-            allowBlank: no
-            minLength: 2
-            maxLength: 255
+        padding: 10
 
         items: [
-            fieldLabel: '<span style="color:red;">*</span> ชื่อของฝาก'
-            emptyText: 'ของฝาก...'
-            bind: '{record.title}'
+            xtype: 'fieldtranslation'
+            fieldLabel: 'ชื่อสถานที่'
+            itemKey: 'title'
+            bind:
+                locales: '{locales}'
+                locale: '{defaultLocale}'
         ,
-            fieldLabel: '<span style="color:red;">*</span> คำอธิบาย'
-            emptyText: 'พูดทักทาย หรือสถานะ...'
-            bind: '{record.description}'
-
+            xtype: 'fieldtranslation'
+            fieldLabel: 'Description'
+            itemKey: 'description'
+            itemType: 'textarea'
+            bind:
+                locales: '{locales}'
+                locale: '{defaultLocale}'
         ]
 
         buttons: [

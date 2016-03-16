@@ -1,3 +1,23 @@
+Ext.define('Ext.overrides.form.field.Tag', {
+    override: 'Ext.form.field.Tag',
+
+    updateBindSelection: function(selModel, selection) {
+        var me = this,
+            selected = null;
+        if (!me.ignoreNextSelection) {
+            me.ignoreNextSelection = true;
+            if (selection.length) {
+                selected = selection || selModel.getLastSelected()// || selection;
+                me.hasHadSelection = true;
+            }
+            if (me.hasHadSelection) {
+                me.setSelection(selected);
+            }
+            me.ignoreNextSelection = false;
+        }
+    }
+});
+
 // Ext.define 'Ext.overrides.form.field.Tag',
 //     override: 'Ext.form.field.Tag'
 

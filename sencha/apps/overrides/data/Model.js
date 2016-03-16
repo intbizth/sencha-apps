@@ -85,10 +85,15 @@ Ext.define('Ext.overrides.data.Model', {
 
                 // ======== MY PATCH ========
                 if (reference && reference.cls) {
-                    if ((value && value.isModel) || value === undefined) {
-                        me[reference.setterName](value);
+                    if (currentValue && !currentValue.isModel) {
+                        currentValue = me.store.findById(currentValue);
                     } else {
                         currentValue = me[reference.getterName]();
+                    }
+
+                    if ((value && value.isModel) || value === undefined) {
+                        //me[reference.setterName](value);
+                    } else {
 
                         if (updateRefs) {
                             session.updateReference(me, field, value, currentValue);
