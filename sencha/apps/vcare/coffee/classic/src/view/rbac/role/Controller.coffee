@@ -18,7 +18,7 @@ Ext.define 'Vcare.view.rbac.role.Controller',
 
         @callParent([record, options])
 
-        # auto select first row.
+        # auto select first row after show dialog.
         @referTo('RolePermissionList')
             .getSelectionModel().select([
                 @getViewModel().get('rbac-permissions').getAt(0)
@@ -37,7 +37,7 @@ Ext.define 'Vcare.view.rbac.role.Controller',
             .select(records, no, yes)
 
     onPermissionChange: (sm, rs) ->
-        # deselect prevent `selectionchange` fire.
+        # deselect with `suppressEvent` prevent `selectionchange` fire.
         @referTo('RolePermissionChoiceList')
             .getSelectionModel()
             .deselectAll(yes)
@@ -48,5 +48,18 @@ Ext.define 'Vcare.view.rbac.role.Controller',
             value: rs[0].get('code')
         ])
 
-    onPermissionChoiceChange: (sm, rs) ->
-        console.log rs
+    # @private
+    doPermissionChoiceSelectionChange: (method, rec) ->
+        record = @getDialogRecord()
+        store = record.getPermissions()
+
+        store[method](rec)
+
+        # just mask dirty change to prevent daul check in vm.isDirty()
+        record.set('permissions', store.getData().getRange())
+
+    onPermissionChoiceChecked: (sm, record) ->
+        @doPermissionChoiceSelectionChange('add', record)
+
+    onPermissionChoiceUnChecked: (sm, record) ->
+        @doPermissionChoiceSelectionChange('remove', record)
