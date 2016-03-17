@@ -2,7 +2,16 @@ Ext.define 'Moboque.view.promote-category.Controller',
     extend: 'Moboque.view.base.Controller'
     alias: 'controller.ctrl-promote-category'
 
-    init: -> #..
-        @setWidgetForm 'wg-promote-category-form'
-        @setViewModelForm 'vm-promote-category-form'
-        @setEditField 'title'
+    createDialog: (record) ->
+        vm = @getViewModel()
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.get('title')}"
+        record = vm.prepareData(record)
+
+        options =
+            xtype: 'wg-promote-category-form'
+            title:  title
+            viewModel:
+                type: 'vm-promote-category-form'
+                data:
+                    record: record
+        @callParent([record, options])

@@ -2,28 +2,19 @@ Ext.define 'Moboque.view.promote-image.Controller',
     extend: 'Moboque.view.base.Controller'
     alias: 'controller.ctrl-promote-image'
 
-    init: ->
-        @setWidgetForm 'wg-promote-image-form'
-        @setViewModelForm 'vm-promote-image-form'
-        @setEditField 'title'
+    createDialog: (record) ->
+        vm = @getViewModel()
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.get('title')}"
+        record = vm.prepareData(record)
 
-#    # override
-#    createDialog: (record) ->
-#        vm = @getViewModel()
-#        title = if !record then 'เพิ่มรูปใหม่' else "แก้ไข #{record.get('title')}"
-#        record = vm.prepareData(record)
-#        console.log 'RECORD', record.hasFileUpload
-#        return
-#        options =
-#            xtype: 'wg-promote-image-form'
-#            title:  title
-#            viewModel:
-#                type: 'vm-promote-image-form'
-#                data:
-#                    record: record
-#
-#        @callParent([record, options])
-
+        options =
+            xtype: 'wg-promote-image-form'
+            title:  title
+            viewModel:
+                type: 'vm-promote-image-form'
+                data:
+                    record: record
+        @callParent([record, options])
 
     setImagePreview: (imageComponent) ->
         console.log 'img', imageComponent
