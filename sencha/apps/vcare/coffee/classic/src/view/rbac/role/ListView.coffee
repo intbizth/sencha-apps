@@ -25,15 +25,21 @@ Ext.define 'Vcare.view.rbac-role.ListView',
         width: 300
         text: 'Name'
         dataIndex: 'name'
+        sortable: no
+        menuDisabled: yes
         renderer: (v, m, r) -> @getTreePadding(m, r, v)
     ,
         width: 200
         text: 'Code'
         dataIndex: 'code'
+        sortable: no
+        menuDisabled: yes
     ,
         flex: 1
         text: 'Description'
         dataIndex: 'description'
+        sortable: no
+        menuDisabled: yes
     ]
 
     tbar:

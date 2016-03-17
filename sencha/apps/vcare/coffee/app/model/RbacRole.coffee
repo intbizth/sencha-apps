@@ -15,6 +15,9 @@ Ext.define 'Vcare.model.RbacRole',
         name: 'description'
         type: 'string'
     ,
+        name: 'security_roles'
+        type: 'auto'
+    ,
         name: 'parent'
         reference:
             type: 'RbacRole'
@@ -22,6 +25,15 @@ Ext.define 'Vcare.model.RbacRole',
             associationKey: 'parent'
             getterName: 'getParent'
             setterName: 'setParent'
+    ]
+
+    hasMany: [
+        name: 'permissions'
+        model: 'RbacPermission'
+        role: 'permissions'
+        associationKey: 'permissions'
+        getterName: 'getPermissions'
+        setterName: 'setPermissions'
     ]
 
     writerTransform: fn: (data) ->

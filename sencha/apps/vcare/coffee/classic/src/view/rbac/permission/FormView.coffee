@@ -17,6 +17,15 @@ Ext.define 'Vcare.view.rbac.permission.FormView',
             anchor: '100%'
 
         items: [
+            xtype: 'textfield'
+            fieldLabel: 'Code'
+            required: yes
+            minLength: 3
+            maxLength: 20
+            bind:
+                value: '{record.code}'
+                disabled: '{!isPhantom}'
+        ,
             xtype: 'combo-tree'
             queryMode: 'local'
             triggerAction: 'all'
@@ -30,15 +39,6 @@ Ext.define 'Vcare.view.rbac.permission.FormView',
                 store: '{rbac-permissions}'
                 selection: '{record.parent}'
                 record: '{record}'
-        ,
-            xtype: 'textfield'
-            fieldLabel: 'Code'
-            required: yes
-            minLength: 3
-            maxLength: 20
-            bind:
-                value: '{record.code}'
-                disabled: '{!isPhantom}'
         ,
             xtype: 'textfield'
             fieldLabel: 'Description'
