@@ -1,55 +1,30 @@
 Ext.define 'Moboque.view.base.Controller',
     extend: 'Ext.app.ViewController'
 
+    dialog: null
+
     config:
         successMessage: "การทำรายการเสร็จเรียบร้อยแล้ว"
         failureMessage: "เกิดความผิดพลาด กรุณาลองใหม่อีกครั้ง"
         confirmMessage: "กรุณายืนยันการทำรายการ"
-        reference: null
-        addTitleField: "เพิ่มรายการ"
-        editTitleField: "แก้ไขรายการ"
-        deleteFailureMessage: "ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้ง!"
+        addMessage: "เพิ่มรายการ"
+
+        editField: null
         widgetForm: null
         viewModelForm: null
-        hasImageUpload: no
 
-    setCurrentView: (view, itemId, params) ->
-        contentPanel = @getView().down '#' + itemId
-
-        if !contentPanel || view == '' || (contentPanel.down() && contentPanel.down().xtype == view)
-            return no
-
-        if params && params.openWindow
-            cfg = Ext.apply
-                xtype: 'ux-base-window'
-                items: [
-                    Ext.apply
-                        xtype: view,
-                        params.targetCfg
-                ],
-                params.windowCfg
-
-            Ext.create cfg
-        else
-            Ext.suspendLayouts()
-
-            contentPanel.removeAll yes
-            contentPanel.add(
-                Ext.apply
-                    xtype: view,
-                    params
-            )
-
-            Ext.resumeLayouts yes
-
+    # @private
     createMessageBox: ->
         Ext.create
             xtype: 'messagebox'
 
-    alertSuccess: (options) ->
+    # @protected
+    successAlert: (options) ->
+        options = @getSuccessMessage() if !options
+
         if Ext.isString options
             options = message: options
-            options.title = 'สำเร็จ'
+            options.title = 'Successful!'
 
         if !options.icon
             options.icon = Ext.Msg.INFO
@@ -57,13 +32,15 @@ Ext.define 'Moboque.view.base.Controller',
         if !options.buttons
             options.buttons = Ext.Msg.OK
 
-        msg = @createMessageBox()
-        msg.alert options
+        @createMessageBox().alert options
 
-    alertFailure: (options) ->
+    # @protected
+    failureAlert: (options) ->
+        options = @getFailureMessage() if !options
+
         if Ext.isString options
             options = message: options
-            options.title = 'ผิดพลาด !'
+            options.title = 'Error!'
 
         if !options.icon
             options.icon = Ext.Msg.ERROR
@@ -71,15 +48,22 @@ Ext.define 'Moboque.view.base.Controller',
         if !options.buttons
             options.buttons = Ext.Msg.OK
 
-        msg = @createMessageBox()
-        msg.alert options
+        @createMessageBox().alert options
 
-    showConfirmMessage: (options, func) ->
+    # @protected
+    confirmAlert: (options, callback, scope) ->
+        if Ext.isFunction(options)
+            scope = callback
+            callback = options
+            options = null
+
+        options = @getConfirmMessage() if !options
+
         if Ext.isString options
             options = message: options
 
         if !options.title
-            options.title = 'Confirm ?'
+            options.title = 'Confirm?'
 
         if !options.icon
             options.icon = Ext.Msg.QUESTION
@@ -87,14 +71,151 @@ Ext.define 'Moboque.view.base.Controller',
         if !options.buttons
             options.buttons = Ext.Msg.OKCANCEL
 
-        if Ext.isObject func
-            func.scope = @
-            options.fn = (pressed) =>
-                options.fn.call func.scope, pressed
+        if Ext.isFunction callback
+            options.fn = (pressed) ->
+                callback.call (scope || @), pressed
 
-        msg = @createMessageBox()
-        msg.show options
+        @createMessageBox().show options
 
+    # @protected
+    getDialogViewModel: -> @dialog.getViewModel()
+
+    # @protected
+    getDialogRecord: (key) -> @getDialogViewModel().get(key || 'record')
+
+    # @protected
+    getDialogForm: (key) -> @dialog.down('form')
+
+    # @protected
+    closeDialog: -> @dialog.close()
+
+    # @protected MUST be overrided!
+    createDialog: (record, options) ->
+        vm = @getViewModel()
+        title = if !record then @getAddMessage() else "แก้ไข #{record.get(@getEditField())}"
+        record = vm.prepareData(record)
+
+        @dialog = @getView().add(Ext.apply(
+            title: 'Override me!'
+            ownerView: @getView()
+            widgetRecord: record
+        ,
+            #use data from 'override' OR 'default'
+            options || {
+                xtype: @getWidgetForm()
+                title:  title
+                viewModel:
+                    type: @getViewModelForm()
+                    data:
+                        record: record
+            }
+        ))
+        @dialog.show()
+
+    # @protected
+    onCancel: (btn) ->
+        record = @dialog.widgetRecord
+
+        @dialog.getViewModel().beforeCancel(
+            if record and record.dirty
+                @showConfirmMessage
+                    title: 'ข้อมูลมีการเปลี่ยนแปลง'
+                    message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
+                    fn: (pressed) =>
+                        if pressed == 'ok'
+                            if record.store
+                                record.store.rejectChanges()
+                            console.log 'Close!'
+                            @dialog.close()
+            else
+                @dialog.close()
+        )
+
+    # @protected
+    onAddNew: (btn) -> @createDialog()
+
+    # @protected
+    onEdit: (btn) ->
+        console.log 'GET SINGLE', btn.getSingleWidgetRecord()
+        @createDialog(btn.getSingleWidgetRecord())
+
+    # @protected
+    onDelete: (btn) ->
+        @confirmAlert "กรุณายืนยันการลบรายการ", (pressed) =>
+            return if pressed != 'ok'
+
+            record = btn.getSingleWidgetRecord()
+            grid = btn.up('grid')
+            store = grid.getStore()
+
+            grid.mask("กำลังลบรายการ ...")
+            store.remove([record])
+
+            store.sync
+                failure: (record, o) =>
+                    grid.unmask()
+                    store.rejectChanges()
+                    @failureAlert('เกิดความผิดพลาด ในการลบข้อมูล')
+
+                success: (record, o) =>
+                    grid.unmask()
+                    @successAlert('ลบข้อมูลเรียบร้อยแล้ว')
+
+    # @protected
+    onSubmit: ->
+        vm = @dialog.getViewModel()
+        form = @dialog.down 'form'
+        record = vm.get 'record'
+
+        vm.beforeSubmit(record, form)
+        console.log form.isValid()
+
+        if !(form.isValid() && vm.isDirty())
+            @dialog.close()
+            return
+
+        form.mask('กำลังบันทึกข้อมูล ..')
+
+        record.save
+            failure: (record, o) =>
+                form.unmask()
+                vm.onSubmitFailure(record, form)
+
+                titleMessage = 'ผิดพลาด'
+                errorMessage = 'ขออภัย! เกิดความผิดพลาดในการบันทึกข้อมูล'
+
+                if response = o.error.response
+                    # internal server error
+                    if response.status == 500
+                        titleMessage = response.statusText
+                        errorMessage = 'Sorry, Something went wrong.'
+
+                    # sf validation error.
+                    # TODO: handle form error with custom fn.
+                    if response.status == 400
+                        obj = Ext.decode response.responseText
+                        titleMessage = obj.message
+
+                        Ext.Object.each obj.errors.children, (key, value, item) ->
+                            if value.hasOwnProperty('errors')
+                                errorMessage = value.errors[0]
+
+                @failureAlert
+                    title: titleMessage
+                    message: errorMessage
+
+            success: (record, o) =>
+                form.unmask()
+
+                vm.onSubmitSuccess(record, form)
+                vm.commit()
+
+                @successAlert(@getSuccessMessage())
+                @closeDialog()
+
+
+    # ++++++ TODO: Refatoring ++++++
+    # ++++++++++++++++++++++++++++++
     createTransitionMenu: (items, handler) ->
 
         if !items
@@ -247,149 +368,25 @@ Ext.define 'Moboque.view.base.Controller',
         button = @referTo(ref)
         button.setDisabled(value)
 
-    # Event on (onDelete, onEdit, onSubmit, etc..) Call here
+    #-----------------------
 
-    onAddNew: -> @createDialog()
-    onEdit: -> @createDialog(@getReference())
+    showConfirmMessage: (options, func) ->
+        if Ext.isString options
+            options = message: options
 
-    createDialog: (refer) ->
-        record = @getViewModel().prepareData()
+        if !options.title
+            options.title = 'Confirm ?'
 
-        if refer
-            record = @getViewModel().prepareData(@referTo(refer).getSelection()[0])
-            console.log record
+        if !options.icon
+            options.icon = Ext.Msg.QUESTION
 
-        @dialog = @getView().add
-            xtype: @getWidgetForm()
-            ownerView: @getView()
-            viewModel:
-                type: @getViewModelForm()
-                data:
-                    title: if record.phantom then @getAddTitleField() else @getEditTitleField()
-                    record: record
+        if !options.buttons
+            options.buttons = Ext.Msg.OKCANCEL
 
-            listeners:
-                beforeclose: (panel, eOpts) =>
-                    if record and record.dirty
-                        @showConfirmMessage
-                            title: 'ข้อมูลมีการเปลี่ยนแปลง'
-                            message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
-                            fn: (pressed) =>
-                                if pressed == 'ok'
-                                    if record.store
-                                        record.store.rejectChanges()
-                                    console.log 'Close!'
-                                    @dialog.close()
-                        return no
-        @dialog.show()
+        if Ext.isObject func
+            func.scope = @
+            options.fn = (pressed) =>
+                options.fn.call func.scope, pressed
 
-    onDelete: ->
-        @showConfirmMessage
-            title: 'ยืนยันการลบ'
-            message: 'คุณแน่ใจหรือไม่',
-            fn: (pressed) =>
-                if pressed == 'ok'
-                    list = @referTo @getReference()
-                    list.mask('Deleting..')
-
-                    baseRecord = list.getSelection()[0]
-                    store = list.getStore()
-
-                    baseRecord.erase
-                        success: =>
-                            list.unmask()
-                            @alertSuccess('ลบข้อมูลเรียบร้อยแล้ว')
-                        failure: =>
-                            list.unmask()
-                            @alertFailure(@getDeleteFailureMessage())
-
-    onSubmit: ->
-        vm = @dialog.getViewModel()
-
-        me = @
-        form = @dialog.down 'form'
-        record = vm.get 'record'
-        isPhantom = record.phantom
-
-        list = @referTo @getReference()
-        store = list.getStore()
-
-        # add item for make it look like it's added.
-        # imageUpdated = record.getChanges().hasOwnProperty('image')
-
-        if @getHasImageUpload && record.get('media')
-            console.log 'yes, have image'
-            # check if add image.
-            filesInput = []
-            imageInput = @manageFiles(form, 'image')
-
-            if imageInput.files and imageInput.files.length
-                filesInput.push(imageInput)
-
-            # if got image file, ENCODE them and submit.
-            if filesInput.length
-                Ext.each filesInput, (input) ->
-                    reader = new FileReader()
-                    reader.readAsDataURL input.files[0]
-                    reader.onload = (e) ->
-                        record.set(input.name, 'media': e.target.result)
-
-                        console.log record.get('media')
-                        return
-                        me.baseSubmit()
-        else
-            if !(form.isValid() && vm.isDirty())
-                @dialog.close()
-                return
-
-            form.mask('กำลังบันทึกข้อมูล ..')
-
-            record.save
-                failure: (rec, o) =>
-                    form.unmask()
-
-                    titleMessage = 'ผิดพลาด'
-                    errorMessage = error
-
-                    if response = o.error.response
-                        # internal server error
-                        if response.status == 500
-                            titleMessage = response.statusText
-                            errorMessage = 'Sorry, something went wrong.'
-
-                        # sf validation error.
-                        # TODO: handle form error with custom fn.
-                        if response.status == 400
-                            obj = Ext.decode response.responseText
-                            titleMessage = message
-                            errorMessage = 'Sorry, Validate Error.'
-
-                    @alertFailure
-                        title: titleMessage
-                        message: errorMessage
-
-                success: (rec, o) =>
-                    vm.commit()
-                    form.unmask()
-
-                    if isPhantom
-                        @alertSuccess('บันทึกข้อมูลสำเร็จ')
-                        store.add(record)
-                    else
-                        store.reload()
-                        @alertSuccess('แก้ไขข้อมูลสำเร็จ')
-
-                    @dialog.close()
-
-    onCancel: -> @dialog.close()
-
-    fileReader: (inputfiles, record, refer) ->
-        me = @
-
-        Ext.each inputfiles, (input, index) ->
-            reader = new FileReader()
-            reader.readAsDataURL input.files[0]
-            reader.onload = (e) ->
-                record.set(input.name, 'media': e.target.result)
-#                if index == (inputfiles.length - 1)
-#                    me.baseSubmit(refer)
+        msg = @createMessageBox()
+        msg.show options

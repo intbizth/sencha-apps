@@ -1,5 +1,5 @@
 Ext.define 'Moboque.view.promote.Controller',
-    extend: 'Moboque.view.base.BaseController'
+    extend: 'Moboque.view.base.Controller'
     alias: 'controller.ctrl-promote'
 
     init: -> #..
