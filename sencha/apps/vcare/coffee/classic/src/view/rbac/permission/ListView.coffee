@@ -1,21 +1,19 @@
-Ext.define 'Vcare.view.taxon.CategoryListView',
+Ext.define 'Vcare.view.rbac-permission.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-taxon-category-list'
+    alias: 'widget.wg-rbac-permission-list'
 
     bind:
-        store: '{categories}'
+        store: '{rbac-permissions}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
-    title: 'Category'
-    reference: 'refTaxonCategoryList'
+    title: 'Permissions'
+    reference: 'refRbacPermissionList'
     headerBorders: no
-
-    getTaxonType: -> 'category'
 
     getTreePadding: (meta, r, label) ->
         padding = (r.get('level') * 20) + 10
@@ -24,14 +22,23 @@ Ext.define 'Vcare.view.taxon.CategoryListView',
         return label
 
     columns: [
+        xtype: 'rownumberer'
+        width: 40
+        sortable: no
+        menuDisabled: yes
+    ,
+        width: 400
         text: 'Code'
         dataIndex: 'code'
-        width: 300
+        sortable: no
+        menuDisabled: yes
         renderer: (v, m, r) -> @getTreePadding(m, r, v)
     ,
         flex: 1
-        text: 'Name'
-        renderer: (v, m, r) -> @getTreePadding(m, r, r.getName())
+        text: 'Description'
+        dataIndex: 'description'
+        sortable: no
+        menuDisabled: yes
     ]
 
     tbar:
@@ -42,13 +49,13 @@ Ext.define 'Vcare.view.taxon.CategoryListView',
         ,
             text: 'แก้ไข'
             iconCls:'pencil-square-o'
-            bind: widgetRecord: '{refTaxonCategoryList.selection}'
+            bind: widgetRecord: '{refRbacPermissionList.selection}'
             handler: 'onEdit'
             aclCheck: -> !!@getWidgetRecord().getParent()
         ,
             text: 'ลบ'
             iconCls:'trash-o'
-            bind: widgetRecord: '{refTaxonCategoryList.selection}'
+            bind: widgetRecord: '{refRbacPermissionList.selection}'
             handler: 'onDelete'
             aclCheck: -> !!@getWidgetRecord().getParent()
         ]

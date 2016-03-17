@@ -1,31 +1,30 @@
-Ext.define 'Vcare.view.taxon.FormView',
+Ext.define 'Vcare.view.rbac.permission.FormView',
     extend: 'Vcare.view.base.Window'
-    alias: 'widget.wg-taxon-form'
-
-    requires:
-        'Ext.form.Translation'
+    alias: 'widget.wg-rbac-permission-form'
 
     bind:
         title: '{title}'
 
     fullsize: no
-
-    width: 600
-    height: 500
+    width: 400
+    height: 300
 
     items:
         xtype: 'form'
         padding: 10
 
+        defaults:
+            anchor: '100%'
+
         items: [
             xtype: 'textfield'
             fieldLabel: 'Code'
             required: yes
+            minLength: 3
+            maxLength: 20
             bind:
                 value: '{record.code}'
                 disabled: '{!isPhantom}'
-            minLength: 3
-            maxLength: 8
         ,
             xtype: 'combo-tree'
             queryMode: 'local'
@@ -33,36 +32,18 @@ Ext.define 'Vcare.view.taxon.FormView',
             fieldLabel: 'Parent'
             forceSelection: yes
             required: yes
-            editable: no
-            displayField: 'name'
+            editable: yes
+            displayField: 'description'
             valueField: 'id'
-            flex: 1
             bind:
-                store: '{parents}'
+                store: '{rbac-permissions}'
                 selection: '{record.parent}'
                 record: '{record}'
         ,
-            xtype: 'fieldtranslation'
-            fieldLabel: 'Name'
-            itemKey: 'name'
-            bind:
-                locales: '{locales}'
-                locale: '{defaultLocale}'
-        ,
-            xtype: 'fieldtranslation'
-            fieldLabel: 'Permalink'
-            itemKey: 'permalink'
-            bind:
-                locales: '{locales}'
-                locale: '{defaultLocale}'
-        ,
-            xtype: 'fieldtranslation'
+            xtype: 'textfield'
             fieldLabel: 'Description'
-            itemKey: 'description'
-            itemType: 'textarea'
-            bind:
-                locales: '{locales}'
-                locale: '{defaultLocale}'
+            required: no
+            bind: value: '{record.description}'
         ]
 
         buttons: [

@@ -7,9 +7,7 @@ Ext.define 'Vcare.view.customer.Controller',
         vm = @getViewModel()
         title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.getUser() && record.getUser().get('username')}"
         record = vm.prepareData(record)
-        console.log record
-        console.log record
-        console.log record
+
         options =
             xtype: 'wg-customer-form'
             title:  title
@@ -19,3 +17,6 @@ Ext.define 'Vcare.view.customer.Controller',
                     record: record
 
         @callParent([record, options])
+
+    onManageGroup: ->
+        @getView().add(xtype: 'wg-group-form').show()
