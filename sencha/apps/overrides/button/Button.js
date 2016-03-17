@@ -6,6 +6,19 @@ Ext.define('Ext.overrides.button.Button', {
         widgetRecord: null
     },
 
+    constructor: function(config)
+    {
+        if (config && config.iconCls && (/^fa /.test(config.iconCls))) {
+            console.warn('Please config button.iconCls without `fa fa-` for ' + config.iconCls);
+        }
+
+        if (config && config.iconCls && !(/^x-/.test(config.iconCls))) {
+            config.iconCls = 'fa fa-' + config.iconCls;
+        }
+
+        this.callParent([config]);
+    },
+
     getSingleWidgetRecord: function()
     {
         var rs = this.getWidgetRecord();
@@ -29,7 +42,7 @@ Ext.define('Ext.overrides.button.Button', {
 
     checkAcl: function(rs)
     {
-        disabled = false
+        var disabled = false;
 
         // TODO: user permission
         if (Ext.isArray(rs)) {

@@ -139,7 +139,6 @@ Ext.define 'Vcare.view.base.Controller',
         record = vm.get 'record'
 
         vm.beforeSubmit(record, form)
-        console.log form.isValid()
 
         if !(form.isValid() && vm.isDirty())
             @dialog.close()
@@ -152,14 +151,10 @@ Ext.define 'Vcare.view.base.Controller',
                 form.unmask()
                 vm.onSubmitFailure(record, form)
 
-                titleMessage = 'ผิดพลาด'
-                errorMessage = 'ขออภัย! เกิดความผิดพลาดในการบันทึกข้อมูล'
-
                 if response = o.error.response
                     # internal server error
                     if response.status == 500
                         titleMessage = response.statusText
-                        errorMessage = 'Sorry, Something went wrong.'
 
                     # sf validation error.
                     # TODO: handle form error with custom fn.
@@ -172,8 +167,8 @@ Ext.define 'Vcare.view.base.Controller',
                                 errorMessage = value.errors[0]
 
                 @failureAlert
-                    title: titleMessage
-                    message: errorMessage
+                    title: titleMessage || "Error!"
+                    message: errorMessage || @getFailureMessage()
 
             success: (record, o) =>
                 form.unmask()

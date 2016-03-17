@@ -9,9 +9,9 @@ Ext.define 'Vcare.view.customer.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
-    title: 'ผู้ใช้งานระบบ'
+    title: 'Users'
     reference: 'refCustomerList'
     headerBorders: no
 
@@ -19,7 +19,6 @@ Ext.define 'Vcare.view.customer.ListView',
         text: 'สถานะ'
         align: 'center'
         width: 80
-        dataIndex: 'user'
         renderer: (v, c, r) ->
             if r.getUser() && r.getUser().isEnabled()
                 return '<span style="color:green;">เปิด</span>'
@@ -45,25 +44,31 @@ Ext.define 'Vcare.view.customer.ListView',
 
     tbar:
         items: [
-            text: 'เพิ่มผู้ใช้งาน'
-            iconCls: 'fa fa-pencil'
+            text: 'Manage Groups'
+            iconCls: 'users'
+            handler: 'onManageGroup'
+        ,
+            '-'
+        ,
+            text: 'Add New'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
-            text: 'แก้ไข'
-            iconCls:'fa fa-pencil-square-o '
+            text: 'Edit'
+            iconCls:'pencil-square-o '
             bind: widgetRecord: '{refCustomerList.selection}'
             handler: 'onEdit'
             aclCheck: yes
         ,
-            text: 'ลบ'
-            iconCls:'fa fa-minus-square'
+            text: 'Remove'
+            iconCls:'trash-o'
             bind: widgetRecord: '{refCustomerList.selection}'
             handler: 'onDelete'
             aclCheck: yes
         ,
             '->'
         ,
-            fieldLabel: 'ค้นหา'
+            fieldLabel: 'Search'
             xtype: 'searchfield'
             labelWidth: 50
             bind: store: '{customers}'
