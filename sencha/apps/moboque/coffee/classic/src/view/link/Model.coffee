@@ -19,14 +19,3 @@ Ext.define 'Moboque.view.link.Model',
     createUser: (record) ->
         return record.getUser() if record
         return Ext.create 'Moboque.model.Link'
-
-#    createRecord: (record) ->
-#        return record if record
-#        return new (@data.customers.getModel())()
-#
-#    prepareData: (record) ->
-#        user = @createUser record
-#        record = @createRecord record
-#        record.setUser user
-#
-#        return record
