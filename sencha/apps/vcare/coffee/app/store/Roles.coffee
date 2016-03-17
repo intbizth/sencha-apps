@@ -3,4 +3,17 @@ Ext.define 'Vcare.store.Roles',
     model: 'Vcare.model.Role'
     alias: 'store.store-roles'
 
-    data: ["ROLE_USER"]
+    data: [
+        code: 'ROLE_USER'
+        description: 'User'
+        is_default: yes
+    ,
+        code: 'ROLE_ADMINISTRATION_ACCESS'
+        description: 'Administration'
+    ,
+        code: 'ROLE_ALLOWED_TO_SWITCH'
+        description: 'Impersonate Users'
+    ,
+        code: 'ROLE_API_ACCESS'
+        description: 'API'
+    ]

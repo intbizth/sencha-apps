@@ -56,6 +56,26 @@ Ext.define 'Vcare.view.rbac.role.FormView',
                 fieldLabel: 'Description'
                 required: no
                 bind: value: '{record.description}'
+            ,
+                xtype: 'checkboxgroup'
+                bind: value: '{security_roles}'
+                columns: 1
+                items: [
+                    xtype: 'checkbox'
+                    name: 'security_role'
+                    boxLabel: 'Administration'
+                    inputValue: 'ROLE_ADMINISTRATION_ACCESS'
+                ,
+                    xtype: 'checkbox'
+                    name: 'security_role'
+                    boxLabel: 'Impersonate Users'
+                    inputValue: 'ROLE_ALLOWED_TO_SWITCH'
+                ,
+                    xtype: 'checkbox'
+                    name: 'security_role'
+                    boxLabel: 'API'
+                    inputValue: 'ROLE_API_ACCESS'
+                ]
             ]
         ,
             flex: 1
@@ -74,7 +94,8 @@ Ext.define 'Vcare.view.rbac.role.FormView',
             reference: 'refRolePermissionChoiceList'
 
             listeners:
-                selectionchange: 'onPermissionChoiceChange'
+                select: 'onPermissionChoiceChecked'
+                deselect: 'onPermissionChoiceUnChecked'
 
             selModel:
                 type: 'checkboxmodel'

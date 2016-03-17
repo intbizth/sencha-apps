@@ -206,6 +206,7 @@ Ext.define 'Vcare.model.Base',
                 writer:
                     type: 'json'
                     writeRecordId: no
+                    writeAllFields: config.updateMethod == 'PUT'
                     allDataOptions:
                         associated: yes
                         persist: yes
