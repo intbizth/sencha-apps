@@ -18,16 +18,7 @@ Ext.define 'Moboque.view.link.Controller',
 
         @callParent([record, options])
 
-    init: -> #..
-        @setWidgetForm 'wg-link-form'
-        @setViewModelForm 'vm-link-form'
-#
-#    onCancel: -> @dialog.close()
-
-#    onAddNew: ->
-#       @baseCreateDialog({xType: 'wg-link-form', vmType: 'vm-link-form'})
-
-
-#    onEdit: -> @baseCreateDialog({xType: 'wg-link-form', vmType: 'vm-link-form', refer: 'LinkList', title : 'label'})
-#    onDelete: -> @baseDelete('LinkList')
-#    onSubmit: -> @baseSubmit('LinkList')
+#    init: -> #..
+#        @setWidgetForm 'wg-link-form'
+#        @setViewModelForm 'vm-link-form'
+#        @setEditField 'label'

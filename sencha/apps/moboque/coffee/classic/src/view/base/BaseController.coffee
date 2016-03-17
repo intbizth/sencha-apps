@@ -7,8 +7,12 @@ Ext.define 'Moboque.view.base.BaseController',
         successMessage: "การทำรายการเสร็จเรียบร้อยแล้ว"
         failureMessage: "เกิดความผิดพลาด กรุณาลองใหม่อีกครั้ง"
         confirmMessage: "กรุณายืนยันการทำรายการ"
+        addMessage: "เพิ่มรายการ"
+
+        editField: null
         widgetForm: null
         viewModelForm: null
+
         hasImageUpload: no
 
     # @private
@@ -89,14 +93,25 @@ Ext.define 'Moboque.view.base.BaseController',
 
     # @protected MUST be overrided!
     createDialog: (record, options) ->
+        vm = @getViewModel()
+        title = if !record then @getAddMessage() else "แก้ไข #{record.get(@getEditField())}"
+        record = vm.prepareData(record)
+
         @dialog = @getView().add(Ext.apply(
             title: 'Override me!'
             ownerView: @getView()
             widgetRecord: record
         ,
-            options || {}
+            #use data from 'override' OR 'default'
+            options || {
+                xtype: 'wg-link-form'
+                title:  title
+                viewModel:
+                    type: 'vm-link-form'
+                    data:
+                        record: record
+            }
         ))
-
         @dialog.show()
 
     # @protected
@@ -114,6 +129,8 @@ Ext.define 'Moboque.view.base.BaseController',
                                 record.store.rejectChanges()
                             console.log 'Close!'
                             @dialog.close()
+            else
+                @dialog.close()
         )
 
     # @protected
