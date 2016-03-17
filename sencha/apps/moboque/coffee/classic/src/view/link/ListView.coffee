@@ -15,11 +15,12 @@ Ext.define 'Moboque.view.link.ListView',
     reference: 'refLinkList'
     headerBorders: no
 
-    listeners:
-        selectionchange: ->
-            console.log arguments
-
     columns: [
+        text: 'สถานะ'
+        align: 'center'
+        width: 80
+        dataIndex: 'link'
+    ,
         text: 'คำอธิบาย'
         dataIndex: 'label'
         width: 200
@@ -46,7 +47,10 @@ Ext.define 'Moboque.view.link.ListView',
             iconCls:'fa fa-pencil-square-o '
             bind:
                 disabled: '{!refLinkList.selection}'
+                widgetRecord: '{refLinkList.selection}'
             handler: 'onEdit'
+            aclCheck: yes
+#            aclCheck: -> !!@getWidgetRecord().getParent()
         ,
             '-'
         ,
@@ -56,7 +60,10 @@ Ext.define 'Moboque.view.link.ListView',
             iconCls:'fa fa-minus-square'
             bind:
                 disabled: '{!refLinkList.selection}'
+                widgetRecord: '{refLinkList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
+#            aclCheck: -> !!@getWidgetRecord().getParent()
         ,
             '->'
         ,

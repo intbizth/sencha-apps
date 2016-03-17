@@ -1,6 +1,18 @@
 Ext.define 'Moboque.view.base.Controller',
     extend: 'Ext.app.ViewController'
 
+    config:
+        successMessage: "การทำรายการเสร็จเรียบร้อยแล้ว"
+        failureMessage: "เกิดความผิดพลาด กรุณาลองใหม่อีกครั้ง"
+        confirmMessage: "กรุณายืนยันการทำรายการ"
+        reference: null
+        addTitleField: "เพิ่มรายการ"
+        editTitleField: "แก้ไขรายการ"
+        deleteFailureMessage: "ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้ง!"
+        widgetForm: null
+        viewModelForm: null
+        hasImageUpload: no
+
     setCurrentView: (view, itemId, params) ->
         contentPanel = @getView().down '#' + itemId
 
@@ -237,20 +249,23 @@ Ext.define 'Moboque.view.base.Controller',
 
     # Event on (onDelete, onEdit, onSubmit, etc..) Call here
 
-    baseCreateDialog: (obj = null) ->
-        # obj = {refer: string, title: string, xType: string, vmType: string}
+    onAddNew: -> @createDialog()
+    onEdit: -> @createDialog(@getReference())
+
+    createDialog: (refer) ->
         record = @getViewModel().prepareData()
 
-        if obj.hasOwnProperty('refer')
-            record = @getViewModel().prepareData(@referTo(obj.refer).getSelection()[0])
+        if refer
+            record = @getViewModel().prepareData(@referTo(refer).getSelection()[0])
+            console.log record
 
         @dialog = @getView().add
-            xtype: obj.xType
+            xtype: @getWidgetForm()
             ownerView: @getView()
             viewModel:
-                type: obj.vmType
+                type: @getViewModelForm()
                 data:
-                    title: if record.phantom then 'เพิ่มรายการ' else record.get(obj.title)
+                    title: if record.phantom then @getAddTitleField() else @getEditTitleField()
                     record: record
 
             listeners:
@@ -268,17 +283,13 @@ Ext.define 'Moboque.view.base.Controller',
                         return no
         @dialog.show()
 
-    baseDelete: (refer, obj) ->
-        # obj = [success: string, error: string]
-        if Ext.isObject(obj)
-            if !obj.hasOwnProperty("success") then obj.successMessage = 'ลบข้อมูลเรียบร้อยแล้ว!'
-            if !obj.hasOwnProperty("error") then obj.error = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้ง!'
+    onDelete: ->
         @showConfirmMessage
             title: 'ยืนยันการลบ'
             message: 'คุณแน่ใจหรือไม่',
             fn: (pressed) =>
                 if pressed == 'ok'
-                    list = @referTo refer
+                    list = @referTo @getReference()
                     list.mask('Deleting..')
 
                     baseRecord = list.getSelection()[0]
@@ -287,14 +298,12 @@ Ext.define 'Moboque.view.base.Controller',
                     baseRecord.erase
                         success: =>
                             list.unmask()
-                            @alertSuccess(obj.successMessage)
+                            @alertSuccess('ลบข้อมูลเรียบร้อยแล้ว')
                         failure: =>
                             list.unmask()
-                            @alertFailure(obj.error)
+                            @alertFailure(@getDeleteFailureMessage())
 
-    baseSubmit: (refer, obj = null, successMessage = 'ลบข้อมูลเรียบร้อยแล้ว!', editMessage = 'แก้ไขข้อมูลเรียบร้อยแล้ว', error = 'ขออภัย! เกิดปัญหาขณะจัดการข้อมูล กรุณาลองใหม่อีกครั้ง!') ->
-        UNDEFINED = 'undefined'
-        # obj = [hasImage: bool, success: string, edited: string, error: string]
+    onSubmit: ->
         vm = @dialog.getViewModel()
 
         me = @
@@ -302,13 +311,13 @@ Ext.define 'Moboque.view.base.Controller',
         record = vm.get 'record'
         isPhantom = record.phantom
 
-        list = @referTo refer
+        list = @referTo @getReference()
         store = list.getStore()
 
         # add item for make it look like it's added.
         # imageUpdated = record.getChanges().hasOwnProperty('image')
-        console.log obj
-        if obj != null && typeof obj.hasImage != UNDEFINED
+
+        if @getHasImageUpload && record.get('media')
             console.log 'yes, have image'
             # check if add image.
             filesInput = []
@@ -324,7 +333,10 @@ Ext.define 'Moboque.view.base.Controller',
                     reader.readAsDataURL input.files[0]
                     reader.onload = (e) ->
                         record.set(input.name, 'media': e.target.result)
-                        me.baseSubmit(refer)
+
+                        console.log record.get('media')
+                        return
+                        me.baseSubmit()
         else
             if !(form.isValid() && vm.isDirty())
                 @dialog.close()
@@ -361,13 +373,15 @@ Ext.define 'Moboque.view.base.Controller',
                     form.unmask()
 
                     if isPhantom
-                        @alertSuccess(successMessage)
+                        @alertSuccess('บันทึกข้อมูลสำเร็จ')
                         store.add(record)
                     else
                         store.reload()
-                        @alertSuccess(editMessage)
+                        @alertSuccess('แก้ไขข้อมูลสำเร็จ')
 
                     @dialog.close()
+
+    onCancel: -> @dialog.close()
 
     fileReader: (inputfiles, record, refer) ->
         me = @

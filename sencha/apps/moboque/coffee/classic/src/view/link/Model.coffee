@@ -7,12 +7,26 @@ Ext.define 'Moboque.view.link.Model',
             type: 'store-link'
             autoLoad: yes
 
+    prepareData: (record) ->
+        record = @createRecord record
+
+        return record
 
     createRecord: (record) ->
         return record if record
         return new (@data.links.getModel())()
 
-    prepareData: (record) ->
-        record = @createRecord record
+    createUser: (record) ->
+        return record.getUser() if record
+        return Ext.create 'Moboque.model.Link'
 
-        return record
+#    createRecord: (record) ->
+#        return record if record
+#        return new (@data.customers.getModel())()
+#
+#    prepareData: (record) ->
+#        user = @createUser record
+#        record = @createRecord record
+#        record.setUser user
+#
+#        return record

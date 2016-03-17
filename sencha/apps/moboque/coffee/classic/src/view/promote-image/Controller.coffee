@@ -3,12 +3,16 @@ Ext.define 'Moboque.view.promote-image.Controller',
     alias: 'controller.ctrl-promote-image'
 
     init: -> #..
+        @setReference 'PromoteImageList'
+        @setWidgetForm 'wg-promote-form'
+        @setViewModelForm 'vm-promote-form'
+        @setHasImageUpload yes
 
-    onCancel: -> @dialog.close()
-    onAddNew: -> @baseCreateDialog({xType: 'wg-promote-image-form', vmType: 'vm-promote-image-form'})
-    onEdit: -> @baseCreateDialog({xType: 'wg-promote-image-form', vmType: 'vm-promote-image-form', refer: 'PromoteImageList', title : 'title'})
-    onDelete: -> @baseDelete('PromoteImageList')
-    onSubmit: -> @baseSubmit('PromoteImageList', {hasImage: yes})
+#    onCancel: -> @dialog.close()
+#    onAddNew: -> @baseCreateDialog({xType: 'wg-promote-image-form', vmType: 'vm-promote-image-form'})
+#    onEdit: -> @baseCreateDialog({xType: 'wg-promote-image-form', vmType: 'vm-promote-image-form', refer: 'PromoteImageList', title : 'title'})
+#    onDelete: -> @baseDelete('PromoteImageList')
+#    onSubmit: -> @baseSubmit('PromoteImageList', {hasImage: yes})
 
     setImagePreview: (imageComponent) ->
         console.log 'img', imageComponent

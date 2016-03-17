@@ -13,6 +13,10 @@ Ext.define 'Moboque.view.base.Window',
     border: no
     bodyPadding: 0
 
+    config:
+        fullsize: yes
+        widgetRecord: null
+
     afterRender: ->
         @callParent arguments
         @syncSize()
