@@ -13,8 +13,6 @@ Ext.define 'Moboque.view.base.BaseController',
         widgetForm: null
         viewModelForm: null
 
-        hasImageUpload: no
-
     # @private
     createMessageBox: ->
         Ext.create
@@ -104,10 +102,10 @@ Ext.define 'Moboque.view.base.BaseController',
         ,
             #use data from 'override' OR 'default'
             options || {
-                xtype: 'wg-link-form'
+                xtype: @getWidgetForm()
                 title:  title
                 viewModel:
-                    type: 'vm-link-form'
+                    type: @getViewModelForm()
                     data:
                         record: record
             }
