@@ -13,7 +13,7 @@ Ext.define('Ext.overrides.button.Button', {
         }
 
         if (config && config.iconCls && !(/^x-/.test(config.iconCls))) {
-            config.iconCls = 'fa fa-' + config.iconCls;
+            config.iconCls = 'x-fa fa-' + config.iconCls;
         }
 
         this.callParent([config]);
