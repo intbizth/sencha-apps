@@ -7,12 +7,11 @@ Ext.define 'Moboque.view.link.Model',
             type: 'store-link'
             autoLoad: yes
 
-
-    createRecord: (record) ->
-        return record if record
-        return new (@data.links.getModel())()
-
     prepareData: (record) ->
         record = @createRecord record
 
         return record
+
+    createRecord: (record) ->
+        return record if record
+        return new (@data.links.getModel())()

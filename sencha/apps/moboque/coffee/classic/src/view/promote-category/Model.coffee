@@ -4,7 +4,7 @@ Ext.define 'Moboque.view.promote-category.Model',
 
     stores:
         promotes:
-            type: 'store-promote-category'
+            type: 'store-promote-categories'
             autoLoad: yes
 
     createRecord: (record) ->

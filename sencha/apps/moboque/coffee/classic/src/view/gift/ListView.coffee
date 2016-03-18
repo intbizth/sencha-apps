@@ -44,6 +44,7 @@ Ext.define 'Moboque.view.gift.ListView',
             xtype: 'button'
             iconCls: 'fa fa-pencil'
             handler: 'onAddNew'
+
         ,
             '-'
         ,
@@ -51,9 +52,9 @@ Ext.define 'Moboque.view.gift.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refGiftList.selection}'
             handler: 'onEdit'
+            bind: widgetRecord: '{refGiftList.selection}'
+            aclCheck: yes
         ,
             '-'
         ,
@@ -61,9 +62,9 @@ Ext.define 'Moboque.view.gift.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refGiftList.selection}'
             handler: 'onDelete'
+            bind: widgetRecord: '{refGiftList.selection}'
+            aclCheck: yes
         ,
             '->'
         ,

@@ -1,5 +1,5 @@
 Ext.define 'Moboque.view.link.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-link-form'
 
     width: 500

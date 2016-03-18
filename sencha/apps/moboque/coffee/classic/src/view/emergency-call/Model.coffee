@@ -4,9 +4,8 @@ Ext.define 'Moboque.view.emergency-call.Model',
 
     stores:
         tels:
-            type: 'store-emergency-call'
+            type: 'store-emergency-calls'
             autoLoad: yes
-
 
     createRecord: (record) ->
         return record if record

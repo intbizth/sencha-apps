@@ -54,9 +54,9 @@ Ext.define 'Moboque.view.travel.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refTravelList.selection}'
             handler: 'onEdit'
+            bind: widgetRecord: '{refTravelList.selection}'
+            aclCheck: yes
         ,
             '-'
         ,
@@ -64,9 +64,9 @@ Ext.define 'Moboque.view.travel.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refTravelList.selection}'
             handler: 'onDelete'
+            bind: widgetRecord: '{refTravelList.selection}'
+            aclCheck: yes
         ,
             '->'
         ,

@@ -4,9 +4,8 @@ Ext.define 'Moboque.view.meet.Model',
 
     stores:
         meets:
-            type: 'store-meet'
+            type: 'store-meets'
             autoLoad: yes
-
 
     createRecord: (record) ->
         return record if record

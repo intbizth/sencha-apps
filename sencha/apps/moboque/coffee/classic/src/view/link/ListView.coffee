@@ -15,10 +15,6 @@ Ext.define 'Moboque.view.link.ListView',
     reference: 'refLinkList'
     headerBorders: no
 
-    listeners:
-        selectionchange: ->
-            console.log arguments
-
     columns: [
         text: 'คำอธิบาย'
         dataIndex: 'label'
@@ -44,9 +40,9 @@ Ext.define 'Moboque.view.link.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refLinkList.selection}'
             handler: 'onEdit'
+            bind: widgetRecord: '{refLinkList.selection}'
+            aclCheck: yes
         ,
             '-'
         ,
@@ -54,9 +50,9 @@ Ext.define 'Moboque.view.link.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refLinkList.selection}'
             handler: 'onDelete'
+            bind: widgetRecord: '{refLinkList.selection}'
+            aclCheck: yes
         ,
             '->'
         ,
