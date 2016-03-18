@@ -3,9 +3,6 @@ Ext.define 'Vcare.store.Transitions',
     alias: 'store.store-transitions'
     storeId: 'store-transitions'
 
-    config:
-        method: 'GET'
-
     proxy:
         type: 'ajax'
         url: '/api/transitions/{name}/{id}'
@@ -22,6 +19,7 @@ Ext.define 'Vcare.store.Transitions',
             method: 'POST'
             url: '/api/transitions/{name}/{id}/{transition}'
             params: options.params
+
             success: (response) ->
                 # reload
                 me.reload
