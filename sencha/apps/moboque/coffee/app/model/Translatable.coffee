@@ -23,8 +23,9 @@ Ext.define 'Moboque.model.Translatable',
                 return false
 
             for propName in aProps
-                # If values of same property are not equal,
-                if a[propName] != null and typeof a[propName] == 'object'
+                if !propName
+                    # do nothing
+                else if a[propName] != null and typeof a[propName] == 'object'
                     if !@isEqual a[propName], b[propName], yes
                         return no
                 else if (a[propName] != b[propName])
@@ -33,9 +34,15 @@ Ext.define 'Moboque.model.Translatable',
             return yes
     ]
 
-    updateTranslations: (values) ->
-        return if !values
-        @set 'translations', Ext.apply @data.translations, values
+    updateTranslations: ->
+        ## current bind (Translation.js)
+        ## will bind into main model property (model.translations)
+        if @translations
+            @set('translations', Ext.Object.merge(
+                _copy(@data.translations), _copy(@translations)
+            ))
+
+            delete @translations
 
     trans: (key) ->
         locale = @data.translations[@data.current_locale]

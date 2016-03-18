@@ -2,10 +2,16 @@ Ext.define 'Moboque.view.promote-category.Controller',
     extend: 'Moboque.view.base.Controller'
     alias: 'controller.ctrl-promote-category'
 
-    init: -> #..
+    createDialog: (record) ->
+        vm = @getViewModel()
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.get('title')}"
+        record = vm.prepareData(record)
 
-    onCancel: -> @dialog.close()
-    onAddNew: -> @baseCreateDialog({xType: 'wg-promote-category-form', vmType: 'vm-promote-category-form'})
-    onEdit: -> @baseCreateDialog({xType: 'wg-promote-category-form', vmType: 'vm-promote-category-form', refer: 'PromoteCategoryList', title : 'title'})
-    onDelete: -> @baseDelete('PromoteCategoryList')
-    onSubmit: -> @baseSubmit('PromoteCategoryList')
+        options =
+            xtype: 'wg-promote-category-form'
+            title:  title
+            viewModel:
+                type: 'vm-promote-category-form'
+                data:
+                    record: record
+        @callParent([record, options])

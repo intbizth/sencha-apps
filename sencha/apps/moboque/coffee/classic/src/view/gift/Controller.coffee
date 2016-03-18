@@ -2,10 +2,17 @@ Ext.define 'Moboque.view.gift.Controller',
     extend: 'Moboque.view.base.Controller'
     alias: 'controller.ctrl-gift'
 
-    init: -> #..
+    createDialog: (record) ->
+        vm = @getViewModel()
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.get('title')}"
+        record = vm.prepareData(record)
 
-    onCancel: -> @dialog.close()
-    onAddNew: -> @baseCreateDialog({xType: 'wg-gift-form', vmType: 'vm-gift-form'})
-    onEdit: -> @baseCreateDialog({xType: 'wg-gift-form', vmType: 'vm-gift-form', refer: 'GiftList', title : 'title'})
-    onDelete: -> @baseDelete('GiftList')
-    onSubmit: -> @baseSubmit('GiftList')
+        options =
+            xtype: 'wg-gift-form'
+            title:  title
+            viewModel:
+                type: 'vm-gift-form'
+                data:
+                    record: record
+
+        @callParent([record, options])

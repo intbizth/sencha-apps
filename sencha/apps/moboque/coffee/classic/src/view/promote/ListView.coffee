@@ -52,6 +52,8 @@ Ext.define 'Moboque.view.promote.ListView',
             iconCls:'fa fa-pencil-square-o '
             bind:
                 disabled: '{!refPromoteList.selection}'
+                widgetRecord: '{refPromoteList.selection}'
+            aclCheck: yes
             handler: 'onEdit'
         ,
             '-'
@@ -62,6 +64,8 @@ Ext.define 'Moboque.view.promote.ListView',
             iconCls:'fa fa-minus-square'
             bind:
                 disabled: '{!refPromoteList.selection}'
+                widgetRecord: '{refPromoteList.selection}'
+            aclCheck: yes
             handler: 'onDelete'
         ,
             '->'

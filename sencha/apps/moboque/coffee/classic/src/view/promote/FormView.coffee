@@ -39,41 +39,6 @@ Ext.define 'Moboque.view.promote.FormView',
             bind:
                 store: '{promoteCategories}'
                 selection: '{promoteCategory}'
-        ,
-            xtype: 'fieldset'
-            title: 'Upload Images'
-            defaultType: 'textfield'
-            defaults:
-                anchor: '100%'
-            items: [
-                xtype: 'image'
-                reference: 'refImage'
-                width: 60
-                height: 40
-                alt: 'image'
-                style:
-                    backgroundColor: '#d9d9d9'
-                margin: '22 0 0 0'
-                listeners:
-#                    beforerender: 'setImagePreview'
-                    click:
-                        element: 'el'
-                        fn: 'onClickImage'
-            ,
-                allowBlank: no
-                fieldLabel: 'ชื่อ'
-            ,
-                xtype: 'filefield'
-                emptyText: 'คลิกไอคอน เพื่อเลือกรูปที่จะ Upload.'
-                fieldLabel: 'รูป'
-                name: 'photo-path'
-                buttonText: ''
-                buttonConfig:
-                    iconCls: 'fa fa-photo'
-            ,
-                xtype: 'button'
-                text: 'ลบรูป'
-            ]
         ]
 
         buttons: [

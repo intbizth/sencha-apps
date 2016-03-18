@@ -6,6 +6,8 @@ Ext.define 'Moboque.view.report.ModelForm',
         isPhantom:
             get: -> @get('record').phantom
 
+    onSubmitSuccess: -> @get('reports').reload()
+
     isDirty: ->
         @get('record').dirty
 

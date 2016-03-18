@@ -1,4 +1,4 @@
-Ext.define 'Moboque.store.Gift',
+Ext.define 'Moboque.store.Gifts',
     extend: 'Moboque.store.Base'
     model: 'Moboque.model.Gift'
-    alias: 'store.store-gift'
+    alias: 'store.store-gifts'

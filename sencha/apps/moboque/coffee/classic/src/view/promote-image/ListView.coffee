@@ -56,6 +56,8 @@ Ext.define 'Moboque.view.promote-image.ListView',
             iconCls:'fa fa-pencil-square-o '
             bind:
                 disabled: '{!refPromoteImageList.selection}'
+                widgetRecord: '{refPromoteImageList.selection}'
+            aclCheck: yes
             handler: 'onEdit'
         ,
             '-'
@@ -66,6 +68,8 @@ Ext.define 'Moboque.view.promote-image.ListView',
             iconCls:'fa fa-minus-square'
             bind:
                 disabled: '{!refPromoteImageList.selection}'
+                widgetRecord: '{refPromoteImageList.selection}'
+            aclCheck: yes
             handler: 'onDelete'
         ,
             '->'

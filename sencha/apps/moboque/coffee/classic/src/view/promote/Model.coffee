@@ -4,7 +4,7 @@ Ext.define 'Moboque.view.promote.Model',
 
     stores:
         promotes:
-            type: 'store-promote'
+            type: 'store-promotes'
             autoLoad: yes
 
     createRecord: (record) ->

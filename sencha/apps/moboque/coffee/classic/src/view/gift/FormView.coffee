@@ -1,5 +1,5 @@
 Ext.define 'Moboque.view.gift.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-gift-form'
 
     width: 500
