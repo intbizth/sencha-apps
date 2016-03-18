@@ -1,5 +1,5 @@
 Ext.define 'Moboque.view.emergency-call.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-emergency-call-form'
 
     width: 500

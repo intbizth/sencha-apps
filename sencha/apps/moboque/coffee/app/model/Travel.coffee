@@ -4,12 +4,8 @@ Ext.define 'Moboque.model.Travel',
     api: '/api/travel/'
 
     fields: [
-        name: 'id'
-        type: 'int'
-    ,
-        name: 'current_locale'
+        name: 'code'
         type: 'string'
-        persist: no
     ,
         name: 'title'
         persist: no
@@ -19,18 +15,31 @@ Ext.define 'Moboque.model.Travel',
         persist: no
         convert: (v, r) -> r.getDescription()
 
+    ,
+        name: 'parent'
+        reference:
+            type: 'Travel'
+            role: 'parent'
+            associationKey: 'parent'
+            getterName: 'getTravel'
+            setterName: 'setParent'
     ]
 
     getTitle: -> @trans 'title'
     getDescription: -> @trans 'description'
 
-    validators:
-        title: 'presence'
-        description: 'presence'
-
     writerTransform: fn: (data) ->
+        if data.parent
+            data.parent = data.parent.id
 
-        if data.TranslateTitle
-            data.TranslateTitle = data.TranslateTitle.id
+        if data.translations
+            for locale of data.translations
+                if !locale
+                    delete data.translations[locale]
+                else
+                    for prop of data.translations[locale]
+                        # @see \Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType
+                        if -1 == Ext.Array.indexOf ['title', 'description'], prop
+                            delete data.translations[locale][prop]
 
         return data

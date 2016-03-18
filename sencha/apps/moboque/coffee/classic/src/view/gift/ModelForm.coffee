@@ -6,7 +6,7 @@ Ext.define 'Moboque.view.gift.ModelForm',
         isPhantom:
             get: -> @get('record').phantom
 
-    onSubmitSuccess: -> @get('gift').reload()
+    onSubmitSuccess: -> @get('gifts').reload()
 
     isDirty: ->
         @get('record').dirty

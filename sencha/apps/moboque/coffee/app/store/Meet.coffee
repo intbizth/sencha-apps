@@ -1,4 +1,4 @@
 Ext.define 'Moboque.store.Meet',
     extend: 'Moboque.store.Base'
     model: 'Moboque.model.Meet'
-    alias: 'store.store-meet'
+    alias: 'store.store-meets'

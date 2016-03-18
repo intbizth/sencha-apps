@@ -11,4 +11,4 @@ Ext.define 'Moboque.view.travel.ModelForm',
     reject: -> @get('record').reject()
     beforeSubmit: (record) -> record.updateTranslations()
     beforeCancel: (record) -> record.updateTranslations()
-    onSubmitSuccess: (record) -> @get('parents').reload()
+    onSubmitSuccess: (record) -> @get('travels').reload()

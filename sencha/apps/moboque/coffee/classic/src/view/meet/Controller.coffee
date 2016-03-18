@@ -2,10 +2,17 @@ Ext.define 'Moboque.view.meet.Controller',
     extend: 'Moboque.view.base.Controller'
     alias: 'controller.ctrl-meet'
 
-    init: -> #..
+    createDialog: (record) ->
+        vm = @getViewModel()
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.get('description')}"
+        record = vm.prepareData(record)
 
-    onCancel: -> @dialog.close()
-    onAddNew: -> @baseCreateDialog({xType: 'wg-meet-form', vmType: 'vm-meet-form'})
-    onEdit: -> @baseCreateDialog({xType: 'wg-meet-form', vmType: 'vm-meet-form', refer: 'MeetList', title : 'description'})
-    onDelete: -> @baseDelete('MeetList')
-    onSubmit: -> @baseSubmit('MeetList', {success: 'โพสคำทักทายแล้ว!', edited: 'แก้ไขคำทักทายเรียบร้อย', error: 'ไม่สามารถเพิ่มข้อมูลได้'})
+        options =
+            xtype: 'wg-meet-form'
+            title:  title
+            viewModel:
+                type: 'vm-meet-form'
+                data:
+                    record: record
+
+        @callParent([record, options])

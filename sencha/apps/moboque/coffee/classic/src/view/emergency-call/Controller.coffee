@@ -2,10 +2,17 @@ Ext.define 'Moboque.view.emergency-call.Controller',
     extend: 'Moboque.view.base.Controller'
     alias: 'controller.ctrl-emergency-call'
 
-    init: -> #..
+    createDialog: (record) ->
+        vm = @getViewModel()
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.get('title')}"
+        record = vm.prepareData(record)
 
-    onCancel: -> @dialog.close()
-    onAddNew: -> @baseCreateDialog({xType: 'wg-emergency-call-form', vmType: 'vm-emergency-call-form'})
-    onEdit: -> @baseCreateDialog({xType: 'wg-emergency-call-form', vmType: 'vm-emergency-call-form', refer: 'EmergencyCallList', title : 'title'})
-    onDelete: -> @baseDelete('EmergencyCallList')
-    onSubmit: -> @baseSubmit('EmergencyCallList', {success: 'เพิ่มเบอร์โทรฉุกเฉินแล้ว!'})
+        options =
+            xtype: 'wg-emergency-call-form'
+            title:  title
+            viewModel:
+                type: 'vm-emergency-call-form'
+                data:
+                    record: record
+
+        @callParent([record, options])

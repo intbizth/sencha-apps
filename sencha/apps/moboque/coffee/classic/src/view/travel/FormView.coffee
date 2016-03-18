@@ -1,5 +1,5 @@
 Ext.define 'Moboque.view.travel.FormView',
-    extend: 'Moboque.view.base.Window'
+    extend: 'Ext.window.Window'
     alias: 'widget.wg-travel-form'
 
     requires: 'Ext.form.Translation'

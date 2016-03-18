@@ -1,5 +1,5 @@
 Ext.define 'Moboque.view.meet.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-meet-form'
 
     width: 500

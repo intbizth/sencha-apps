@@ -49,9 +49,9 @@ Ext.define 'Moboque.view.emergency-call.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refEmergencyCallList.selection}'
             handler: 'onEdit'
+            bind: widgetRecord: '{refEmergencyCallList.selection}'
+            aclCheck: yes
         ,
             '-'
         ,
@@ -59,9 +59,9 @@ Ext.define 'Moboque.view.emergency-call.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refEmergencyCallList.selection}'
             handler: 'onDelete'
+            bind: widgetRecord: '{refEmergencyCallList.selection}'
+            aclCheck: yes
         ,
             '->'
         ,
