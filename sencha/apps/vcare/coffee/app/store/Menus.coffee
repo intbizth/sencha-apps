@@ -50,6 +50,6 @@ Ext.define 'Vcare.store.Menus',
                 view: 'order.LayoutView'
                 iconCls: 'x-fa fa-shopping-basket'
                 leaf: true
-                routeId: 'rbac-orders'
+                routeId: 'orders'
             ]
         ]

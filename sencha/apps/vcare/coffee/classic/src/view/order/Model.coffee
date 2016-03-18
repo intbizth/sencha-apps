@@ -7,17 +7,24 @@ Ext.define 'Vcare.view.order.Model',
             type: 'store-orders'
             autoLoad: yes
 
-    createUser: (record) ->
-        return record.getUser() if record
-        return Ext.create 'Vcare.model.User'
+        transitions:
+            type: 'store-transitions'
+
+    createCustomer: (record) ->
+        if !record.getCustomer()
+            record.setCustomer @createNewCustomer()
+
+        return record.getCustomer()
 
     createRecord: (record) ->
         return record if record
-        return new (@data.orders.getModel())()
+
+        record = new (@data.orders.getModel())()
+        @createCustomer record
+
+        return record
 
     prepareData: (record) ->
-        user = @createUser record
         record = @createRecord record
-        record.setUser user
 
         return record

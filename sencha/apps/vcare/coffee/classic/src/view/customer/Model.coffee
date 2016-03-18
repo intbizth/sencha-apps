@@ -18,8 +18,8 @@ Ext.define 'Vcare.view.customer.Model',
             pageSize: 200
 
     createUser: (record) ->
-        return record.getUser() if record
-        return Ext.create 'Vcare.model.User'
+        return record.getUser() if record and record.getUser()
+        return @createNewUser()
 
     createRecord: (record) ->
         return record if record

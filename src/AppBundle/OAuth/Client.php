@@ -48,7 +48,7 @@ class Client
      *
      * @return Response
      */
-    public function get($url, array $queryParameters = [], array  $options = [])
+    public function get($url, array $queryParameters = [], array $options = [])
     {
         return $this->parseResponse(
             $this->httpClient->get(
@@ -65,7 +65,7 @@ class Client
      *
      * @return Response
      */
-    public function patch($url, array $body = [], array  $options = [])
+    public function patch($url, array $body = [], array $options = [])
     {
         return $this->parseResponse(
             $this->httpClient->patch(

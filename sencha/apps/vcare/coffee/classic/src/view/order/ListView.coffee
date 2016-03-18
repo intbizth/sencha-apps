@@ -54,6 +54,14 @@ Ext.define 'Vcare.view.order.ListView',
             handler: 'onDelete'
             aclCheck: yes
         ,
+            '-'
+        ,
+            text: 'Update State'
+            iconCls:'check-square'
+            bind: widgetRecord: '{refOrderList.selection}'
+            handler: 'onUpdateState'
+            aclCheck: yes
+        ,
             '->'
         ,
             fieldLabel: 'Search'
