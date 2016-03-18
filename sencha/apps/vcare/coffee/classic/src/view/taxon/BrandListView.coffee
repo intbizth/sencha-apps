@@ -12,17 +12,17 @@ Ext.define 'Vcare.view.taxon.BrandListView',
     tbar:
         items: [
             text: 'เพิ่มรายการ'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             text: 'แก้ไข'
-            iconCls:'fa fa-pencil-square-o'
+            iconCls: 'pencil-square-o'
             bind: widgetRecord: '{refTaxonBrandList.selection}'
             handler: 'onEdit'
             aclCheck: -> !!@getWidgetRecord().getParent()
         ,
             text: 'ลบ'
-            iconCls:'fa fa-trash-o'
+            iconCls: 'trash-o'
             bind: widgetRecord: '{refTaxonBrandList.selection}'
             handler: 'onDelete'
             aclCheck: -> !!@getWidgetRecord().getParent()
