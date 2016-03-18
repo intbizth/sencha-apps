@@ -1,5 +1,5 @@
 Ext.define 'Moboque.view.feeder.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-feeder-form'
 
     width: 500
