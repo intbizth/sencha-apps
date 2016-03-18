@@ -16,11 +16,6 @@ Ext.define 'Moboque.view.link.ListView',
     headerBorders: no
 
     columns: [
-        text: 'สถานะ'
-        align: 'center'
-        width: 80
-        dataIndex: 'link'
-    ,
         text: 'คำอธิบาย'
         dataIndex: 'label'
         width: 200
