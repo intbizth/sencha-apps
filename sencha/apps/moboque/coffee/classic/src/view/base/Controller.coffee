@@ -7,11 +7,6 @@ Ext.define 'Moboque.view.base.Controller',
         successMessage: "การทำรายการเสร็จเรียบร้อยแล้ว"
         failureMessage: "เกิดความผิดพลาด กรุณาลองใหม่อีกครั้ง"
         confirmMessage: "กรุณายืนยันการทำรายการ"
-        addMessage: "เพิ่มรายการ"
-
-        editField: null
-        widgetForm: null
-        viewModelForm: null
 
     # @private
     createMessageBox: ->
@@ -91,53 +86,29 @@ Ext.define 'Moboque.view.base.Controller',
 
     # @protected MUST be overrided!
     createDialog: (record, options) ->
-        vm = @getViewModel()
-        title = if !record then @getAddMessage() else "แก้ไข #{record.get(@getEditField())}"
-        record = vm.prepareData(record)
-
         @dialog = @getView().add(Ext.apply(
-            title: 'Override me!'
+            title: 'Hello World!'
             ownerView: @getView()
             widgetRecord: record
         ,
-            #use data from 'override' OR 'default'
-            options || {
-                xtype: @getWidgetForm()
-                title:  title
-                viewModel:
-                    type: @getViewModelForm()
-                    data:
-                        record: record
-            }
+            options || {}
         ))
+
         @dialog.show()
 
     # @protected
-    onCancel: (btn) ->
-        record = @dialog.widgetRecord
-
+    onCancel: ->
         @dialog.getViewModel().beforeCancel(
-            if record and record.dirty
-                @showConfirmMessage
-                    title: 'ข้อมูลมีการเปลี่ยนแปลง'
-                    message: 'คุณต้องการออกจากหน้านี้หรือไม่ ?',
-                    fn: (pressed) =>
-                        if pressed == 'ok'
-                            if record.store
-                                record.store.rejectChanges()
-                            console.log 'Close!'
-                            @dialog.close()
-            else
-                @dialog.close()
+            @dialog.getWidgetRecord()
         )
+
+        @closeDialog()
 
     # @protected
     onAddNew: (btn) -> @createDialog()
 
     # @protected
-    onEdit: (btn) ->
-        console.log 'GET SINGLE', btn.getSingleWidgetRecord()
-        @createDialog(btn.getSingleWidgetRecord())
+    onEdit: (btn) -> @createDialog(btn.getSingleWidgetRecord())
 
     # @protected
     onDelete: (btn) ->
@@ -168,7 +139,6 @@ Ext.define 'Moboque.view.base.Controller',
         record = vm.get 'record'
 
         vm.beforeSubmit(record, form)
-        console.log form.isValid()
 
         if !(form.isValid() && vm.isDirty())
             @dialog.close()
@@ -181,14 +151,10 @@ Ext.define 'Moboque.view.base.Controller',
                 form.unmask()
                 vm.onSubmitFailure(record, form)
 
-                titleMessage = 'ผิดพลาด'
-                errorMessage = 'ขออภัย! เกิดความผิดพลาดในการบันทึกข้อมูล'
-
                 if response = o.error.response
                     # internal server error
                     if response.status == 500
                         titleMessage = response.statusText
-                        errorMessage = 'Sorry, Something went wrong.'
 
                     # sf validation error.
                     # TODO: handle form error with custom fn.
@@ -201,8 +167,8 @@ Ext.define 'Moboque.view.base.Controller',
                                 errorMessage = value.errors[0]
 
                 @failureAlert
-                    title: titleMessage
-                    message: errorMessage
+                    title: titleMessage || "Error!"
+                    message: errorMessage || @getFailureMessage()
 
             success: (record, o) =>
                 form.unmask()
@@ -367,26 +333,3 @@ Ext.define 'Moboque.view.base.Controller',
     enabledButtonWithSelection: (ref, value) ->
         button = @referTo(ref)
         button.setDisabled(value)
-
-    #-----------------------
-
-    showConfirmMessage: (options, func) ->
-        if Ext.isString options
-            options = message: options
-
-        if !options.title
-            options.title = 'Confirm ?'
-
-        if !options.icon
-            options.icon = Ext.Msg.QUESTION
-
-        if !options.buttons
-            options.buttons = Ext.Msg.OKCANCEL
-
-        if Ext.isObject func
-            func.scope = @
-            options.fn = (pressed) =>
-                options.fn.call func.scope, pressed
-
-        msg = @createMessageBox()
-        msg.show options
