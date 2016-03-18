@@ -6,13 +6,9 @@ Ext.define 'Moboque.view.travel.ModelForm',
         isPhantom:
             get: -> @get('record').phantom
 
-    onSubmitSuccess: -> @get('travels').reload()
-
-    isDirty: ->
-        @get('record').dirty
-
-    commit: ->
-        @get('record').commit()
-
-    reject: ->
-        @get('record').reject()
+    isDirty: -> @get('record').dirty
+    commit: -> @get('record').commit()
+    reject: -> @get('record').reject()
+    beforeSubmit: (record) -> record.updateTranslations()
+    beforeCancel: (record) -> record.updateTranslations()
+    onSubmitSuccess: (record) -> @get('parents').reload()

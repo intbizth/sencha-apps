@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.travel.Controller',
 
         options =
             xtype: 'wg-travel-form'
-            title:  title
+            title: title
             viewModel:
                 type: 'vm-travel-form'
                 data:
