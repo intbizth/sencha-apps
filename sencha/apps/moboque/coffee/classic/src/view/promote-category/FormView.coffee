@@ -1,5 +1,5 @@
 Ext.define 'Moboque.view.promote-category.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-promote-category-form'
 
     width: 500

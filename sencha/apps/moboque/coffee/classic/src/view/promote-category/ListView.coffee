@@ -23,13 +23,6 @@ Ext.define 'Moboque.view.promote-category.ListView',
         text: 'หัวเรื่อง'
         dataIndex: 'title'
         width: 200
-    ,
-        xtype: 'datecolumn'
-        text: 'วันที่เขียน'
-        dataIndex: 'created_at'
-        format: 'd-m-Y H:i'
-        flex: 1
-        minWidth: 200
     ]
 
     tbar:

@@ -7,11 +7,11 @@ Ext.define 'Moboque.view.report.Model',
             type: 'store-reports'
             autoLoad: yes
 
-    createRecord: (record) ->
-        return record if record
-        return new (@data.reports.getModel())()
-
     prepareData: (record) ->
         record = @createRecord record
 
         return record
+
+    createRecord: (record) ->
+        return record if record
+        return new (@data.links.getModel())()

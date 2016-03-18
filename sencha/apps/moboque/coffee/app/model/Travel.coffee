@@ -15,14 +15,14 @@ Ext.define 'Moboque.model.Travel',
         persist: no
         convert: (v, r) -> r.getDescription()
 
-    ,
-        name: 'parent'
-        reference:
-            type: 'Travel'
-            role: 'parent'
-            associationKey: 'parent'
-            getterName: 'getTravel'
-            setterName: 'setParent'
+#    ,
+#        name: 'parent'
+#        reference:
+#            type: 'Travel'
+#            role: 'parent'
+#            associationKey: 'parent'
+#            getterName: 'getTravel'
+#            setterName: 'setParent'
     ]
 
     getTitle: -> @trans 'title'

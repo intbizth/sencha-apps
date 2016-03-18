@@ -1,5 +1,5 @@
 Ext.define 'Moboque.view.report.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-report-form'
 
     width: 600
