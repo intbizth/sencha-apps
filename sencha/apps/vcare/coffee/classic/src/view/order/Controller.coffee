@@ -23,9 +23,9 @@ Ext.define 'Vcare.view.order.Controller',
         record = btn.getSingleWidgetRecord()
         store = @getViewModel().get('transitions')
 
-        # TODO: confirm
+        # TODO: confirmation
 
-        store.updateState({
+        store.updateState
             params:
                 name: 'order'
                 id: record.getId()
@@ -34,8 +34,6 @@ Ext.define 'Vcare.view.order.Controller',
                 # reload grid
                 record.store.reload()
                 dialog.close()
-        })
-
 
     onUpdateState: (btn) ->
         view = @getView()
