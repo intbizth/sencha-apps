@@ -45,12 +45,9 @@ Ext.define 'Moboque.view.link.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refLinkList.selection}'
-                widgetRecord: '{refLinkList.selection}'
             handler: 'onEdit'
+            bind: widgetRecord: '{refLinkList.selection}'
             aclCheck: yes
-#            aclCheck: -> !!@getWidgetRecord().getParent()
         ,
             '-'
         ,
@@ -58,12 +55,9 @@ Ext.define 'Moboque.view.link.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refLinkList.selection}'
-                widgetRecord: '{refLinkList.selection}'
             handler: 'onDelete'
+            bind: widgetRecord: '{refLinkList.selection}'
             aclCheck: yes
-#            aclCheck: -> !!@getWidgetRecord().getParent()
         ,
             '->'
         ,

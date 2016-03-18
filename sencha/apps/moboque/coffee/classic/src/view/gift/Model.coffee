@@ -4,7 +4,7 @@ Ext.define 'Moboque.view.gift.Model',
 
     stores:
         gifts:
-            type: 'store-gift'
+            type: 'store-gifts'
             autoLoad: yes
 
 
