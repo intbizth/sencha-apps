@@ -6,6 +6,7 @@ Ext.define 'Moboque.view.activity.Model',
         activities:
             type: 'store-activities'
             autoLoad: yes
+            pageSize: 25
 
     createRecord: (record) ->
         return record if record

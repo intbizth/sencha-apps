@@ -9,15 +9,11 @@ Ext.define 'Moboque.view.service_category.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'กลุ่ม'
     reference: 'refServiceCategoryList'
     headerBorders: no
-
-    listeners:
-        selectionchange: ->
-            console.log arguments
 
     columns: [
         text: 'ชื่อบริการ'
@@ -45,9 +41,9 @@ Ext.define 'Moboque.view.service_category.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refServiceCategoryList.selection}'
+            bind: widgetRecord: '{refServiceCategoryList.selection}'
             handler: 'onEdit'
+            aclCheck: yes
         ,
             '-'
         ,
@@ -55,9 +51,9 @@ Ext.define 'Moboque.view.service_category.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refServiceCategoryList.selection}'
+            bind: widgetRecord: '{refServiceCategoryList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
         ,
             '->'
         ,
@@ -65,8 +61,7 @@ Ext.define 'Moboque.view.service_category.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{serviceCategories}'
+            bind: store: '{serviceCategories}'
             margin: '0 10 0 0'
         ]
 
@@ -74,6 +69,5 @@ Ext.define 'Moboque.view.service_category.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{serviceCategories}'
+        bind: store: '{serviceCategories}'
         displayInfo: yes
