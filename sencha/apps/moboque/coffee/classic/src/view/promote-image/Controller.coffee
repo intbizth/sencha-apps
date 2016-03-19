@@ -16,6 +16,71 @@ Ext.define 'Moboque.view.promote-image.Controller',
                     record: record
         @callParent([record, options])
 
+    onSubmit: ->
+        vm = @dialog.getViewModel()
+
+        me = @
+        form = @dialog.down 'form'
+        record = vm.get 'record'
+
+        if record.hasFileUpload
+            console.log 'yes, have image'
+            # check if add image.
+            filesInput = []
+            imageInput = @manageFiles(form, 'image')
+
+            if imageInput.files and imageInput.files.length
+                filesInput.push(imageInput)
+
+            # if got image file, ENCODE them and submit.
+            if filesInput.length
+                Ext.each filesInput, (input) ->
+                    reader = new FileReader()
+                    reader.readAsDataURL input.files[0]
+                    reader.onload = (e) ->
+                        record.set(input.name, 'media': e.target.result)
+                        me.onSave(form, vm)
+
+    onSave: (form, vm) ->
+        if !(form.isValid() && vm.isDirty())
+            @dialog.close()
+            return
+        form.mask('กำลังบันทึกข้อมูล ..')
+
+        record = vm.get 'record'
+        record.save
+            failure: (record, o) =>
+                form.unmask()
+                vm.onSubmitFailure(record, form)
+
+                if response = o.error.response
+                    # internal server error
+                    if response.status == 500
+                        titleMessage = response.statusText
+
+                    # sf validation error.
+                    # TODO: handle form error with custom fn.
+                    if response.status == 400
+                        obj = Ext.decode response.responseText
+                        titleMessage = obj.message
+
+                        Ext.Object.each obj.errors.children, (key, value, item) ->
+                            if value.hasOwnProperty('errors')
+                                errorMessage = value.errors[0]
+
+                @failureAlert
+                    title: titleMessage || "Error!"
+                    message: errorMessage || @getFailureMessage()
+
+            success: (record, o) =>
+                form.unmask()
+
+                vm.onSubmitSuccess(record, form)
+                vm.commit()
+
+                @successAlert(@getSuccessMessage())
+                @closeDialog()
+
     setImagePreview: (imageComponent) ->
         console.log 'img', imageComponent
         record = @dialog.getViewModel().get 'record'
