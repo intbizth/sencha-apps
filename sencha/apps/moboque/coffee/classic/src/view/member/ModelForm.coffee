@@ -2,20 +2,11 @@ Ext.define 'Moboque.view.member.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
     alias: 'viewmodel.vm-member-form'
 
-    stores:
-        groups:
-            type: 'store-groups'
-            autoLoad: yes
-            pageSize: 25
-
     formulas:
     	group:
-            get: ->
-                @get('record').getGroup()
-
+            get: -> @get('record').getGroup()
             set: (val) ->
                 @get('record').setGroup val
-                # console.log @get('record').getGroup()
 
         isPhantom:
             get: -> @get('record').phantom

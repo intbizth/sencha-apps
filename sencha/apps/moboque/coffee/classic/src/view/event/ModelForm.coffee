@@ -2,24 +2,6 @@ Ext.define 'Moboque.view.event.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
     alias: 'viewmodel.vm-event-form'
 
-    getStartDate: -> @get('record').get('start_date')
-
-    setStartDate: (date, time) ->
-        originDate = @getStartDate()
-        date = @setDateTimeInRecord(originDate, date, time)
-
-        @get('record').set 'start_date', date
-        return
-
-    getEndDate: -> @get('record').get('end_date')
-
-    setEndDate: (date, time) ->
-        originDate = @getEndDate()
-        date = @setDateTimeInRecord(originDate, date, time)
-
-        @get('record').set 'end_date', date
-        return
-
     formulas:
         startDate:
             get: -> @getStartDate()
@@ -40,5 +22,31 @@ Ext.define 'Moboque.view.event.ModelForm',
         isPhantom:
             get: -> @get('record').phantom
 
+    onSubmitSuccess: -> @get('events').reload()
+
+    getStartDate: -> @get('record').get('start_date')
+
+    setStartDate: (date, time) ->
+        originDate = @getStartDate()
+        date = @setDateTimeInRecord(originDate, date, time)
+
+        @get('record').set 'start_date', date
+        return
+
+    getEndDate: -> @get('record').get('end_date')
+
+    setEndDate: (date, time) ->
+        originDate = @getEndDate()
+        date = @setDateTimeInRecord(originDate, date, time)
+
+        @get('record').set 'end_date', date
+        return
+
     isDirty: ->
         @get('record').dirty
+
+    commit: ->
+        @get('record').commit()
+
+    reject: ->
+        @get('record').reject()

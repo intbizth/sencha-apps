@@ -27,38 +27,32 @@ Ext.define 'Moboque.view.member.FormView',
             xtype: 'form'
 
             defaults:
+                xtype: 'textfield'
                 anchor : '100%'
                 labelAlign: 'top'
 
             items: [
-                xtype: 'fieldset'
-                title: 'Upload Images'
-                defaultType: 'textfield'
-                items: [
-                    xtype: 'image'
-                    reference: 'refImage'
-                    height: 200
-                    alt: 'image'
-                    style:
-                        backgroundColor: '#d9d9d9'
-                    margin: '0 0 0 10'
-                    listeners:
-                        beforerender: 'setImagePreview'
-                ,
-                    name: 'image'
-                    xtype: 'fileuploadfield'
-                    emptyText: 'Select an image'
-                    fieldLabel: 'Image '
-                    labelAlign: 'top'
-                    anchor: '100%'
-                    margin: '0 5 0 10'
-                    buttonText: ''
-                    buttonConfig:
-                        iconCls: 'right-icon hot-icon x-fa fa-file-image-o'
-                    bind: '{record.image}'
-                    listeners:
-                        change: 'imageUploadChanged'
-                ]
+                xtype: 'textareafield'
+                fieldLabel: '<span style="color:red;">*</span> ที่อยู่'
+                emptyText: 'กรุณาระบุที่อยู่'
+                bind: '{record.address}'
+            ,
+                fieldLabel: '<span style="color:red;">*</span> อีเมล์'
+                emptyText: 'กรุณาระบุอีเมล์'
+                vtype: 'email'
+                bind: '{record.email}'
+            ,
+                fieldLabel: 'เบอร์โทรศัพท์'
+                emptyText: 'กรุณาระบุเบอร์โทรศัพท์ '
+                allowBlank: yes
+                bind: '{record.phone_number}'
+            ,
+                fieldLabel: '<span style="color:red;">*</span> เบอร์มือถือ'
+                bind: '{record.mobile_number}'
+                emptyText: 'กรุณาระบุเบอร์มือถือ'
+                maskRe: /[\d\-]/
+                regex: /^\d{3}\d{3}\d{4}$/
+                regexText: 'Must be in the format 0999999999'
             ]
         ,
             region:'west'
@@ -109,27 +103,6 @@ Ext.define 'Moboque.view.member.FormView',
                 emptyText: 'กรุณาระบุชื่อหน่วยงาน'
                 allowBlank: yes
                 bind: '{record.company}'
-            ,
-                fieldLabel: '<span style="color:red;">*</span> ที่อยู่'
-                emptyText: 'กรุณาระบุที่อยู่'
-                bind: '{record.address}'
-            ,
-                fieldLabel: '<span style="color:red;">*</span> อีเมล์'
-                emptyText: 'กรุณาระบุอีเมล์'
-                vtype: 'email'
-                bind: '{record.email}'
-            ,
-                fieldLabel: 'เบอร์โทรศัพท์'
-                emptyText: 'กรุณาระบุเบอร์โทรศัพท์ '
-                allowBlank: yes
-                bind: '{record.phone_number}'
-            ,
-                fieldLabel: '<span style="color:red;">*</span> เบอร์มือถือ'
-                bind: '{record.mobile_number}'
-                emptyText: 'กรุณาระบุเบอร์มือถือ'
-                maskRe: /[\d\-]/
-                regex: /^\d{3}\d{3}\d{4}$/
-                regexText: 'Must be in the format 0999999999'
             ]
         ,
             region: 'south'
@@ -138,11 +111,6 @@ Ext.define 'Moboque.view.member.FormView',
             split: no
             bodyPadding: 0
             buttons: [
-                text: 'Preview'
-                handler: 'applyImage'
-                reference: 'refApply'
-                hidden: yes
-            ,
                 text: 'ยกเลิก'
                 handler: 'onCancel'
             ,

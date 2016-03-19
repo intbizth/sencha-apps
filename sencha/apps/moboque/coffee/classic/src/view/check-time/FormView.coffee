@@ -1,10 +1,6 @@
 Ext.define 'Moboque.view.check-time.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-check-time-form'
-
-    width: 600
-    modal: yes
-    scrollable: 'true'
 
     bind:
         title: '{title}'
@@ -19,7 +15,7 @@ Ext.define 'Moboque.view.check-time.FormView',
         # TODO allowBlank is not working !
         defaults:
             xtype: 'combo'
-            anchor: '100%'
+            width: 360
             labelAlign: 'top'
             allowBlank: no
             editable: no
