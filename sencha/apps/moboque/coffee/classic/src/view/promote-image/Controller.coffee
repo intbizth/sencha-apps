@@ -16,7 +16,7 @@ Ext.define 'Moboque.view.promote-image.Controller',
                     record: record
         @callParent([record, options])
 
-    onSubmit: ->
+    onSubmitWithImage: ->
         vm = @dialog.getViewModel()
 
         me = @
@@ -28,6 +28,7 @@ Ext.define 'Moboque.view.promote-image.Controller',
             # check if add image.
             filesInput = []
             imageInput = @manageFiles(form, 'image')
+            i = 0
 
             if imageInput.files and imageInput.files.length
                 filesInput.push(imageInput)
@@ -38,48 +39,11 @@ Ext.define 'Moboque.view.promote-image.Controller',
                     reader = new FileReader()
                     reader.readAsDataURL input.files[0]
                     reader.onload = (e) ->
+                        i++
                         record.set(input.name, 'media': e.target.result)
-                        me.onSave(form, vm)
 
-    onSave: (form, vm) ->
-        if !(form.isValid() && vm.isDirty())
-            @dialog.close()
-            return
-        form.mask('กำลังบันทึกข้อมูล ..')
-
-        record = vm.get 'record'
-        record.save
-            failure: (record, o) =>
-                form.unmask()
-                vm.onSubmitFailure(record, form)
-
-                if response = o.error.response
-                    # internal server error
-                    if response.status == 500
-                        titleMessage = response.statusText
-
-                    # sf validation error.
-                    # TODO: handle form error with custom fn.
-                    if response.status == 400
-                        obj = Ext.decode response.responseText
-                        titleMessage = obj.message
-
-                        Ext.Object.each obj.errors.children, (key, value, item) ->
-                            if value.hasOwnProperty('errors')
-                                errorMessage = value.errors[0]
-
-                @failureAlert
-                    title: titleMessage || "Error!"
-                    message: errorMessage || @getFailureMessage()
-
-            success: (record, o) =>
-                form.unmask()
-
-                vm.onSubmitSuccess(record, form)
-                vm.commit()
-
-                @successAlert(@getSuccessMessage())
-                @closeDialog()
+                        if i == filesInput.length
+                            me.onSubmit()
 
     setImagePreview: (imageComponent) ->
         console.log 'img', imageComponent
