@@ -82,7 +82,7 @@ Ext.define 'Moboque.view.promote-image.FormView',
             handler: 'onCancel'
         ,
             text: 'บันทึก'
-            handler: 'onSubmit'
+            handler: 'onSubmitWithImage'
             disabled: yes
             formBind: yes
         ]
