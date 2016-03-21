@@ -45,7 +45,7 @@ Ext.define 'Moboque.view.service.ListView',
         items: [
             text: 'เพิ่มบริการ'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -53,7 +53,7 @@ Ext.define 'Moboque.view.service.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
+            iconCls: 'pencil-square-o'
             bind: widgetRecord: '{refServiceList.selection}'
             handler: 'onEdit'
             aclCheck: yes
@@ -63,7 +63,7 @@ Ext.define 'Moboque.view.service.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
+            iconCls: 'trash-o'
             bind: widgetRecord: '{refServiceList.selection}'
             handler: 'onDelete'
             aclCheck: yes
