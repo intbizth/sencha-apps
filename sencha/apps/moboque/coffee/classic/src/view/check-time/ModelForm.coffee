@@ -10,11 +10,13 @@ Ext.define 'Moboque.view.check-time.ModelForm',
 
         checkDate:
             get: -> @getChecktime()
-            set: (date) -> @setChecktime(date, null)
+            set: (date) -> 
+                @setChecktime(date, null)
 
         checkTime:
             get: -> @getChecktime()
-            set: (time) -> @setChecktime(null, time)
+            set: (time) ->
+                @setChecktime(null, time)
 
         isPhantom:
             get: -> @get('record').phantom

@@ -8,7 +8,7 @@ Ext.define 'Moboque.view.base.ViewModel',
     beforeCancel: (record, form) ->
     onSubmitSuccess: (record, form) ->
     onSubmitFailure: (record, form) ->
-	setDateTimeInRecord: (originDate, date, time) ->
+    setDateTimeInRecord: (originDate, date, time) ->
         if date?
             _date = Ext.Date.format(date, 'Y-m-d')
 

@@ -5,19 +5,23 @@ Ext.define 'Moboque.view.event.ModelForm',
     formulas:
         startDate:
             get: -> @getStartDate()
-            set: (date) -> @setStartDate(date, null)
+            set: (date) ->
+                @setStartDate(date, null)
 
         startTime:
             get: -> @getStartDate()
-            set: (time) -> @setStartDate(null, time)
+            set: (time) ->
+                @setStartDate(null, time)
 
         endDate:
             get: -> @getEndDate()
-            set: (date) -> @setEndDate(date, null)
+            set: (date) ->
+                @setEndDate(date, null)
 
         endTime:
             get: -> @getEndDate()
-            set: (time) -> @setEndDate(null, time)
+            set: (time) ->
+                @setEndDate(null, time)
 
         isPhantom:
             get: -> @get('record').phantom
