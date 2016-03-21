@@ -39,9 +39,7 @@ Ext.define 'Moboque.view.promote-category.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refPromoteCategoryList.selection}'
-                widgetRecord: '{refPromoteCategoryList.selection}'
+            bind: widgetRecord: '{refPromoteCategoryList.selection}'
             aclCheck: yes
             handler: 'onEdit'
         ,
@@ -51,9 +49,7 @@ Ext.define 'Moboque.view.promote-category.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refPromoteCategoryList.selection}'
-                widgetRecord: '{refPromoteCategoryList.selection}'
+            bind: widgetRecord: '{refPromoteCategoryList.selection}'
             aclCheck: yes
             handler: 'onDelete'
         ,

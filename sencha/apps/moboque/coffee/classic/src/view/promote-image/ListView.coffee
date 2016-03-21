@@ -54,9 +54,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refPromoteImageList.selection}'
-                widgetRecord: '{refPromoteImageList.selection}'
+            bind: widgetRecord: '{refPromoteImageList.selection}'
             aclCheck: yes
             handler: 'onEdit'
         ,
@@ -66,9 +64,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refPromoteImageList.selection}'
-                widgetRecord: '{refPromoteImageList.selection}'
+            bind: widgetRecord: '{refPromoteImageList.selection}'
             aclCheck: yes
             handler: 'onDelete'
         ,

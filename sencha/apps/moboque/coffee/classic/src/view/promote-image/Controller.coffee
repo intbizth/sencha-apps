@@ -4,7 +4,7 @@ Ext.define 'Moboque.view.promote-image.Controller',
 
     createDialog: (record) ->
         vm = @getViewModel()
-        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.get('title')}"
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.getPromoteTitle()}"
         record = vm.prepareData(record)
 
         options =
@@ -44,6 +44,9 @@ Ext.define 'Moboque.view.promote-image.Controller',
 
                         if i == filesInput.length
                             me.onSubmit()
+            else
+                # maybe edit with no image.
+                @onSubmit()
 
     setImagePreview: (imageComponent) ->
         console.log 'img', imageComponent
