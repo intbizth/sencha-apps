@@ -25,10 +25,9 @@ Ext.define 'Moboque.view.promote-image.Controller',
 
         if record.hasFileUpload
             console.log 'yes, have image'
-            # check if add image.
+            # count if imageInput have more than one fields.
             filesInput = []
             imageInput = @manageFiles(form, 'image')
-            i = 0
 
             if imageInput.files and imageInput.files.length
                 filesInput.push(imageInput)
@@ -36,6 +35,7 @@ Ext.define 'Moboque.view.promote-image.Controller',
             # if got image file, ENCODE them and submit.
             if filesInput.length
                 Ext.each filesInput, (input) ->
+                    i = 0
                     reader = new FileReader()
                     reader.readAsDataURL input.files[0]
                     reader.onload = (e) ->
