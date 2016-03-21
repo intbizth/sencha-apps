@@ -1,9 +1,6 @@
 Ext.define 'Moboque.view.service.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-service-form'
-
-    width: 500
-    modal: yes
 
     bind:
         title: '{title}'
@@ -17,11 +14,9 @@ Ext.define 'Moboque.view.service.FormView',
 
         defaults:
             xtype: 'textfield'
-            anchor: '100%'
+            width: 360
             labelAlign: 'top'
             allowBlank: no
-            minLength: 2
-            maxLength: 255
 
         items: [
             xtype: 'combobox'

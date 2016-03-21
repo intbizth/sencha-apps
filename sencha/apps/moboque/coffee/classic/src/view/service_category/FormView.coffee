@@ -1,9 +1,6 @@
 Ext.define 'Moboque.view.service_category.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-service-category-form'
-
-    width: 500
-    modal: yes
 
     bind:
         title: '{title}'
@@ -17,11 +14,9 @@ Ext.define 'Moboque.view.service_category.FormView',
 
         defaults:
             xtype: 'textfield'
-            anchor: '100%'
+            width: 360
             labelAlign: 'top'
             allowBlank: no
-            minLength: 2
-            maxLength: 255
 
         items: [
             fieldLabel: '<span style="color:red;">*</span> ชื่อเรื่อง'

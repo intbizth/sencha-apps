@@ -2,17 +2,9 @@ Ext.define 'Moboque.view.service.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
     alias: 'viewmodel.vm-service-form'
 
-    stores:
-        serviceCategories:
-            type: 'store-service-categories'
-            autoLoad: yes
-            pageSize: 25
-
     formulas:
         serviceCategory:
-            get: ->
-                @get('record').getServiceCategory()
-
+            get: -> @get('record').getServiceCategory()
             set: (val) ->
                 @get('record').setServiceCategory val
 

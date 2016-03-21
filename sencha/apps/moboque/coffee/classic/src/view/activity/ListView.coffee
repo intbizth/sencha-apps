@@ -9,14 +9,11 @@ Ext.define 'Moboque.view.activity.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
+        deferEmptyText: no
 
     title: 'กิจกรรม'
     reference: 'refActivityList'
     headerBorders: no
-
-    listeners:
-        selectionchange: ->
-            console.log arguments
 
     columns: [
         text: 'ชื่อเรื่อง'
@@ -49,9 +46,9 @@ Ext.define 'Moboque.view.activity.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refActivityList.selection}'
+            bind: widgetRecord: '{refActivityList.selection}'
             handler: 'onEdit'
+            aclCheck: yes
         ,
             '-'
         ,
@@ -59,9 +56,9 @@ Ext.define 'Moboque.view.activity.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refActivityList.selection}'
+            bind: widgetRecord: '{refActivityList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
         ,
             '->'
         ,
@@ -69,8 +66,7 @@ Ext.define 'Moboque.view.activity.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{activities}'
+            bind: store: '{activities}'
             margin: '0 10 0 0'
         ]
 
@@ -78,6 +74,5 @@ Ext.define 'Moboque.view.activity.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{activities}'
+        bind: store: '{activities}'
         displayInfo: yes
