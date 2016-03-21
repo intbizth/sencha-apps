@@ -8,3 +8,9 @@ Ext.define 'Moboque.view.personal-department.ModelForm',
 
     isDirty: ->
         @get('record').dirty
+
+    commit: ->
+        @get('record').commit()
+
+    reject: ->
+        @get('record').reject()

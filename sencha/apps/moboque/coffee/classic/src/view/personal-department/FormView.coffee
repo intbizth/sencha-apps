@@ -1,9 +1,6 @@
 Ext.define 'Moboque.view.personal-department.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-personal-department-form'
-
-    width: 500
-    modal: yes
 
     bind:
         title: '{title}'
@@ -17,7 +14,7 @@ Ext.define 'Moboque.view.personal-department.FormView',
 
         items: [
             xtype: 'textfield'
-            anchor: '100%'
+            width: 360
             fieldLabel: '<span style="color:red;">*</span> ชื่อแผนก'
             labelAlign: 'top'
             emptyText: 'กรุณากรอกชื่อแผนก'

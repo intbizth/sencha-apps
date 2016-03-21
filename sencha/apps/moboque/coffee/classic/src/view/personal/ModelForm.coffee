@@ -2,17 +2,9 @@ Ext.define 'Moboque.view.personal.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
     alias: 'viewmodel.vm-personal-form'
 
-    stores:
-        personalDepartments:
-            type: 'store-personal-departments'
-            autoLoad: yes
-            pageSize: 25
-
     formulas:
         personalDepartment:
-            get: ->
-                @get('record').getPersonalDepartment()
-
+            get: -> @get('record').getPersonalDepartment()
             set: (val) ->
                 @get('record').setPersonalDepartment val
 
