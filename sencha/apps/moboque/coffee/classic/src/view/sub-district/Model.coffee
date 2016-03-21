@@ -7,6 +7,11 @@ Ext.define 'Moboque.view.sub-district.Model',
             type: 'store-sub-districts'
             autoLoad: yes
 
+        districts:
+            type: 'store-districts'
+            autoLoad: yes
+            pageSize: 100
+
     createRecord: (record) ->
         return record if record
         return new (@data.subDistricts.getModel())()

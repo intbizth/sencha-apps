@@ -9,15 +9,11 @@ Ext.define 'Moboque.view.personal-department.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'แผนก'
     reference: 'refPersonalDepartmentList'
     headerBorders: no
-
-    listeners:
-        selectionchange: ->
-            console.log arguments
 
     columns: [
         text: 'ชื่อแผนก'
@@ -37,7 +33,7 @@ Ext.define 'Moboque.view.personal-department.ListView',
         items: [
             text: 'เพิ่มแผนก'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -45,20 +41,20 @@ Ext.define 'Moboque.view.personal-department.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refPersonalDepartmentList.selection}'
+            iconCls: 'pencil-square-o '
+            bind: widgetRecord: '{refPersonalDepartmentList.selection}'
             handler: 'onEdit'
+            aclCheck: yes
         ,
             '-'
         ,
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refPersonalDepartmentList.selection}'
+            iconCls: 'trash-o'
+            bind: widgetRecord: '{refPersonalDepartmentList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
         ,
             '->'
         ,
@@ -66,8 +62,7 @@ Ext.define 'Moboque.view.personal-department.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{personalDepartments}'
+            bind: store: '{personalDepartments}'
             margin: '0 10 0 0'
         ]
 
@@ -75,6 +70,5 @@ Ext.define 'Moboque.view.personal-department.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{personalDepartments}'
+        bind: store: '{personalDepartments}'
         displayInfo: yes

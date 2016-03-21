@@ -9,21 +9,16 @@ Ext.define 'Moboque.view.feeder.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'Feeder'
     reference: 'refFeederList'
     headerBorders: no
 
-    listeners:
-        selectionchange: ->
-            console.log arguments
-
     columns: [
         text: 'สถานะ'
         dataIndex: 'state'
-        minWidth: 200
-        flex: 1
+        width: 200
     ,
         text: 'ชื่อหัวข้อ'
         dataIndex: 'title'
@@ -34,7 +29,7 @@ Ext.define 'Moboque.view.feeder.ListView',
         text: 'วันที่เขียน'
         dataIndex: 'created_at'
         format: 'd-m-Y H:i'
-        maxWidth: 250
+        width: 200
     ]
 
     tbar:
@@ -42,7 +37,7 @@ Ext.define 'Moboque.view.feeder.ListView',
         items: [
             text: 'เพิ่มหัวข้อ'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -50,20 +45,20 @@ Ext.define 'Moboque.view.feeder.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refFeederList.selection}'
+            iconCls:'pencil-square-o '
+            bind: widgetRecord: '{refFeederList.selection}'
             handler: 'onEdit'
+            aclCheck: yes
         ,
             '-'
         ,
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refFeederList.selection}'
+            iconCls: 'trash-o'
+            bind: widgetRecord: '{refFeederList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
         ,
             '->'
         ,
@@ -71,8 +66,7 @@ Ext.define 'Moboque.view.feeder.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{feeders}'
+            bind: store: '{feeders}'
             margin: '0 10 0 0'
         ]
 
@@ -80,6 +74,5 @@ Ext.define 'Moboque.view.feeder.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{feeders}'
+        bind: store: '{feeders}'
         displayInfo: yes

@@ -9,15 +9,11 @@ Ext.define 'Moboque.view.personal.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'ข้อมูลบุคคล'
     reference: 'refPersonalList'
     headerBorders: no
-
-    listeners:
-        selectionchange: ->
-            console.log arguments
 
     columns: [
         text: 'ชื่อ-นามสกุล'
@@ -46,7 +42,7 @@ Ext.define 'Moboque.view.personal.ListView',
         items: [
             text: 'เพิ่มบุคคล'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -54,20 +50,20 @@ Ext.define 'Moboque.view.personal.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refPersonalList.selection}'
+            iconCls: 'pencil-square-o'
+            bind: widgetRecord: '{refPersonalList.selection}'
             handler: 'onEdit'
+            aclCheck: yes
         ,
             '-'
         ,
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refPersonalList.selection}'
+            iconCls: 'trash-o'
+            bind: widgetRecord: '{refPersonalList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
         ,
             '->'
         ,
@@ -75,8 +71,7 @@ Ext.define 'Moboque.view.personal.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{personals}'
+            bind: store: '{personals}'
             margin: '0 10 0 0'
         ]
 
@@ -84,6 +79,5 @@ Ext.define 'Moboque.view.personal.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{personals}'
+        bind: store: '{personals}'
         displayInfo: yes

@@ -7,6 +7,11 @@ Ext.define 'Moboque.view.personal.Model',
             type: 'store-personals'
             autoLoad: yes
 
+        personalDepartments:
+            type: 'store-personal-departments'
+            autoLoad: yes
+            pageSize: 25
+
     createRecord: (record) ->
         return record if record
         return new (@data.personals.getModel())()
