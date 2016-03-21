@@ -41,7 +41,7 @@ Ext.define 'Moboque.view.personal-department.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'pencil-square-o '
+            iconCls: 'pencil-square-o '
             bind: widgetRecord: '{refPersonalDepartmentList.selection}'
             handler: 'onEdit'
             aclCheck: yes
@@ -51,7 +51,7 @@ Ext.define 'Moboque.view.personal-department.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'trash-o'
+            iconCls: 'trash-o'
             bind: widgetRecord: '{refPersonalDepartmentList.selection}'
             handler: 'onDelete'
             aclCheck: yes
