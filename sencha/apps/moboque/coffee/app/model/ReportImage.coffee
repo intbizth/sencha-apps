@@ -16,9 +16,9 @@ Ext.define 'Moboque.model.ReportImage',
         type: 'auto'
     ]
 
-    getReportDescription: ->
+    getReportTitle: ->
         report = @getReport()
-        return report.get("description") if report
+        return report.get("title") if report
         return ''
 
     validators:

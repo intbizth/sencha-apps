@@ -1,6 +1,6 @@
 Ext.define 'Moboque.model.Meet',
     extend: 'Moboque.model.Base'
-    api: '/api/meet/'
+    api: '/api/meets/'
 
     fields: [
         name: 'description'

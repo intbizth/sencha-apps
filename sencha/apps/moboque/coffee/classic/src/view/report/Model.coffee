@@ -14,4 +14,4 @@ Ext.define 'Moboque.view.report.Model',
 
     createRecord: (record) ->
         return record if record
-        return new (@data.links.getModel())()
+        return new (@data.reports.getModel())()

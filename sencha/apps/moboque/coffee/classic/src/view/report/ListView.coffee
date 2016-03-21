@@ -20,10 +20,45 @@ Ext.define 'Moboque.view.report.ListView',
             console.log arguments
 
     columns: [
+        text: 'ID'
+        dataIndex: 'id'
+        maxWidth: 120
+    ,
         text: 'หัวข้อเหตุฉุกเฉิน'
         dataIndex: 'title'
         flex: 1
         minWidth: 200
+    ,
+        text: 'Description'
+        dataIndex: 'description'
+        flex: 1
+        minWidth: 200
+#    ,
+#        text: 'published'
+#        dataIndex: 'published'
+#        flex: 1
+#        maxWidth: 400
+#        renderer: (value, metaData, record) ->
+#            if value == true then return 'เผยแพร่' else return 'ไม่เผยแพร่'
+    ,
+        text: 'สถานะ'
+        dataIndex: 'state'
+        flex: 1
+        maxWidth: 600
+        renderer: (value, metaData, record) ->
+            switch value
+                when 'draft' then return 'ร่าง'
+                when 'waiting' then return 'รออนุมัติ'
+                when 'published' then return '<span style="color:' + '#73b51e' + ';">เผยเพร่</span>'
+                when 'rejected' then return 'ยกเลิก'
+                when 'approved' then return '<span style="color:' + 'blue' + ';">อนุมัติแล้ว</span>'
+                when 'unpublished' then return 'ยกเลิกเผยแพร่'
+                else return 'unknown'
+    ,
+        text: 'ยอดผู้ชม'
+        dataIndex: 'unique_viewers'
+        flex: 1
+        maxWidth: 200
     ,
         xtype: 'datecolumn'
         text: 'วันที่สร้าง'
@@ -36,7 +71,7 @@ Ext.define 'Moboque.view.report.ListView',
         items: [
             text: 'เพิ่มเหตุฉุกเฉิน'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -44,7 +79,7 @@ Ext.define 'Moboque.view.report.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
+            iconCls:'pencil-square-o '
             handler: 'onEdit'
             bind: widgetRecord: '{refReportList.selection}'
             aclCheck: yes
@@ -54,7 +89,7 @@ Ext.define 'Moboque.view.report.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
+            iconCls:'trash-o'
             handler: 'onDelete'
             bind: widgetRecord: '{refReportList.selection}'
             aclCheck: yes

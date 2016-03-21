@@ -1,6 +1,6 @@
 Ext.define 'Moboque.model.EmergencyCall',
     extend: 'Moboque.model.Base'
-    api: '/api/emergency-call/'
+    api: '/api/emergency-calls/'
 
     fields: [
         name: 'title'

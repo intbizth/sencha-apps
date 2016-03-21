@@ -25,11 +25,11 @@ Ext.define 'Moboque.view.report-image.ListView',
         flex: 1
         minWidth: 200
     ,
-#        text: 'ของโปรโมท'
-#        width: 300
-#        renderer: (value, metaData, record) ->
-#            return record.getReportTitle()
-#    ,
+        text: 'ของ รายงาน'
+        width: 300
+        renderer: (value, metaData, record) ->
+            return record.getReportTitle()
+    ,
         text: 'ลิงค์'
         width: 300
         renderer: (value, metaData, record) ->
