@@ -11,15 +11,14 @@ Ext.define 'Moboque.view.service_category.ListView',
         emptyText: 'Empty Data'
         deferEmptyText: no
 
-    title: 'กลุ่ม'
+    title: 'หมวดหมู่บริการ'
     reference: 'refServiceCategoryList'
     headerBorders: no
 
     columns: [
-        text: 'ชื่อบริการ'
+        text: 'ชื่อหมวดหมู่บริการ'
         dataIndex: 'title'
-        flex: 1
-        minWidth: 200
+        width: 300
     ,
         text: 'คำบรรยาย'
         dataIndex: 'sub_title'
@@ -30,9 +29,9 @@ Ext.define 'Moboque.view.service_category.ListView',
     tbar:
         scrollable: yes
         items: [
-            text: 'เพิ่มกลุ่ม'
+            text: 'เพิ่มหมวดหมู่บริการ'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -40,7 +39,7 @@ Ext.define 'Moboque.view.service_category.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
+            iconCls: 'pencil-square-o'
             bind: widgetRecord: '{refServiceCategoryList.selection}'
             handler: 'onEdit'
             aclCheck: yes
@@ -50,7 +49,7 @@ Ext.define 'Moboque.view.service_category.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
+            iconCls: 'trash-o'
             bind: widgetRecord: '{refServiceCategoryList.selection}'
             handler: 'onDelete'
             aclCheck: yes
