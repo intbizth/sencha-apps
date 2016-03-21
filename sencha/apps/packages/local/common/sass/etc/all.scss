@@ -1,1 +1,19 @@
 $font-icon-font-family: dynamic(FontAwesome);
+
+
+.x-grid-column-color-label {
+    position: relative;
+
+    &-color {
+        display: inline-block;
+        margin-right: 5px;
+        min-width: 10px;
+        min-height: 10px;
+        vertical-align: middle;
+    }
+
+    &-text {
+        display: inline-block;
+        // vertical-align: middle;
+    }
+}
