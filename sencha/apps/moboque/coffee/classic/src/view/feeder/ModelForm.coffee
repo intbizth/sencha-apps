@@ -8,3 +8,9 @@ Ext.define 'Moboque.view.feeder.ModelForm',
 
     isDirty: ->
         @get('record').dirty
+
+    commit: ->
+        @get('record').commit()
+
+    reject: ->
+        @get('record').reject()

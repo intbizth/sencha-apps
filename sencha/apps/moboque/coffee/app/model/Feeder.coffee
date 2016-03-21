@@ -1,6 +1,6 @@
 Ext.define 'Moboque.model.Feeder',
     extend: 'Moboque.model.Base'
-    api: '/api/feeder'
+    api: '/api/feeder/'
 
     fields: [
         name: 'title'

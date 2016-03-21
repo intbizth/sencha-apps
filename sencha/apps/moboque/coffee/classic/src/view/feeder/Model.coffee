@@ -7,10 +7,9 @@ Ext.define 'Moboque.view.feeder.Model',
             type: 'store-feeders'
             autoLoad: yes
 
-
     createRecord: (record) ->
         return record if record
-        return new (@data.gifts.getModel())()
+        return new (@data.feeders.getModel())()
 
     prepareData: (record) ->
         record = @createRecord record
