@@ -38,7 +38,7 @@ Ext.define 'Moboque.view.sub-district.ListView',
         items: [
             text: 'เพิ่มข้อมูลตำบล'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -46,7 +46,7 @@ Ext.define 'Moboque.view.sub-district.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
+            iconCls: 'pencil-square-o '
             bind: widgetRecord: '{refSubDistrictList.selection}'
             handler: 'onEdit'
             aclCheck: yes
@@ -56,7 +56,7 @@ Ext.define 'Moboque.view.sub-district.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
+            iconCls: 'trash-o'
             bind: widgetRecord: '{refSubDistrictList.selection}'
             handler: 'onDelete'
             aclCheck: yes
