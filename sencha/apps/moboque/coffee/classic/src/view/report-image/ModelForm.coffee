@@ -4,7 +4,7 @@ Ext.define 'Moboque.view.report-image.ModelForm',
 
     stores:
         reportList:
-            type: 'store-report'
+            type: 'store-reports'
             autoLoad: yes
             pageSize: 25
 

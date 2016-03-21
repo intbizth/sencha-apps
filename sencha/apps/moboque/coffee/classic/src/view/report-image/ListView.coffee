@@ -20,24 +20,28 @@ Ext.define 'Moboque.view.report-image.ListView',
             console.log arguments
 
     columns: [
+        text: 'ชื่อรายงาน'
+        dataIndex: 'title'
+        flex: 1
+        minWidth: 120
+    ,
         text: 'คำอธิบายภาพ'
         dataIndex: 'description'
         flex: 1
         minWidth: 200
-    ,
-        text: 'ของ รายงาน'
-        width: 300
-        renderer: (value, metaData, record) ->
-            return record.getReportTitle()
-    ,
-        text: 'ลิงค์'
-        width: 300
-        renderer: (value, metaData, record) ->
-            if image = record.get 'image'
-                return image.media.url
-
-
-            return ''
+#    ,
+#        text: 'ของ รายงาน'
+#        width: 300
+#        renderer: (value, metaData, record) ->
+#            return record.getReportTitle()
+#    ,
+#        text: 'ลิงค์'
+#        width: 300
+#        renderer: (value, metaData, record) ->
+#            if image = record.get 'image'
+#                return image.media.url
+#
+#            return ''
     ]
 
     tbar:
@@ -45,7 +49,7 @@ Ext.define 'Moboque.view.report-image.ListView',
         items: [
             text: 'เพิ่มกลุ่ม'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -53,7 +57,7 @@ Ext.define 'Moboque.view.report-image.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
+            iconCls:'pencil-square-o '
             bind: widgetRecord: '{refReportImageList.selection}'
             aclCheck: yes
             handler: 'onEdit'
@@ -63,7 +67,7 @@ Ext.define 'Moboque.view.report-image.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
+            iconCls:'trash-o'
             bind: widgetRecord: '{refReportImageList.selection}'
             aclCheck: yes
             handler: 'onDelete'

@@ -4,7 +4,7 @@ Ext.define 'Moboque.view.report-image.Controller',
 
     createDialog: (record) ->
         vm = @getViewModel()
-        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.getReportDescription()}"
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.getReportTitle()}"
         record = vm.prepareData(record)
 
         options =
