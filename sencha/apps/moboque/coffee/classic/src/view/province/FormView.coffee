@@ -1,10 +1,6 @@
 Ext.define 'Moboque.view.province.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-province-form'
-
-    width: 600
-    modal: yes
-    scrollable: 'true'
 
     bind:
         title: '{title}'
@@ -16,11 +12,10 @@ Ext.define 'Moboque.view.province.FormView',
         margin: '10 10 10 10'
         modelValidation: yes
 
-        # TODO allowBlank is not working !
         defaults:
             xtype: 'textfield'
             labelAlign: 'top'
-            anchor: '100%'
+            width: 360
             allowBlank: no
 
         items: [

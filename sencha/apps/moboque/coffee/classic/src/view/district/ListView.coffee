@@ -9,15 +9,11 @@ Ext.define 'Moboque.view.district.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'รายชื่ออำเภอ'
     reference: 'refDistrictList'
     headerBorders: no
-
-    listeners:
-        selectionchange: ->
-            console.log arguments
 
     columns: [
         text: 'ชื่ออำเภอ'
@@ -42,7 +38,7 @@ Ext.define 'Moboque.view.district.ListView',
         items: [
             text: 'เพิ่มข้อมูลอำเภอ'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -50,20 +46,20 @@ Ext.define 'Moboque.view.district.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refDistrictList.selection}'
+            iconCls: 'pencil-square-o '
+            bind: widgetRecord: '{refDistrictList.selection}'
             handler: 'onEdit'
+            aclCheck: yes
         ,
             '-'
         ,
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refDistrictList.selection}'
+            iconCls: 'trash-o'
+            bind: widgetRecord: '{refDistrictList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
         ,
             '->'
         ,
@@ -71,8 +67,7 @@ Ext.define 'Moboque.view.district.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{districts}'
+            bind: store: '{districts}'
             margin: '0 10 0 0'
         ]
 
@@ -80,6 +75,5 @@ Ext.define 'Moboque.view.district.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{districts}'
+        bind: store: '{districts}'
         displayInfo: yes
