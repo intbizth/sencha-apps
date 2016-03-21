@@ -178,6 +178,12 @@ Ext.define 'Moboque.store.Menus',
             leaf: true
             routeId: 'reports'
         ,
+            text: 'Reports Image'
+            view: 'report-image.LayoutView'
+            iconCls: 'fa fa-file-text-o'
+            leaf: true
+            routeId: 'reports-images'
+        ,
             text: 'Locales'
             view: 'locale.LayoutView'
             iconCls: 'fa fa-file-text-o'

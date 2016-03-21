@@ -1,4 +1,4 @@
-Ext.define 'Moboque.store.Link',
+Ext.define 'Moboque.store.Links',
     extend: 'Moboque.store.Base'
     model: 'Moboque.model.Link'
-    alias: 'store.store-link'
+    alias: 'store.store-links'
