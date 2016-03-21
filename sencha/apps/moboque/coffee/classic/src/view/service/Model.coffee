@@ -6,6 +6,12 @@ Ext.define 'Moboque.view.service.Model',
         services:
             type: 'store-services'
             autoLoad: yes
+            pageSize: 25
+
+        serviceCategories:
+            type: 'store-service-categories'
+            autoLoad: yes
+            pageSize: 25
 
     createRecord: (record) ->
         return record if record

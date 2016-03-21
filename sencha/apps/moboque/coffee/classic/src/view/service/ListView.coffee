@@ -9,15 +9,11 @@ Ext.define 'Moboque.view.service.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'บริการ'
     reference: 'refServiceList'
     headerBorders: no
-
-    listeners:
-        selectionchange: ->
-            console.log arguments
 
     columns: [
         text: 'ชื่อบริการ'
@@ -58,9 +54,9 @@ Ext.define 'Moboque.view.service.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refServiceList.selection}'
+            bind: widgetRecord: '{refServiceList.selection}'
             handler: 'onEdit'
+            aclCheck: yes
         ,
             '-'
         ,
@@ -68,9 +64,9 @@ Ext.define 'Moboque.view.service.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refServiceList.selection}'
+            bind: widgetRecord: '{refServiceList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
         ,
             '->'
         ,
@@ -78,8 +74,7 @@ Ext.define 'Moboque.view.service.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{services}'
+            bind: store: '{services}'
             margin: '0 10 0 0'
         ]
 
@@ -87,6 +82,5 @@ Ext.define 'Moboque.view.service.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{services}'
+        bind: store: '{services}'
         displayInfo: yes
