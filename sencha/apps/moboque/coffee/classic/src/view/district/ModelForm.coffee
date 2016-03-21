@@ -2,17 +2,9 @@ Ext.define 'Moboque.view.district.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
     alias: 'viewmodel.vm-district-form'
 
-    stores:
-        provinces:
-            type: 'store-provinces'
-            autoLoad: yes
-            pageSize: 25
-
     formulas:
         province:
-            get: ->
-                @get('record').getProvince()
-
+            get: -> @get('record').getProvince()
             set: (val) ->
                 @get('record').setProvince val
 

@@ -2,17 +2,9 @@ Ext.define 'Moboque.view.sub-district.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
     alias: 'viewmodel.vm-sub-district-form'
 
-    stores:
-        districts:
-            type: 'store-districts'
-            autoLoad: yes
-            pageSize: 25
-
     formulas:
         district:
-            get: ->
-                @get('record').getDistrict()
-
+            get: -> @get('record').getDistrict()
             set: (val) ->
                 @get('record').setDistrict val
 

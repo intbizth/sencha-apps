@@ -9,15 +9,11 @@ Ext.define 'Moboque.view.sub-district.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'รายชื่อตำบล'
     reference: 'refSubDistrictList'
     headerBorders: no
-
-    listeners:
-        selectionchange: ->
-            console.log arguments
 
     columns: [
         text: 'ชื่อตำบล'
@@ -51,9 +47,9 @@ Ext.define 'Moboque.view.sub-district.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refSubDistrictList.selection}'
+            bind: widgetRecord: '{refSubDistrictList.selection}'
             handler: 'onEdit'
+            aclCheck: yes
         ,
             '-'
         ,
@@ -61,9 +57,9 @@ Ext.define 'Moboque.view.sub-district.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refSubDistrictList.selection}'
+            bind: widgetRecord: '{refSubDistrictList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
         ,
             '->'
         ,
@@ -71,8 +67,7 @@ Ext.define 'Moboque.view.sub-district.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{subDistricts}'
+            bind: store: '{subDistricts}'
             margin: '0 10 0 0'
         ]
 
@@ -80,6 +75,5 @@ Ext.define 'Moboque.view.sub-district.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{subDistricts}'
+        bind: store: '{subDistricts}'
         displayInfo: yes

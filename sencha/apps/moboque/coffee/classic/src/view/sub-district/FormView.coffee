@@ -1,10 +1,6 @@
 Ext.define 'Moboque.view.sub-district.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-sub-district-form'
-
-    width: 600
-    modal: yes
-    scrollable: 'true'
 
     bind:
         title: '{title}'
@@ -16,10 +12,9 @@ Ext.define 'Moboque.view.sub-district.FormView',
         margin: '10 10 10 10'
         modelValidation: yes
 
-        # TODO allowBlank is not working !
         defaults:
             xtype: 'textfield'
-            anchor: '100%'
+            width: 360
             labelAlign: 'top'
             allowBlank: no
 
