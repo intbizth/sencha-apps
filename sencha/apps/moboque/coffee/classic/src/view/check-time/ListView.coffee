@@ -9,15 +9,11 @@ Ext.define 'Moboque.view.check-time.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'ตารางเวลาเข้าออก'
     reference: 'refCheckTimeList'
     headerBorders: no
-
-    listeners:
-        selectionchange: ->
-            console.log arguments
 
     columns: [
         text: 'ชื่อสมาชิก'
@@ -42,7 +38,7 @@ Ext.define 'Moboque.view.check-time.ListView',
         items: [
             text: 'เพิ่มข้อมูลเวลาเข้าออก'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -50,20 +46,20 @@ Ext.define 'Moboque.view.check-time.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!CheckTimeList.selection}'
+            iconCls: 'pencil-square-o'
+            bind: widgetRecord: '{refCheckTimeList.selection}'
             handler: 'onEdit'
+            aclCheck: yes
         ,
             '-'
         ,
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!CheckTimeList.selection}'
+            iconCls: 'trash-o'
+            bind: widgetRecord: '{refCheckTimeList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
         ,
             '->'
         ,
@@ -71,8 +67,7 @@ Ext.define 'Moboque.view.check-time.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{checkTimes}'
+            bind: store: '{checkTimes}'
             margin: '0 10 0 0'
         ]
 
@@ -80,6 +75,5 @@ Ext.define 'Moboque.view.check-time.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{checkTimes}'
+        bind: store: '{checkTimes}'
         displayInfo: yes

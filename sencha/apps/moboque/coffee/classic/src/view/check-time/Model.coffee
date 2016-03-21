@@ -7,6 +7,11 @@ Ext.define 'Moboque.view.check-time.Model',
             type: 'store-check-times'
             autoLoad: yes
 
+        members:
+            type: 'store-members'
+            autoLoad: yes
+            pageSize: 25
+
     createRecord: (record) ->
         return record if record
         return new (@data.checkTimes.getModel())()

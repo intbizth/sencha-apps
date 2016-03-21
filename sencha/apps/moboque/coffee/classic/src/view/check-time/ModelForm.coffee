@@ -2,11 +2,24 @@ Ext.define 'Moboque.view.check-time.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
     alias: 'viewmodel.vm-check-time-form'
 
-    stores:
-        members:
-            type: 'store-members'
-            autoLoad: yes
-            pageSize: 25
+    formulas:
+        member:
+            get: -> @get('record').getMember()
+            set: (val) ->
+                @get('record').setMember val
+
+        checkDate:
+            get: -> @getChecktime()
+            set: (date) -> 
+                @setChecktime(date, null)
+
+        checkTime:
+            get: -> @getChecktime()
+            set: (time) ->
+                @setChecktime(null, time)
+
+        isPhantom:
+            get: -> @get('record').phantom
 
     getChecktime: -> @get('record').get('checktime')
 
@@ -16,25 +29,6 @@ Ext.define 'Moboque.view.check-time.ModelForm',
 
         @get('record').set 'checktime', date
         return
-
-    formulas:
-        member:
-            get: ->
-                @get('record').getMember()
-
-            set: (val) ->
-                @get('record').setMember val
-
-        checkDate:
-            get: -> @getChecktime()
-            set: (date) -> @setChecktime(date, null)
-
-        checkTime:
-            get: -> @getChecktime()
-            set: (time) -> @setChecktime(null, time)
-
-        isPhantom:
-            get: -> @get('record').phantom
 
     isDirty: ->
         @get('record').dirty

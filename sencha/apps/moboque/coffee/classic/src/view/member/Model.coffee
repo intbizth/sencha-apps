@@ -7,6 +7,11 @@ Ext.define 'Moboque.view.member.Model',
             type: 'store-members'
             autoLoad: yes
 
+        groups:
+            type: 'store-groups'
+            autoLoad: yes
+            pageSize: 25
+
     createRecord: (record) ->
         return record if record
         return new (@data.members.getModel())()

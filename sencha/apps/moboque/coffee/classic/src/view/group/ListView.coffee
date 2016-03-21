@@ -9,15 +9,11 @@ Ext.define 'Moboque.view.group.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'กลุ่ม'
     reference: 'refGroupList'
     headerBorders: no
-
-    listeners:
-        selectionchange: ->
-            console.log arguments
 
     columns: [
         text: 'ชื่องาน'
@@ -40,7 +36,7 @@ Ext.define 'Moboque.view.group.ListView',
         items: [
             text: 'เพิ่มกลุ่ม'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -48,20 +44,20 @@ Ext.define 'Moboque.view.group.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refGroupList.selection}'
+            iconCls: 'pencil-square-o'
+            bind: widgetRecord: '{refGroupList.selection}'                
             handler: 'onEdit'
+            aclCheck: yes
         ,
             '-'
         ,
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refGroupList.selection}'
+            iconCls: 'trash-o'
+            bind: widgetRecord: '{refGroupList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
         ,
             '->'
         ,
@@ -69,8 +65,7 @@ Ext.define 'Moboque.view.group.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{groups}'
+            bind: store: '{groups}'
             margin: '0 10 0 0'
         ]
 
@@ -78,6 +73,5 @@ Ext.define 'Moboque.view.group.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{groups}'
+        bind: store: '{groups}'
         displayInfo: yes
