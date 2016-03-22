@@ -1,17 +1,17 @@
-Ext.define 'Moboque.view.promote-image.Controller',
+Ext.define 'Moboque.view.report-image.Controller',
     extend: 'Moboque.view.base.Controller'
-    alias: 'controller.ctrl-promote-image'
+    alias: 'controller.ctrl-report-image'
 
     createDialog: (record) ->
         vm = @getViewModel()
-        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.getPromoteTitle()}"
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.getReportTitle()}"
         record = vm.prepareData(record)
 
         options =
-            xtype: 'wg-promote-image-form'
+            xtype: 'wg-report-image-form'
             title:  title
             viewModel:
-                type: 'vm-promote-image-form'
+                type: 'vm-report-image-form'
                 data:
                     record: record
         @callParent([record, options])

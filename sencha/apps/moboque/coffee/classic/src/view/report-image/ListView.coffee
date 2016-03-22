@@ -1,18 +1,18 @@
-Ext.define 'Moboque.view.promote-image.ListView',
+Ext.define 'Moboque.view.report-image.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-promote-image-list'
+    alias: 'widget.wg-report-image-list'
 
     bind:
-        store: '{promotesImage}'
+        store: '{reportsImage}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'รูปภาพ'
-    reference: 'refPromoteImageList'
+    reference: 'refReportImageList'
     headerBorders: no
 
     listeners:
@@ -20,24 +20,28 @@ Ext.define 'Moboque.view.promote-image.ListView',
             console.log arguments
 
     columns: [
+        text: 'ชื่อรายงาน'
+        dataIndex: 'title'
+        flex: 1
+        minWidth: 120
+    ,
         text: 'คำอธิบายภาพ'
         dataIndex: 'description'
         flex: 1
         minWidth: 200
-    ,
-        text: 'ของโปรโมท'
-        width: 300
-        renderer: (value, metaData, record) ->
-            return record.getPromoteTitle()
-    ,
-        text: 'ลิงค์'
-        width: 300
-        renderer: (value, metaData, record) ->
-            if image = record.get 'image'
-                return image.media.url
-
-
-            return ''
+#    ,
+#        text: 'ของ รายงาน'
+#        width: 300
+#        renderer: (value, metaData, record) ->
+#            return record.getReportTitle()
+#    ,
+#        text: 'ลิงค์'
+#        width: 300
+#        renderer: (value, metaData, record) ->
+#            if image = record.get 'image'
+#                return image.media.url
+#
+#            return ''
     ]
 
     tbar:
@@ -54,7 +58,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls: 'pencil-square-o'
-            bind: widgetRecord: '{refPromoteImageList.selection}'
+            bind: widgetRecord: '{refReportImageList.selection}'
             aclCheck: yes
             handler: 'onEdit'
         ,
@@ -64,7 +68,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls: 'trash-o'
-            bind: widgetRecord: '{refPromoteImageList.selection}'
+            bind: widgetRecord: '{refReportImageList.selection}'
             aclCheck: yes
             handler: 'onDelete'
         ,
@@ -75,7 +79,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
             reference: 'refSearchField'
             labelWidth: 50
             bind:
-                store: '{promotesImage}'
+                store: '{reportsImage}'
             margin: '0 10 0 0'
         ]
 
@@ -84,5 +88,5 @@ Ext.define 'Moboque.view.promote-image.ListView',
         scrollable: yes
         pageSize: 25
         bind:
-            store: '{promotesImage}'
+            store: '{reportsImage}'
         displayInfo: yes

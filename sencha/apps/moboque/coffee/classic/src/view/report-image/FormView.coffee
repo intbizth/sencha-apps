@@ -1,9 +1,6 @@
-Ext.define 'Moboque.view.promote-image.FormView',
+Ext.define 'Moboque.view.report-image.FormView',
     extend: 'Moboque.view.base.Window'
-    alias: 'widget.wg-promote-image-form'
-
-    width: 600
-    modal: yes
+    alias: 'widget.wg-report-image-form'
 
     bind:
         title: '{title}'
@@ -28,14 +25,14 @@ Ext.define 'Moboque.view.promote-image.FormView',
         ,
             xtype: 'combo'
             editable: no
-            fieldLabel: 'ภาพของโปรโมท'
+            fieldLabel: 'ภาพของ Report'
             emptyText: 'กรุณาเลือก....'
             displayField: 'title'
             valueField: 'id'
             queryMode: 'local'
             bind:
-                store: '{promoteList}'
-                selection: '{promote}'
+                store: '{reportList}'
+                selection: '{report}'
         ,
             xtype: 'fieldset'
             title: 'Upload Images'

@@ -30,7 +30,7 @@ Ext.define 'Moboque.view.promote-category.ListView',
         items: [
             text: 'เพิ่มรายการ'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -38,10 +38,8 @@ Ext.define 'Moboque.view.promote-category.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refPromoteCategoryList.selection}'
-                widgetRecord: '{refPromoteCategoryList.selection}'
+            iconCls: 'pencil-square-o'
+            bind: widgetRecord: '{refPromoteCategoryList.selection}'
             aclCheck: yes
             handler: 'onEdit'
         ,
@@ -50,10 +48,8 @@ Ext.define 'Moboque.view.promote-category.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refPromoteCategoryList.selection}'
-                widgetRecord: '{refPromoteCategoryList.selection}'
+            iconCls: 'trash-o'
+            bind: widgetRecord: '{refPromoteCategoryList.selection}'
             aclCheck: yes
             handler: 'onDelete'
         ,

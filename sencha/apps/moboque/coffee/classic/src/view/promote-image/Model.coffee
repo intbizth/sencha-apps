@@ -4,7 +4,7 @@ Ext.define 'Moboque.view.promote-image.Model',
 
     stores:
         promotesImage:
-            type: 'store-promote-image'
+            type: 'store-promote-images'
             autoLoad: yes
 
     createRecord: (record) ->

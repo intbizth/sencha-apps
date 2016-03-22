@@ -1,6 +1,6 @@
 Ext.define 'Moboque.model.Link',
     extend: 'Moboque.model.Base'
-    api: '/api/link/'
+    api: '/api/links/'
 
     fields: [
         name: 'label'
