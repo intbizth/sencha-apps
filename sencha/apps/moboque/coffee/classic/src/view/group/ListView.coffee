@@ -25,8 +25,11 @@ Ext.define 'Moboque.view.group.ListView',
         dataIndex: 'name'
         width: 300
     ,
+        xtype: 'colorlabelcolumn'
         text: 'สีประจำกลุ่ม'
         dataIndex: 'color'
+        colorBoxWidth: 20
+        colorBoxHeight: 20
         flex: 1
         minWidth: 200
     ]
