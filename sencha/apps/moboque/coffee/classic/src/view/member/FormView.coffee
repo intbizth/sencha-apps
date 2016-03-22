@@ -53,8 +53,8 @@ Ext.define 'Moboque.view.member.FormView',
                     style:
                         backgroundColor: '#d9d9d9'
                     margin: '0 0 0 10'
-                    # listeners:
-                    #     beforerender: 'setImagePreview'
+                    listeners:
+                        beforerender: 'setImagePreview'
                 ,
                     name: 'image'
                     xtype: 'fileuploadfield'
@@ -67,8 +67,8 @@ Ext.define 'Moboque.view.member.FormView',
                     buttonConfig:
                         iconCls: 'right-icon hot-icon x-fa fa-file-image-o'
                     bind: '{record.image}'
-                    # listeners:
-                    #     change: 'imageUploadChanged'
+                    listeners:
+                        change: 'imageUploadChanged'
                 ]
             ]
         ,
@@ -140,11 +140,16 @@ Ext.define 'Moboque.view.member.FormView',
             split: no
             bodyPadding: 0
             buttons: [
+                text: 'Preview'
+                handler: 'applyImage'
+                reference: 'refApply'
+                hidden: yes
+            ,
                 text: 'ยกเลิก'
                 handler: 'onCancel'
             ,
                 text: 'บันทึก'
-                handler: 'onSubmit'
+                handler: 'onSubmitWithImage'
                 disabled: yes
                 formBind: yes
             ]
