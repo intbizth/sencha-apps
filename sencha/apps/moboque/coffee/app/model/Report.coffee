@@ -9,12 +9,6 @@ Ext.define 'Moboque.model.Report',
         name: 'description'
         type: 'string'
     ,
-        name: 'latitude'
-        type: 'string'
-    ,
-        name: 'longitude'
-        type: 'string'
-    ,
         name: 'state'
         type: 'string'
     ,

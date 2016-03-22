@@ -36,16 +36,6 @@ Ext.define 'Moboque.view.report.FormView',
             fieldLabel: '<span style="color:red;">*</span> รายละเอียด'
             emptyText: 'กรุณาใส่รายละเอียด'
             bind: '{record.description}'
-        ,
-            xtype: 'textareafield'
-            fieldLabel: 'ละติจูด'
-            emptyText: 'กรุณาใส่รายละเอียด'
-            bind: '{record.latitude}'
-        ,
-            xtype: 'textareafield'
-            fieldLabel: 'ลองจิจูด'
-            emptyText: 'กรุณาใส่รายละเอียด'
-            bind: '{record.longitude}'
         ]
 
         buttons: [
