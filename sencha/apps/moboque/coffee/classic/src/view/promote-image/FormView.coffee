@@ -1,5 +1,5 @@
 Ext.define 'Moboque.view.promote-image.FormView',
-    extend: 'Ext.window.Window'
+    extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-promote-image-form'
 
     width: 600

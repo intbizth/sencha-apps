@@ -4,7 +4,7 @@ Ext.define 'Moboque.view.promote-image.ModelForm',
 
     stores:
         promoteList:
-            type: 'store-promote'
+            type: 'store-promotes'
             autoLoad: yes
             pageSize: 25
 

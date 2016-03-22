@@ -45,7 +45,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
         items: [
             text: 'เพิ่มกลุ่ม'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -53,7 +53,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
+            iconCls: 'pencil-square-o '
             bind: widgetRecord: '{refPromoteImageList.selection}'
             aclCheck: yes
             handler: 'onEdit'
@@ -63,7 +63,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
+            iconCls: 'trash-o'
             bind: widgetRecord: '{refPromoteImageList.selection}'
             aclCheck: yes
             handler: 'onDelete'
