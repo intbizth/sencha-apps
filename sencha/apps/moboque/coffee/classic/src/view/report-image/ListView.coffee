@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.report-image.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'รูปภาพ'
     reference: 'refReportImageList'

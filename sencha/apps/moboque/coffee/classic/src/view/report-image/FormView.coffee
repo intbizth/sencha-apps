@@ -2,9 +2,6 @@ Ext.define 'Moboque.view.report-image.FormView',
     extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-report-image-form'
 
-    width: 600
-    modal: yes
-
     bind:
         title: '{title}'
 
