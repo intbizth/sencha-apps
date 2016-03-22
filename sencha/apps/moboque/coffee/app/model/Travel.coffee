@@ -1,7 +1,7 @@
 Ext.define 'Moboque.model.Travel',
     extend: 'Moboque.model.Translatable'
 
-    api: '/api/travel/'
+    api: '/api/travels/'
 
     fields: [
         name: 'code'

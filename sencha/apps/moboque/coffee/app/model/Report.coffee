@@ -1,9 +1,12 @@
 Ext.define 'Moboque.model.Report',
     extend: 'Moboque.model.Base'
-    api: '/api/report/'
+    api: '/api/reports/'
 
     fields: [
         name: 'title'
+        type: 'string'
+    ,
+        name: 'description'
         type: 'string'
     ,
         name: 'state'

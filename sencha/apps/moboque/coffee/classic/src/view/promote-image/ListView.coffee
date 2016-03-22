@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'รูปภาพ'
     reference: 'refPromoteImageList'
@@ -45,7 +45,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
         items: [
             text: 'เพิ่มกลุ่ม'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -53,10 +53,8 @@ Ext.define 'Moboque.view.promote-image.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refPromoteImageList.selection}'
-                widgetRecord: '{refPromoteImageList.selection}'
+            iconCls: 'pencil-square-o'
+            bind: widgetRecord: '{refPromoteImageList.selection}'
             aclCheck: yes
             handler: 'onEdit'
         ,
@@ -65,10 +63,8 @@ Ext.define 'Moboque.view.promote-image.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refPromoteImageList.selection}'
-                widgetRecord: '{refPromoteImageList.selection}'
+            iconCls: 'trash-o'
+            bind: widgetRecord: '{refPromoteImageList.selection}'
             aclCheck: yes
             handler: 'onDelete'
         ,
@@ -78,8 +74,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{promotesImage}'
+            bind: store: '{promotesImage}'
             margin: '0 10 0 0'
         ]
 

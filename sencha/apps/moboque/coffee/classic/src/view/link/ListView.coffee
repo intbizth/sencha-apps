@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.link.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'ลิงค์ภายนอก'
     reference: 'refLinkList'
@@ -31,7 +31,7 @@ Ext.define 'Moboque.view.link.ListView',
         items: [
             text: 'เพิ่มรายการ'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -39,7 +39,7 @@ Ext.define 'Moboque.view.link.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
+            iconCls: 'pencil-square-o'
             handler: 'onEdit'
             bind: widgetRecord: '{refLinkList.selection}'
             aclCheck: yes
@@ -49,7 +49,7 @@ Ext.define 'Moboque.view.link.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
+            iconCls: 'trash-o'
             handler: 'onDelete'
             bind: widgetRecord: '{refLinkList.selection}'
             aclCheck: yes
@@ -60,8 +60,7 @@ Ext.define 'Moboque.view.link.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{links}'
+            bind: store: '{links}'
             margin: '0 10 0 0'
         ]
 

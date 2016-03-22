@@ -1,10 +1,10 @@
-Ext.define 'Moboque.view.report.Model',
+Ext.define 'Moboque.view.report-image.Model',
     extend: 'Ext.app.ViewModel'
-    alias: 'viewmodel.vm-report'
+    alias: 'viewmodel.vm-report-image'
 
     stores:
-        reports:
-            type: 'store-reports'
+        reportImages:
+            type: 'store-report-images'
             autoLoad: yes
 
     prepareData: (record) ->
@@ -14,4 +14,4 @@ Ext.define 'Moboque.view.report.Model',
 
     createRecord: (record) ->
         return record if record
-        return new (@data.reports.getModel())()
+        return new (@data.reportImages.getModel())()

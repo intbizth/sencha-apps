@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.promote.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'แนะนำสถานที่ท่องเที่ยว'
     reference: 'refPromoteList'
@@ -41,7 +41,7 @@ Ext.define 'Moboque.view.promote.ListView',
         items: [
             text: 'เพิ่มกลุ่ม'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -49,10 +49,8 @@ Ext.define 'Moboque.view.promote.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refPromoteList.selection}'
-                widgetRecord: '{refPromoteList.selection}'
+            iconCls: 'pencil-square-o'
+            bind: widgetRecord: '{refPromoteList.selection}'
             aclCheck: yes
             handler: 'onEdit'
         ,
@@ -61,10 +59,8 @@ Ext.define 'Moboque.view.promote.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refPromoteList.selection}'
-                widgetRecord: '{refPromoteList.selection}'
+            iconCls: 'trash-o'
+            bind: widgetRecord: '{refPromoteList.selection}'
             aclCheck: yes
             handler: 'onDelete'
         ,
@@ -74,8 +70,7 @@ Ext.define 'Moboque.view.promote.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{promotes}'
+            bind: store: '{promotes}'
             margin: '0 10 0 0'
         ]
 

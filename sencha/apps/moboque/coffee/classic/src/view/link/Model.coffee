@@ -4,7 +4,7 @@ Ext.define 'Moboque.view.link.Model',
 
     stores:
         links:
-            type: 'store-link'
+            type: 'store-links'
             autoLoad: yes
 
     prepareData: (record) ->

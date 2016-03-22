@@ -1,9 +1,9 @@
-Ext.define 'Moboque.view.gift.ListView',
+Ext.define 'Moboque.view.report-image.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-gift-list'
+    alias: 'widget.wg-report-image-list'
 
     bind:
-        store: '{gifts}'
+        store: '{reportsImage}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,8 +11,8 @@ Ext.define 'Moboque.view.gift.ListView',
         emptyText: 'Empty Data'
         deferEmptyText: no
 
-    title: 'ของฝากประจำจังหวัด'
-    reference: 'refGiftList'
+    title: 'รูปภาพ'
+    reference: 'refReportImageList'
     headerBorders: no
 
     listeners:
@@ -20,31 +20,37 @@ Ext.define 'Moboque.view.gift.ListView',
             console.log arguments
 
     columns: [
-        text: 'ชื่อของฝาก'
+        text: 'ชื่อรายงาน'
         dataIndex: 'title'
-        minWidth: 300
         flex: 1
+        minWidth: 120
     ,
-        text: 'คำอธิบาย'
+        text: 'คำอธิบายภาพ'
         dataIndex: 'description'
-        minWidth: 300
         flex: 1
-    ,
-        xtype: 'datecolumn'
-        text: 'วันที่เขียน'
-        dataIndex: 'created_at'
-        format: 'd-m-Y H:i'
-        maxWidth: 250
+        minWidth: 200
+#    ,
+#        text: 'ของ รายงาน'
+#        width: 300
+#        renderer: (value, metaData, record) ->
+#            return record.getReportTitle()
+#    ,
+#        text: 'ลิงค์'
+#        width: 300
+#        renderer: (value, metaData, record) ->
+#            if image = record.get 'image'
+#                return image.media.url
+#
+#            return ''
     ]
 
     tbar:
         scrollable: yes
         items: [
-            text: 'เพิ่มรายการ'
+            text: 'เพิ่มกลุ่ม'
             xtype: 'button'
             iconCls: 'plus'
             handler: 'onAddNew'
-
         ,
             '-'
         ,
@@ -52,9 +58,9 @@ Ext.define 'Moboque.view.gift.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls: 'pencil-square-o'
-            handler: 'onEdit'
-            bind: widgetRecord: '{refGiftList.selection}'
+            bind: widgetRecord: '{refReportImageList.selection}'
             aclCheck: yes
+            handler: 'onEdit'
         ,
             '-'
         ,
@@ -62,9 +68,9 @@ Ext.define 'Moboque.view.gift.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls: 'trash-o'
-            handler: 'onDelete'
-            bind: widgetRecord: '{refGiftList.selection}'
+            bind: widgetRecord: '{refReportImageList.selection}'
             aclCheck: yes
+            handler: 'onDelete'
         ,
             '->'
         ,
@@ -73,7 +79,7 @@ Ext.define 'Moboque.view.gift.ListView',
             reference: 'refSearchField'
             labelWidth: 50
             bind:
-                store: '{gifts}'
+                store: '{reportsImage}'
             margin: '0 10 0 0'
         ]
 
@@ -81,5 +87,6 @@ Ext.define 'Moboque.view.gift.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind: store: '{gifts}'
+        bind:
+            store: '{reportsImage}'
         displayInfo: yes
