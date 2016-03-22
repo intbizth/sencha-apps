@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'รูปภาพ'
     reference: 'refPromoteImageList'
@@ -74,8 +74,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{promotesImage}'
+            bind: store: '{promotesImage}'
             margin: '0 10 0 0'
         ]
 

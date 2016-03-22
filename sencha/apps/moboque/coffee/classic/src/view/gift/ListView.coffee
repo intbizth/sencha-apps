@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.gift.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'ของฝากประจำจังหวัด'
     reference: 'refGiftList'
@@ -81,6 +81,5 @@ Ext.define 'Moboque.view.gift.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{gifts}'
+        bind: store: '{gifts}'
         displayInfo: yes

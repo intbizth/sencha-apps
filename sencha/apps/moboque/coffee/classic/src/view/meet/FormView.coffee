@@ -2,9 +2,6 @@ Ext.define 'Moboque.view.meet.FormView',
     extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-meet-form'
 
-    width: 500
-    modal: yes
-
     bind:
         title: '{title}'
 
@@ -24,8 +21,6 @@ Ext.define 'Moboque.view.meet.FormView',
             maxLength: 255
 
         # TODO allowBlank is not working !
-
-
 
         items: [
             fieldLabel: '<span style="color:red;">*</span> สถานะ'

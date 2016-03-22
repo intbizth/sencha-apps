@@ -66,8 +66,7 @@ Ext.define 'Moboque.view.meet.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{meets}'
+            bind: store: '{meets}'
             margin: '0 10 0 0'
         ]
 
