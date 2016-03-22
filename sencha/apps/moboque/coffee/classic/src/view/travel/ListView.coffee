@@ -53,7 +53,7 @@ Ext.define 'Moboque.view.travel.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'pencil-square-o '
+            iconCls: 'pencil-square-o'
             handler: 'onEdit'
             bind: widgetRecord: '{refTravelList.selection}'
             aclCheck: yes
@@ -63,7 +63,7 @@ Ext.define 'Moboque.view.travel.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'trash-o'
+            iconCls: 'trash-o'
             handler: 'onDelete'
             bind: widgetRecord: '{refTravelList.selection}'
             aclCheck: yes

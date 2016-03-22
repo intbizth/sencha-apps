@@ -57,7 +57,7 @@ Ext.define 'Moboque.view.report-image.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls: 'pencil-square-o '
+            iconCls: 'pencil-square-o'
             bind: widgetRecord: '{refReportImageList.selection}'
             aclCheck: yes
             handler: 'onEdit'

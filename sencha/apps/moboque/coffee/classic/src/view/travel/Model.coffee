@@ -4,7 +4,7 @@ Ext.define 'Moboque.view.travel.Model',
 
     stores:
         travels:
-            type: 'store-travel'
+            type: 'store-travels'
             autoLoad: yes
         locales:
             type: 'store-locale'

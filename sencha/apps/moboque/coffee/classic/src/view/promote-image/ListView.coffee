@@ -53,7 +53,7 @@ Ext.define 'Moboque.view.promote-image.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls: 'pencil-square-o '
+            iconCls: 'pencil-square-o'
             bind: widgetRecord: '{refPromoteImageList.selection}'
             aclCheck: yes
             handler: 'onEdit'

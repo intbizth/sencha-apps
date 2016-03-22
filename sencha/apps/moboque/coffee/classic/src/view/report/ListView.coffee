@@ -79,7 +79,7 @@ Ext.define 'Moboque.view.report.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls: 'pencil-square-o '
+            iconCls: 'pencil-square-o'
             handler: 'onEdit'
             bind: widgetRecord: '{refReportList.selection}'
             aclCheck: yes

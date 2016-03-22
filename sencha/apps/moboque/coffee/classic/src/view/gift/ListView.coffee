@@ -42,7 +42,7 @@ Ext.define 'Moboque.view.gift.ListView',
         items: [
             text: 'เพิ่มรายการ'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
 
         ,
@@ -51,7 +51,7 @@ Ext.define 'Moboque.view.gift.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
+            iconCls: 'pencil-square-o'
             handler: 'onEdit'
             bind: widgetRecord: '{refGiftList.selection}'
             aclCheck: yes
@@ -61,7 +61,7 @@ Ext.define 'Moboque.view.gift.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
+            iconCls: 'trash-o'
             handler: 'onDelete'
             bind: widgetRecord: '{refGiftList.selection}'
             aclCheck: yes
