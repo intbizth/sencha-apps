@@ -1,4 +1,4 @@
-Ext.define 'Moboque.view.service_category.FormView',
+Ext.define 'Moboque.view.service-category.FormView',
     extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-service-category-form'
 

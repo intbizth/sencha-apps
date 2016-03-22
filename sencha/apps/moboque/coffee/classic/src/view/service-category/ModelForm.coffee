@@ -1,4 +1,4 @@
-Ext.define 'Moboque.view.service_category.ModelForm',
+Ext.define 'Moboque.view.service-category.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
     alias: 'viewmodel.vm-service-category-form'
 

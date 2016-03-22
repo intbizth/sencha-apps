@@ -1,4 +1,4 @@
-Ext.define 'Moboque.view.service_category.Model',
+Ext.define 'Moboque.view.service-category.Model',
     extend: 'Ext.app.ViewModel'
     alias: 'viewmodel.vm-service-category'
 
