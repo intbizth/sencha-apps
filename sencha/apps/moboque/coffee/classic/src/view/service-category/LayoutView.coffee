@@ -1,4 +1,4 @@
-Ext.define 'Moboque.view.service_category.LayoutView',
+Ext.define 'Moboque.view.service-category.LayoutView',
     extend: 'Ext.container.Container'
     xtype: 'ux-service-category-layout'
 

@@ -58,6 +58,12 @@ Ext.define 'Moboque.store.Menus',
                 leaf: true
                 routeId: 'activities'
             ,
+                text: 'ActivityImages'
+                view: 'activity-image.LayoutView'
+                iconCls: 'fa fa-picture-o'
+                leaf: true
+                routeId: 'activity-images'
+            ,
                 text: 'Services'
                 view: 'service.LayoutView'
                 iconCls: 'fa fa-cube'
@@ -65,10 +71,16 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'services'
             ,
                 text: 'ServiceCategories'
-                view: 'service_category.LayoutView'
+                view: 'service-category.LayoutView'
                 iconCls: 'fa fa-cubes'
                 leaf: true
                 routeId: 'service-categories'
+            ,
+                text: 'ServiceImages'
+                view: 'service-image.LayoutView'
+                iconCls: 'fa fa-picture-o'
+                leaf: true
+                routeId: 'service-images'
             ]
         ,
             text: 'ContentBundle'

@@ -1,4 +1,4 @@
-Ext.define 'Moboque.view.service_category.Controller',
+Ext.define 'Moboque.view.service-category.Controller',
     extend: 'Moboque.view.base.Controller'
     alias: 'controller.ctrl-service-category'
 
