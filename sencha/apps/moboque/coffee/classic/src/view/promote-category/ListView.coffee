@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.promote-category.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'ลิงค์ภายนอก'
     reference: 'refPromoteCategoryList'
@@ -68,6 +68,5 @@ Ext.define 'Moboque.view.promote-category.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{promotes}'
+        bind: store: '{promotes}'
         displayInfo: yes

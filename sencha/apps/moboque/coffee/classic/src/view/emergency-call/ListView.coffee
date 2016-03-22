@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.emergency-call.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'เบอร์โทรฉุกเฉิน'
     reference: 'refEmergencyCallList'

@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.promote.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'แนะนำสถานที่ท่องเที่ยว'
     reference: 'refPromoteList'
@@ -70,8 +70,7 @@ Ext.define 'Moboque.view.promote.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{promotes}'
+            bind: store: '{promotes}'
             margin: '0 10 0 0'
         ]
 

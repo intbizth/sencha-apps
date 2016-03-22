@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.link.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'ลิงค์ภายนอก'
     reference: 'refLinkList'
@@ -60,8 +60,7 @@ Ext.define 'Moboque.view.link.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{links}'
+            bind: store: '{links}'
             margin: '0 10 0 0'
         ]
 

@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.report.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'กล่องเหตุฉุกเฉิน'
     reference: 'refReportList'
@@ -33,13 +33,6 @@ Ext.define 'Moboque.view.report.ListView',
         dataIndex: 'description'
         flex: 1
         minWidth: 200
-#    ,
-#        text: 'published'
-#        dataIndex: 'published'
-#        flex: 1
-#        maxWidth: 400
-#        renderer: (value, metaData, record) ->
-#            if value == true then return 'เผยแพร่' else return 'ไม่เผยแพร่'
     ,
         text: 'สถานะ'
         dataIndex: 'state'

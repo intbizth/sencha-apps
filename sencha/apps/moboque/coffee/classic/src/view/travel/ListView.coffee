@@ -9,7 +9,7 @@ Ext.define 'Moboque.view.travel.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
     title: 'สถานที่ท่องเที่ยว'
     reference: 'refTravelList'
