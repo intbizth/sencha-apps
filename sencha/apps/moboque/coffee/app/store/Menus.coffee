@@ -60,7 +60,7 @@ Ext.define 'Moboque.store.Menus',
             ,
                 text: 'ActivityImages'
                 view: 'activity-image.LayoutView'
-                iconCls: 'fa fa-newspaper-o'
+                iconCls: 'fa fa-picture-o'
                 leaf: true
                 routeId: 'activity-images'
             ,
@@ -78,7 +78,7 @@ Ext.define 'Moboque.store.Menus',
             ,
                 text: 'ServiceImages'
                 view: 'service-image.LayoutView'
-                iconCls: 'fa fa-cubes'
+                iconCls: 'fa fa-picture-o'
                 leaf: true
                 routeId: 'service-images'
             ]
