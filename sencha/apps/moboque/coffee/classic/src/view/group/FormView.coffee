@@ -83,7 +83,7 @@ Ext.define 'Moboque.view.group.FormView',
             handler: 'onCancel'
         ,
             text: 'บันทึก'
-            handler: 'onSubmit'
+            handler: 'onSubmitWithImage'
             disabled: yes
             formBind: yes
         ]
