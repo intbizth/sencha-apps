@@ -47,7 +47,6 @@ Ext.define 'Moboque.view.group.Controller',
                             me.onSubmit()
 
     setImagePreview: (imageComponent) ->
-        console.log 'img', imageComponent
         record = @dialog.getViewModel().get 'record'
 
         if image = record.get 'image'

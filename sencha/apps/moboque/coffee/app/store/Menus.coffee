@@ -162,6 +162,22 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'sub-districts'
             ]
         ,
+            text: 'GalleryBundle'
+            iconCls: 'fa fa-location-arrow'
+            children: [
+                text: 'Galleries'
+                view: 'gallery.LayoutView'
+                iconCls: 'fa fa-globe'
+                leaf: true
+                routeId: 'galleries'
+            ,
+                text: 'GalleryCategories'
+                view: 'gallery-category.LayoutView'
+                iconCls: 'fa fa-map-marker'
+                leaf: true
+                routeId: 'gallery-categories'
+            ]
+        ,
             text: 'Personals'
             iconCls: 'fa fa-users'
             children: [
