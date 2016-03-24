@@ -163,19 +163,19 @@ Ext.define 'Moboque.store.Menus',
             ]
         ,
             text: 'GalleryBundle'
-            iconCls: 'fa fa-location-arrow'
+            iconCls: 'fa fa-camera-retro'
             children: [
-                text: 'Galleries'
-                view: 'gallery.LayoutView'
-                iconCls: 'fa fa-globe'
-                leaf: true
-                routeId: 'galleries'
-            ,
                 text: 'GalleryCategories'
                 view: 'gallery-category.LayoutView'
-                iconCls: 'fa fa-map-marker'
+                iconCls: 'fa fa-picture-o'
                 leaf: true
                 routeId: 'gallery-categories'
+            ,
+                text: 'Galleries'
+                view: 'gallery.LayoutView'
+                iconCls: 'fa fa-file-image-o'
+                leaf: true
+                routeId: 'galleries'
             ]
         ,
             text: 'Personals'

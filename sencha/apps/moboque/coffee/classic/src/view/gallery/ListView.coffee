@@ -20,15 +20,17 @@ Ext.define 'Moboque.view.gallery.ListView',
         dataIndex: 'title'
         width: 250
     ,
-        text: 'คำบรรยาย'
-        dataIndex: 'sub_title'
-        width: 250
-    ,
         text: 'หมวดหมู่รูปภาพ'
+        width: 250
+        renderer: (v, m, r) ->
+            return r.getGalleryCategoryName()
+    ,
+        text: 'ลิงค์รูปภาพ'
         minWidth: 250
         flex: 1
         renderer: (v, m, r) ->
-            return r.getGalleryCategoryName()
+            if image = r.get 'image'
+                return image.media.url
     ,
         xtype: 'datecolumn'
         text: 'สร้างเมื่อ'

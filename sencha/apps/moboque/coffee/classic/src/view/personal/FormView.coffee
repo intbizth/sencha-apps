@@ -41,6 +41,8 @@ Ext.define 'Moboque.view.personal.FormView',
                     style:
                         backgroundColor: '#d9d9d9'
                     margin: '0 0 0 10'
+                    listeners:
+                        beforerender: 'setImagePreview'
                 ,
                     name: 'image'
                     xtype: 'fileuploadfield'
@@ -129,97 +131,3 @@ Ext.define 'Moboque.view.personal.FormView',
                 formBind: yes
             ]
         ]
-
-    # items:
-    #     xtype: 'form'
-    #     layout: 'anchor'
-    #     referenceHolder: yes
-    #     margin: '10 10 10 10'
-    #     modelValidation: yes
-
-    #     defaults:
-    #         xtype: 'textfield'
-    #         width: 360
-    #         labelAlign: 'top'
-    #         allowBlank: no
-
-    #     items: [
-    #         fieldLabel: '<span style="color:red;">*</span> ชื่อ'
-    #         emptyText: 'กรุณาระบุชื่อ'
-    #         bind: '{record.name}'
-    #     ,
-    #         fieldLabel: '<span style="color:red;">*</span> นามสกุล'
-    #         emptyText: 'กรุณาระบุนามสกุล'
-    #         bind: '{record.surname}'
-    #     ,
-    #         xtype: 'combo'
-    #         fieldLabel: '<span style="color:red;">*</span> ชื่อแผนก'
-    #         displayField: 'title'
-    #         valueField: 'id'
-    #         queryMode: 'local'
-    #         bind:
-    #             store: '{personalDepartments}'
-    #             selection: '{personalDepartment}'
-    #     ,
-    #         fieldLabel: '<span style="color:red;">*</span> ตำแหน่ง'
-    #         emptyText: 'กรุณาระบุตำแหน่ง'
-    #         bind: '{record.position}'
-    #     ,
-    #         xtype: 'textareafield'
-    #         fieldLabel: '<span style="color:red;">*</span> ที่อยู่'
-    #         emptyText: 'กรุณากรอกรายละเอียดที่อยู่'
-    #         bind: '{record.address}'
-    #     ,
-    #         xtype: 'datefield'
-    #         fieldLabel: '<span style="color:red;">*</span> วันเกิด'
-    #         emptyText: 'กรุณาระบุวันเกิด'
-    #         format: 'd-m-Y'
-    #         bind: '{record.birth_date}'
-    #     ,
-    #         fieldLabel: '<span style="color:red;">*</span> เบอร์โทรติดต่อ'
-    #         emptyText: 'กรุณาใส่เบอร์โทรติดต่อ'
-    #         bind: '{record.tel}'
-    #     ,
-    #         fieldLabel: '<span style="color:red;">*</span> อีเมล์'
-    #         emptyText: 'กรุณาใส่ชื่ออีเมล์'
-    #         vtype: 'email'
-    #         bind: '{record.email}'
-    #     ,
-    #         xtype: 'fieldset'
-    #         title: 'Upload Images'
-    #         defaultType: 'textfield'
-    #         items: [
-    #             xtype: 'image'
-    #             reference: 'refImage'
-    #             alt: 'image'
-    #             style:
-    #                 backgroundColor: '#d9d9d9'
-    #             margin: '0 0 0 10'
-    #             listeners:
-    #                 beforerender: 'setImagePreview'
-    #         ,
-    #             name: 'image'
-    #             xtype: 'fileuploadfield'
-    #             emptyText: 'Select an image'
-    #             fieldLabel: 'Image '
-    #             labelAlign: 'top'
-    #             anchor: '100%'
-    #             margin: '0 5 0 10'
-    #             buttonText: ''
-    #             buttonConfig:
-    #                 iconCls: 'right-icon hot-icon x-fa fa-file-image-o'
-    #             bind: '{record.image}'
-    #             listeners:
-    #                 change: 'imageUploadChanged'
-    #         ]
-    #     ]
-
-    #     buttons: [
-    #         text: 'ยกเลิก'
-    #         handler: 'onCancel'
-    #     ,
-    #         text: 'บันทึก'
-    #         handler: 'onSubmit'
-    #         disabled: yes
-    #         formBind: yes
-    #     ]
