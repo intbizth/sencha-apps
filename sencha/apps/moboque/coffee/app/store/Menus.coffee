@@ -184,6 +184,12 @@ Ext.define 'Moboque.store.Menus',
             leaf: true
             routeId: 'feeders'
         ,
+            text: 'News'
+            view: 'news.LayoutView'
+            iconCls: 'fa fa-newspaper-o'
+            leaf: true
+            routeId: 'news'
+        ,
             text: 'Reports'
             view: 'report.LayoutView'
             iconCls: 'fa fa-file-text-o'
