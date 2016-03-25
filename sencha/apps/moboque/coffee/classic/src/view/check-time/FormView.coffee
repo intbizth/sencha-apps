@@ -45,14 +45,14 @@ Ext.define 'Moboque.view.check-time.FormView',
 
             items: [
                 xtype: 'datefield'
-                fieldLabel: '<span style="color:red;">*</span> วันเริ่มงาน'
+                fieldLabel: '<span style="color:red;">*</span> วันที่บันทึก'
                 labelAlign: 'top'
                 bind: '{checkDate}'
                 format: 'd/m/Y'
                 margin: '10 10 10 0'
             ,
                 xtype: 'timefield'
-                fieldLabel: '<span style="color:red;">*</span> เวลาเริ่มงาน'
+                fieldLabel: '<span style="color:red;">*</span> เวลาที่บันทึก'
                 labelAlign: 'top'
                 bind: '{checkTime}'
                 margin: '10 0 10 10'

@@ -55,19 +55,4 @@ Ext.define 'Moboque.view.feeder.Controller',
             imageComponent.setSrc('http://dummyimage.com/300x200/757575/242424.png&text=Image+Here')
 
     imageUploadChanged: (field, value) ->
-        applyBtn = @dialog.down('form').lookupReference('refApply')
         field.setRawValue(value.replace(/C:\\fakepath\\/g, ''))
-        applyBtn.setHidden(no)
-
-    applyImage: ->
-        form = @dialog.down 'form'
-        imageInput = @manageFiles(form, 'image')
-
-        if imageInput.files and imageInput.files.length
-            Ext.each imageInput, (input) ->
-                reader = new FileReader()
-                reader.readAsDataURL input.files[0]
-                reader.onload = (e) ->
-                    thumbnail = form.lookupReference('refImage')
-                    thumbnail.setSrc(e.target.result)
-                    return
