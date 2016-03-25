@@ -9,9 +9,9 @@ Ext.define 'Moboque.model.Gallery',
     ,
         name: 'sub_title'
         type: 'string'
-    # ,
-    #     name: 'image'
-    #     type: 'auto'
+    ,
+        name: 'image'
+        type: 'auto'
     ,
         name: 'galleryCategory'
         reference:

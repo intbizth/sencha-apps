@@ -66,7 +66,7 @@ Ext.define 'Moboque.view.gallery-category.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind: store: '{gallery-categories}'
+            bind: store: '{galleryCategories}'
             margin: '0 10 0 0'
         ]
 
@@ -74,5 +74,5 @@ Ext.define 'Moboque.view.gallery-category.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind: store: '{gallery-categories}'
+        bind: store: '{galleryCategories}'
         displayInfo: yes

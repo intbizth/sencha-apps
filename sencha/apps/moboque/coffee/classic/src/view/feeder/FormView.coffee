@@ -64,11 +64,6 @@ Ext.define 'Moboque.view.feeder.FormView',
         ]
 
         buttons: [
-            text: 'Preview'
-            handler: 'applyImage'
-            reference: 'refApply'
-            hidden: yes
-        ,
             text: 'ยกเลิก'
             handler: 'onCancel'
         ,

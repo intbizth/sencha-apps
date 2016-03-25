@@ -23,6 +23,7 @@ Ext.define 'Moboque.view.service.FormView',
             fieldLabel: '* ชื่อหมวดหมู่'
             displayField: 'title'
             valueField: 'id'
+            editable: no
             queryMode: 'local'
             bind:
                 store: '{serviceCategories}'

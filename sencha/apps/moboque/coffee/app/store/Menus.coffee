@@ -50,7 +50,7 @@ Ext.define 'Moboque.store.Menus',
             ]
         ,
             text: 'InfoBundle'
-            iconCls: 'fa fa-newspaper-o'
+            iconCls: 'fa fa-info-circle'
             children: [
                 text: 'Activity'
                 view: 'activity.LayoutView'
