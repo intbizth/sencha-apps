@@ -1,6 +1,6 @@
-Ext.define 'Moboque.view.service-category.ModelForm',
+Ext.define 'Moboque.view.news-category.ModelForm',
     extend: 'Moboque.view.base.ViewModel'
-    alias: 'viewmodel.vm-service-category-form'
+    alias: 'viewmodel.vm-news-category-form'
 
     formulas:
         isPhantom:

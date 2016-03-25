@@ -1,9 +1,9 @@
-Ext.define 'Moboque.view.service-category.ListView',
+Ext.define 'Moboque.view.news-category.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-service-category-list'
+    alias: 'widget.wg-news-category-list'
 
     bind:
-        store: '{serviceCategories}'
+        store: '{newsCategories}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -12,7 +12,7 @@ Ext.define 'Moboque.view.service-category.ListView',
         deferEmptyText: no
 
     title: 'หมวดหมู่บริการ'
-    reference: 'refServiceCategoryList'
+    reference: 'refNewsCategoryList'
     headerBorders: no
 
     columns: [
@@ -40,7 +40,7 @@ Ext.define 'Moboque.view.service-category.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls: 'pencil-square-o'
-            bind: widgetRecord: '{refServiceCategoryList.selection}'
+            bind: widgetRecord: '{refNewsCategoryList.selection}'
             handler: 'onEdit'
             aclCheck: yes
         ,
@@ -50,7 +50,7 @@ Ext.define 'Moboque.view.service-category.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls: 'trash-o'
-            bind: widgetRecord: '{refServiceCategoryList.selection}'
+            bind: widgetRecord: '{refNewsCategoryList.selection}'
             handler: 'onDelete'
             aclCheck: yes
         ,
@@ -60,7 +60,7 @@ Ext.define 'Moboque.view.service-category.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind: store: '{serviceCategories}'
+            bind: store: '{newsCategories}'
             margin: '0 10 0 0'
         ]
 
@@ -68,5 +68,5 @@ Ext.define 'Moboque.view.service-category.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind: store: '{serviceCategories}'
+        bind: store: '{newsCategories}'
         displayInfo: yes

@@ -1,11 +1,11 @@
-Ext.define 'Moboque.view.service-category.LayoutView',
+Ext.define 'Moboque.view.news-category.LayoutView',
     extend: 'Ext.container.Container'
-    xtype: 'ux-service-category-layout'
+    xtype: 'ux-news-category-layout'
 
     viewModel:
-        type: 'vm-service-category'
+        type: 'vm-news-category'
 
-    controller: 'ctrl-service-category'
+    controller: 'ctrl-news-category'
     cls: 'ui-shadow-panel'
 
     layout:
@@ -13,6 +13,6 @@ Ext.define 'Moboque.view.service-category.LayoutView',
         align: 'stretch'
 
     items: [
-        xtype: 'wg-service-category-list'
+        xtype: 'wg-news-category-list'
         flex: 1
     ]

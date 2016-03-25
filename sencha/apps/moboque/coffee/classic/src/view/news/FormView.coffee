@@ -14,6 +14,12 @@ Ext.define 'Moboque.view.news.FormView',
         xtype: 'form'
         padding: 10
 
+        defaults:
+            xtype: 'textfield'
+#            anchor: '100%'
+#            labelAlign: 'top'
+#            allowBlank: no
+
         items: [
             xtype: 'fieldtranslation'
             fieldLabel: 'ชื่อพาดหัวข่าว'
@@ -37,6 +43,19 @@ Ext.define 'Moboque.view.news.FormView',
             bind:
                 locales: '{locales}'
                 locale: '{defaultLocale}'
+        ,
+            fieldLabel: 'Link'
+            emptyText: 'URL Link...'
+            bind: '{record.link}'
+        ,
+            xtype: 'combo'
+            fieldLabel: 'ประเภทข่าว'
+            displayField: 'title'
+            valueField: 'id'
+            queryMode: 'local'
+            bind:
+                store: '{newsCategories}'
+                selection: '{newsCategory}'
         ]
 
         buttons: [

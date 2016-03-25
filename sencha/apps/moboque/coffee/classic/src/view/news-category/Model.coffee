@@ -1,15 +1,15 @@
-Ext.define 'Moboque.view.service-category.Model',
+Ext.define 'Moboque.view.news-category.Model',
     extend: 'Ext.app.ViewModel'
-    alias: 'viewmodel.vm-service-category'
+    alias: 'viewmodel.vm-news-category'
 
     stores:
-        serviceCategories:
-            type: 'store-service-categories'
+        newsCategories:
+            type: 'store-news-categories'
             autoLoad: yes
 
     createRecord: (record) ->
         return record if record
-        return new (@data.serviceCategories.getModel())()
+        return new (@data.newsCategories.getModel())()
 
     prepareData: (record) ->
         record = @createRecord record

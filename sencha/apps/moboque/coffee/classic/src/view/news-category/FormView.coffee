@@ -1,6 +1,6 @@
-Ext.define 'Moboque.view.service-category.FormView',
+Ext.define 'Moboque.view.news-category.FormView',
     extend: 'Moboque.view.base.Window'
-    alias: 'widget.wg-service-category-form'
+    alias: 'widget.wg-news-category-form'
 
     bind:
         title: '{title}'
@@ -26,6 +26,7 @@ Ext.define 'Moboque.view.service-category.FormView',
             fieldLabel: '<span style="color:red;">*</span> คำบรรยาย'
             emptyText: 'กรุณาใส่คำบรรยาย'
             bind: '{record.sub_title}'
+
         ]
 
         buttons: [

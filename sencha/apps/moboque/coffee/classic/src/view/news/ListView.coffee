@@ -20,8 +20,8 @@ Ext.define 'Moboque.view.news.ListView',
             console.log arguments
 
     columns: [
-        text: 'id'
-        dataIndex: 'id'
+        text: 'สถานะ'
+        dataIndex: 'state'
     ,
         text: 'หัวข้อข่าว'
         dataIndex: 'title'
@@ -32,6 +32,12 @@ Ext.define 'Moboque.view.news.ListView',
         dataIndex: 'subTitle'
         minWidth: 300
         flex: 1
+    ,
+        text: 'ประเภท'
+        minWidth: 300
+        flex: 1
+        renderer: (value, metaData, record) ->
+            return record.getNewsCategoryTitle()
     ,
         text: 'ลิงค์'
         dataIndex: 'link'

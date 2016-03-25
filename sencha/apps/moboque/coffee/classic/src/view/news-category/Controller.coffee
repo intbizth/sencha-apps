@@ -1,6 +1,6 @@
-Ext.define 'Moboque.view.service-category.Controller',
+Ext.define 'Moboque.view.news-category.Controller',
     extend: 'Moboque.view.base.Controller'
-    alias: 'controller.ctrl-service-category'
+    alias: 'controller.ctrl-news-category'
 
     createDialog: (record) ->
         vm = @getViewModel()
@@ -8,10 +8,10 @@ Ext.define 'Moboque.view.service-category.Controller',
         record = vm.prepareData(record)
 
         options =
-            xtype: 'wg-service-category-form'
+            xtype: 'wg-news-category-form'
             title:  title
             viewModel:
-                type: 'vm-service-category-form'
+                type: 'vm-news-category-form'
                 data:
                     record: record
                     

@@ -24,19 +24,30 @@ Ext.define 'Moboque.model.News',
     ,
         name: 'state'
         type: 'string'
-#    ,
-#        name: 'parent'
-#        reference:
-#            type: 'News'
-#            role: 'parent'
-#            associationKey: 'parent'
-#            getterName: 'getNews'
-#            setterName: 'setParent'
+    ,
+        name: 'newsCategory'
+        reference:
+            type: 'NewsCategory'
+            role: 'newsCategory'
+            associationKey: 'news_category'
+            getterName: 'getNewsCategory'
+            setterName: 'setNewsCategory'
     ]
 
     getTitle: -> @trans 'title'
     getSubTitle: -> @trans 'sub_title'
     getDetail: -> @trans 'detail'
+        
+    getNewsCategoryTitle: ->
+        news = @getNewsCategory()
+        return news.get("title") if news
+        return ''
+
+#    writerTransform: fn: (data) ->
+#        if data.newsCategory
+#            data.newsCategory = data.newsCategory.id
+#        return data
+
 
     writerTransform: fn: (data) ->
         if data.parent

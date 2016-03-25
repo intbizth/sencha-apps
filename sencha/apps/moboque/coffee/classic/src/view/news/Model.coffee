@@ -21,4 +21,11 @@ Ext.define 'Moboque.view.news.Model',
     prepareData: (record) ->
         record = @createRecord record
 
+        newsCategoryRecord = record.getNewsCategory()
+
+        console.log 'DDD', newsCategoryRecord
+        if newsCategoryRecord and record.get('newsCategory_id') != newsCategoryRecord.getId()
+            record.set('newsCategory_id', newsCategoryRecord.getId())
+            record.commit()
+
         return record
