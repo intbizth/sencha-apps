@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d4d50a8f59f2e8fc3979cdef79f3d554",
-    "content-hash": "657b1114439bc6633f0e261e081c0b2d",
+    "hash": "60b0fc3a0ca794b57c3a906f254a859b",
+    "content-hash": "c98a7deb8f94ff5aff0cfe7facdd403f",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1567,6 +1567,46 @@
             "time": "2015-11-07 08:07:40"
         },
         {
+            "name": "somoza/oauth2-client-middleware",
+            "version": "0.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gsomoza/oauth2-middleware.git",
+                "reference": "728c578d8bb2ed4a182d5b69880757cc0d0f9ee3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gsomoza/oauth2-middleware/zipball/728c578d8bb2ed4a182d5b69880757cc0d0f9ee3",
+                "reference": "728c578d8bb2ed4a182d5b69880757cc0d0f9ee3",
+                "shasum": ""
+            },
+            "require": {
+                "league/oauth2-client": "^1.2.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0|^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Somoza\\Psr7\\OAuth2Middleware\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gabriel Somoza",
+                    "email": "gabriel@somoza.me"
+                }
+            ],
+            "description": "OAuth2 PSR7 middleware for league/oauth2-client",
+            "time": "2016-03-18 10:31:10"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.1",
             "source": {
@@ -2316,7 +2356,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/855dc0e829fad123966347612b4183e307338c11",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/9562f8291b98bcd4abd4959ab74f35191d7b34b5",
                 "reference": "855dc0e829fad123966347612b4183e307338c11",
                 "shasum": ""
             },

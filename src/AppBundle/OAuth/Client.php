@@ -2,33 +2,101 @@
 
 namespace AppBundle\OAuth;
 
+use AppBundle\Security\User;
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\HandlerStack;
+use League\OAuth2\Client\Provider\GenericProvider;
+use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ResponseInterface;
+use Somoza\Psr7\OAuth2Middleware\Bearer;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class Client
 {
     /**
-     * @var string $baseUrl
+     * @var string
      */
     private $baseUrl;
 
     /**
-     * @var GuzzleClient $httpClient
+     * @var GuzzleClient
      */
     private $httpClient;
+
+    /**
+     * @var HandlerStack
+     */
+    private $handlerStack;
+
+    /**
+     * @var GenericProvider
+     */
+    private $oauth2Provider;
+
+    /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
 
     /**
      * @var string
      */
     private $prefix;
 
-    public function __construct(GuzzleClient $httpClient, OAuth2HandlerStack $auth2HandlerStack, $prefix = 'api')
-    {
+    public function __construct(
+        GuzzleClient $httpClient,
+        HandlerStack $handlerStack,
+        GenericProvider $oauth2Provider,
+        TokenStorageInterface $tokenStorage,
+        $prefix = 'api'
+    ) {
         $this->httpClient = $httpClient;
+        $this->handlerStack = $handlerStack;
         $this->prefix = $prefix;
+        $this->tokenStorage = $tokenStorage;
         $this->baseUrl = $httpClient->getConfig('base_uri');
 
-        $auth2HandlerStack->pushHandlers();
+        $this->oauth2Provider = $oauth2Provider->setHttpClient($httpClient);
+
+        $this->initOauth2Middleware();
+    }
+
+    /**
+     * @return User|null
+     */
+    private function getUser()
+    {
+        return $this->tokenStorage->getToken()
+            ? $this->tokenStorage->getToken()->getUser()
+            : null
+        ;
+    }
+
+    /**
+     * @return AccessToken|null
+     */
+    private function getUserAccessToken()
+    {
+        return $this->getUser()
+            ? $this->getUser()->getAccessToken()
+            : null
+        ;
+    }
+
+    protected function initOauth2Middleware()
+    {
+        $oauth2Middleware = new Bearer(
+            $this->oauth2Provider,
+            $this->getUserAccessToken(),
+            function(AccessToken $accessToken) {
+                if ($user = $this->getUser()) {
+                    $user->setAccessToken($accessToken);
+                    $this->tokenStorage->getToken()->setUser($user);
+                }
+            }
+        );
+
+        $this->handlerStack->push($oauth2Middleware);
     }
 
     /**
@@ -147,9 +215,9 @@ class Client
     private function applyOptions(array $options = [])
     {
         if (array_key_exists('headers', $options)) {
-            $defaults = (array) $this->httpClient->getConfig('headers');
+            $defaults = (array)$this->httpClient->getConfig('headers');
 
-            foreach($options['headers'] as $key => &$value) {
+            foreach ($options['headers'] as $key => &$value) {
                 $value = sprintf('%s; %s', $defaults[$key], $value);
             }
         }
