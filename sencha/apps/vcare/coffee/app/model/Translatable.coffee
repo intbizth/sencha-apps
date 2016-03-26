@@ -12,6 +12,10 @@ Ext.define 'Vcare.model.Translatable',
         type: 'string'
         persist: no
     ,
+        name: 'fallback_locale'
+        type: 'string'
+        persist: no
+    ,
         name: 'translations'
         type: 'auto'
         defaultValue: {}
@@ -46,6 +50,7 @@ Ext.define 'Vcare.model.Translatable',
 
     trans: (key) ->
         locale = @data.translations[@data.current_locale]
+        locale = @data.translations[@data.fallback_locale] if !locale
         locale = (@data.translations[@data.current_locale] = {}) if !locale
 
         return locale[key]
