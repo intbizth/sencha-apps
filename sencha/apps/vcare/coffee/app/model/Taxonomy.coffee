@@ -1,6 +1,6 @@
-Ext.define 'Vcare.model.TaxonCategory',
+Ext.define 'Vcare.model.Taxonomy',
     extend: 'Vcare.model.Translatable'
-    api: '/api/taxons/category/'
+    api: '/api/taxonomies/'
 
     fields: [
         name: 'code'
@@ -9,21 +9,11 @@ Ext.define 'Vcare.model.TaxonCategory',
         name: 'name'
         persist: no
         convert: (v, r) -> r.getName()
-    ,
-        name: 'parent'
-        reference:
-            type: 'TaxonCategory'
-            role: 'parent'
-            associationKey: 'parent'
-            getterName: 'getParent'
-            setterName: 'setParent'
     ]
 
     getName: -> @trans 'name'
 
     writerTransform: fn: (data) ->
-        if data.parent
-            data.parent = data.parent.id
 
         if data.translations
             for locale of data.translations

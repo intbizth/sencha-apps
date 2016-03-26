@@ -8,15 +8,16 @@ Ext.define 'Vcare.view.taxon.LayoutView',
 
     controller: 'ctrl-taxon'
 
-    layout: 'border'
+    layout:
+        type: 'hbox'
+        align: 'stretch'
 
     items: [
-        region: 'center'
-        xtype: 'wg-taxon-category-list'
+        xtype: 'wg-taxonomy-list'
         flex: 1
     ,
-        region: 'east'
-        xtype: 'wg-taxon-brand-list'
-        split: yes
-        flex: 1
+        xtype: 'wg-taxon-list'
+        hidden: yes
+        flex: 3
+        margin: '0 0 0 10'
     ]
