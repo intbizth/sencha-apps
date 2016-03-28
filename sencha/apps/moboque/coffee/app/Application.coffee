@@ -64,3 +64,6 @@ Ext.define 'Moboque.Application',
             buttons: Ext.Msg.OK
             closable: false
             fn: -> window.location.href = Moboque.cfg.get 'api.login'
+
+# util
+_copy = (data) -> JSON.parse(JSON.stringify(data))

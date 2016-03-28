@@ -43,19 +43,19 @@ Ext.define 'Vcare.model.Customer',
         associationKey: 'groups'
         getterName: 'getGroups'
         setterName: 'setGroups'
-        storeConfig:
-            type: 'store-groups'
     ]
 
     writerTransform: fn: (data) ->
         delete data.user if Ext.Object.isEmpty(data.user)
-        delete data.user.id if data.user
 
-        if data.user.country
-            data.user.country = data.user.country.id
+        if data.user
+            delete data.user.id
 
-        if data.user.locale
-            data.user.locale = data.user.locale.id
+            if data.user.country
+                data.user.country = data.user.country.id
+
+            if data.user.locale
+                data.user.locale = data.user.locale.id
 
         groups = data.groups
 

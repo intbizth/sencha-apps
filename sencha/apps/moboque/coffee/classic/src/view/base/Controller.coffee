@@ -1,43 +1,25 @@
 Ext.define 'Moboque.view.base.Controller',
     extend: 'Ext.app.ViewController'
 
-    setCurrentView: (view, itemId, params) ->
-        contentPanel = @getView().down '#' + itemId
+    dialog: null
 
-        if !contentPanel || view == '' || (contentPanel.down() && contentPanel.down().xtype == view)
-            return no
+    config:
+        successMessage: "การทำรายการเสร็จเรียบร้อยแล้ว"
+        failureMessage: "เกิดความผิดพลาด กรุณาลองใหม่อีกครั้ง"
+        confirmMessage: "กรุณายืนยันการทำรายการ"
 
-        if params && params.openWindow
-            cfg = Ext.apply
-                xtype: 'ux-base-window'
-                items: [
-                    Ext.apply
-                        xtype: view,
-                        params.targetCfg
-                ],
-                params.windowCfg
-
-            Ext.create cfg
-        else
-            Ext.suspendLayouts()
-
-            contentPanel.removeAll yes
-            contentPanel.add(
-                Ext.apply
-                    xtype: view,
-                    params
-            )
-
-            Ext.resumeLayouts yes
-
+    # @private
     createMessageBox: ->
         Ext.create
             xtype: 'messagebox'
 
-    alertSuccess: (options) ->
+    # @protected
+    successAlert: (options) ->
+        options = @getSuccessMessage() if !options
+
         if Ext.isString options
             options = message: options
-            options.title = 'สำเร็จ'
+            options.title = 'Successful!'
 
         if !options.icon
             options.icon = Ext.Msg.INFO
@@ -45,13 +27,15 @@ Ext.define 'Moboque.view.base.Controller',
         if !options.buttons
             options.buttons = Ext.Msg.OK
 
-        msg = @createMessageBox()
-        msg.alert options
+        @createMessageBox().alert options
 
-    alertFailure: (options) ->
+    # @protected
+    failureAlert: (options) ->
+        options = @getFailureMessage() if !options
+
         if Ext.isString options
             options = message: options
-            options.title = 'ผิดพลาด !'
+            options.title = 'Error!'
 
         if !options.icon
             options.icon = Ext.Msg.ERROR
@@ -59,15 +43,22 @@ Ext.define 'Moboque.view.base.Controller',
         if !options.buttons
             options.buttons = Ext.Msg.OK
 
-        msg = @createMessageBox()
-        msg.alert options
+        @createMessageBox().alert options
 
-    showConfirmMessage: (options, func) ->
+    # @protected
+    confirmAlert: (options, callback, scope) ->
+        if Ext.isFunction(options)
+            scope = callback
+            callback = options
+            options = null
+
+        options = @getConfirmMessage() if !options
+
         if Ext.isString options
             options = message: options
 
         if !options.title
-            options.title = 'Confirm ?'
+            options.title = 'Confirm?'
 
         if !options.icon
             options.icon = Ext.Msg.QUESTION
@@ -75,14 +66,122 @@ Ext.define 'Moboque.view.base.Controller',
         if !options.buttons
             options.buttons = Ext.Msg.OKCANCEL
 
-        if Ext.isObject func
-            func.scope = @
-            options.fn = (pressed) =>
-                options.fn.call func.scope, pressed
+        if Ext.isFunction callback
+            options.fn = (pressed) ->
+                callback.call (scope || @), pressed
 
-        msg = @createMessageBox()
-        msg.show options
+        @createMessageBox().show options
 
+    # @protected
+    getDialogViewModel: -> @dialog.getViewModel()
+
+    # @protected
+    getDialogRecord: (key) -> @getDialogViewModel().get(key || 'record')
+
+    # @protected
+    getDialogForm: (key) -> @dialog.down('form')
+
+    # @protected
+    closeDialog: -> @dialog.close()
+
+    # @protected MUST be overrided!
+    createDialog: (record, options) ->
+        @dialog = @getView().add(Ext.apply(
+            title: 'Hello World!'
+            ownerView: @getView()
+            widgetRecord: record
+        ,
+            options || {}
+        ))
+
+        @dialog.show()
+
+    # @protected
+    onCancel: ->
+        @dialog.getViewModel().beforeCancel(
+            @dialog.getWidgetRecord()
+        )
+
+        @closeDialog()
+
+    # @protected
+    onAddNew: (btn) -> @createDialog()
+
+    # @protected
+    onEdit: (btn) -> @createDialog(btn.getSingleWidgetRecord())
+
+    # @protected
+    onDelete: (btn) ->
+        @confirmAlert "กรุณายืนยันการลบรายการ", (pressed) =>
+            return if pressed != 'ok'
+
+            record = btn.getSingleWidgetRecord()
+            grid = btn.up('grid')
+            store = grid.getStore()
+
+            grid.mask("กำลังลบรายการ ...")
+            store.remove([record])
+
+            store.sync
+                failure: (record, o) =>
+                    grid.unmask()
+                    store.rejectChanges()
+                    @failureAlert('เกิดความผิดพลาด ในการลบข้อมูล')
+
+                success: (record, o) =>
+                    grid.unmask()
+                    @successAlert('ลบข้อมูลเรียบร้อยแล้ว')
+
+    # @protected
+    onSubmit: ->
+        vm = @dialog.getViewModel()
+        form = @dialog.down 'form'
+        record = vm.get 'record'
+
+        vm.beforeSubmit(record, form)
+
+        if !(form.isValid() && vm.isDirty())
+            @dialog.close()
+            return
+
+        form.mask('กำลังบันทึกข้อมูล ..')
+
+        record.save
+            failure: (record, o) =>
+                form.unmask()
+                vm.onSubmitFailure(record, form)
+
+                if response = o.error.response
+                    # internal server error
+                    if response.status == 500
+                        titleMessage = response.statusText
+
+                    # sf validation error.
+                    # TODO: handle form error with custom fn.
+                    if response.status == 400
+                        obj = Ext.decode response.responseText
+                        titleMessage = obj.message
+
+                        Ext.Object.each obj.errors.children, (key, value, item) ->
+                            if value.hasOwnProperty('errors')
+                                errorMessage = value.errors[0]
+
+                @failureAlert
+                    title: titleMessage || "Error!"
+                    message: errorMessage || @getFailureMessage()
+
+            success: (record, o) =>
+                form.unmask()
+
+                vm.onSubmitSuccess(record, form)
+                vm.commit()
+
+                @successAlert(@getSuccessMessage())
+                @closeDialog()
+
+
+    # ++++++ TODO: Refatoring ++++++
+    # ++++++++++++++++++++++++++++++
     createTransitionMenu: (items, handler) ->
 
         if !items
@@ -123,26 +222,6 @@ Ext.define 'Moboque.view.base.Controller',
             xtype: 'loadmask'
             msg: message
             target: panel
-
-    setDateTimeInRecord: (originDate, date, time) ->
-        if date?
-            _date = Ext.Date.format(date, 'Y-m-d')
-
-            if originDate?
-                _time = Ext.Date.format(originDate, 'H:i:s')
-            else
-                _time = '00:00:00'
-
-            date = Ext.Date.parse(_date + ' ' + _time, 'Y-m-d H:i:s')
-        else
-            date = originDate
-
-        if time?
-            date = Ext.Date.format(date, 'Y-m-d')
-            dateTime = date + ' ' + Ext.Date.format(time, 'H:i:s')
-            date = Ext.Date.parse dateTime, 'Y-m-d H:i:s'
-
-        return date
 
     enabledState: (listname, fieldname, tran, refbutton) ->
         # listname เช่น 'NewsList'

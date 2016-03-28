@@ -9,22 +9,18 @@ Ext.define 'Vcare.view.customer.ListView',
         preserveScrollOnRefresh: yes
         preserveScrollOnReload: yes
         emptyText: 'Empty Data'
-        #deferEmptyText: no
+        deferEmptyText: no
 
-    title: 'ผู้ใช้งานระบบ'
+    title: 'Users'
     reference: 'refCustomerList'
     headerBorders: no
-
-    listeners:
-        selectionchange: ->
-            console.log arguments
 
     columns: [
         text: 'สถานะ'
         align: 'center'
         width: 80
         renderer: (v, c, r) ->
-            if r.getUser().isEnabled()
+            if r.getUser() && r.getUser().isEnabled()
                 return '<span style="color:green;">เปิด</span>'
 
             return '<span style="color:red;">ปิด</span>'
@@ -35,7 +31,7 @@ Ext.define 'Vcare.view.customer.ListView',
     ,
         text: 'Username'
         width: 200
-        renderer: (v, c, r) -> r.getUser().get('username')
+        renderer: (v, c, r) -> r.getUser() && r.getUser().get('username')
     ,
         dataIndex: 'email'
         text: 'อีเมล์'
@@ -43,41 +39,37 @@ Ext.define 'Vcare.view.customer.ListView',
     ,
         text: 'สิทธิ์การใช้งาน'
         flex: 1
-        renderer: (v, c, r) -> r.getUser().getReadableRoles()
+        renderer: (v, c, r) -> r.getUser() && r.getUser().getReadableRoles()
     ]
 
     tbar:
         items: [
-            text: 'เพิ่มผู้ใช้งาน'
-            xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            text: 'Manage Groups'
+            iconCls: 'users'
+            handler: 'onManageGroup'
+        ,
+            '-'
+        ,
+            text: 'Add New'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
-            '-'
-        ,
-            text: 'แก้ไข'
-            xtype: 'button'
-            reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
-            bind:
-                disabled: '{!refCustomerList.selection}'
+            text: 'Edit'
+            iconCls:'pencil-square-o '
+            bind: widgetRecord: '{refCustomerList.selection}'
             handler: 'onEdit'
+            aclCheck: yes
         ,
-            '-'
-        ,
-            text: 'ลบ'
-            xtype: 'button'
-            reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
-            bind:
-                disabled: '{!refCustomerList.selection}'
+            text: 'Remove'
+            iconCls:'trash-o'
+            bind: widgetRecord: '{refCustomerList.selection}'
             handler: 'onDelete'
+            aclCheck: yes
         ,
             '->'
         ,
-            fieldLabel: 'ค้นหา'
+            fieldLabel: 'Search'
             xtype: 'searchfield'
-            reference: 'refSearchField'
             labelWidth: 50
             bind: store: '{customers}'
             margin: '0 10 0 0'

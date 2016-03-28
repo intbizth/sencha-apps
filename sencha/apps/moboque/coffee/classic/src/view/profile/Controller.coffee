@@ -14,7 +14,6 @@ Ext.define 'Moboque.view.profile.Controller',
     createDialog: (record) ->
         vm = @getViewModel()
         record = vm.prepareData(record)
-        console.log record
 
         @dialog = @getView().add
             xtype: 'wg-profile-form'

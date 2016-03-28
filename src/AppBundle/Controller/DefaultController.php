@@ -32,10 +32,7 @@ class DefaultController extends Controller
         }
 
         if ($response->isStatus(400)) {
-            return JsonResponse::create(array(
-                'code' => $status,
-                'message' => $response->getStatusText(),
-            ), $status);
+            return JsonResponse::create($response->getContent(), $status);
         }
 
         if ($response->isJson()) {
@@ -87,15 +84,15 @@ class DefaultController extends Controller
 
             switch($method) {
                 case 'POST':
-                    $result = $client->post($path, $data, $defaultOptions);
+                    $result = $client->post($path, (array) $data, $defaultOptions);
                     break;
 
                 case 'PUT':
-                    $result = $client->put($path, $data, $defaultOptions);
+                    $result = $client->put($path, (array) $data, $defaultOptions);
                     break;
 
                 case 'PATCH':
-                    $result = $client->patch($path, $data, $defaultOptions);
+                    $result = $client->patch($path, (array) $data, $defaultOptions);
                     break;
 
                 case 'DELETE':

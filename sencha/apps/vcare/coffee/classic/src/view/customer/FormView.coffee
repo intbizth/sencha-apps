@@ -7,107 +7,41 @@ Ext.define 'Vcare.view.customer.FormView',
 
     items:
         xtype: 'form'
-        layout: 'border'
-        referenceHolder: yes
+        layout: 'hbox'
+        bodyPadding: 10
 
         defaults:
-            split: yes
-            bodyPadding: 10
+            xtype: 'container'
+            layout: 'anchor'
 
-        items: [
-            region: 'center'
-            collapsible: no
-            margin: '5 5 0 0'
-            scrollable: yes
-            modelValidation: yes
-            referenceHolder: yes
-            xtype: 'form'
+        fieldDefaults:
+            labelAlign: 'top'
+            anchor : '100%'
 
-            defaults:
-                anchor : '100%'
-                labelAlign: 'top'
-
+        items: [{
+            flex: 1
+            margin: '0 20 0 0'
             items: [
-                xtype: 'textfield'
-                fieldLabel: '* ชื่อ'
-                allowBlank: no
-                bind: '{record.first_name}'
-                minLength: 2
-                maxLength: 255
-            ,
-                xtype: 'textfield'
-                fieldLabel: '* นามสกุล'
-                allowBlank: no
-                bind: '{record.last_name}'
-                minLength: 2
-                maxLength: 255
-            ,
-                xtype: 'textfield'
-                fieldLabel: '* อีเมล '
-                allowBlank: no
-                bind: '{record.email}'
-                vtype: 'email'
-            ,
-                xtype: 'datefield'
-                fieldLabel: 'วันเกิด'
-                format: 'd M Y'
-                bind: '{record.birthday}'
-            ,
-                xtype: 'combobox'
-                fieldLabel: '* เพศ'
-                name: 'gender'
-                allowBlank: no
-                editable: no
-                bind: '{record.gender}'
-                store: [
-                    ['u', 'ไม่ระบุ']
-                ,
-                    ['m', 'ชาย']
-                ,
-                    ['f', 'หญิง']
-                ]
-            ,
-                xtype: 'tagfield'
-                fieldLabel: 'กลุ่มผู้ใช้งาน '
-                allowBlank: yes
-                displayField: 'name'
-                valueField: 'id'
-                queryMode: 'local'
-                multiSelect: yes
-                bind:
-                    store: '{groups}'
-                    value: '{currentGroups}'
-            ]
-        ,
-            region:'west'
-            floatable: no
-            margin: '5 0 0 5'
-            scrollable: yes
-            referenceHolder: yes
-            width: 400
-            xtype: 'form'
-
-            defaults:
-                width: 360
                 labelAlign: 'top'
-
-            items: [
                 xtype: 'textfield'
                 fieldLabel: 'Username'
-                allowBlank: no
+                required: no
                 bind: '{record.user.username}'
-            ,
-                xtype: 'textfield'
-                inputType: 'password'
-                fieldLabel: 'รหัสผ่าน '
-                minLength: 4
-                bind:
-                    value: '{record.user.plain_password}'
-                    required: '{isPhantom}'
+            # TODO: can't disable autocomplete
+            # ,
+            #     xtype: 'textfield'
+            #     inputType: 'password'
+            #     fieldLabel: 'รหัสผ่าน '
+            #     minLength: 4
+            #     ariaAttributes:
+            #         autocomplete: 'no-password'
+            #     bind:
+            #         value: '{record.user.plain_password}'
+            #         required: '{isPhantom}'
             ,
                 xtype: 'combobox'
-                fieldLabel: 'Locale '
-                allowBlank: yes
+                fieldLabel: 'Locale'
+                required: yes
                 displayField: 'name'
                 valueField: 'id'
                 queryMode: 'local'
@@ -119,19 +53,64 @@ Ext.define 'Vcare.view.customer.FormView',
                 boxLabel: 'เปิดการใช้งาน '
                 bind: '{record.user.enabled}'
             ]
-        ,
-            region: 'south'
-            collapsible: no
-            layout: 'fit'
-            split: no
-            bodyPadding: 0
-            buttons: [
-                text: 'ยกเลิก'
-                handler: 'onCancel'
+        }, {
+            flex: 2
+            items: [
+                xtype: 'textfield'
+                fieldLabel: 'ชื่อ'
+                required: yes
+                bind: '{record.first_name}'
+                minLength: 2
+                maxLength: 255
             ,
-                text: 'บันทึก'
-                handler: 'onSubmit'
-                disabled: yes
-                formBind: yes
+                xtype: 'textfield'
+                fieldLabel: 'นามสกุล'
+                required: no
+                bind: '{record.last_name}'
+                minLength: 2
+                maxLength: 255
+            ,
+                xtype: 'textfield'
+                fieldLabel: 'อีเมล '
+                required: yes
+                bind: '{record.email}'
+                vtype: 'email'
+            ,
+                xtype: 'datefield'
+                fieldLabel: 'วันเกิด'
+                format: 'd M Y'
+                bind: '{record.birthday}'
+            ,
+                xtype: 'combobox'
+                fieldLabel: 'เพศ'
+                name: 'gender'
+                required: yes
+                bind: '{record.gender}'
+                store: [
+                    ['u', 'ไม่ระบุ']
+                ,
+                    ['m', 'ชาย']
+                ,
+                    ['f', 'หญิง']
+                ]
+            ,
+                xtype: 'tagfield'
+                fieldLabel: 'กลุ่มผู้ใช้งาน '
+                displayField: 'name'
+                valueField: 'id'
+                queryMode: 'local'
+                bind:
+                    store: '{groups}'
+                    selection: '{currentGroups}'
             ]
+        }]
+
+        buttons: [
+            text: 'ยกเลิก'
+            handler: 'onCancel'
+        ,
+            text: 'บันทึก'
+            handler: 'onSubmit'
+            disabled: yes
+            formBind: yes
         ]
