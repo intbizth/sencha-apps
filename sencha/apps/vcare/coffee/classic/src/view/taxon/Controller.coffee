@@ -7,7 +7,7 @@ Ext.define 'Vcare.view.taxon.Controller',
         vm = @getViewModel()
         title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.getName()}"
         record = vm.createRecord(record, type)
-        store = if type == 'brand' then 'brands' else 'categories'
+        store = vm.getStoreByType(type)
 
         options =
             xtype: 'wg-taxon-form'
@@ -17,6 +17,7 @@ Ext.define 'Vcare.view.taxon.Controller',
                 data:
                     record: record
                     parents: vm.getStore(store)
+                    isRoot: vm.isRootType(type)
 
         @callParent([record, options])
 
@@ -33,3 +34,8 @@ Ext.define 'Vcare.view.taxon.Controller',
             btn.getSingleWidgetRecord(),
             btn.up('grid').getTaxonType()
         )
+
+    onTaxonomySelectionChange: (sm, rs) ->
+        @referTo('TaxonList').show()
+        @getViewModel().get('taxons').load
+            params: root: rs[0].get('code').toLowerCase()
