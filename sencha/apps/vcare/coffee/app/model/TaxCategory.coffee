@@ -1,6 +1,6 @@
-Ext.define 'Vcare.model.Country',
+Ext.define 'Vcare.model.TaxCategory',
     extend: 'Vcare.model.Base'
-    api: '/api/countries/'
+    api: '/api/tax-categories/'
 
     fields: [
         name: 'id'
@@ -8,15 +8,15 @@ Ext.define 'Vcare.model.Country',
     ,
         name: 'code'
         type: 'string'
+        unique: true
     ,
         name: 'name'
         type: 'string'
-        mapping: (data) -> data.code
     ,
-        name: 'enabled'
-        type: 'boolean'
-
+        name: 'description'
+        type: 'string'
     ]
 
     validators:
         code: 'presence'
+        name: 'presence'
