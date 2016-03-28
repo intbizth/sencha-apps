@@ -48,7 +48,7 @@ Ext.define 'Moboque.view.group.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls: 'pencil-square-o'
-            bind: widgetRecord: '{refGroupList.selection}'                
+            bind: widgetRecord: '{refGroupList.selection}'
             handler: 'onEdit'
             aclCheck: yes
         ,

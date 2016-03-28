@@ -1,17 +1,17 @@
-Ext.define 'Moboque.view.group.Controller',
+Ext.define 'Moboque.view.gallery.Controller',
     extend: 'Moboque.view.base.Controller'
-    alias: 'controller.ctrl-group'
+    alias: 'controller.ctrl-gallery'
 
     createDialog: (record) ->
         vm = @getViewModel()
-        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.get('name')}"
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.get('title')}"
         record = vm.prepareData(record)
 
         options =
-            xtype: 'wg-group-form'
+            xtype: 'wg-gallery-form'
             title:  title
             viewModel:
-                type: 'vm-group-form'
+                type: 'vm-gallery-form'
                 data:
                     record: record
 
@@ -47,6 +47,7 @@ Ext.define 'Moboque.view.group.Controller',
                             me.onSubmit()
 
     setImagePreview: (imageComponent) ->
+        console.log 'img', imageComponent
         record = @dialog.getViewModel().get 'record'
 
         if image = record.get 'image'
@@ -55,19 +56,4 @@ Ext.define 'Moboque.view.group.Controller',
             imageComponent.setSrc('http://dummyimage.com/300x200/757575/242424.png&text=Image+Here')
 
     imageUploadChanged: (field, value) ->
-        applyBtn = @dialog.down('form').lookupReference('refApply')
         field.setRawValue(value.replace(/C:\\fakepath\\/g, ''))
-        applyBtn.setHidden(no)
-
-    applyImage: ->
-        form = @dialog.down 'form'
-        imageInput = @manageFiles(form, 'image')
-
-        if imageInput.files and imageInput.files.length
-            Ext.each imageInput, (input) ->
-                reader = new FileReader()
-                reader.readAsDataURL input.files[0]
-                reader.onload = (e) ->
-                    thumbnail = form.lookupReference('refImage')
-                    thumbnail.setSrc(e.target.result)
-                    return

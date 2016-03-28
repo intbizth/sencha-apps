@@ -1,6 +1,6 @@
-Ext.define 'Moboque.view.personal-department.FormView',
+Ext.define 'Moboque.view.gallery.FormView',
     extend: 'Moboque.view.base.Window'
-    alias: 'widget.wg-personal-department-form'
+    alias: 'widget.wg-gallery-form'
 
     bind:
         title: '{title}'
@@ -12,31 +12,46 @@ Ext.define 'Moboque.view.personal-department.FormView',
         margin: '10 10 10 10'
         modelValidation: yes
 
-        items: [
+        defaults:
             xtype: 'textfield'
             width: 360
-            fieldLabel: '<span style="color:red;">*</span> ชื่อแผนก'
             labelAlign: 'top'
-            emptyText: 'กรุณากรอกชื่อแผนก'
             allowBlank: no
+
+        items: [
+            xtype: 'combo'
+            fieldLabel: '<span style="color:red;">*</span> ชื่อหมวดหมู่รูปภาพ'
+            emptyText: 'กรุณาเลือกหมวดหมู่รูปภาพ'
+            editable: no
+            displayField: 'title'
+            valueField: 'id'
+            queryMode: 'local'
+            bind:
+                store: '{galleryCategories}'
+                selection: '{galleryCategory}'
+        ,
+            fieldLabel: '<span style="color:red;">*</span> ชื่อ'
+            emptyText: 'กรุณาระบุชื่อรูปภาพ'
             bind: '{record.title}'
+        ,
+            fieldLabel: '<span style="color:red;">*</span> คำบรรยาย'
+            emptyText: 'กรุณากรอกคำบรรยาย'
+            bind: '{record.sub_title}'
         ,
             xtype: 'fieldset'
             title: 'Upload Images'
             defaultType: 'textfield'
-            width: 360
             items: [
                 xtype: 'image'
                 reference: 'refImage'
-                height: 200
-                alt: 'thumbnail'
+                alt: 'image'
                 style:
                     backgroundColor: '#d9d9d9'
                 margin: '0 0 0 10'
                 listeners:
                     beforerender: 'setImagePreview'
             ,
-                name: 'thumbnail'
+                name: 'image'
                 xtype: 'fileuploadfield'
                 emptyText: 'Select an image'
                 fieldLabel: 'Image '
@@ -46,18 +61,13 @@ Ext.define 'Moboque.view.personal-department.FormView',
                 buttonText: ''
                 buttonConfig:
                     iconCls: 'right-icon hot-icon x-fa fa-file-image-o'
-                bind: '{record.thumbnail}'
+                bind: '{record.image}'
                 listeners:
                     change: 'imageUploadChanged'
             ]
         ]
 
         buttons: [
-            text: 'Preview'
-            handler: 'applyImage'
-            reference: 'refApply'
-            hidden: yes
-        ,
             text: 'ยกเลิก'
             handler: 'onCancel'
         ,

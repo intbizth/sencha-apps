@@ -7,7 +7,6 @@ Ext.define 'Moboque.view.group.ModelForm',
             get: -> @get('record').getEvent()
             set: (val) ->
                 @get('record').setEvent val
-                console.log @get('record').getEvent()
 
         isPhantom:
             get: -> @get('record').phantom

@@ -23,6 +23,7 @@ Ext.define 'Moboque.view.service.FormView',
             fieldLabel: '* ชื่อหมวดหมู่'
             displayField: 'title'
             valueField: 'id'
+            editable: no
             queryMode: 'local'
             bind:
                 store: '{serviceCategories}'
@@ -46,8 +47,19 @@ Ext.define 'Moboque.view.service.FormView',
             emptyText: 'กรุณากรอกราคา'
             bind: '{record.price}'
         ,
+            xtype: 'combo'
             fieldLabel: '<span style="color:red;">*</span> สกุลเงิน'
             emptyText: 'กรุณากรอกสกุลเงิน'
+            queryMode: 'local'
+            store: [
+                [ 'USD', 'USD' ]
+            ,
+                [ 'THB', 'THB' ]
+            ,
+                [ 'EUR', 'EUR' ]
+            ,
+                [ 'YEN', 'YEN' ]
+            ]
             bind: '{record.price_currency}'
         ,
             fieldLabel: '<span style="color:red;">*</span> ลิงก์'
