@@ -4,9 +4,6 @@ Ext.define 'Moboque.model.News',
     api: '/api/news/'
 
     fields: [
-        name: 'code'
-        type: 'string'
-    ,
         name: 'title'
         persist: no
         convert: (v, r) -> r.getTitle()
@@ -43,13 +40,10 @@ Ext.define 'Moboque.model.News',
         return news.get("title") if news
         return ''
 
-#    writerTransform: fn: (data) ->
-#        if data.newsCategory
-#            data.newsCategory = data.newsCategory.id
-#        return data
-
-
     writerTransform: fn: (data) ->
+        if data.newsCategory
+            data.newsCategory = data.newsCategory.id
+
         if data.parent
             data.parent = data.parent.id
 
@@ -64,3 +58,7 @@ Ext.define 'Moboque.model.News',
                             delete data.translations[locale][prop]
 
         return data
+
+    validators:
+        link: 'presence'
+        state: 'presence'

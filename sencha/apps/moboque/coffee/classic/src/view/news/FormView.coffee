@@ -48,6 +48,10 @@ Ext.define 'Moboque.view.news.FormView',
             emptyText: 'URL Link...'
             bind: '{record.link}'
         ,
+            fieldLabel: 'State'
+            value: 'draft'
+            bind: '{record.state}'
+        ,
             xtype: 'combo'
             fieldLabel: 'ประเภทข่าว'
             displayField: 'title'
