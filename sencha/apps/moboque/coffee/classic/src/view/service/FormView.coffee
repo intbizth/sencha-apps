@@ -51,6 +51,7 @@ Ext.define 'Moboque.view.service.FormView',
             fieldLabel: '<span style="color:red;">*</span> สกุลเงิน'
             emptyText: 'กรุณากรอกสกุลเงิน'
             queryMode: 'local'
+            editable: no
             store: [
                 [ 'USD', 'USD' ]
             ,

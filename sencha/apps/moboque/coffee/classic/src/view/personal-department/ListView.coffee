@@ -21,6 +21,11 @@ Ext.define 'Moboque.view.personal-department.ListView',
         flex: 1
         minWidth: 200
     ,
+        text: 'จำนวนบุคลากร'
+        dataIndex: 'total_personal'
+        align: 'center'
+        width: 150
+    ,
         xtype: 'datecolumn'
         text: 'วันที่เขียน'
         dataIndex: 'created_at'

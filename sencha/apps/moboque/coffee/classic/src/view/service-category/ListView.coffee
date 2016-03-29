@@ -24,6 +24,12 @@ Ext.define 'Moboque.view.service-category.ListView',
         dataIndex: 'sub_title'
         flex: 1
         minWidth: 200
+    ,
+        xtype: 'datecolumn'
+        text: 'วันที่สร้าง'
+        dataIndex: 'created_at'
+        format: 'd-m-Y H:i'
+        width: 200
     ]
 
     tbar:
