@@ -52,4 +52,14 @@ Ext.define 'Vcare.store.Menus',
                 leaf: true
                 routeId: 'orders'
             ]
+        ,
+            text: 'Products'
+            iconCls: 'x-fa fa-cubes'
+            children: [
+                text: 'Products'
+                view: 'product.LayoutView'
+                iconCls: 'x-fa fa-shopping-bag'
+                leaf: true
+                routeId: 'products'
+            ]
         ]
