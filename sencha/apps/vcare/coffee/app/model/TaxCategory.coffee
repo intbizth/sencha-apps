@@ -1,6 +1,6 @@
-Ext.define 'Vcare.model.Locale',
+Ext.define 'Vcare.model.TaxCategory',
     extend: 'Vcare.model.Base'
-    api: '/api/locales/'
+    api: '/api/tax-categories/'
 
     fields: [
         name: 'id'
@@ -10,13 +10,13 @@ Ext.define 'Vcare.model.Locale',
         type: 'string'
         unique: true
     ,
-        name: 'enabled'
-        type: 'boolean'
-        persist: false
+        name: 'name'
+        type: 'string'
+    ,
+        name: 'description'
+        type: 'string'
     ]
-
-    getCode: -> @get 'code'
-    getName: -> @get 'name'
 
     validators:
         code: 'presence'
+        name: 'presence'

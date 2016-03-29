@@ -1,6 +1,6 @@
-Ext.define 'Vcare.model.Country',
+Ext.define 'Vcare.model.Zone',
     extend: 'Vcare.model.Base'
-    api: '/api/countries/'
+    api: '/api/zones/'
 
     fields: [
         name: 'id'
@@ -8,15 +8,18 @@ Ext.define 'Vcare.model.Country',
     ,
         name: 'code'
         type: 'string'
+        unique: true
     ,
         name: 'name'
         type: 'string'
-        mapping: (data) -> data.code
     ,
-        name: 'enabled'
-        type: 'boolean'
-
+        name: 'type'
+        type: 'string'
+    ,
+        name: 'scope'
+        type: 'string'
     ]
 
     validators:
         code: 'presence'
+        name: 'presence'

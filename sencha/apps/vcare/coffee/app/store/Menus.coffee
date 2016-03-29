@@ -52,4 +52,22 @@ Ext.define 'Vcare.store.Menus',
                 leaf: true
                 routeId: 'orders'
             ]
+        ,
+          text: 'Locales'
+          view: 'locale.LayoutView'
+          iconCls: 'fa fa-users'
+          leaf: true
+          routeId: 'locales'
+        ,
+          text: 'Taxs'
+          view: 'tax.LayoutView'
+          iconCls: 'fa fa-money'
+          leaf: true
+          routeId: 'taxs'
+        ,
+          text: 'Tax Categories'
+          view: 'tax-category.LayoutView'
+          iconCls: 'fa fa-money'
+          leaf: true
+          routeId: 'tax-categories'
         ]
