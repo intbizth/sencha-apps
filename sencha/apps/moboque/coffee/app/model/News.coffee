@@ -8,7 +8,7 @@ Ext.define 'Moboque.model.News',
         persist: no
         convert: (v, r) -> r.getTitle()
     ,
-        name: 'subTitle'
+        name: 'sub_title'
         persist: no
         convert: (v, r) -> r.getSubTitle()
     ,
@@ -18,9 +18,6 @@ Ext.define 'Moboque.model.News',
     ,
         name: 'link'
         type: 'string'
-#    ,
-#        name: 'state'
-#        type: 'string'
     ,
         name: 'newsCategory'
         reference:
@@ -54,7 +51,7 @@ Ext.define 'Moboque.model.News',
                 else
                     for prop of data.translations[locale]
                         # @see \Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType
-                        if -1 == Ext.Array.indexOf ['title', 'subTitle', 'description'], prop
+                        if -1 == Ext.Array.indexOf ['title', 'sub_title', 'detail'], prop
                             delete data.translations[locale][prop]
 
         return data

@@ -37,7 +37,7 @@ Ext.define 'Moboque.view.news.Controller',
 
                 dialog = view.add
                     xtype: 'wg-news-update-transition'
-                    title: "News: #{record.get('number')}"
+                    title: "News: #{record.get('title')}"
                     handlerName: 'onNewsTransitionUpdateButtonClick'
                     data: rs[0]
                     record: record

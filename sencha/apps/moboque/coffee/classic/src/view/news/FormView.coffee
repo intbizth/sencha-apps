@@ -28,7 +28,6 @@ Ext.define 'Moboque.view.news.FormView',
             xtype: 'fieldtranslation'
             fieldLabel: 'อธิบายย่อ'
             itemKey: 'sub_title'
-            itemType: 'textarea'
             bind:
                 locales: '{locales}'
                 locale: '{defaultLocale}'
@@ -44,10 +43,6 @@ Ext.define 'Moboque.view.news.FormView',
             fieldLabel: 'Link'
             emptyText: 'URL Link...'
             bind: '{record.link}'
-        ,
-            fieldLabel: 'State'
-            value: 'draft'
-            bind: '{record.state}'
         ,
             xtype: 'combo'
             fieldLabel: 'ประเภทข่าว'

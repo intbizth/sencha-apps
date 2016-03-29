@@ -29,7 +29,7 @@ Ext.define 'Moboque.view.news.ListView',
         flex: 1
     ,
         text: 'คำอธิบาย'
-        dataIndex: 'subTitle'
+        dataIndex: 'sub_title'
         minWidth: 300
         flex: 1
     ,
