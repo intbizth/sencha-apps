@@ -35,7 +35,6 @@ Ext.define 'Moboque.view.news.ListView',
     ,
         text: 'ประเภท'
         minWidth: 300
-        flex: 1
         renderer: (value, metaData, record) ->
             return record.getNewsCategoryTitle()
     ,
@@ -91,8 +90,7 @@ Ext.define 'Moboque.view.news.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{news}'
+            bind: store: '{news}'
             margin: '0 10 0 0'
         ]
 
@@ -100,6 +98,5 @@ Ext.define 'Moboque.view.news.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{news}'
+        bind: store: '{news}'
         displayInfo: yes

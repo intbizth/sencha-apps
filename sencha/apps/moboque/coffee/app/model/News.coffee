@@ -58,4 +58,3 @@ Ext.define 'Moboque.model.News',
 
     validators:
         link: 'presence'
-#        state: 'presence'

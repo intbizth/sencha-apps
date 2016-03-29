@@ -13,9 +13,6 @@ Ext.define 'Moboque.view.news.FormView',
 
         defaults:
             xtype: 'textfield'
-#            anchor: '100%'
-#            labelAlign: 'top'
-#            allowBlank: no
 
         items: [
             xtype: 'fieldtranslation'
