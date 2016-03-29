@@ -79,6 +79,12 @@ Ext.define 'Moboque.view.news.ListView',
             bind: widgetRecord: '{refNewsList.selection}'
             aclCheck: yes
         ,
+            text: 'Update State'
+            iconCls:'check-square'
+            bind: widgetRecord: '{refNewsList.selection}'
+            handler: 'onUpdateState'
+            aclCheck: yes
+        ,
             '->'
         ,
             fieldLabel: 'ค้นหา'

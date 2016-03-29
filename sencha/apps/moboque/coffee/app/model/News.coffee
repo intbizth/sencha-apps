@@ -18,9 +18,9 @@ Ext.define 'Moboque.model.News',
     ,
         name: 'link'
         type: 'string'
-    ,
-        name: 'state'
-        type: 'string'
+#    ,
+#        name: 'state'
+#        type: 'string'
     ,
         name: 'newsCategory'
         reference:
@@ -61,4 +61,4 @@ Ext.define 'Moboque.model.News',
 
     validators:
         link: 'presence'
-        state: 'presence'
+#        state: 'presence'

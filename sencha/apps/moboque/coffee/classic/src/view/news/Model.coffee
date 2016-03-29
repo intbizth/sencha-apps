@@ -6,9 +6,13 @@ Ext.define 'Moboque.view.news.Model',
         news:
             type: 'store-news'
             autoLoad: yes
+
         locales:
             type: 'store-locale'
             autoLoad: yes
+
+        transitions:
+            type: 'store-transitions'
 
     createRecord: (record) ->
         return record if record

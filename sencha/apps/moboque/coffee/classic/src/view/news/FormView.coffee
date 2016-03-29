@@ -4,9 +4,6 @@ Ext.define 'Moboque.view.news.FormView',
 
     requires: 'Ext.form.Translation'
 
-    width: 510
-    modal: yes
-
     bind:
         title: '{title}'
 
