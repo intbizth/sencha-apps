@@ -25,7 +25,7 @@ Ext.define 'Moboque.model.Service',
         reference:
             type: 'ServiceCategory'
             role: 'serviceCategory'
-            associationKey: 'service-category'
+            associationKey: 'service_category'
             getterName: 'getServiceCategory'
             setterName: 'setServiceCategory'
     ]

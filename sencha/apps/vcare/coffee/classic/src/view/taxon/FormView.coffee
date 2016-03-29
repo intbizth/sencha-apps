@@ -32,7 +32,6 @@ Ext.define 'Vcare.view.taxon.FormView',
             triggerAction: 'all'
             fieldLabel: 'Parent'
             forceSelection: yes
-            required: yes
             editable: no
             displayField: 'name'
             valueField: 'id'
@@ -41,6 +40,8 @@ Ext.define 'Vcare.view.taxon.FormView',
                 store: '{parents}'
                 selection: '{record.parent}'
                 record: '{record}'
+                hidden: '{isRoot}'
+                required: '{!isRoot}'
         ,
             xtype: 'fieldtranslation'
             fieldLabel: 'Name'

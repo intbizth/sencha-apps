@@ -25,11 +25,6 @@ services:
         arguments: ["@logger", "@guzzle.message_formatter"]
         factory: [GuzzleHttp\Middleware, log]
 
-    guzzle.oauth2:
-        public: false
-        class: AppBundle\OAuth\OAuth2HandlerStack
-        arguments: [ "@guzzle.stack", "@api.provider", "@security.token_storage" ]
-
     guzzle.http_client:
         class: GuzzleHttp\Client
         arguments:
@@ -43,17 +38,19 @@ services:
                     Content-Type: "application/json"
                     User-Agent: "DoSAPI/0.1"
 
+    oauth2.provider:
+        class: League\OAuth2\Client\Provider\GenericProvider
+        arguments: [ "%api_configs%" ]
+
     api.client:
         class: AppBundle\OAuth\Client
         arguments:
             - "@guzzle.http_client"
-            - "@guzzle.oauth2"
-
-    api.provider:
-        class: League\OAuth2\Client\Provider\GenericProvider
-        arguments: [ "%api_configs%", { httpClient: "@guzzle.http_client" } ]
+            - "@guzzle.stack"
+            - "@oauth2.provider"
+            - "@security.token_storage"
 
     api.user_provider:
         class: AppBundle\Security\UserProvider
-        arguments: [ "@api.provider" ]
+        arguments: [ "@oauth2.provider" ]
 

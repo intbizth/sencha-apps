@@ -1,9 +1,9 @@
-Ext.define 'Moboque.view.service.ListView',
+Ext.define 'Moboque.view.gallery.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-service-list'
+    alias: 'widget.wg-gallery-list'
 
     bind:
-        store: '{services}'
+        store: '{galleries}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,40 +11,38 @@ Ext.define 'Moboque.view.service.ListView',
         emptyText: 'Empty Data'
         deferEmptyText: no
 
-    title: 'บริการ'
-    reference: 'refServiceList'
+    title: 'รูปภาพ'
+    reference: 'refGalleryList'
     headerBorders: no
 
     columns: [
-        text: 'ชื่อบริการ'
+        text: 'ชื่อ'
         dataIndex: 'title'
-        flex: 1
-        minWidth: 200
+        width: 250
     ,
-        text: 'หมวดหมู่'
-        width: 350
+        text: 'หมวดหมู่รูปภาพ'
+        width: 250
         renderer: (v, m, r) ->
-            return r.getServiceCategoryName()
+            return r.getGalleryCategoryName()
     ,
-        xtype: 'numbercolumn'
-        text: 'ราคา'
-        dataIndex: 'price'
-        format: '0,000.00'
-        width: 100
+        text: 'ลิงค์รูปภาพ'
+        minWidth: 250
+        flex: 1
+        renderer: (v, m, r) ->
+            if image = r.get 'image'
+                return image.media.url
     ,
-        text: 'สกุลเงิน'
-        dataIndex: 'price_currency'
-        width: 100
-    ,
-        text: 'ลิงก์'
-        dataIndex: 'link'
-        width: 300
+        xtype: 'datecolumn'
+        text: 'สร้างเมื่อ'
+        dataIndex: 'created_at'
+        format: 'd-m-Y H:i'
+        width: 200
     ]
 
     tbar:
         scrollable: yes
         items: [
-            text: 'เพิ่มบริการ'
+            text: 'เพิ่มรูปภาพ'
             xtype: 'button'
             iconCls: 'plus'
             handler: 'onAddNew'
@@ -55,7 +53,7 @@ Ext.define 'Moboque.view.service.ListView',
             xtype: 'button'
             reference: 'refEditButton'
             iconCls: 'pencil-square-o'
-            bind: widgetRecord: '{refServiceList.selection}'
+            bind: widgetRecord: '{refGalleryList.selection}'
             handler: 'onEdit'
             aclCheck: yes
         ,
@@ -65,7 +63,7 @@ Ext.define 'Moboque.view.service.ListView',
             xtype: 'button'
             reference: 'refDeleteButton'
             iconCls: 'trash-o'
-            bind: widgetRecord: '{refServiceList.selection}'
+            bind: widgetRecord: '{refGalleryList.selection}'
             handler: 'onDelete'
             aclCheck: yes
         ,
@@ -75,7 +73,7 @@ Ext.define 'Moboque.view.service.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind: store: '{services}'
+            bind: store: '{galleries}'
             margin: '0 10 0 0'
         ]
 
@@ -83,5 +81,5 @@ Ext.define 'Moboque.view.service.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind: store: '{services}'
+        bind: store: '{galleries}'
         displayInfo: yes

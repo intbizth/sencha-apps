@@ -1,6 +1,6 @@
-Ext.define 'Vcare.model.TaxonBrand',
+Ext.define 'Vcare.model.Taxon',
     extend: 'Vcare.model.Translatable'
-    api: '/api/taxons/brand/'
+    api: '/api/taxons/{root}/'
 
     fields: [
         name: 'code'
@@ -12,7 +12,7 @@ Ext.define 'Vcare.model.TaxonBrand',
     ,
         name: 'parent'
         reference:
-            type: 'TaxonBrand'
+            type: 'Taxon'
             role: 'parent'
             associationKey: 'parent'
             getterName: 'getParent'
