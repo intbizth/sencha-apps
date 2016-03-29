@@ -38,7 +38,6 @@ Ext.define 'Vcare.view.currency.ListView',
         field:
             xtype: 'numberfield'
     ,
-        xtype: 'numbercolumn'
         dataIndex: 'enabled'
         text: 'Enabled'
         align: 'center'

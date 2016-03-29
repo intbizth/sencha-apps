@@ -34,7 +34,6 @@ Ext.define 'Vcare.view.locale.ListView',
         dataIndex: 'name'
         width: 200
     ,
-        xtype: 'numbercolumn'
         dataIndex: 'enabled'
         text: 'Enabled'
         align: 'center'

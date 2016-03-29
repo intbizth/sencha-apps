@@ -1,9 +1,9 @@
-Ext.define 'Vcare.view.country.ListView',
+Ext.define 'Vcare.view.zone.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-country-list'
+    alias: 'widget.wg-zone-list'
 
     bind:
-        store: '{countries}'
+        store: '{zones}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,8 +11,8 @@ Ext.define 'Vcare.view.country.ListView',
         emptyText: 'Empty Data'
         deferEmptyText: no
 
-    title: 'Country'
-    reference: 'refCountryList'
+    title: 'Zone'
+    reference: 'refZoneList'
     headerBorders: no
 
     plugins:
@@ -33,6 +33,13 @@ Ext.define 'Vcare.view.country.ListView',
         text: 'Name'
         dataIndex: 'name'
         width: 200
+        field:
+            xtype: 'textfield'
+    ,
+        dataIndex: 'type'
+        text: 'Type'
+        width: 120
+
     ,
         dataIndex: 'enabled'
         text: 'Enabled'
@@ -56,7 +63,7 @@ Ext.define 'Vcare.view.country.ListView',
         ,
             text: 'Remove'
             iconCls: 'trash-o'
-            bind: widgetRecord: '{refCountryList.selection}'
+            bind: widgetRecord: '{refZoneList.selection}'
             handler: 'onDelete'
             aclCheck: -> !@widgetRecord.phantom
         ,
@@ -65,7 +72,7 @@ Ext.define 'Vcare.view.country.ListView',
             fieldLabel: 'Search'
             xtype: 'searchfield'
             labelWidth: 50
-            bind: store: '{countries}'
+            bind: store: '{zones}'
             margin: '0 10 0 0'
         ]
 
@@ -73,5 +80,5 @@ Ext.define 'Vcare.view.country.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind: store: '{countries}'
+        bind: store: '{zones}'
         displayInfo: yes
