@@ -1,6 +1,6 @@
-Ext.define 'Moboque.view.promote-category.FormView',
+Ext.define 'Moboque.view.news-category.FormView',
     extend: 'Moboque.view.base.Window'
-    alias: 'widget.wg-promote-category-form'
+    alias: 'widget.wg-news-category-form'
 
     bind:
         title: '{title}'
@@ -14,16 +14,18 @@ Ext.define 'Moboque.view.promote-category.FormView',
 
         defaults:
             xtype: 'textfield'
-            anchor: '100%'
+            width: 360
             labelAlign: 'top'
             allowBlank: no
-            minLength: 2
-            maxLength: 255
 
         items: [
-            fieldLabel: 'ชื่อเรื่อง'
-            emptyText: 'กรุณากรอกชื่อเรื่อง...'
+            fieldLabel: '<span style="color:red;">*</span> ชื่อเรื่อง'
+            emptyText: 'กรุณาระบุชื่อเรื่อง'
             bind: '{record.title}'
+        ,
+            fieldLabel: '<span style="color:red;">*</span> คำบรรยาย'
+            emptyText: 'กรุณาใส่คำบรรยาย'
+            bind: '{record.sub_title}'
 
         ]
 

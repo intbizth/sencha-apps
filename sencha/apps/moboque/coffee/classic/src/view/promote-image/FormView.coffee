@@ -2,9 +2,6 @@ Ext.define 'Moboque.view.promote-image.FormView',
     extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-promote-image-form'
 
-    width: 600
-    modal: yes
-
     bind:
         title: '{title}'
 

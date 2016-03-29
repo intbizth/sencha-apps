@@ -2,9 +2,6 @@ Ext.define 'Moboque.view.promote.FormView',
     extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-promote-form'
 
-    width: 600
-    modal: yes
-
     bind:
         title: '{title}'
 

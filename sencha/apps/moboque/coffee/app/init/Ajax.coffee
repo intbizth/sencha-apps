@@ -10,6 +10,21 @@ Ext.define 'Moboque.init.Ajax',
             # custom api proxy
             options.url = options.url.replace '/api/', '/' + Moboque.cfg.get('api.version') + '/'
 
+            # url with holder in sf style.
+            options.url = options.url.replace /\{\w+?\}/g, (holder) ->
+                return if !options.params
+
+                holder = holder.replace /\{|\}/g, ''
+                replacements = options.params
+
+                return holder if !replacements
+
+                if Object.prototype.hasOwnProperty.call(replacements, holder)
+                    value = replacements[holder]
+                    delete replacements[holder]
+                    return value
+                else holder
+
             if options.proxy and options.proxy.model and options.proxy.model.xhrOverrideOptions
                 options = options.proxy.model.xhrOverrideOptions options
 

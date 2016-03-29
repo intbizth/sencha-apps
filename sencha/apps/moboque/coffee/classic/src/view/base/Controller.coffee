@@ -8,12 +8,12 @@ Ext.define 'Moboque.view.base.Controller',
         failureMessage: "เกิดความผิดพลาด กรุณาลองใหม่อีกครั้ง"
         confirmMessage: "กรุณายืนยันการทำรายการ"
 
-    # @private
+# @private
     createMessageBox: ->
         Ext.create
             xtype: 'messagebox'
 
-    # @protected
+# @protected
     successAlert: (options) ->
         options = @getSuccessMessage() if !options
 
@@ -29,7 +29,7 @@ Ext.define 'Moboque.view.base.Controller',
 
         @createMessageBox().alert options
 
-    # @protected
+# @protected
     failureAlert: (options) ->
         options = @getFailureMessage() if !options
 
@@ -45,7 +45,7 @@ Ext.define 'Moboque.view.base.Controller',
 
         @createMessageBox().alert options
 
-    # @protected
+# @protected
     confirmAlert: (options, callback, scope) ->
         if Ext.isFunction(options)
             scope = callback
@@ -72,19 +72,19 @@ Ext.define 'Moboque.view.base.Controller',
 
         @createMessageBox().show options
 
-    # @protected
+# @protected
     getDialogViewModel: -> @dialog.getViewModel()
 
-    # @protected
+# @protected
     getDialogRecord: (key) -> @getDialogViewModel().get(key || 'record')
 
-    # @protected
+# @protected
     getDialogForm: (key) -> @dialog.down('form')
 
-    # @protected
+# @protected
     closeDialog: -> @dialog.close()
 
-    # @protected MUST be overrided!
+# @protected MUST be overrided!
     createDialog: (record, options) ->
         @dialog = @getView().add(Ext.apply(
             title: 'Hello World!'
@@ -96,7 +96,7 @@ Ext.define 'Moboque.view.base.Controller',
 
         @dialog.show()
 
-    # @protected
+# @protected
     onCancel: ->
         @dialog.getViewModel().beforeCancel(
             @dialog.getWidgetRecord()
@@ -104,13 +104,13 @@ Ext.define 'Moboque.view.base.Controller',
 
         @closeDialog()
 
-    # @protected
+# @protected
     onAddNew: (btn) -> @createDialog()
 
-    # @protected
+# @protected
     onEdit: (btn) -> @createDialog(btn.getSingleWidgetRecord())
 
-    # @protected
+# @protected
     onDelete: (btn) ->
         @confirmAlert "กรุณายืนยันการลบรายการ", (pressed) =>
             return if pressed != 'ok'
@@ -132,7 +132,7 @@ Ext.define 'Moboque.view.base.Controller',
                     grid.unmask()
                     @successAlert('ลบข้อมูลเรียบร้อยแล้ว')
 
-    # @protected
+# @protected
     onSubmit: ->
         vm = @dialog.getViewModel()
         form = @dialog.down 'form'
@@ -152,7 +152,7 @@ Ext.define 'Moboque.view.base.Controller',
                 vm.onSubmitFailure(record, form)
 
                 if response = o.error.response
-                    # internal server error
+# internal server error
                     if response.status == 500
                         titleMessage = response.statusText
 
@@ -180,8 +180,8 @@ Ext.define 'Moboque.view.base.Controller',
                 @closeDialog()
 
 
-    # ++++++ TODO: Refatoring ++++++
-    # ++++++++++++++++++++++++++++++
+# ++++++ TODO: Refatoring ++++++
+# ++++++++++++++++++++++++++++++
     createTransitionMenu: (items, handler) ->
 
         if !items
@@ -223,11 +223,31 @@ Ext.define 'Moboque.view.base.Controller',
             msg: message
             target: panel
 
+    setDateTimeInRecord: (originDate, date, time) ->
+        if date?
+            _date = Ext.Date.format(date, 'Y-m-d')
+
+            if originDate?
+                _time = Ext.Date.format(originDate, 'H:i:s')
+            else
+                _time = '00:00:00'
+
+            date = Ext.Date.parse(_date + ' ' + _time, 'Y-m-d H:i:s')
+        else
+            date = originDate
+
+        if time?
+            date = Ext.Date.format(date, 'Y-m-d')
+            dateTime = date + ' ' + Ext.Date.format(time, 'H:i:s')
+            date = Ext.Date.parse dateTime, 'Y-m-d H:i:s'
+
+        return date
+
     enabledState: (listname, fieldname, tran, refbutton) ->
-        # listname เช่น 'NewsList'
-        # fieldname เช่น 'hottest'
-        # message เช่น 'ข่าวร้อน'
-        # refbutton เช่น 'HottestButton'
+# listname เช่น 'NewsList'
+# fieldname เช่น 'hottest'
+# message เช่น 'ข่าวร้อน'
+# refbutton เช่น 'HottestButton'
 
         list = @referTo listname
         records = list.getSelection()
@@ -278,7 +298,7 @@ Ext.define 'Moboque.view.base.Controller',
                             loading.hide()
                             @alertFailure('ขออภัย! กรุณาลองใหม่อีกครั้งค่ะ')
 
-    # fieldnames เช่น ['competition', 'season', 'tags']
+# fieldnames เช่น ['competition', 'season', 'tags']
     checkStoreLoaded: (record, fieldnames) ->
         form = @dialog.down 'form'
 
