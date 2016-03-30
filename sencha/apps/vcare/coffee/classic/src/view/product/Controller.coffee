@@ -3,9 +3,12 @@ Ext.define 'Vcare.view.product.Controller',
     alias: 'controller.ctrl-product'
 
     activeForm: (record) ->
+        vm = @getViewModel()
         form = @referTo 'ProductForm'
         main = @getMainLayout(form)
         title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.get('name')}"
+
+        record = vm.createRecord(record)
 
         form.setTitle title
         form.setViewModel

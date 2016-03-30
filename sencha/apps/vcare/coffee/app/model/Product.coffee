@@ -1,5 +1,5 @@
 Ext.define 'Vcare.model.Product',
-    extend: 'Vcare.model.Base'
+    extend: 'Vcare.model.Translatable'
     api: '/api/products/'
 
     fields: [

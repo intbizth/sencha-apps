@@ -6,3 +6,17 @@ Ext.define 'Vcare.view.product.Model',
         products:
             type: 'store-products'
             autoLoad: yes
+
+        locales:
+            type: 'store-locales'
+            autoLoad: yes
+            pageSize: no
+
+    createRecord: (record) ->
+        return record if record
+
+        console.log @get('defaultLocale')
+
+        return new (@data.products.getModel(
+            current_locale: @get('defaultLocale')
+        ))()

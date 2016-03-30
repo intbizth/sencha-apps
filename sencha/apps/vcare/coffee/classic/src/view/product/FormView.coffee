@@ -12,8 +12,11 @@ Ext.define 'Vcare.view.product.FormView',
         region: 'west'
         xtype: 'menu'
         width: 200
-        margin: '0 0 10 0'
+        margin: '5 5 0 0'
+        border: no
+        frame: no
         floating: no
+        manageHeight: no
         defaults:
             iconCls: 'x-fa fa-angle-right'
             iconAlign: 'right'
@@ -46,16 +49,15 @@ Ext.define 'Vcare.view.product.FormView',
         layout: 'card'
         activeItem: 'main'
 
-        # todo แยกไฟล์ ของแต่ละ form?
         items: [
             id: 'main'
-            html: 'MAIN'
+            xtype: 'wg-product-form-main'
         ,
             id: 'attribute'
             html: 'ATTRIBUTE'
         ,
             id: 'categorization'
-            html: 'CATEGORIZATION'
+            xtype: 'wg-product-form-categorization'
         ,
             id: 'image'
             html: 'IMAGE'
