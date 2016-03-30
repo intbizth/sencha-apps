@@ -20,30 +20,33 @@ Ext.define 'Vcare.view.product.FormView',
 
         items: [
             text: 'Main'
-            handler: ->
-                console.log @
-                console.log 'main'
+            itemId: 'main'
+            handler: 'onFormMenuClick'
         ,
             text: 'Attribute'
-            handler: ->
-                console.log 'attribute'
+            itemId: 'attribute'
+            handler: 'onFormMenuClick'
         ,
             text: 'Categorization'
-            handler: ->
-                console.log 'categorization'
+            itemId: 'categorization'
+            handler: 'onFormMenuClick'
         ,
             text: 'Image'
-            handler: ->
-                console.log 'image'
+            itemId: 'image'
+            handler: 'onFormMenuClick'
         ,
             text: 'SEO Keyword'
-            handler: ->
-                console.log 'keyword'
+            itemId: 'meta'
+            handler: 'onFormMenuClick'
         ]
     ,
         region: 'center'
         xtype: 'container'
-        reference: 'refProductForms'
+        reference: 'refFormTabs'
+        layout: 'card'
+        activeItem: 'main'
+
+        # todo แยกไฟล์ ของแต่ละ form?
         items: [
             id: 'main'
             html: 'MAIN'
@@ -51,14 +54,14 @@ Ext.define 'Vcare.view.product.FormView',
             id: 'attribute'
             html: 'ATTRIBUTE'
         ,
-            id: 'attribute'
+            id: 'categorization'
             html: 'CATEGORIZATION'
         ,
-            id: 'attribute'
-            html: 'ATTRIBUTE'
+            id: 'image'
+            html: 'IMAGE'
         ,
-            id: 'attribute'
-            html: 'ATTRIBUTE'
+            id: 'meta'
+            html: 'SEO'
         ]
     ,
         region: 'south'

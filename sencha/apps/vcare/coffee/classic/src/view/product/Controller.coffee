@@ -2,13 +2,6 @@ Ext.define 'Vcare.view.product.Controller',
     extend: 'Vcare.view.base.Controller'
     alias: 'controller.ctrl-product'
 
-    getMainLayout: (panel) ->
-        return panel.up('container')
-
-    onAddNew: (btn) -> @activeForm()
-
-    onEdit: (btn) -> @activeForm(btn.getSingleWidgetRecord())
-
     activeForm: (record) ->
         form = @referTo 'ProductForm'
         main = @getMainLayout(form)
@@ -22,9 +15,20 @@ Ext.define 'Vcare.view.product.Controller',
 
         main.setActiveItem('form')
 
+    getMainLayout: (panel) ->
+        return panel.up('container')
+
+    onAddNew: (btn) -> @activeForm()
+
+    onEdit: (btn) -> @activeForm(btn.getSingleWidgetRecord())
+
     onCancel: (btn) ->
         form = btn.up('form')
         main = @getMainLayout(form)
 
         #todo check dirty
         main.setActiveItem('list')
+
+    onFormMenuClick: (btn) ->
+        formTabs = @referTo 'FormTabs'
+        formTabs.setActiveItem(btn.getItemId())
