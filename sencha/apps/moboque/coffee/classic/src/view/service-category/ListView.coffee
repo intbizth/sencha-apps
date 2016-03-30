@@ -15,6 +15,15 @@ Ext.define 'Moboque.view.service-category.ListView',
     reference: 'refServiceCategoryList'
     headerBorders: no
 
+    selModel: 'rowmodel'
+    plugins:
+        ptype: 'rowediting'
+        clicksToEdit: 1
+
+    listeners:
+        edit: 'updatePersonalRecord'
+        canceledit: 'cancelEditRecord'
+
     columns: [
         text: 'ชื่อหมวดหมู่บริการ'
         dataIndex: 'title'
