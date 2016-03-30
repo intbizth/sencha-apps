@@ -1,16 +1,16 @@
-Ext.define 'Vcare.view.group.Controller',
+Ext.define 'Vcare.view.zone.Controller',
     extend: 'Vcare.view.base.Controller'
-    alias: 'controller.ctrl-group'
+    alias: 'controller.ctrl-zone'
 
     getRowEditor: ->
         @getView()
             .down('grid')
             .getPlugin('rowediting')
 
-    getGroupStore: -> @getViewModel().get('groups')
+    getZoneStore: -> @getViewModel().get('zones')
 
     onCancelEdit: (editor, context) ->
-        @getViewModel().reject()
+        context.record.reject()
 
     onSubmit: (editor, context) ->
         editor.grid.mask("กำลังบันทึกรายการ ...")
@@ -27,5 +27,5 @@ Ext.define 'Vcare.view.group.Controller',
     onAddNew: ->
         record = @getViewModel().createRecord()
 
-        @getGroupStore().insert(0, record)
+        @getZoneStore().insert(0, record)
         @getRowEditor().startEdit(record, 0)

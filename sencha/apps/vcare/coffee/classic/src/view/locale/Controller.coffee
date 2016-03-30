@@ -1,16 +1,16 @@
-Ext.define 'Vcare.view.group.Controller',
+Ext.define 'Vcare.view.locale.Controller',
     extend: 'Vcare.view.base.Controller'
-    alias: 'controller.ctrl-group'
+    alias: 'controller.ctrl-locale'
 
     getRowEditor: ->
         @getView()
             .down('grid')
             .getPlugin('rowediting')
 
-    getGroupStore: -> @getViewModel().get('groups')
+    getLocaleStore: -> @getViewModel().get('locales')
 
     onCancelEdit: (editor, context) ->
-        @getViewModel().reject()
+        context.record.reject()
 
     onSubmit: (editor, context) ->
         editor.grid.mask("กำลังบันทึกรายการ ...")
@@ -27,5 +27,5 @@ Ext.define 'Vcare.view.group.Controller',
     onAddNew: ->
         record = @getViewModel().createRecord()
 
-        @getGroupStore().insert(0, record)
+        @getLocaleStore().insert(0, record)
         @getRowEditor().startEdit(record, 0)

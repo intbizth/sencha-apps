@@ -16,14 +16,13 @@ Ext.define 'Vcare.view.customer.ListView',
     headerBorders: no
 
     columns: [
+        xtype: 'yesnocolumn'
         text: 'สถานะ'
         align: 'center'
         width: 80
-        renderer: (v, c, r) ->
-            if r.getUser() && r.getUser().isEnabled()
-                return '<span style="color:green;">เปิด</span>'
-
-            return '<span style="color:red;">ปิด</span>'
+        renderer: (v, m, r, rowIndex, colIndex) ->
+            v = r.getUser() && r.getUser().isEnabled()
+            @columns[colIndex].defaultRenderer(v)
     ,
         text: 'ชื่อ - นามสกุล'
         width: 200
@@ -31,7 +30,7 @@ Ext.define 'Vcare.view.customer.ListView',
     ,
         text: 'Username'
         width: 200
-        renderer: (v, c, r) -> r.getUser() && r.getUser().get('username')
+        renderer: (v, m, r) -> r.getUser() && r.getUser().get('username')
     ,
         dataIndex: 'email'
         text: 'อีเมล์'
@@ -39,7 +38,7 @@ Ext.define 'Vcare.view.customer.ListView',
     ,
         text: 'สิทธิ์การใช้งาน'
         flex: 1
-        renderer: (v, c, r) -> r.getUser() && r.getUser().getReadableRoles()
+        renderer: (v, m, r) -> r.getUser() && r.getUser().getReadableRoles()
     ]
 
     tbar:

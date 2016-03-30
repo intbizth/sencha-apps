@@ -7,6 +7,8 @@ Ext.define 'Vcare.model.RbacRole',
     # @see https://github.com/symfony/symfony/issues/8301
     updateMethod: 'PUT'
 
+    associationWriterIdBased: yes
+
     fields: [
         name: 'id'
         type: 'int'
@@ -44,17 +46,3 @@ Ext.define 'Vcare.model.RbacRole',
         getterName: 'getPermissions'
         setterName: 'setPermissions'
     ]
-
-    writerTransform: fn: (data) ->
-        if data.parent
-            data.parent = data.parent.id
-
-        if data.permissions
-            permissions = []
-
-            for permission in data.permissions
-                permissions.push(permission.id)
-
-            data.permissions = permissions
-
-        return data
