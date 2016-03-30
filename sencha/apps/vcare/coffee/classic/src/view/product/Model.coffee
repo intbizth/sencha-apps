@@ -12,6 +12,10 @@ Ext.define 'Vcare.view.product.Model',
             autoLoad: yes
             pageSize: no
 
+        # taxons:
+        #     type: 'store-taxons'
+        #     autoLoad: yes
+
     createRecord: (record) ->
         return record if record
 

@@ -48,6 +48,9 @@ Ext.define 'Vcare.view.product.FormView',
         reference: 'refFormTabs'
         layout: 'card'
         activeItem: 'main'
+        defaults:
+            margin: '5 5 0 0'
+            anchor : '100%'
 
         items: [
             id: 'main'

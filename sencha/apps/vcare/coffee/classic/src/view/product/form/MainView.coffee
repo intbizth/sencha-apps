@@ -8,15 +8,15 @@ Ext.define 'Vcare.view.product.form.MainView',
     layout: 'border'
     defaults:
         split: yes
-        bodyPadding: 10
+        bodyPadding: 5
 
     items: [
         region: 'center'
         collapsible: no
-        margin: '5 0 0 0'
         scrollable: yes
         modelValidation: yes
         referenceHolder: yes
+        scrollable: yes
         xtype: 'form'
 
         defaults:
@@ -40,10 +40,10 @@ Ext.define 'Vcare.view.product.form.MainView',
     ,
         region: 'east'
         floatable: no
-        margin: '5 5 0 0'
         scrollable: yes
         referenceHolder: yes
         width: 320
+        scrollable: yes
         xtype: 'form'
 
         defaults:
