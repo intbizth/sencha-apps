@@ -2,6 +2,13 @@ Ext.define 'Vcare.model.PaymentMethod',
     extend: 'Vcare.model.Translatable'
     api: '/api/payment-methods/'
 
+    requires: [
+        'Vcare.store.PaymentGateways'
+    ]
+
+    associationWriterIdBased: yes
+    translationFields: ['name', 'description']
+
     fields: [
         name: 'id'
         type: 'int'
@@ -23,14 +30,27 @@ Ext.define 'Vcare.model.PaymentMethod',
         type: 'boolean'
     ,
         name: 'gateway'
-        mapping: (data) ->
-            return Ext.data.StoreManager
-                .lookup('store-payment-gateways')
-                .getById(data.gateway)
+        convert: (v, r) ->
+            v = v.get('code') if v && v.isModel
+            store = Ext.data.StoreManager.lookup('store-payment-gateways')
+            store = Ext.create('Vcare.store.PaymentGateways', {
+                autoLoad: yes
+                pageSize: no
+                listeners: load: (store) ->
+                    r.beginEdit()
+                    r.set('gateway', store.findRecord('code', v))
+                    r.endEdit(no)
+                    r.commit(no)
+
+            }) if !store && v
+
+            return v if !v
+            return store.findRecord('code', v)
     ]
 
     getName: -> @trans 'name'
     getDescription: -> @trans 'description'
+    getGatewayName: -> @get('gateway') && @get('gateway').get('name')
 
     validators:
         code: 'presence'
@@ -38,14 +58,5 @@ Ext.define 'Vcare.model.PaymentMethod',
     writerTransform: fn: (data) ->
         if data.gateway
             data.gateway = data.gateway.id
-
-        if data.translations
-            for locale of data.translations
-                if !locale
-                    delete data.translations[locale]
-                else
-                    for prop of data.translations[locale]
-                        if -1 == Ext.Array.indexOf ['name', 'description'], prop
-                            delete data.translations[locale][prop]
 
         return data

@@ -9,6 +9,11 @@ Ext.define 'Vcare.model.Currency',
         name: 'code'
         type: 'string'
     ,
+        name: 'name'
+        type: 'string'
+        persist: no
+        convert: (v, r) -> r.get('code')
+    ,
         name: 'exchange_rate'
         type: 'float'
     ,

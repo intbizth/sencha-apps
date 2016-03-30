@@ -2,6 +2,8 @@ Ext.define 'Vcare.model.Channel',
     extend: 'Vcare.model.Base'
     api: '/api/channels/'
 
+    associationWriterIdBased: yes
+
     fields: [
         name: 'id'
         type: 'int'
@@ -42,14 +44,49 @@ Ext.define 'Vcare.model.Channel',
     ]
 
     hasMany: [
-        name: 'taxons'
-        model: 'Taxon'
-        role: 'taxons'
+        name: 'taxonomies'
+        model: 'Taxonomy'
+        role: 'taxonomies'
         associationKey: 'taxons'
-        getterName: 'getTaxons'
-        setterName: 'setTaxons'
+        getterName: 'getTaxonomys'
+        setterName: 'setTaxonomys'
+    ,
+        name: 'currencies'
+        model: 'Currency'
+        role: 'currencies'
+        associationKey: 'currencies'
+        getterName: 'getCurrencies'
+        setterName: 'setCurrencies'
+    ,
+        name: 'locales'
+        model: 'Locale'
+        role: 'locales'
+        associationKey: 'locales'
+        getterName: 'getLocales'
+        setterName: 'setLocales'
+    ,
+        name: 'shipping_methods'
+        model: 'ShippingMethod'
+        role: 'shipping_methods'
+        associationKey: 'shipping_methods'
+        getterName: 'getShippingMethods'
+        setterName: 'setShippingMethods'
+    ,
+        name: 'payment_methods'
+        model: 'PaymentMethod'
+        role: 'payment_methods'
+        associationKey: 'payment_methods'
+        getterName: 'getPaymentMethods'
+        setterName: 'setPaymentMethods'
     ]
 
     validators:
         code: 'presence'
         name: 'presence'
+
+    writerTransform: fn: (data) ->
+        data.taxons = data.taxonomies if data.taxonomies
+        delete data.taxonomies if data.taxonomies
+
+        return data
+

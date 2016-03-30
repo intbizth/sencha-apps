@@ -8,10 +8,6 @@ Ext.define 'Vcare.view.payment_method.Controller',
         title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.getName()}"
         record = vm.createRecord(record)
 
-        console.log record
-        console.log record
-        console.log record
-
         options =
             xtype: 'wg-payment-method-form'
             title:  title

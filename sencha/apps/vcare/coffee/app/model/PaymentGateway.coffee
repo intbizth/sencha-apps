@@ -4,6 +4,9 @@ Ext.define 'Vcare.model.PaymentGateway',
 
     fields: [
         name: 'id'
+        type: 'int'
+    ,
+        name: 'code'
         type: 'string'
     ,
         name: 'name'

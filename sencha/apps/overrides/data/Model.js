@@ -1,6 +1,12 @@
 Ext.define('Ext.overrides.data.Model', {
     override: 'Ext.data.Model',
 
+    config: {
+        associationWriterIdBased: false,
+        translationBaseField: 'translations',
+        translationFields: null
+    },
+
     privates: {
         /**
          * Checks if two values are equal, taking into account certain special factors, for
@@ -32,6 +38,51 @@ Ext.define('Ext.overrides.data.Model', {
 
             return lhs === rhs;
         }
+    },
+
+    getData: function()
+    {
+        var store, role, roleName, locale, prop, data = this.callParent(arguments);
+
+        // TODO: only when get data to submit
+        if (this.config.associationWriterIdBased) {
+            console.warn('DO YOU GET DATA TO SUBMIT?');
+            for (roleName in this.associations) {
+                role = this.associations[roleName];
+
+                if (!data[roleName]) {
+                    continue;
+                }
+
+                if (role.isMany) {
+                    data[roleName] = [];
+                    role.getAssociatedItem(this).each(function(item) {
+                        data[roleName].push(item.getId())
+                    });
+                } else {
+                    data[roleName] = data[roleName][role.cls.idProperty];
+                }
+            }
+        }
+
+        var translations = data[this.config.translationBaseField];
+
+        if (this.config.translationFields && translations) {
+            console.warn('DO YOU GET DATA TO SUBMIT?');
+            for (locale in translations) {
+                if (!locale) {
+                    delete translations[locale]
+                } else {
+                    for (prop in translations[locale]) {
+                        if (-1 === Ext.Array.indexOf(this.config.translationFields, prop)) {
+                            delete translations[locale][prop];
+                        }
+                    }
+                }
+            }
+        }
+
+        return data;
     },
 
     set: function(fieldName, newValue, options) {
@@ -85,10 +136,12 @@ Ext.define('Ext.overrides.data.Model', {
 
                 // ======== MY PATCH ========
                 if (reference && reference.cls) {
-                    if (currentValue && !currentValue.isModel) {
-                        currentValue = me.store.findById(currentValue);
-                    } else {
-                        currentValue = me[reference.getterName]();
+                    if (currentValue) {
+                        if (!currentValue.isModel) {
+                            currentValue = me.store.findById(currentValue);
+                        } else {
+                            currentValue = me[reference.getterName]();
+                        }
                     }
 
                     if ((value && value.isModel) || value === undefined) {

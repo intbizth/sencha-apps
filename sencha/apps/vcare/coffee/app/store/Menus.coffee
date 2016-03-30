@@ -50,11 +50,17 @@ Ext.define 'Vcare.store.Menus',
             text: 'Configuration'
             iconCls: 'x-fa fa-cog'
             children: [
+                text: 'Channels'
+                view: 'channel.LayoutView'
+                iconCls: 'x-fa fa-database'
+                leaf: true
+                routeId: 'channel'
+            ,
                 text: 'Taxons'
                 view: 'taxon.LayoutView'
                 iconCls: 'x-fa fa-sitemap'
                 leaf: true
-                routeId: 'taxons'
+                routeId: 'taxon'
             ,
                 text: 'Currency'
                 view: 'currency.LayoutView'

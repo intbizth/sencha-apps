@@ -10,7 +10,7 @@ Ext.define 'Vcare.view.main.ViewportModel',
         locales:
             type: 'store-locales'
             autoLoad: yes
-            pageSize: 200
+            pageSize: no
 
     formulas:
         defaultLocale:

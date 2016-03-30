@@ -1,9 +1,9 @@
-Ext.define 'Vcare.view.payment_method.ListView',
+Ext.define 'Vcare.view.channel.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-payment-method-list'
+    alias: 'widget.wg-channel-list'
 
     bind:
-        store: '{payment-methods}'
+        store: '{channels}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,30 +11,34 @@ Ext.define 'Vcare.view.payment_method.ListView',
         emptyText: 'Empty Data'
         deferEmptyText: no
 
-    title: 'Payment Methods'
-    reference: 'refPaymentMethodList'
+    title: 'Channels'
+    reference: 'refChannelList'
     headerBorders: no
 
     columns: [
         xtype: 'yesnocolumn'
-        text: 'Enabled'
         dataIndex: 'enabled'
+        text: 'Enabled'
         align: 'center'
         width: 80
-    ,
-        text: 'Code'
-        width: 100
-        dataIndex: 'code'
     ,
         text: 'Name'
         dataIndex: 'name'
     ,
-        text: 'Gateway'
-        renderer: (v, m, r) -> r.getGatewayName()
+        text: 'Hostname'
+        dataIndex: 'hostname'
+    ,
+        xtype: 'templatecolumn'
+        text: 'Currency'
+        tpl: '{default_currency.name}'
+    ,
+        xtype: 'templatecolumn'
+        text: 'Locale'
+        tpl: '{default_locale.name}'
     ,
         text: 'Description'
-        flex: 1
         dataIndex: 'description'
+        flex: 1
     ]
 
     tbar:
@@ -44,29 +48,21 @@ Ext.define 'Vcare.view.payment_method.ListView',
             handler: 'onAddNew'
         ,
             text: 'Edit'
-            iconCls:'pencil-square-o '
-            bind: widgetRecord: '{refPaymentMethodList.selection}'
+            iconCls: 'pencil-square-o'
+            bind: widgetRecord: '{refChannelList.selection}'
             handler: 'onEdit'
             aclCheck: yes
         ,
             text: 'Remove'
-            iconCls:'trash-o'
-            bind: widgetRecord: '{refPaymentMethodList.selection}'
+            iconCls: 'trash-o'
+            bind: widgetRecord: '{refChannelList.selection}'
             handler: 'onDelete'
             aclCheck: yes
-        ,
-            '->'
-        ,
-            fieldLabel: 'Search'
-            xtype: 'searchfield'
-            labelWidth: 50
-            bind: store: '{payment-methods}'
-            margin: '0 10 0 0'
         ]
 
     bbar:
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind: store: '{payment-methods}'
+        bind: store: '{channels}'
         displayInfo: yes
