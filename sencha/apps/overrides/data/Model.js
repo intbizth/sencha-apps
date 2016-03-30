@@ -42,12 +42,22 @@ Ext.define('Ext.overrides.data.Model', {
 
     getData: function()
     {
-        var store, role, roleName, locale, prop, data = this.callParent(arguments);
+        var i, role, roleName, locale, prop, associations, customFields, data = this.callParent(arguments);
 
         // TODO: only when get data to submit
         if (this.config.associationWriterIdBased) {
             console.warn('DO YOU GET DATA TO SUBMIT?');
-            for (roleName in this.associations) {
+
+            customFields = this.config.associationWriterIdBased;
+
+            if (Ext.isArray(customFields)) {
+                associations = {};
+                for(i = 0; i < customFields.length; i++) {
+                    associations[customFields[i]] = true;
+                }
+            }
+
+            for (roleName in (associations ? associations : this.associations)) {
                 role = this.associations[roleName];
 
                 if (!data[roleName]) {
