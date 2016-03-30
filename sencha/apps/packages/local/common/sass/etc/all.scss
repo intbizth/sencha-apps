@@ -1,6 +1,5 @@
 $font-icon-font-family: dynamic(FontAwesome);
 
-
 .x-grid-column-color-label {
     position: relative;
 
@@ -15,5 +14,15 @@ $font-icon-font-family: dynamic(FontAwesome);
     &-text {
         display: inline-block;
         // vertical-align: middle;
+    }
+}
+
+.x-grid-column-yesno {
+    &-yes {
+        color: green;
+    }
+
+    &-no {
+        color: red;
     }
 }

@@ -24,6 +24,14 @@ Ext.define 'Vcare.view.currency.ListView',
             edit: 'onSubmit'
 
     columns: [
+        xtype: 'yesnocolumn'
+        dataIndex: 'enabled'
+        text: 'Enabled'
+        align: 'center'
+        width: 80
+        field:
+            xtype: 'checkbox'
+    ,
         text: 'Code'
         width: 80
         dataIndex: 'code'
@@ -37,17 +45,6 @@ Ext.define 'Vcare.view.currency.ListView',
         width: 200
         field:
             xtype: 'numberfield'
-    ,
-        dataIndex: 'enabled'
-        text: 'Enabled'
-        align: 'center'
-        width: 80
-        field:
-            xtype: 'checkbox'
-
-        renderer: (v, c, r) ->
-            return '<span style="color:green;">Yes</span>' if v
-            return '<span style="color:red;">No</span>'
     ,
         flex: 1
     ]

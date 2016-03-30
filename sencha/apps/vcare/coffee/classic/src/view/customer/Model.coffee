@@ -12,11 +12,6 @@ Ext.define 'Vcare.view.customer.Model',
             autoLoad: yes
             pageSize: 100
 
-        locales:
-            type: 'store-locales'
-            autoLoad: yes
-            pageSize: 200
-
     createUser: (record) ->
         return record.getUser() if record and record.getUser()
         return @createNewUser()

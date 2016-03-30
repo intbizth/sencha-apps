@@ -1,9 +1,9 @@
-Ext.define 'Vcare.view.locale.ListView',
+Ext.define 'Vcare.view.payment_method.ListView',
     extend: 'Ext.grid.Panel'
-    alias: 'widget.wg-locale-list'
+    alias: 'widget.wg-payment-method-list'
 
     bind:
-        store: '{locales}'
+        store: '{payment-methods}'
 
     viewConfig:
         preserveScrollOnRefresh: yes
@@ -11,38 +11,31 @@ Ext.define 'Vcare.view.locale.ListView',
         emptyText: 'Empty Data'
         deferEmptyText: no
 
-    title: 'Locale'
-    reference: 'refLocaleList'
+    title: 'Payment Methods'
+    reference: 'refPaymentMethodList'
     headerBorders: no
-
-    plugins:
-        ptype: 'rowediting'
-        pluginId: 'rowediting'
-        clicksToEdit: 1
-        listeners:
-            cancelEdit: 'onCancelEdit'
-            edit: 'onSubmit'
 
     columns: [
         xtype: 'yesnocolumn'
-        dataIndex: 'enabled'
         text: 'Enabled'
+        dataIndex: 'enabled'
         align: 'center'
         width: 80
-        field:
-            xtype: 'checkbox'
     ,
         text: 'Code'
-        width: 80
+        width: 100
         dataIndex: 'code'
-        field:
-            xtype: 'textfield'
     ,
         text: 'Name'
         dataIndex: 'name'
-        width: 200
     ,
+        text: 'Gateway'
+        dataIndex: 'gateway'
+        renderer: (v) -> v.get('name')
+    ,
+        text: 'Description'
         flex: 1
+        dataIndex: 'description'
     ]
 
     tbar:
@@ -51,18 +44,24 @@ Ext.define 'Vcare.view.locale.ListView',
             iconCls: 'plus'
             handler: 'onAddNew'
         ,
+            text: 'Edit'
+            iconCls:'pencil-square-o '
+            bind: widgetRecord: '{refPaymentMethodList.selection}'
+            handler: 'onEdit'
+            aclCheck: yes
+        ,
             text: 'Remove'
-            iconCls: 'trash-o'
-            bind: widgetRecord: '{refLocaleList.selection}'
+            iconCls:'trash-o'
+            bind: widgetRecord: '{refPaymentMethodList.selection}'
             handler: 'onDelete'
-            aclCheck: -> !@widgetRecord.phantom
+            aclCheck: yes
         ,
             '->'
         ,
             fieldLabel: 'Search'
             xtype: 'searchfield'
             labelWidth: 50
-            bind: store: '{locales}'
+            bind: store: '{payment-methods}'
             margin: '0 10 0 0'
         ]
 
@@ -70,5 +69,5 @@ Ext.define 'Vcare.view.locale.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind: store: '{locales}'
+        bind: store: '{payment-methods}'
         displayInfo: yes

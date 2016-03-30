@@ -39,18 +39,6 @@ Ext.define 'Vcare.view.zone.ListView',
         dataIndex: 'type'
         text: 'Type'
         width: 120
-
-    ,
-        dataIndex: 'enabled'
-        text: 'Enabled'
-        align: 'center'
-        width: 80
-        field:
-            xtype: 'checkbox'
-
-        renderer: (v, c, r) ->
-            return '<span style="color:green;">Yes</span>' if v
-            return '<span style="color:red;">No</span>'
     ,
         flex: 1
     ]
