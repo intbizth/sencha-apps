@@ -2,20 +2,26 @@ Ext.define 'Vcare.view.product.Controller',
     extend: 'Vcare.view.base.Controller'
     alias: 'controller.ctrl-product'
 
+    # todo create active 'card' layout in base
     activeForm: (record) ->
-        vm = @getViewModel()
-        form = @referTo 'ProductForm'
-        main = @getMainLayout(form)
         title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.get('name')}"
 
-        record = vm.createRecord(record)
+        vm = @getViewModel()
+        record = vm.prepareData(record)
 
-        form.setTitle title
-        form.setViewModel
-            type: 'vm-product-form'
-            data:
-                record: record
+        console.log record
 
+        if !form = @referTo 'ProductForm'
+            form = @getView().add
+                xtype: 'wg-product-form'
+                id: 'form'
+                title: title
+                viewModel:
+                    type: 'vm-product-form'
+                    data:
+                        record: record
+
+        main = @getMainLayout(form)
         main.setActiveItem('form')
 
     getMainLayout: (panel) ->
@@ -35,3 +41,18 @@ Ext.define 'Vcare.view.product.Controller',
     onFormMenuClick: (btn) ->
         formTabs = @referTo 'FormTabs'
         formTabs.setActiveItem(btn.getItemId())
+
+    # todo use base or create function for form 'card' layout
+    onSubmit: ->
+        formPanel = @referTo 'ProductForm'
+        vm = formPanel.getViewModel()
+        form = formPanel.down 'form'
+        record = vm.get 'record'
+
+        vm.beforeSubmit(record, form)
+
+        record.save
+            failure: (record, o) =>
+                console.log 'failure'
+            success: (record, o) =>
+                console.log 'success'

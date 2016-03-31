@@ -62,7 +62,7 @@ Ext.define 'Vcare.view.product.FormView',
             html: 'IMAGE'
         ,
             itemId: 'meta'
-            html: 'SEO'
+            xtype: 'wg-product-form-meta'
         ]
     ,
         region: 'south'

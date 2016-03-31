@@ -2,13 +2,11 @@ Ext.define 'Vcare.view.product.form.MainView',
     extend: 'Ext.form.Panel'
     alias: 'widget.wg-product-form-main'
 
-    requires:
-        'Ext.form.Translation'
-
     layout: 'border'
     defaults:
-        split: yes
-        bodyPadding: 5
+        split:
+            size: 5
+        bodyPadding: 10
 
     items: [
         region: 'center'
@@ -23,26 +21,36 @@ Ext.define 'Vcare.view.product.form.MainView',
             anchor : '100%'
             labelAlign: 'top'
 
-        # todo translation field
         items: [
-            xtype: 'textfield'
-            fieldLabel: 'xxxx'
+            xtype: 'fieldtranslation'
+            fieldLabel: 'Name'
+            itemKey: 'name'
+            bind:
+                locales: '{locales}'
+                locale: '{defaultLocale}'
         ,
-            xtype: 'textfield'
-            fieldLabel: 'xxxx'
+            xtype: 'fieldtranslation'
+            fieldLabel: 'Short description'
+            itemKey: 'short_description'
+            bind:
+                locales: '{locales}'
+                locale: '{defaultLocale}'
         ,
-            xtype: 'textfield'
-            fieldLabel: 'xxxx'
-        ,
-            xtype: 'textfield'
-            fieldLabel: 'xxxx'
+            xtype: 'fieldtranslation'
+            fieldLabel: 'Description'
+            itemKey: 'description'
+            itemType: 'textarea'
+            bind:
+                locales: '{locales}'
+                locale: '{defaultLocale}'
+
         ]
     ,
         region: 'east'
         floatable: no
         scrollable: yes
         referenceHolder: yes
-        width: 320
+        width: 340
         scrollable: yes
         xtype: 'form'
 
@@ -52,18 +60,20 @@ Ext.define 'Vcare.view.product.form.MainView',
         items: [
             xtype: 'textfield'
             fieldLabel: 'SKU'
+            bind: '{record.master_variant.sku}'
         ,
             xtype: 'textfield'
             fieldLabel: 'Price'
-            vtype: 'alphanum'
+            bind: '{record.master_variant.price}'
         ,
             xtype: 'textfield'
             fieldLabel: 'Original price'
-            vtype: 'alphanum'
+            bind: '{record.master_variant.original_price}'
         ,
             xtype: 'numberfield'
             fieldLabel: 'Current stock'
             minValue: 0
+            bind: '{record.master_variant.on_hold}'
         ,
             xtype: 'container'
             layout: 'hbox'

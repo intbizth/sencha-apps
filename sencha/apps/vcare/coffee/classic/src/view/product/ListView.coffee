@@ -18,10 +18,14 @@ Ext.define 'Vcare.view.product.ListView',
     columns: [
         dataIndex: 'name'
         text: 'Name'
-        width: 200
+        width: 250
     ,
         dataIndex: 'sku'
         text: 'SKU'
+        width: 200
+    ,
+        dataIndex: 'description'
+        text: 'Description'
         flex: 1
     ]
 

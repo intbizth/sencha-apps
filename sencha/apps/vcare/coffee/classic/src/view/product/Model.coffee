@@ -7,20 +7,17 @@ Ext.define 'Vcare.view.product.Model',
             type: 'store-products'
             autoLoad: yes
 
-        locales:
-            type: 'store-locales'
-            autoLoad: yes
-            pageSize: no
-
-        # taxons:
-        #     type: 'store-taxons'
-        #     autoLoad: yes
+    createMasterVariant: (record) ->
+        return record.getMasterVariant() if record and record.getMasterVariant()
+        return Ext.create 'Vcare.model.ProductVariant'
 
     createRecord: (record) ->
         return record if record
+        return new (@data.products.getModel())()
 
-        console.log @get('defaultLocale')
+    prepareData: (record) ->
+        variant = @createMasterVariant record
+        record = @createRecord record
+        record.setMasterVariant variant
 
-        return new (@data.products.getModel(
-            current_locale: @get('defaultLocale')
-        ))()
+        return record

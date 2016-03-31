@@ -12,7 +12,6 @@ Ext.define 'Vcare.view.product.form.CategorizationView',
     items: [
         xtype: 'combobox'
         fieldLabel: 'Main taxon'
-        required: yes
         displayField: 'code'
         valueField: 'id'
         queryMode: 'local'

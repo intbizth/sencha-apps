@@ -14,7 +14,4 @@ Ext.define 'Vcare.view.product.LayoutView',
     items: [
         xtype: 'wg-product-list'
         id: 'list'
-    ,
-        xtype: 'wg-product-form'
-        id: 'form'
     ]
