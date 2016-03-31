@@ -17,12 +17,12 @@ Ext.define 'Vcare.view.product.ListView',
 
     columns: [
         dataIndex: 'name'
-        text: 'ชื่อผลิตภัณฑ์'
+        text: 'Name'
         width: 200
     ,
         dataIndex: 'sku'
         text: 'SKU'
-        width: 200
+        flex: 1
     ]
 
     tbar:

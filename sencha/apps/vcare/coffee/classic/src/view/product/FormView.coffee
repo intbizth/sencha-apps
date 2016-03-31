@@ -20,27 +20,23 @@ Ext.define 'Vcare.view.product.FormView',
         defaults:
             iconCls: 'x-fa fa-angle-right'
             iconAlign: 'right'
+            handler: 'onFormMenuClick'
 
         items: [
             text: 'Main'
             itemId: 'main'
-            handler: 'onFormMenuClick'
         ,
             text: 'Attribute'
             itemId: 'attribute'
-            handler: 'onFormMenuClick'
         ,
             text: 'Categorization'
             itemId: 'categorization'
-            handler: 'onFormMenuClick'
         ,
             text: 'Image'
             itemId: 'image'
-            handler: 'onFormMenuClick'
         ,
             text: 'SEO Keyword'
             itemId: 'meta'
-            handler: 'onFormMenuClick'
         ]
     ,
         region: 'center'
@@ -53,19 +49,19 @@ Ext.define 'Vcare.view.product.FormView',
             anchor : '100%'
 
         items: [
-            id: 'main'
+            itemId: 'main'
             xtype: 'wg-product-form-main'
         ,
-            id: 'attribute'
+            itemId: 'attribute'
             html: 'ATTRIBUTE'
         ,
-            id: 'categorization'
+            itemId: 'categorization'
             xtype: 'wg-product-form-categorization'
         ,
-            id: 'image'
+            itemId: 'image'
             html: 'IMAGE'
         ,
-            id: 'meta'
+            itemId: 'meta'
             html: 'SEO'
         ]
     ,
