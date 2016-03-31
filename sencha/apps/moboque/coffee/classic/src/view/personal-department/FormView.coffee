@@ -20,14 +20,49 @@ Ext.define 'Moboque.view.personal-department.FormView',
             emptyText: 'กรุณากรอกชื่อแผนก'
             allowBlank: no
             bind: '{record.title}'
+        ,
+            xtype: 'fieldset'
+            title: 'Upload Images'
+            defaultType: 'textfield'
+            width: 360
+            items: [
+                xtype: 'image'
+                reference: 'refImage'
+                height: 200
+                alt: 'thumbnail'
+                style:
+                    backgroundColor: '#d9d9d9'
+                margin: '0 0 0 10'
+                listeners:
+                    beforerender: 'setImagePreview'
+            ,
+                name: 'thumbnail'
+                xtype: 'fileuploadfield'
+                emptyText: 'Select an image'
+                fieldLabel: 'Image '
+                labelAlign: 'top'
+                anchor: '100%'
+                margin: '0 5 0 10'
+                buttonText: ''
+                buttonConfig:
+                    iconCls: 'right-icon hot-icon x-fa fa-file-image-o'
+                bind: '{record.thumbnail}'
+                listeners:
+                    change: 'imageUploadChanged'
+            ]
         ]
 
         buttons: [
+            text: 'Preview'
+            handler: 'applyImage'
+            reference: 'refApply'
+            hidden: yes
+        ,
             text: 'ยกเลิก'
             handler: 'onCancel'
         ,
             text: 'บันทึก'
-            handler: 'onSubmit'
+            handler: 'onSubmitWithImage'
             disabled: yes
             formBind: yes
         ]

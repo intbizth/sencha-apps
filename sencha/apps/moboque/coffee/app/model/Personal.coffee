@@ -1,6 +1,7 @@
 Ext.define 'Moboque.model.Personal',
     extend: 'Moboque.model.Base'
     api: '/api/personals/'
+    hasFileUpload: true
 
     fields: [
         name: 'name'
@@ -24,6 +25,9 @@ Ext.define 'Moboque.model.Personal',
     ,
         name: 'email'
         type: 'string'
+    ,
+        name: 'image'
+        type: 'auto'
     ,
         name: 'fullname'
         persist: no

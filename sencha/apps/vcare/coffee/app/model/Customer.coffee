@@ -2,6 +2,8 @@ Ext.define 'Vcare.model.Customer',
     extend: 'Vcare.model.Base'
     api: '/api/customers/'
 
+    associationWriterIdBased: ['groups']
+
     fields: [
         name: 'id'
         type: 'int'
@@ -56,13 +58,6 @@ Ext.define 'Vcare.model.Customer',
 
             if data.user.locale
                 data.user.locale = data.user.locale.id
-
-        groups = data.groups
-
-        if !Ext.isEmpty groups
-            data.groups = []
-            for group in groups
-                data.groups.push group.id
 
         return data
 

@@ -2,6 +2,8 @@ Ext.define 'Vcare.model.RbacPermission',
     extend: 'Vcare.model.Base'
     api: '/api/permissions/'
 
+    associationWriterIdBased: yes
+
     fields: [
         name: 'id'
         type: 'int'
@@ -23,9 +25,3 @@ Ext.define 'Vcare.model.RbacPermission',
             getterName: 'getParent'
             setterName: 'setParent'
     ]
-
-    writerTransform: fn: (data) ->
-        if data.parent
-            data.parent = data.parent.id
-
-        return data

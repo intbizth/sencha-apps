@@ -13,11 +13,6 @@ Ext.define 'Vcare.view.taxon.Model',
             autoLoad: no
             pageSize: no
 
-        locales:
-            type: 'store-locales'
-            autoLoad: yes
-            pageSize: no
-
     isRootType: (type) -> type == 'root'
     getStoreByType: (type) -> if @isRootType(type) then 'taxonomies' else 'taxons'
 

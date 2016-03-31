@@ -6,6 +6,12 @@ Ext.define 'Vcare.view.main.ViewportModel',
         currentView: null
         userDisplayName: 'anon.'
 
+    stores:
+        locales:
+            type: 'store-locales'
+            autoLoad: yes
+            pageSize: no
+
     formulas:
         defaultLocale:
             get: -> Vcare.app.getLocale()

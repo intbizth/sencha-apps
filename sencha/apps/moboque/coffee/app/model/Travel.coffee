@@ -4,9 +4,6 @@ Ext.define 'Moboque.model.Travel',
     api: '/api/travels/'
 
     fields: [
-        name: 'code'
-        type: 'string'
-    ,
         name: 'title'
         persist: no
         convert: (v, r) -> r.getTitle()

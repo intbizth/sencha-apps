@@ -50,7 +50,7 @@ Ext.define 'Moboque.store.Menus',
             ]
         ,
             text: 'InfoBundle'
-            iconCls: 'fa fa-newspaper-o'
+            iconCls: 'fa fa-info-circle'
             children: [
                 text: 'Activity'
                 view: 'activity.LayoutView'
@@ -162,6 +162,22 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'sub-districts'
             ]
         ,
+            text: 'GalleryBundle'
+            iconCls: 'fa fa-camera-retro'
+            children: [
+                text: 'GalleryCategories'
+                view: 'gallery-category.LayoutView'
+                iconCls: 'fa fa-picture-o'
+                leaf: true
+                routeId: 'gallery-categories'
+            ,
+                text: 'Galleries'
+                view: 'gallery.LayoutView'
+                iconCls: 'fa fa-file-image-o'
+                leaf: true
+                routeId: 'galleries'
+            ]
+        ,
             text: 'Personals'
             iconCls: 'fa fa-users'
             children: [
@@ -183,6 +199,12 @@ Ext.define 'Moboque.store.Menus',
             iconCls: 'fa fa-rss'
             leaf: true
             routeId: 'feeders'
+        ,
+            text: 'News'
+            view: 'news.LayoutView'
+            iconCls: 'fa fa-newspaper-o'
+            leaf: true
+            routeId: 'news'
         ,
             text: 'Reports'
             view: 'report.LayoutView'

@@ -13,7 +13,7 @@ Ext.define 'Vcare.view.group.Controller',
         @getViewModel().reject()
 
     onSubmit: (editor, context) ->
-        editor.grid.mask("กำลังลบรายการ ...")
+        editor.grid.mask("กำลังบันทึกรายการ ...")
 
         context.record.save
             failure: (record, o) =>
