@@ -10,9 +10,6 @@ Ext.define 'Vcare.view.customer.ModelForm',
                 # to mask model dirty
                 @get('record').set('groups', rs)
 
-        isPhantom:
-            get: -> @get('record').phantom
-
     onSubmitSuccess: -> @get('customers').reload()
 
     beforeSubmit: (record) ->

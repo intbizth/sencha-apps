@@ -37,12 +37,6 @@ Ext.define 'Vcare.store.Menus',
             leaf: true
             routeId: 'customers'
         ,
-            text: 'Taxons'
-            view: 'taxon.LayoutView'
-            iconCls: 'x-fa fa-sitemap'
-            leaf: true
-            routeId: 'taxons'
-        ,
             text: 'Orders'
             iconCls: 'x-fa fa-shopping-cart'
             children: [
@@ -51,5 +45,51 @@ Ext.define 'Vcare.store.Menus',
                 iconCls: 'x-fa fa-shopping-basket'
                 leaf: true
                 routeId: 'orders'
+            ]
+        ,
+            text: 'Configuration'
+            iconCls: 'x-fa fa-cog'
+            children: [
+                text: 'Channels'
+                view: 'channel.LayoutView'
+                iconCls: 'x-fa fa-database'
+                leaf: true
+                routeId: 'channel'
+            ,
+                text: 'Taxons'
+                view: 'taxon.LayoutView'
+                iconCls: 'x-fa fa-sitemap'
+                leaf: true
+                routeId: 'taxon'
+            ,
+                text: 'Currency'
+                view: 'currency.LayoutView'
+                iconCls: 'x-fa fa-dollar'
+                leaf: true
+                routeId: 'currency'
+            ,
+                text: 'Country'
+                view: 'country.LayoutView'
+                iconCls: 'x-fa fa-flag'
+                leaf: true
+                routeId: 'country'
+            ,
+                text: 'Locale'
+                view: 'locale.LayoutView'
+                iconCls: 'x-fa fa-language'
+                leaf: true
+                routeId: 'locale'
+            ,
+                text: 'Zone'
+                view: 'zone.LayoutView'
+                iconCls: 'x-fa fa-globe'
+                leaf: true
+                routeId: 'zone'
+            ,
+                text: 'Payment Methods'
+                view: 'payment_method.LayoutView'
+                iconCls: 'x-fa fa-credit-card'
+                leaf: true
+                routeId: 'payment-method'
             ]
         ]

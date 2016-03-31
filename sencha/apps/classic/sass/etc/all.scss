@@ -53,6 +53,12 @@ $blank-page-color :#cacaca;
   font: normal normal normal 14px/1 $font-family;
 }
 
+// roweditor checkbox
+.x-grid-editor .x-form-cb-wrap {
+  vertical-align: middle;
+  padding-top: 5px;
+}
+
 .alignRight {
   float: right;
 }

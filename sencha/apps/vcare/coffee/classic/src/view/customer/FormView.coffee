@@ -37,7 +37,7 @@ Ext.define 'Vcare.view.customer.FormView',
             #         autocomplete: 'no-password'
             #     bind:
             #         value: '{record.user.plain_password}'
-            #         required: '{isPhantom}'
+            #         required: '{record.phantom}'
             ,
                 xtype: 'combobox'
                 fieldLabel: 'Locale'
