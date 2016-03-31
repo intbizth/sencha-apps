@@ -14,23 +14,12 @@ Ext.define 'Moboque.view.personal-department.ListView',
     title: 'แผนก'
     reference: 'refPersonalDepartmentList'
     headerBorders: no
-    selModel: 'rowmodel'
-
-    plugins:
-        ptype: 'rowediting'
-        clicksToEdit: 1
-
-    listeners:
-        edit: 'updatePersonalRecord'
-        canceledit: 'cancelEditRecord'
 
     columns: [
         text: 'ชื่อแผนก'
         dataIndex: 'title'
         flex: 1
         minWidth: 200
-        editor:
-            allowBlank: false
     ,
         text: 'จำนวนบุคลากร'
         dataIndex: 'total_personal'
@@ -71,11 +60,6 @@ Ext.define 'Moboque.view.personal-department.ListView',
             bind: widgetRecord: '{refPersonalDepartmentList.selection}'
             handler: 'onDelete'
             aclCheck: yes
-        ,
-            '-'
-        ,
-            text: 'Add'
-            handler: 'onAddRow'
         ,
             '->'
         ,

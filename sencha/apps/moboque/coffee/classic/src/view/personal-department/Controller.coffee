@@ -17,51 +17,6 @@ Ext.define 'Moboque.view.personal-department.Controller',
 
         @callParent([record, options])
 
-    onAddRow: ->
-        departmentList = @referTo 'PersonalDepartmentList'
-        departmentsStore = departmentList.getStore()
-
-        record = Ext.create 'Moboque.model.PersonalDepartment',
-            title: ''
-            total_personal: 0
-            created_at: null
-
-        departmentsStore.insert(departmentsStore.getCount(), record)
-        departmentList.findPlugin('rowediting').startEdit(record)
-
-    updatePersonalRecord: (editor, context) ->
-        record = context.record
-        grid = context.grid
-        isHomeSide = grid.getItemId() == 'title'
-        isNewRecord = record.phantom
-
-        grid.mask('submitting...')
-
-        # personal
-        if record.get('personal')
-            if isHomeSide
-                store = @getPlayersStore('home')
-            else
-                store = @getPlayersStore('away')
-
-            # TODO check store limit
-            record.setPersonal store.getById(record.get('personal'))
-
-        # position
-        if record.get('position')
-            record.setPosition @getPositionsStore().getById(record.get('position'))
-
-        record.save
-            success: =>
-                @alertSuccess('บันทึกข้อมูลนักเตะเรียบร้อยแล้วค่ะ')
-                grid.unmask()
-            failure: =>
-                if isNewRecord
-                    context.store.remove(record)
-
-                @alertFailure('ขออภัย! เกิดปัญหาขณะบันทึกข้อมูลนักเตะ กรุณาลองใหม่อีกครั้งค่ะ')
-                grid.unmask()
-
     onSubmitWithImage: ->
         vm = @dialog.getViewModel()
 

@@ -34,7 +34,7 @@ Ext.define 'Moboque.view.gift.ListView',
         text: 'วันที่เขียน'
         dataIndex: 'created_at'
         format: 'd-m-Y H:i'
-        maxWidth: 250
+        width: 200
     ]
 
     tbar:
