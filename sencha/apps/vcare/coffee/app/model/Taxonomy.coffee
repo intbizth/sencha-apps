@@ -2,6 +2,8 @@ Ext.define 'Vcare.model.Taxonomy',
     extend: 'Vcare.model.Translatable'
     api: '/api/taxonomies/'
 
+    translationFields: ['name', 'permalink', 'description']
+
     fields: [
         name: 'code'
         type: 'string'
@@ -12,17 +14,3 @@ Ext.define 'Vcare.model.Taxonomy',
     ]
 
     getName: -> @trans 'name'
-
-    writerTransform: fn: (data) ->
-
-        if data.translations
-            for locale of data.translations
-                if !locale
-                    delete data.translations[locale]
-                else
-                    for prop of data.translations[locale]
-                        # @see \Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType
-                        if -1 == Ext.Array.indexOf ['name', 'permalink', 'description'], prop
-                            delete data.translations[locale][prop]
-
-        return data

@@ -1,6 +1,7 @@
 Ext.define 'Moboque.model.Feeder',
     extend: 'Moboque.model.Base'
     api: '/api/feeder/'
+    hasFileUpload: true
 
     fields: [
         name: 'title'
@@ -11,6 +12,9 @@ Ext.define 'Moboque.model.Feeder',
     ,
         name: 'state'
         type: 'string'
+    ,
+        name: 'image'
+        type: 'auto'
     ]
 
     validators:

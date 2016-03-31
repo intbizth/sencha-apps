@@ -23,17 +23,22 @@ Ext.define 'Vcare.view.shipment.Controller',
         record = btn.getSingleWidgetRecord()
         store = @getViewModel().get('transitions')
 
-        # TODO: confirmation
+        Ext.MessageBox.confirm 'Confirm', 'Are you sure you want to apply this transition?', ((btnText) ->
+            if btnText == 'yes'
+                dialog.mask('Applying transition ...')
+                store.updateState
+                    params:
+                        name: 'shipment'
+                        id: record.getId()
+                        transition: btn.transitionKey
+                    callback: (success) =>
+                        @successAlert('Apply transition completely !')
+                        record.store.reload()
+                        dialog.unmask()
+                        dialog.close()
 
-        store.updateState
-            params:
-                name: 'shipment'
-                id: record.getId()
-                transition: btn.transitionKey
-            callback: (success) =>
-                # reload grid
-                record.store.reload()
-                dialog.close()
+        ),this
+
 
     onUpdateState: (btn) ->
         view = @getView()

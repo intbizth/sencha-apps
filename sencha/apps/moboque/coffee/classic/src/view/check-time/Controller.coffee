@@ -4,7 +4,7 @@ Ext.define 'Moboque.view.check-time.Controller',
 
     createDialog: (record) ->
         vm = @getViewModel()
-        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไข #{record.get('fullname')}"
+        title = if !record then 'เพิ่มรายการใหม่' else "แก้ไขบันทึกเวลาเข้าออก"
         record = vm.prepareData(record)
 
         options =

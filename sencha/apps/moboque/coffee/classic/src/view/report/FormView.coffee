@@ -2,8 +2,6 @@ Ext.define 'Moboque.view.report.FormView',
     extend: 'Moboque.view.base.Window'
     alias: 'widget.wg-report-form'
 
-    width: 600
-    modal: yes
     scrollable: 'true'
 
     bind:
