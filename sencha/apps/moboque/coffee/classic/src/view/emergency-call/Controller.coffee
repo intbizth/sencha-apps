@@ -17,17 +17,18 @@ Ext.define 'Moboque.view.emergency-call.Controller',
 
         @callParent([record, options])
 
+    getRowEditor: ->
+        @getView()
+            .down('grid')
+            .getPlugin('rowediting')
+
+    getEmergencyCallStore: -> @getViewModel().get('tels')
+
     onAddNew: ->
-        emergencyCallList = @referTo 'EmergencyCallList'
-        emergencyCallsStore = emergencyCallList.getStore()
+        record = @getViewModel().createRecord()
 
-        record = Ext.create 'Moboque.model.EmergencyCall',
-            title: ''
-            description: ''
-            tel: null
-
-        emergencyCallsStore.insert(emergencyCallsStore.getCount(), record)
-        emergencyCallList.findPlugin('rowediting').startEdit(record)
+        @getEmergencyCallStore().insert(0, record)
+        @getRowEditor().startEdit(record, 0)
 
     onCancelEdit: (editor, context) ->
         context.record.reject()
@@ -43,8 +44,3 @@ Ext.define 'Moboque.view.emergency-call.Controller',
             success: (record, o) =>
                 editor.grid.unmask()
                 @successAlert(@getSuccessMessage())
-
-        # record = @getViewModel().createRecord()
-
-        # @getCountryStore().insert(0, record)
-        # @getRowEditor().startEdit(record, 0)

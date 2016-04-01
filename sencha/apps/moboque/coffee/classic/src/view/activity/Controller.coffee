@@ -14,5 +14,5 @@ Ext.define 'Moboque.view.activity.Controller',
                 type: 'vm-activity-form'
                 data:
                     record: record
-                    
+
         @callParent([record, options])

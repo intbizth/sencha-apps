@@ -14,5 +14,5 @@ Ext.define 'Moboque.view.district.Controller',
                 type: 'vm-district-form'
                 data:
                     record: record
-                    
+
         @callParent([record, options])

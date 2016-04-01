@@ -73,8 +73,7 @@ Ext.define 'Moboque.view.emergency-call.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{tels}'
+            bind: store: '{tels}'
             margin: '0 10 0 0'
         ]
 
@@ -82,6 +81,5 @@ Ext.define 'Moboque.view.emergency-call.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{tels}'
+        bind: store: '{tels}'
         displayInfo: yes

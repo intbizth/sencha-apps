@@ -14,5 +14,5 @@ Ext.define 'Moboque.view.news-category.Controller',
                 type: 'vm-news-category-form'
                 data:
                     record: record
-                    
+
         @callParent([record, options])
