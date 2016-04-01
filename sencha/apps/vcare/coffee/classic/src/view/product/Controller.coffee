@@ -9,8 +9,6 @@ Ext.define 'Vcare.view.product.Controller',
         vm = @getViewModel()
         record = vm.prepareData(record)
 
-        console.log record
-
         if !form = @referTo 'ProductForm'
             form = @getView().add
                 xtype: 'wg-product-form'
