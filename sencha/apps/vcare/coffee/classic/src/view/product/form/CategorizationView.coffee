@@ -15,21 +15,10 @@ Ext.define 'Vcare.view.product.form.CategorizationView',
         displayField: 'code'
         valueField: 'id'
         queryMode: 'local'
-        store: [1, 2, 3]
+        triggerAction: 'all'
         margin: '10 10 0 10'
-        # todo: bind with main taxon
-		# bind:
-    	# 	store: '{taxons}'
-    ,
-        xtype: 'tagfield'
-        fieldLabel: 'Taxons'
-        displayField: 'code'
-        valueField: 'id'
-        createNewOnEnter: no
-        queryMode: 'local'
-        store: [1, 2, 3]
-        margin: '10 10 0 10'
-        # todo: bind with taxons
-        # bind:
-        #   store: '{taxons}'
+        bind:
+            store: '{taxonomies}'
+            selection: '{record.main_taxon}'
+        # todo all taxons
     ]

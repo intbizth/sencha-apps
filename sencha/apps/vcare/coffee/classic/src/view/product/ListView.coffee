@@ -20,9 +20,9 @@ Ext.define 'Vcare.view.product.ListView',
         text: 'Name'
         width: 250
     ,
-        dataIndex: 'sku'
         text: 'SKU'
         width: 200
+        renderer: (v, m, r) -> r.getMasterVariant() && r.getMasterVariant().get('sku')
     ,
         dataIndex: 'description'
         text: 'Description'
