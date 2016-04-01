@@ -46,7 +46,7 @@ Ext.define 'Vcare.view.product.FormView',
         activeItem: 'main'
         defaults:
             margin: '5 5 0 0'
-            anchor : '100%'
+            anchor: '100%'
 
         items: [
             itemId: 'main'

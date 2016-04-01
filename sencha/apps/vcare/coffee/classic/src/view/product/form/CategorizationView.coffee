@@ -6,7 +6,7 @@ Ext.define 'Vcare.view.product.form.CategorizationView',
         type: 'vbox'
 
     defaults:
-        width : '100%'
+        width: '100%'
         labelAlign: 'top'
 
     items: [
@@ -17,6 +17,7 @@ Ext.define 'Vcare.view.product.form.CategorizationView',
         queryMode: 'local'
         store: [1, 2, 3]
         margin: '10 10 0 10'
+        # todo: bind with main taxon
 		# bind:
     	# 	store: '{taxons}'
     ,
@@ -28,4 +29,7 @@ Ext.define 'Vcare.view.product.form.CategorizationView',
         queryMode: 'local'
         store: [1, 2, 3]
         margin: '10 10 0 10'
+        # todo: bind with taxons
+        # bind:
+        #   store: '{taxons}'
     ]

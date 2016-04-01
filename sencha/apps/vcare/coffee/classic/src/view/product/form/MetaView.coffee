@@ -6,7 +6,7 @@ Ext.define 'Vcare.view.product.form.MetaView',
         type: 'vbox'
 
     defaults:
-        width : '100%'
+        width: '100%'
         labelAlign: 'top'
         margin: '0 5 0 10'
 

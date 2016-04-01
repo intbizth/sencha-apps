@@ -18,7 +18,7 @@ Ext.define 'Vcare.view.product.form.MainView',
         xtype: 'form'
 
         defaults:
-            anchor : '100%'
+            anchor: '100%'
             labelAlign: 'top'
 
         items: [
@@ -57,6 +57,7 @@ Ext.define 'Vcare.view.product.form.MainView',
         defaults:
             width: 300
             labelAlign: 'top'
+
         items: [
             xtype: 'textfield'
             fieldLabel: 'SKU'
