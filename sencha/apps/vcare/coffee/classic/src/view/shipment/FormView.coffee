@@ -1,10 +1,9 @@
-Ext.define 'Vcare.view.order.FormView',
-    extend: 'Vcare.view.base.Window'
-    alias: 'widget.wg-order-form'
+Ext.define 'Vcare.view.shipmemt.FormView',
+    extend: 'Ext.window.Window'
+    alias: 'widget.wg-shipment-form'
 
-    bind:
-        title: '{title}'
-
+    modal: yes
+    width: 400
     items:
         xtype: 'form'
         layout: 'hbox'
@@ -19,108 +18,16 @@ Ext.define 'Vcare.view.order.FormView',
             anchor : '100%'
 
         items: [
-            {
-                xtype: 'fieldset',
-                title: 'Billing Address',
-                defaultType: 'textfield',
-                defaults: {
-                    anchor: '100%'
-                },
-                items: [
-                    {
-                        allowBlank: false,
-                        fieldLabel: 'First name',
-                        bind: '{record.billing_address.first_name}',
-                    }
-                ,
-                    {
-                        allowBlank: false,
-                        fieldLabel: 'Last name',
-                        bind: '{record.billing_address.last_name}',
-                    }
-                ,
-                    {
-                        fieldLabel: 'Phone number',
-                        bind: '{record.billing_address.phone_number}',
-                    }
-                ,
-                    {
-                        fieldLabel: 'Company',
-                        bind: '{record.billing_address.company}',
-                    }
-                ,
-                    {
-                        allowBlank: false,
-                        fieldLabel: 'Street',
-                        bind: '{record.billing_address.street}',
-                    }
-                ,
-                    {
-                        allowBlank: false,
-                        fieldLabel: 'City',
-                        bind: '{record.billing_address.city}',
-                    }
-                ,
-                    {
-                        fieldLabel: 'Postcode',
-                        bind: '{record.billing_address.postcode}',
-                    }
-                ]
-            }
-        ,
-            {
-                xtype: 'fieldset',
-                title: 'Shipping Address',
-                defaultType: 'textfield',
-                defaults: {
-                    anchor: '100%'
-                },
-                items: [
-                    {
-                        allowBlank: false,
-                        fieldLabel: 'First name',
-                        bind: '{record.shipping_address.first_name}',
-                    }
-                ,
-                    {
-                        allowBlank: false,
-                        fieldLabel: 'Last name',
-                        bind: '{record.shipping_address.last_name}',
-                    }
-                ,
-                    {
-                        fieldLabel: 'Phone number',
-                        bind: '{record.shipping_address.phone_number}',
-                    }
-                ,
-                    {
-                        fieldLabel: 'Company',
-                        bind: '{record.shipping_address.company}',
-                    }
-                ,
-                    {
-                        allowBlank: false,
-                        fieldLabel: 'Street',
-                        bind: '{record.shipping_address.street}',
-                    }
-                ,
-                    {
-                        allowBlank: false,
-                        fieldLabel: 'City',
-                        bind: '{record.shipping_address.city}',
-                    }
-                ,
-                    {
-                        fieldLabel: 'Postcode',
-                        bind: '{record.shipping_address.postcode}',
-                    }
-                ]
-            }
+            items: [
+                xtype: 'textfield'
+                fieldLabel: 'Tracking Code'
+                required: no
+                bind: '{record.tracking}'
+                minLength: 2
+                maxLength: 255
+            ]
         ]
         buttons: [
-            text: 'ยกเลิก'
-            handler: 'onCancel'
-        ,
             text: 'บันทึก'
             handler: 'onSubmit'
             disabled: yes

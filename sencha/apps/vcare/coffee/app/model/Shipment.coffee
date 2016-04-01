@@ -8,10 +8,9 @@ Ext.define 'Vcare.model.Shipment',
     ,
         name: 'state'
         type: 'string'
+        persist: false
     ,
-        name: 'created_at'
-        type: 'date'
-    ,
-        name: 'updated_at'
-        type: 'date'
+        name: 'tracking'
+        type: 'string'
+
     ]

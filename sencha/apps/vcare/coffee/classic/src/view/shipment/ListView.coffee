@@ -79,7 +79,7 @@ Ext.define 'Vcare.view.shipment.ListView',
             text: 'Split Shipment'
             iconCls:'check-square'
             bind: widgetRecord: '{refShipmentList.selection}'
-            handler: 'onSplit'
+            handler: 'onShowSplit'
             aclCheck: yes
         ,
             '->'
@@ -94,6 +94,5 @@ Ext.define 'Vcare.view.shipment.ListView',
     bbar:
         xtype: 'pagingtoolbar'
         scrollable: yes
-        pageSize: 25
         bind: store: '{shipments}'
         displayInfo: yes
