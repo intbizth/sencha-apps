@@ -19,33 +19,41 @@ Ext.define 'Vcare.view.product.ModelForm',
             get: -> @getAvailableUntil()
             set: (time) -> @setAvailableUntil(null, time)
 
-    #### >> todo not duplicate & this function is incomplete
+    # AvailableOn, AvailableUntil
+    getMasterVariant: ->
+        return @get('record').getMasterVariant()
+
+    getVariantAvailable: (fieldName) ->
+        if variant = @getMasterVariant()
+             return variant.get(fieldName)
+
+        return
+
+    setAvailable: (fieldName, date) ->
+        if variant = @getMasterVariant()
+            variant.set(fieldName, date)
+
+        return
+
+    # AvailableOn
     getAvailableOn: ->
-        if variant = @get('record').getMasterVariant()
-            return variant.get('available_on')
+        @getVariantAvailable('available_on')
 
-        return
+    setAvailableOn: (date, time) ->
+        originDate = @getAvailableOn()
+        date = @setDateTimeInRecord(originDate, date, time)
 
-    # setAvailableOn: (date, time) ->
-    #     originDate = @getAvailableOn()
-    #     date = @setDateTimeInRecord(originDate, date, time)
+        @setAvailable('available_on', date)
 
-    #     @get('record').set 'available_on', date
-    #     return
-
+    # AvailableUntil
     getAvailableUntil: ->
-        if variant = @get('record').getMasterVariant()
-            return variant.get('available_until')
+        @getVariantAvailable('available_until')
 
-        return
+    setAvailableUntil: (date, time) ->
+        originDate = @getAvailableUntil()
+        date = @setDateTimeInRecord(originDate, date, time)
 
-    # setAvailableUntil: (date, time) ->
-    #     originDate = @getAvailableUntil()
-    #     date = @setDateTimeInRecord(originDate, date, time)
-
-    #     @get('record').set 'available_until', date
-    #     return
-    #### <<
+        @setAvailable('available_until', date)
 
     isDirty: ->
         @get('record').dirty || @get('record.master_variant').dirty

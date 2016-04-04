@@ -11,9 +11,11 @@ Ext.define 'Vcare.model.ProductVariant',
     ,
         name: 'price'
         type: 'int'
+        defaultValue: null
     ,
         name: 'original_price'
         type: 'int'
+        defaultValue: null
     ,
         name: 'on_hand'
         type: 'int'
