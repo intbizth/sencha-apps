@@ -7,6 +7,11 @@ Ext.define 'Vcare.view.product.Model',
             type: 'store-products'
             autoLoad: yes
 
+        taxonomies:
+            type: 'store-taxonomies'
+            autoLoad: yes
+            pageSize: no
+
     createMasterVariant: (record) ->
         return record.getMasterVariant() if record and record.getMasterVariant()
         return Ext.create 'Vcare.model.ProductVariant'

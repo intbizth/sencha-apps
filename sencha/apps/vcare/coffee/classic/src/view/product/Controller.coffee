@@ -9,32 +9,30 @@ Ext.define 'Vcare.view.product.Controller',
         vm = @getViewModel()
         record = vm.prepareData(record)
 
-        if !form = @referTo 'ProductForm'
-            form = @getView().add
-                xtype: 'wg-product-form'
-                id: 'form'
-                title: title
-                viewModel:
-                    type: 'vm-product-form'
-                    data:
-                        record: record
+        form = @getView().add
+            xtype: 'wg-product-form'
+            id: 'form'
+            ownerView: @getView()
+            widgetRecord: record
+            title: title
+            viewModel:
+                type: 'vm-product-form'
+                data:
+                    record: record
 
-        main = @getMainLayout(form)
-        main.setActiveItem('form')
+        @getView().setActiveItem('form')
 
-    getMainLayout: (panel) ->
-        return panel.up('container')
+    removeForm: ->
+        @getView().setActiveItem('list')
+        @getView().remove('form')
 
     onAddNew: (btn) -> @activeForm()
 
     onEdit: (btn) -> @activeForm(btn.getSingleWidgetRecord())
 
     onCancel: (btn) ->
-        form = btn.up('form')
-        main = @getMainLayout(form)
-
         #todo check dirty
-        main.setActiveItem('list')
+        @removeForm()
 
     onFormMenuClick: (btn) ->
         formTabs = @referTo 'FormTabs'
@@ -54,3 +52,4 @@ Ext.define 'Vcare.view.product.Controller',
                 console.log 'failure'
             success: (record, o) =>
                 console.log 'success'
+                @removeForm()

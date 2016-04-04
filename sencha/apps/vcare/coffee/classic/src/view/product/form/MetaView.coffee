@@ -20,7 +20,7 @@ Ext.define 'Vcare.view.product.form.MetaView',
     ,
         xtype: 'fieldtranslation'
         fieldLabel: 'Meta keyword'
-        itemKey: 'meta_keyword'
+        itemKey: 'meta_keywords'
         bind:
             locales: '{locales}'
             locale: '{defaultLocale}'
