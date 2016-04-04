@@ -19,10 +19,10 @@ Ext.define 'Moboque.model.News',
         name: 'link'
         type: 'string'
     ,
-        name: 'newsCategory'
+        name: 'news_category'
         reference:
             type: 'NewsCategory'
-            role: 'newsCategory'
+            role: 'news_category'
             associationKey: 'news_category'
             getterName: 'getNewsCategory'
             setterName: 'setNewsCategory'
@@ -31,15 +31,15 @@ Ext.define 'Moboque.model.News',
     getTitle: -> @trans 'title'
     getSubTitle: -> @trans 'sub_title'
     getDetail: -> @trans 'detail'
-        
+
     getNewsCategoryTitle: ->
         news = @getNewsCategory()
         return news.get("title") if news
         return ''
 
     writerTransform: fn: (data) ->
-        if data.newsCategory
-            data.newsCategory = data.newsCategory.id
+        if data.news_category
+            data.news_category = data.news_category.id
 
         if data.parent
             data.parent = data.parent.id

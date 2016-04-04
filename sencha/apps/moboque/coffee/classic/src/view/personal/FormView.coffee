@@ -83,6 +83,7 @@ Ext.define 'Moboque.view.personal.FormView',
                 bind: '{record.surname}'
             ,
                 xtype: 'combo'
+                editable: no
                 fieldLabel: '<span style="color:red;">*</span> ชื่อแผนก'
                 displayField: 'title'
                 valueField: 'id'

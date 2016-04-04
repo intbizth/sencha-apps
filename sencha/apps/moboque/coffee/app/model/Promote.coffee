@@ -9,10 +9,10 @@ Ext.define 'Moboque.model.Promote',
         name: 'description'
         type: 'string'
     ,
-        name: 'promoteCategory'
+        name: 'promote_category'
         reference:
             type: 'PromoteCategory'
-            role: 'promoteCategory'
+            role: 'promote_category'
             associationKey: 'promote_category'
             getterName: 'getPromoteCategory'
             setterName: 'setPromoteCategory'
