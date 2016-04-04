@@ -31,7 +31,7 @@ Ext.define 'Moboque.view.province.ListView',
     tbar:
         scrollable: yes
         items: [
-            text: 'เพิ่มข้อมูลจังหวัด'
+            text: 'เพิ่มจังหวัด'
             xtype: 'button'
             iconCls: 'plus'
             handler: 'onAddNew'
@@ -41,7 +41,7 @@ Ext.define 'Moboque.view.province.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls: 'pencil-square-o '
+            iconCls: 'pencil-square-o'
             bind: widgetRecord: '{refProvinceList.selection}'
             handler: 'onEdit'
             aclCheck: yes

@@ -14,5 +14,5 @@ Ext.define 'Moboque.view.service.Controller',
                 type: 'vm-service-form'
                 data:
                     record: record
-                    
+
         @callParent([record, options])

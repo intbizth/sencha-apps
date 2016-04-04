@@ -10,7 +10,7 @@ Ext.define 'Moboque.view.group.Model',
         events:
             type: 'store-events'
             autoLoad: yes
-            pageSize: 25
+            pageSize: 50
 
     createRecord: (record) ->
         return record if record

@@ -18,11 +18,10 @@ Ext.define 'Moboque.view.service.ListView',
     columns: [
         text: 'ชื่อบริการ'
         dataIndex: 'title'
-        flex: 1
-        minWidth: 200
+        width: 300
     ,
         text: 'หมวดหมู่'
-        width: 350
+        width: 250
         renderer: (v, m, r) ->
             return r.getServiceCategoryName()
     ,
@@ -30,15 +29,18 @@ Ext.define 'Moboque.view.service.ListView',
         text: 'ราคา'
         dataIndex: 'price'
         format: '0,000.00'
+        align: 'right'
         width: 100
     ,
         text: 'สกุลเงิน'
         dataIndex: 'price_currency'
+        align: 'center'
         width: 100
     ,
         text: 'ลิงก์'
         dataIndex: 'link'
-        width: 300
+        flex: 1
+        minWidth: 200
     ]
 
     tbar:

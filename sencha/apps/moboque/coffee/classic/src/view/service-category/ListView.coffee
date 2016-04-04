@@ -15,6 +15,15 @@ Ext.define 'Moboque.view.service-category.ListView',
     reference: 'refServiceCategoryList'
     headerBorders: no
 
+    selModel: 'rowmodel'
+    plugins:
+        ptype: 'rowediting'
+        clicksToEdit: 1
+
+    listeners:
+        edit: 'updatePersonalRecord'
+        canceledit: 'cancelEditRecord'
+
     columns: [
         text: 'ชื่อหมวดหมู่บริการ'
         dataIndex: 'title'
@@ -24,6 +33,12 @@ Ext.define 'Moboque.view.service-category.ListView',
         dataIndex: 'sub_title'
         flex: 1
         minWidth: 200
+    ,
+        xtype: 'datecolumn'
+        text: 'วันที่สร้าง'
+        dataIndex: 'created_at'
+        format: 'd-m-Y H:i'
+        width: 200
     ]
 
     tbar:

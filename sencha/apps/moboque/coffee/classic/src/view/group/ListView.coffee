@@ -17,7 +17,7 @@ Ext.define 'Moboque.view.group.ListView',
 
     columns: [
         text: 'ชื่องาน'
-        width: 300
+        width: 400
         renderer: (v, m, r) ->
             return r.getEventName()
     ,
@@ -32,6 +32,12 @@ Ext.define 'Moboque.view.group.ListView',
         colorBoxHeight: 20
         flex: 1
         minWidth: 200
+    ,
+        xtype: 'datecolumn'
+        text: 'วันที่สร้าง'
+        dataIndex: 'created_at'
+        format: 'd-m-Y H:i'
+        width: 200
     ]
 
     tbar:

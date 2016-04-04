@@ -22,7 +22,8 @@ Ext.define 'Moboque.view.promote-category.ListView',
     columns: [
         text: 'หัวเรื่อง'
         dataIndex: 'title'
-        width: 200
+        flex: 1
+        minWidth: 200
     ]
 
     tbar:
