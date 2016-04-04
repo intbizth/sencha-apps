@@ -200,11 +200,27 @@ Ext.define 'Moboque.store.Menus',
             leaf: true
             routeId: 'feeders'
         ,
-            text: 'News'
-            view: 'news.LayoutView'
-            iconCls: 'fa fa-newspaper-o'
-            leaf: true
-            routeId: 'news'
+            text: 'NewsBundle'
+            iconCls: 'fa fa-camera-retro'
+            children: [
+                text: 'News'
+                view: 'news.LayoutView'
+                iconCls: 'fa fa-newspaper-o'
+                leaf: true
+                routeId: 'news'
+            ,
+                text: 'News Category'
+                view: 'news-category.LayoutView'
+                iconCls: 'fa fa-newspaper-o'
+                leaf: true
+                routeId: 'new-category'
+            ,
+                text: 'NewsImage'
+                view: 'news-image.LayoutView'
+                iconCls: 'fa fa-newspaper-o'
+                leaf: true
+                routeId: 'news-image'
+            ]
         ,
             text: 'Reports'
             view: 'report.LayoutView'

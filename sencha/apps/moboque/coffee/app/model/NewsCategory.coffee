@@ -12,4 +12,4 @@ Ext.define 'Moboque.model.NewsCategory',
 
     validators:
         title: 'presence'
-        sub_title: 'string'
+        sub_title: 'presence'
