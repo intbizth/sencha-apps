@@ -84,6 +84,7 @@ Ext.define 'Moboque.view.member.FormView',
                 anchor: '100%'
                 labelAlign: 'top'
                 xtype: 'textfield'
+                msgTarget: 'side'
 
             items: [
                 xtype: 'combo'

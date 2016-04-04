@@ -19,6 +19,7 @@ Ext.define 'Moboque.view.event.FormView',
             xtype: 'textfield'
             labelAlign: 'top'
             allowBlank: no
+            msgTarget: 'side'
 
         # TODO allowBlank is not working !
         items: [
