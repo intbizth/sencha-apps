@@ -28,8 +28,8 @@ class UserProvider implements UserProviderInterface
 
         if ($userData = $this->provider->getResourceOwner($accessToken)->toArray()) {
             return new User(
-                $userData['username'],
-                $userData['roles'],
+                $userData['user']['username'],
+                $userData['user']['roles'],
                 $accessToken
             );
         }
