@@ -18,8 +18,7 @@ Ext.define 'Moboque.view.service-image.ListView',
     columns: [
         text: 'คำอธิบายภาพ'
         dataIndex: 'description'
-        flex: 1
-        minWidth: 200
+        width: 300
     ,
         text: 'รูปภาพของบริการ'
         width: 300
@@ -27,11 +26,11 @@ Ext.define 'Moboque.view.service-image.ListView',
             return r.getServiceTitle()
     ,
         text: 'ลิงค์รูปภาพ'
-        width: 300
+        flex: 1
+        minWidth: 300
         renderer: (v, m, r) ->
             if image = r.get 'image'
                 return image.media.url
-
 
             return ''
     ]

@@ -37,6 +37,16 @@ Ext.define 'Vcare.store.Menus',
             leaf: true
             routeId: 'customers'
         ,
+            text: 'Products'
+            iconCls: 'x-fa fa-cubes'
+            children: [
+                text: 'Products'
+                view: 'product.LayoutView'
+                iconCls: 'x-fa fa-cube'
+                leaf: true
+                routeId: 'products'
+            ]
+        ,
             text: 'Orders'
             iconCls: 'x-fa fa-shopping-cart'
             children: [

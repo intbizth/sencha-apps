@@ -14,5 +14,5 @@ Ext.define 'Moboque.view.province.Controller',
                 type: 'vm-province-form'
                 data:
                     record: record
-                    
+
         @callParent([record, options])

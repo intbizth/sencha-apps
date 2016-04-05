@@ -15,34 +15,36 @@ Ext.define 'Moboque.view.link.ListView',
     reference: 'refLinkList'
     headerBorders: no
 
+    selModel: 'rowmodel'
+    plugins:
+        ptype: 'rowediting'
+        pluginId: 'rowediting'
+        clicksToEdit: 1
+        listeners:
+            cancelEdit: 'onCancelEdit'
+            edit: 'onSubmit'
+
     columns: [
         text: 'คำอธิบาย'
         dataIndex: 'label'
         width: 200
+        editor:
+            allowBlank: no
     ,
         text: 'ลิงค์'
         dataIndex: 'url'
         flex: 1
         minWidth: 200
+        editor:
+            allowBlank: no
     ]
 
     tbar:
         scrollable: yes
         items: [
-            text: 'เพิ่มรายการ'
-            xtype: 'button'
+            text: 'เพิ่มข้อมูล'
             iconCls: 'plus'
             handler: 'onAddNew'
-        ,
-            '-'
-        ,
-            text: 'แก้ไข'
-            xtype: 'button'
-            reference: 'refEditButton'
-            iconCls: 'pencil-square-o'
-            handler: 'onEdit'
-            bind: widgetRecord: '{refLinkList.selection}'
-            aclCheck: yes
         ,
             '-'
         ,
@@ -68,6 +70,5 @@ Ext.define 'Moboque.view.link.ListView',
         xtype: 'pagingtoolbar'
         scrollable: yes
         pageSize: 25
-        bind:
-            store: '{links}'
+        bind: store: '{links}'
         displayInfo: yes

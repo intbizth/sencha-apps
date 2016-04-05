@@ -14,5 +14,5 @@ Ext.define 'Moboque.view.service-category.Controller',
                 type: 'vm-service-category-form'
                 data:
                     record: record
-                    
+
         @callParent([record, options])

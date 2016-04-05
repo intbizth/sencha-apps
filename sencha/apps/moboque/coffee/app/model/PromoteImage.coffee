@@ -1,6 +1,6 @@
 Ext.define 'Moboque.model.PromoteImage',
     extend: 'Moboque.model.Base'
-    api: '/api/promotes/images/'
+    api: '/api/promote-images/'
     hasFileUpload: true
 
     fields: [
