@@ -40,6 +40,14 @@ Ext.define 'Vcare.view.shipment.Controller',
         ),this
 
 
+    onShow: (btn) ->
+        record = btn.getSingleWidgetRecord()
+        dialog = @getView().add
+            xtype: 'wg-shipment-show'
+            data: record
+
+        dialog.show()
+
     onShowSplit: (btn) ->
         record = btn.getSingleWidgetRecord()
         if record.data.units.length > 1

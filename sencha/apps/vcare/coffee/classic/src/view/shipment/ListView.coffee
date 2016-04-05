@@ -17,7 +17,7 @@ Ext.define 'Vcare.view.shipment.ListView',
 
     columns: [
         text: 'ID'
-        width: 40
+        width: 80
         dataIndex: 'id'
     ,
         text: 'Order'
@@ -31,7 +31,7 @@ Ext.define 'Vcare.view.shipment.ListView',
         text: 'Method'
         dataIndex: 'method'
         flex: 1
-        renderer: (v, m, r) -> return v.name
+        renderer: (v, m, r) -> return r.getMethodName()
     ,
         text: 'Ship to'
         dataIndex: 'order'
@@ -39,9 +39,9 @@ Ext.define 'Vcare.view.shipment.ListView',
         renderer: (v, m, r) -> return v.customer.first_name+' '+v.customer.last_name+'<br/>'+v.shipping_address.street + ', ' + v.shipping_address.city
     ,
         text: 'Qty'
-        dataIndex: 'order'
+        dataIndex: 'units'
         width: 80
-        renderer: (v, m, r) -> return v.items.length
+        renderer: (v, m, r) -> return v.length
 
     ,
         text: 'Creation date'
@@ -54,10 +54,10 @@ Ext.define 'Vcare.view.shipment.ListView',
     tbar:
         items: [
 
-            text: 'Edit'
-            iconCls:'pencil-square-o '
+            text: 'Show Units'
+            iconCls:'list-alt '
             bind: widgetRecord: '{refShipmentList.selection}'
-            handler: 'onEdit'
+            handler: 'onShow'
             aclCheck: yes
         ,
             text: 'Remove'
@@ -76,12 +76,12 @@ Ext.define 'Vcare.view.shipment.ListView',
         ,
             '-'
         ,
-            text: 'Split Shipment'
-            iconCls:'check-square'
-            bind: widgetRecord: '{refShipmentList.selection}'
-            handler: 'onShowSplit'
-            aclCheck: yes
-        ,
+#            text: 'Split Shipment'
+#            iconCls:'check-square'
+#            bind: widgetRecord: '{refShipmentList.selection}'
+#            handler: 'onShowSplit'
+#            aclCheck: yes
+#        ,
             '->'
         ,
             fieldLabel: 'Search'
