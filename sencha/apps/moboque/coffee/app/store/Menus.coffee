@@ -49,6 +49,34 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'check-times'
             ]
         ,
+            text: 'Appregisted bind users'
+            iconCls: 'fa fa-mobile'
+            children: [
+                text: 'Events'
+                view: 'event-account.LayoutView'
+                iconCls: 'fa fa-calendar'
+                leaf: true
+                routeId: 'account-events'
+            ,
+                text: 'Groups'
+                view: 'group-account.LayoutView'
+                iconCls: 'fa fa-cubes'
+                leaf: true
+                routeId: 'account-groups'
+            ,
+                text: 'Members'
+                view: 'member-account.LayoutView'
+                iconCls: 'fa fa-user'
+                leaf: true
+                routeId: 'account-members'
+            ,
+                text: 'CheckTimes'
+                view: 'check-time-account.LayoutView'
+                iconCls: 'fa fa-clock-o'
+                leaf: true
+                routeId: 'account-check-times'
+            ]
+        ,
             text: 'InfoBundle'
             iconCls: 'fa fa-info-circle'
             children: [

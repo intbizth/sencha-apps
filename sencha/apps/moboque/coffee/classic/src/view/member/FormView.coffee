@@ -94,6 +94,7 @@ Ext.define 'Moboque.view.member.FormView',
                 displayField: 'name'
                 valueField: 'id'
                 queryMode: 'local'
+                msgTarget: 'side'
                 bind:
                     store: '{groups}'
                     selection: '{group}'
@@ -101,14 +102,18 @@ Ext.define 'Moboque.view.member.FormView',
                 fieldLabel: '<span style="color:red;">*</span> ชื่อ'
                 emptyText: 'กรุณาระบุชื่อจริง'
                 bind: '{record.firstname}'
+                allowBlank: no
+                msgTarget: 'side'
             ,
                 fieldLabel: '<span style="color:red;">*</span> นามสกุล'
                 emptyText: 'กรุณาระบุนามสกุล'
                 bind: '{record.lastname}'
+                msgTarget: 'side'
             ,
                 fieldLabel: '<span style="color:red;">*</span> รหัสประจำตัวประชาชน'
                 emptyText: 'กรุณาระบุรหัสประจำตัวประชาชน'
                 bind: '{record.card_id}'
+                msgTarget: 'side'
                 minLength: 13
                 maxLength: 13
             ,
@@ -116,11 +121,13 @@ Ext.define 'Moboque.view.member.FormView',
                 fieldLabel: '<span style="color:red;">*</span> ที่อยู่'
                 emptyText: 'กรุณาระบุที่อยู่'
                 bind: '{record.address}'
+                msgTarget: 'side'
             ,
                 fieldLabel: '<span style="color:red;">*</span> อีเมล์'
                 emptyText: 'กรุณาระบุอีเมล์'
                 vtype: 'email'
                 bind: '{record.email}'
+                msgTarget: 'side'
             ,
                 fieldLabel: 'เบอร์โทรศัพท์'
                 emptyText: 'กรุณาระบุเบอร์โทรศัพท์ '
@@ -133,6 +140,7 @@ Ext.define 'Moboque.view.member.FormView',
                 maskRe: /[\d\-]/
                 regex: /^\d{3}\d{3}\d{4}$/
                 regexText: 'Must be in the format 0999999999'
+                msgTarget: 'side'
             ]
         ,
             region: 'south'

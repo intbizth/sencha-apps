@@ -48,6 +48,10 @@
     $row-indicator-over-color: transparent
 );
 
+.x-treelist-navigation {
+    overflow-y: auto;
+}
+
 //--------------------------------------------------------
 // Create classes for full-size responsive items
 
