@@ -1,6 +1,6 @@
-Ext.define 'Vcare.view.order.ModelForm',
+Ext.define 'Vcare.view.shipment.ModelForm',
     extend: 'Vcare.view.base.ViewModel'
-    alias: 'viewmodel.vm-order-form'
+    alias: 'viewmodel.vm-shipment-form'
 
     formulas:
         isPhantom:
