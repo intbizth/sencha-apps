@@ -2,6 +2,7 @@ Ext.define 'Vcare.view.shipment.Split',
     extend: 'Ext.window.Window'
     alias: 'widget.wg-shipment-split'
     modal: yes
+
     initComponent: ->
 
         @items = []
