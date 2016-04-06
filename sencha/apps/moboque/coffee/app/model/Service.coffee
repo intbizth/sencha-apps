@@ -21,10 +21,10 @@ Ext.define 'Moboque.model.Service',
         name: 'link'
         type: 'string'
     ,
-        name: 'serviceCategory'
+        name: 'service_category'
         reference:
             type: 'ServiceCategory'
-            role: 'serviceCategory'
+            role: 'service_category'
             associationKey: 'service_category'
             getterName: 'getServiceCategory'
             setterName: 'setServiceCategory'
@@ -38,8 +38,8 @@ Ext.define 'Moboque.model.Service',
 
     writerTransform: fn: (data) ->
 
-        if data.serviceCategory
-            data.serviceCategory = data.serviceCategory.id
+        if data.service_category
+            data.service_category = data.service_category.id
 
         return data
 

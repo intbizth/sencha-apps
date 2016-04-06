@@ -33,10 +33,10 @@ Ext.define 'Moboque.model.Personal',
         persist: no
         calculate: (d) -> "#{d.name} #{d.surname}"
     ,
-        name: 'personalDepartment'
+        name: 'personal_department'
         reference:
             type: 'PersonalDepartment'
-            role: 'personalDepartment'
+            role: 'personal_department'
             associationKey: 'personal_department'
             getterName: 'getPersonalDepartment'
             setterName: 'setPersonalDepartment'
@@ -49,8 +49,8 @@ Ext.define 'Moboque.model.Personal',
         return ''
 
     writerTransform: fn: (data) ->
-        if data.personalDepartment
-            data.personalDepartment = data.personalDepartment.id
+        if data.personal_department
+            data.personal_department = data.personal_department.id
 
         return data
 

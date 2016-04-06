@@ -33,6 +33,7 @@ Ext.define 'Moboque.view.group.FormView',
         ,
             fieldLabel: '<span style="color:red;">*</span> ชื่อกลุ่ม'
             emptyText: 'กรุณาระบุชื่องกลุ่ม'
+            msgTarget: 'side'
             bind: '{record.name}'
         ,
             xtype: 'colorfield'

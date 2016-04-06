@@ -13,10 +13,10 @@ Ext.define 'Moboque.model.Gallery',
         name: 'image'
         type: 'auto'
     ,
-        name: 'galleryCategory'
+        name: 'gallery_category'
         reference:
             type: 'GalleryCategory'
-            role: 'galleryCategory'
+            role: 'gallery_category'
             associationKey: 'gallery_category'
             getterName: 'getGalleryCategory'
             setterName: 'setGalleryCategory'
@@ -30,8 +30,8 @@ Ext.define 'Moboque.model.Gallery',
 
     writerTransform: fn: (data) ->
 
-        if data.galleryCategory
-            data.galleryCategory = data.galleryCategory.id
+        if data.gallery_category
+            data.gallery_category = data.gallery_category.id
 
         return data
 
