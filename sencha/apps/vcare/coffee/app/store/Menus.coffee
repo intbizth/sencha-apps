@@ -63,7 +63,6 @@ Ext.define 'Vcare.store.Menus',
             iconCls: 'x-fa fa-plane'
             leaf: true
             routeId: 'shipments'
-
         ,
             text: 'Configuration'
             iconCls: 'x-fa fa-cog'

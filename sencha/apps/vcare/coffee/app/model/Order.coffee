@@ -52,7 +52,6 @@ Ext.define 'Vcare.model.Order',
             associationKey: 'customer'
             getterName: 'getCustomer'
             setterName: 'setCustomer'
-
     ]
 
     hasMany: [

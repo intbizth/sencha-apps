@@ -10,7 +10,6 @@ Ext.define 'Vcare.view.shipment.Show',
             region : 'center'
             title : 'Shipment Units'
             width: 800
-            bodyPadding: 10
             reference: 'refShipmentUnitList'
             store: Ext.create 'Ext.data.Store',
                 data: data.data.units

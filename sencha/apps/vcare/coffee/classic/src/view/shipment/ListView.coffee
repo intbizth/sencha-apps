@@ -42,13 +42,11 @@ Ext.define 'Vcare.view.shipment.ListView',
         dataIndex: 'units'
         width: 80
         renderer: (v, m, r) -> return v.length
-
     ,
         text: 'Creation date'
         dataIndex: 'created_at'
         flex: 1
         xtype: 'datecolumn'
-
     ]
 
     tbar:

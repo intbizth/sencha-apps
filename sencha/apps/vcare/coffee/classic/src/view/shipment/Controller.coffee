@@ -20,15 +20,19 @@ Ext.define 'Vcare.view.shipment.Controller',
 
     onSplit: (btn) ->
         shipment_id = @currentShipment
-        Ext.MessageBox.confirm 'Confirm', 'Are you sure you want to split these items?', ((btnText) ->
+        Ext.MessageBox.confirm 'Confirm', 'Are you sure you want to split these items?', (btnText) ->
             if btnText == 'yes'
                 dialog = btn.up('window')
                 store = @getViewModel().get('shipments')
                 selModel = btn.up('grid').getSelectionModel()
                 items = []
+
                 for item in selModel.getSelection()
+
                     items.push(item.id)
+
                 dialog.mask('Splitting the shipment ...')
+
                 store.splitShipment
                     items: items
                     params:
@@ -37,7 +41,7 @@ Ext.define 'Vcare.view.shipment.Controller',
                         @successAlert('Split shipment completely !')
                         dialog.close()
 
-        ),this
+        ,this
 
 
     onShow: (btn) ->
@@ -65,7 +69,7 @@ Ext.define 'Vcare.view.shipment.Controller',
         record = btn.getSingleWidgetRecord()
         store = @getViewModel().get('transitions')
 
-        Ext.MessageBox.confirm 'Confirm', 'Are you sure you want to apply this transition?', ((btnText) ->
+        Ext.MessageBox.confirm 'Confirm', 'Are you sure you want to apply this transition?', (btnText) ->
             if btnText == 'yes'
                 dialog.mask('Applying transition ...')
                 store.updateState
@@ -79,7 +83,7 @@ Ext.define 'Vcare.view.shipment.Controller',
                         dialog.unmask()
                         dialog.close()
 
-        ),this
+        ,this
 
 
     onUpdateState: (btn) ->
