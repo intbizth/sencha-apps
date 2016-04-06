@@ -43,7 +43,6 @@ Ext.define 'Vcare.view.product.form.MainView',
             bind:
                 locales: '{locales}'
                 locale: '{defaultLocale}'
-
         ]
     ,
         region: 'east'
@@ -74,7 +73,7 @@ Ext.define 'Vcare.view.product.form.MainView',
             xtype: 'numberfield'
             fieldLabel: 'Current stock'
             minValue: 0
-            bind: '{record.master_variant.on_hold}'
+            bind: '{record.master_variant.on_hand}'
         ,
             xtype: 'container'
             layout: 'hbox'
@@ -85,8 +84,8 @@ Ext.define 'Vcare.view.product.form.MainView',
                 xtype: 'datefield'
                 name: 'date'
                 fieldLabel: 'Available on date'
-                submitFormat: 'Y-m-d'
                 format: 'Y-m-d'
+                bind: '{availableOnDate}'
                 margin: '0 5 0 0'
                 width: 170
             ,
@@ -94,6 +93,7 @@ Ext.define 'Vcare.view.product.form.MainView',
                 name: 'time'
                 fieldLabel: 'time'
                 format: 'H:i'
+                bind: '{availableOnTime}'
                 margin: '0 0 0 5'
                 width: 120
             ]
@@ -108,8 +108,8 @@ Ext.define 'Vcare.view.product.form.MainView',
                 xtype: 'datefield'
                 name: 'date'
                 fieldLabel: 'Available until date'
-                submitFormat: 'Y-m-d'
                 format: 'Y-m-d'
+                bind: '{availableUntilDate}'
                 margin: '0 5 0 0'
                 width: 170
             ,
@@ -117,6 +117,7 @@ Ext.define 'Vcare.view.product.form.MainView',
                 name: 'time'
                 fieldLabel: 'time'
                 format: 'H:i'
+                bind: '{availableUntilTime}'
                 margin: '0 0 0 5'
                 width: 120
             ]
@@ -124,5 +125,6 @@ Ext.define 'Vcare.view.product.form.MainView',
             xtype: 'checkboxfield'
             boxLabel: 'Available on demand'
             margin: '10 0 0 0'
+            bind: '{record.master_variant.available_on_demand}'
         ]
     ]

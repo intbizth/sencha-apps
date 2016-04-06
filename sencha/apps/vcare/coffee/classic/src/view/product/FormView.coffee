@@ -72,10 +72,10 @@ Ext.define 'Vcare.view.product.FormView',
         bodyPadding: 0
 
         buttons: [
-            text: 'ยกเลิก'
+            text: 'Cancel'
             handler: 'onCancel'
         ,
-            text: 'บันทึก'
+            text: 'Submit'
             handler: 'onSubmit'
             disabled: yes
             formBind: yes
