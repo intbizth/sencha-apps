@@ -15,13 +15,12 @@ Ext.define 'Moboque.view.service-image.FormView',
         defaults:
             width: 360
             labelAlign: 'top'
-            allowBlank: no
 
         items: [
             xtype: 'combo'
             editable: no
-            fieldLabel: 'รูปภาพของกิจกรรม'
-            emptyText: 'กรุณาเลือกกิจกรรม'
+            fieldLabel: 'รูปภาพของบริการ'
+            emptyText: 'กรุณาเลือกบริการ'
             displayField: 'title'
             valueField: 'id'
             queryMode: 'local'
@@ -30,8 +29,10 @@ Ext.define 'Moboque.view.service-image.FormView',
                 selection: '{service}'
         ,
             xtype: 'textareafield'
-            fieldLabel: 'คำอธิบายภาพ'
+            fieldLabel: '<span style="color:red;">*</span> คำอธิบายภาพ'
             emptyText: 'คำธิบายภาพ'
+            required: yes
+            msgTarget: 'under'
             bind: '{record.description}'
         ,
             xtype: 'fieldset'

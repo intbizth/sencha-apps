@@ -9,7 +9,3 @@ Ext.define 'Moboque.model.Link',
         name: 'url'
         type: 'string'
     ]
-
-    validators:
-        label: 'presence'
-        url: 'presence'

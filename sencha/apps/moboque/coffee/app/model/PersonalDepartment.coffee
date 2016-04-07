@@ -10,6 +10,3 @@ Ext.define 'Moboque.model.PersonalDepartment',
         name: 'thumbnail'
         type: 'auto'
     ]
-
-    validators:
-        title: 'presence'

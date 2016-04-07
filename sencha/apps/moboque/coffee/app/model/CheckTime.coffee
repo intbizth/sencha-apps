@@ -31,7 +31,4 @@ Ext.define 'Moboque.model.CheckTime',
             data.member = data.member.id
 
         return data
-
-    validators:
-        checktime: 'presence'
-        type: 'presence'
+        

@@ -15,8 +15,3 @@ Ext.define 'Moboque.model.Activity',
         name: 'link'
         type: 'string'
     ]
-
-    validators:
-        title: 'presence'
-        detail: 'presence'
-        link: 'presence'

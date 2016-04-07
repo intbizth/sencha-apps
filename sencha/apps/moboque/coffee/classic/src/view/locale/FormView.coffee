@@ -15,12 +15,10 @@ Ext.define 'Moboque.view.locale.FormView',
         margin: '10 10 10 10'
         modelValidation: yes
 
-        # TODO allowBlank is not working !
         defaults:
             xtype: 'textfield'
             anchor: '100%'
             labelAlign: 'top'
-            allowBlank: no
 
         items: [
             fieldLabel: 'ชื่อสถานที่-แหล่งท่องเที่ยว'

@@ -16,13 +16,8 @@ Ext.define 'Moboque.view.activity-image.FormView',
             xtype: 'textfield'
             width: 360
             labelAlign: 'top'
-            allowBlank: no
 
         items: [
-            fieldLabel: 'คำอธิบายภาพ'
-            emptyText: 'คำธิบายภาพ'
-            bind: '{record.description}'
-        ,
             xtype: 'combo'
             editable: no
             fieldLabel: 'รูปภาพของกิจกรรม'
@@ -33,6 +28,12 @@ Ext.define 'Moboque.view.activity-image.FormView',
             bind:
                 store: '{activities}'
                 selection: '{activity}'
+        ,
+            fieldLabel: '<span style="color:red;">*</span> คำอธิบายภาพ'
+            emptyText: 'คำธิบายภาพ'
+            bind: '{record.description}'
+            required: yes
+            msgTarget: 'under'
         ,
             xtype: 'fieldset'
             title: 'Upload Images'

@@ -12,19 +12,17 @@ Ext.define 'Moboque.view.promote-category.FormView',
         margin: '10 10 10 10'
         modelValidation: yes
 
-        defaults:
-            xtype: 'textfield'
-            anchor: '100%'
-            labelAlign: 'top'
-            allowBlank: no
-            minLength: 2
-            maxLength: 255
-
         items: [
+            xtype: 'textfield'
             fieldLabel: 'ชื่อเรื่อง'
             emptyText: 'กรุณากรอกชื่อเรื่อง...'
+            anchor: '100%'
+            labelAlign: 'top'
+            minLength: 2
+            maxLength: 255
+            required: yes
+            msgTarget: 'under'
             bind: '{record.title}'
-
         ]
 
         buttons: [

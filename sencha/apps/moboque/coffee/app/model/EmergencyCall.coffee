@@ -12,8 +12,3 @@ Ext.define 'Moboque.model.EmergencyCall',
         name: 'tel'
         type: 'string'
     ]
-
-    validators:
-        title: 'presence'
-        description: 'presence'
-        tel: 'presence'

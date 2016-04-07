@@ -13,20 +13,18 @@ Ext.define 'Moboque.view.meet.FormView',
         modelValidation: yes
 
         defaults:
-            xtype: 'textfield'
-            anchor: '100%'
+            xtype: 'textareafield'
+            width: 400
             labelAlign: 'top'
             allowBlank: no
+            msgTarget: 'under'
             minLength: 2
             maxLength: 255
 
-        # TODO allowBlank is not working !
-
         items: [
-            fieldLabel: '<span style="color:red;">*</span> สถานะ'
+            fieldLabel: '<span style="color:red;">*</span> คำอธิบาย'
             emptyText: 'พูดทักทาย หรือสถานะ...'
             bind: '{record.description}'
-
         ]
 
         buttons: [

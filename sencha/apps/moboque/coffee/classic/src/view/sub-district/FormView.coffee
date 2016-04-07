@@ -16,7 +16,8 @@ Ext.define 'Moboque.view.sub-district.FormView',
             xtype: 'textfield'
             width: 360
             labelAlign: 'top'
-            allowBlank: no
+            required: yes
+            msgTarget: 'under'
 
         items: [
             xtype: 'combo'
@@ -33,7 +34,6 @@ Ext.define 'Moboque.view.sub-district.FormView',
             fieldLabel: '<span style="color:red;">*</span> ชื่อตำบล'
             emptyText: 'กรุณาใส่ชื่อตำบล'
             bind: '{record.name}'
-
         ]
 
         buttons: [

@@ -12,11 +12,10 @@ Ext.define 'Moboque.view.group.FormView',
         margin: '10 10 10 10'
         modelValidation: yes
 
-        # TODO allowBlank is not working !
         defaults:
             xtype: 'textfield'
             labelAlign: 'top'
-            allowBlank: no
+            msgTarget: 'under'
             width: 360
 
         items: [
@@ -27,22 +26,21 @@ Ext.define 'Moboque.view.group.FormView',
             displayField: 'name'
             valueField: 'id'
             queryMode: 'local'
+            required: yes
             bind:
                 store: '{events}'
                 selection: '{event}'
         ,
             fieldLabel: '<span style="color:red;">*</span> ชื่อกลุ่ม'
             emptyText: 'กรุณาระบุชื่องกลุ่ม'
-            msgTarget: 'side'
+            required: yes
             bind: '{record.name}'
         ,
             xtype: 'colorfield'
             fieldLabel: '<span style="color:red;">*</span> สีกลุ่ม'
             format: '#hex6'
-            allowBlank: no
+            required: yes
             bind: '{record.color}'
-
-        # TODO: Image field for upload not done yet
         ,
             xtype: 'fieldset'
             title: 'Upload Images'

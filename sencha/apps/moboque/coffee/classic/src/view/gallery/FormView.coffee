@@ -16,7 +16,6 @@ Ext.define 'Moboque.view.gallery.FormView',
             xtype: 'textfield'
             width: 360
             labelAlign: 'top'
-            allowBlank: no
 
         items: [
             xtype: 'combo'
@@ -26,6 +25,7 @@ Ext.define 'Moboque.view.gallery.FormView',
             displayField: 'title'
             valueField: 'id'
             queryMode: 'local'
+            required: yes
             bind:
                 store: '{galleryCategories}'
                 selection: '{galleryCategory}'
@@ -33,8 +33,11 @@ Ext.define 'Moboque.view.gallery.FormView',
             fieldLabel: '<span style="color:red;">*</span> ชื่อ'
             emptyText: 'กรุณาระบุชื่อรูปภาพ'
             bind: '{record.title}'
+            required: yes
+            allowBlank: no
+            msgTarget: 'under'
         ,
-            fieldLabel: '<span style="color:red;">*</span> คำบรรยาย'
+            fieldLabel: 'คำบรรยาย'
             emptyText: 'กรุณากรอกคำบรรยาย'
             bind: '{record.sub_title}'
         ,

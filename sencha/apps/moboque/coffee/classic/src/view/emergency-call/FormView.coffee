@@ -19,11 +19,11 @@ Ext.define 'Moboque.view.emergency-call.FormView',
             xtype: 'textfield'
             anchor: '100%'
             labelAlign: 'top'
-            allowBlank: no
+            required: yes
+            msgTarget: 'under'
             minLength: 2
             maxLength: 255
 
-        # TODO allowBlank is not working !
         items: [
             fieldLabel: '<span style="color:red;">*</span> ชื่อบริการ'
             emptyText: 'กรุณาระบุชื่อของบริการ'
@@ -36,7 +36,7 @@ Ext.define 'Moboque.view.emergency-call.FormView',
             fieldLabel: '<span style="color:red;">*</span> เบอร์ฉุกเฉิน'
             emptyText: 'กรุณาใส่หมายเลขฉุกเฉิน'
             bind: '{record.tel}'
-
+            regex: /[0-9]/
         ]
 
         buttons: [

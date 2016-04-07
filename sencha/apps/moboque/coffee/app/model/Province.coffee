@@ -6,6 +6,3 @@ Ext.define 'Moboque.model.Province',
 		name: 'name'
 		type: 'string'
 	]
-
-	validators:
-		name: 'presence'

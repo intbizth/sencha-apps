@@ -50,7 +50,7 @@ Ext.define 'Moboque.view.profile.ListView',
         items: [
             text: 'เพิ่มผู้ใช้งาน'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -58,7 +58,7 @@ Ext.define 'Moboque.view.profile.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
+            iconCls:'pencil-square-o '
             bind:
                 disabled: '{!refProfileList.selection}'
             handler: 'onEdit'
@@ -68,7 +68,7 @@ Ext.define 'Moboque.view.profile.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
+            iconCls:'trash-o'
             bind:
                 disabled: '{!refProfileList.selection}'
             handler: 'onDelete'

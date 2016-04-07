@@ -55,6 +55,3 @@ Ext.define 'Moboque.model.News',
                             delete data.translations[locale][prop]
 
         return data
-
-    validators:
-        link: 'presence'

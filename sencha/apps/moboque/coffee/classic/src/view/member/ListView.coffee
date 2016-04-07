@@ -29,7 +29,7 @@ Ext.define 'Moboque.view.member.ListView',
         flex: 1
         minWidth: 250
     ,
-        text: 'ชื่องาน'
+        text: 'ชื่อกลุ่ม'
         width: 300
         renderer: (v, m, r) ->
             return r.getGroupName()

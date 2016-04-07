@@ -23,10 +23,6 @@ Ext.define 'Moboque.model.Promote',
         return promote.get("title") if promote
         return ''
 
-    validators:
-        title: 'presence'
-        description: 'presence'
-
     writerTransform: fn: (data) ->
         if data.promoteCategory
             data.promoteCategory = data.promoteCategory.id

@@ -35,7 +35,3 @@ Ext.define 'Moboque.model.Group',
             data.event = data.event.id
 
         return data
-
-    validators:
-        name: 'presence'
-        color: 'presence'

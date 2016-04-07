@@ -34,7 +34,3 @@ Ext.define 'Moboque.model.Gallery',
             data.gallery_category = data.gallery_category.id
 
         return data
-
-    validators:
-        title: 'presence'
-        sub_title: 'presence'

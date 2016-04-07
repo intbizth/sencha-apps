@@ -16,8 +16,3 @@ Ext.define 'Moboque.model.Feeder',
         name: 'image'
         type: 'auto'
     ]
-
-    validators:
-        title: 'presence'
-        description: 'presence'
-        state: 'presence'

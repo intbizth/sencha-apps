@@ -17,9 +17,10 @@ Ext.define 'Moboque.view.gift.FormView',
 
         defaults:
             xtype: 'textfield'
-            anchor: '100%'
+            width: 360
             labelAlign: 'top'
-            allowBlank: no
+            required: yes
+            msgTarget: 'under'
             minLength: 2
             maxLength: 255
 
@@ -31,7 +32,6 @@ Ext.define 'Moboque.view.gift.FormView',
             fieldLabel: '<span style="color:red;">*</span> คำอธิบาย'
             emptyText: 'พูดทักทาย หรือสถานะ...'
             bind: '{record.description}'
-
         ]
 
         buttons: [

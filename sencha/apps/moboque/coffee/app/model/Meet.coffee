@@ -6,6 +6,3 @@ Ext.define 'Moboque.model.Meet',
         name: 'description'
         type: 'string'
     ]
-
-    validators:
-        description: 'presence'

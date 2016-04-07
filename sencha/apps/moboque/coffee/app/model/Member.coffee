@@ -59,11 +59,3 @@ Ext.define 'Moboque.model.Member',
             data.group = data.group.id
 
         return data
-
-    validators:
-        firstname: 'presence'
-        lastname: 'presence'
-        card_id: 'presence'
-        address: 'presence'
-        email: 'presence'
-        mobile_number: 'presence'
