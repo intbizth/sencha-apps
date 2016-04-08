@@ -24,9 +24,6 @@ Ext.define 'Moboque.model.ActivityImage',
         return activity.get("title") if activity
         return ''
 
-    validators:
-        description: 'presence'
-
     writerTransform: fn: (data) ->
         if data.activity
             data.activity = data.activity.id

@@ -16,14 +16,15 @@ Ext.define 'Moboque.view.service-category.FormView',
             xtype: 'textfield'
             width: 360
             labelAlign: 'top'
-            allowBlank: no
 
         items: [
             fieldLabel: '<span style="color:red;">*</span> ชื่อเรื่อง'
             emptyText: 'กรุณาระบุชื่อเรื่อง'
             bind: '{record.title}'
+            required: yes
+            msgTarget: 'under'
         ,
-            fieldLabel: '<span style="color:red;">*</span> คำบรรยาย'
+            fieldLabel: 'คำบรรยาย'
             emptyText: 'กรุณาใส่คำบรรยาย'
             bind: '{record.sub_title}'
         ]

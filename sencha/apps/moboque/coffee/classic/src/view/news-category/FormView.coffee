@@ -16,7 +16,8 @@ Ext.define 'Moboque.view.news-category.FormView',
             xtype: 'textfield'
             width: 360
             labelAlign: 'top'
-            allowBlank: no
+            required: yes
+            msgTarget: 'under'
 
         items: [
             fieldLabel: '<span style="color:red;">*</span> ชื่อเรื่อง'
@@ -26,7 +27,6 @@ Ext.define 'Moboque.view.news-category.FormView',
             fieldLabel: '<span style="color:red;">*</span> คำบรรยาย'
             emptyText: 'กรุณาใส่คำบรรยาย'
             bind: '{record.sub_title}'
-
         ]
 
         buttons: [

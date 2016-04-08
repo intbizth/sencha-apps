@@ -50,7 +50,7 @@ Ext.define 'Moboque.view.locale.ListView',
         items: [
             text: 'เพิ่มกลุ่ม'
             xtype: 'button'
-            iconCls: 'fa fa-pencil'
+            iconCls: 'plus'
             handler: 'onAddNew'
         ,
             '-'
@@ -58,7 +58,7 @@ Ext.define 'Moboque.view.locale.ListView',
             text: 'แก้ไข'
             xtype: 'button'
             reference: 'refEditButton'
-            iconCls:'fa fa-pencil-square-o '
+            iconCls:'pencil-square-o '
             bind:
                 disabled: '{!refLocaleList.selection}'
             handler: 'onEdit'
@@ -68,7 +68,7 @@ Ext.define 'Moboque.view.locale.ListView',
             text: 'ลบ'
             xtype: 'button'
             reference: 'refDeleteButton'
-            iconCls:'fa fa-minus-square'
+            iconCls:'trash-o'
             bind:
                 disabled: '{!refLocaleList.selection}'
             handler: 'onDelete'

@@ -24,9 +24,6 @@ Ext.define 'Moboque.model.PromoteImage',
         return promote.get("title") if promote
         return ''
 
-    validators:
-        description: 'presence'
-
     writerTransform: fn: (data) ->
         if data.promote
             data.promote = data.promote.id

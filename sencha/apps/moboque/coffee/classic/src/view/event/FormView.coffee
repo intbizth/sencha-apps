@@ -18,10 +18,9 @@ Ext.define 'Moboque.view.event.FormView',
         defaults:
             xtype: 'textfield'
             labelAlign: 'top'
-            allowBlank: no
-            msgTarget: 'side'
+            required: yes
+            msgTarget: 'under'
 
-        # TODO allowBlank is not working !
         items: [
             fieldLabel: '<span style="color:red;">*</span> ชื่องานอีเวนท์'
             emptyText: 'กรุณาระบุชื่องานอีเวนท์'

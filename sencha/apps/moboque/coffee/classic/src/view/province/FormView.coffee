@@ -12,13 +12,12 @@ Ext.define 'Moboque.view.province.FormView',
         margin: '10 10 10 10'
         modelValidation: yes
 
-        defaults:
+        items: [
             xtype: 'textfield'
             labelAlign: 'top'
             width: 360
-            allowBlank: no
-
-        items: [
+            xtype: 'textfield'
+            msgTarget: 'under'
             fieldLabel: '<span style="color:red;">*</span> ชื่อจังหวัด'
             emptyText: 'กรุณาระบุชื่อจังหวัด'
             bind: '{record.name}'

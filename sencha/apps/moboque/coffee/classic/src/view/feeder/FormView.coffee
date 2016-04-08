@@ -16,21 +16,24 @@ Ext.define 'Moboque.view.feeder.FormView',
             xtype: 'textfield'
             width: 360
             labelAlign: 'top'
-            allowBlank: no
+            msgTarget: 'under'
             minLength: 2
             maxLength: 255
 
         items: [
             fieldLabel: '<span style="color:red;">*</span> ชื่อหัวข้อ'
             emptyText: 'กรุณาใส่ชื่อหัวข้อ'
+            required: yes
             bind: '{record.title}'
         ,
             fieldLabel: '<span style="color:red;">*</span> รายละเอียด'
             emptyText: 'กรุณาใส่รายละเอียด'
+            required: yes
             bind: '{record.description}'
         ,
             fieldLabel: '<span style="color:red;">*</span> สถานะ'
             emptyText: 'กรุณาใส่สถานะ'
+            required: yes
             bind: '{record.state}'
         ,
             xtype: 'fieldset'

@@ -16,18 +16,17 @@ Ext.define 'Moboque.view.activity.FormView',
             xtype: 'textfield'
             width: 360
             labelAlign: 'top'
-            allowBlank: no
+            required: yes
+            msgTarget: 'under'
 
-        # TODO allowBlank is not working !
         items: [
             fieldLabel: '<span style="color:red;">*</span> ชื่อกิจกรรม'
             emptyText: 'กรุณาระบุชื่อกิจกรรม'
             bind: '{record.title}'
         ,
-            fieldLabel: 'หัวข้อย่อย'
+            fieldLabel: '<span style="color:red;">*</span> หัวข้อย่อย'
             emptyText: 'กรุณาระบุหัวข้อย่อย'
             bind: '{record.sub_title}'
-            allowBlank: yes
         ,
             xtype: 'textareafield'
             fieldLabel: '<span style="color:red;">*</span> รายละเอียด'

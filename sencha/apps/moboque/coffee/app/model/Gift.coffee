@@ -9,7 +9,3 @@ Ext.define 'Moboque.model.Gift',
         name: 'description'
         type: 'string'
     ]
-
-    validators:
-        title: 'presence'
-        description: 'presence'

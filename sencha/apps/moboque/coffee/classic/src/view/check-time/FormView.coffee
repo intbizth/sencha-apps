@@ -12,12 +12,12 @@ Ext.define 'Moboque.view.check-time.FormView',
         margin: '10 10 10 10'
         modelValidation: yes
 
-        # TODO allowBlank is not working !
         defaults:
             xtype: 'combo'
             width: 360
             labelAlign: 'top'
-            allowBlank: no
+            required: yes
+            msgTarget: 'under'
             editable: no
 
         items: [
@@ -26,7 +26,6 @@ Ext.define 'Moboque.view.check-time.FormView',
             displayField: 'fullname'
             valueField: 'id'
             queryMode: 'local'
-            msgTarget: 'side'
             bind:
                 store: '{members}'
                 selection: '{member}'
@@ -39,7 +38,6 @@ Ext.define 'Moboque.view.check-time.FormView',
             ,
                 [ 'check-out', 'Check-out' ]
             ]
-            msgTarget: 'side'
             bind: '{record.type}'
         ,
             xtype: 'container'

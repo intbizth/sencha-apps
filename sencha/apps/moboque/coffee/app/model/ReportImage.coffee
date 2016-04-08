@@ -21,9 +21,6 @@ Ext.define 'Moboque.model.ReportImage',
         return report.get("title") if report
         return ''
 
-    validators:
-        description: 'presence'
-
     writerTransform: fn: (data) ->
         if data.report
             data.report = data.report.id

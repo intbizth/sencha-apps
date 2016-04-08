@@ -15,10 +15,6 @@ Ext.define 'Moboque.view.gift.ListView',
     reference: 'refGiftList'
     headerBorders: no
 
-    listeners:
-        selectionchange: ->
-            console.log arguments
-
     columns: [
         text: 'ชื่อของฝาก'
         dataIndex: 'title'
@@ -44,7 +40,6 @@ Ext.define 'Moboque.view.gift.ListView',
             xtype: 'button'
             iconCls: 'plus'
             handler: 'onAddNew'
-
         ,
             '-'
         ,
@@ -72,8 +67,7 @@ Ext.define 'Moboque.view.gift.ListView',
             xtype: 'searchfield'
             reference: 'refSearchField'
             labelWidth: 50
-            bind:
-                store: '{gifts}'
+            bind: store: '{gifts}'
             margin: '0 10 0 0'
         ]
 

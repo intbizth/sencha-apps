@@ -42,11 +42,3 @@ Ext.define 'Moboque.model.Service',
             data.service_category = data.service_category.id
 
         return data
-
-    validators:
-        title: 'presence'
-        sub_title: 'presence'
-        detail: 'presence'
-        price: 'presence'
-        price_currency: 'presence'
-        link: 'presence'

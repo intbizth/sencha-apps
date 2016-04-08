@@ -155,12 +155,14 @@ Ext.define 'Moboque.view.base.Controller',
 # internal server error
                     if response.status == 500
                         titleMessage = response.statusText
+                        errorMessage = 'Internal server error.'
 
                     # sf validation error.
                     # TODO: handle form error with custom fn.
                     if response.status == 400
                         obj = Ext.decode response.responseText
                         titleMessage = obj.message
+                        errorMessage = 'Validation error.'
 
                         Ext.Object.each obj.errors.children, (key, value, item) ->
                             if value.hasOwnProperty('errors')

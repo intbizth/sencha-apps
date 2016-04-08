@@ -15,8 +15,3 @@ Ext.define 'Moboque.model.Report',
         name: 'description'
         type: 'string'
     ]
-
-    validators:
-        title: 'presence'
-        state: 'presence'
-        description: 'presence'

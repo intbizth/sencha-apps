@@ -18,7 +18,8 @@ Ext.define 'Moboque.view.personal-department.FormView',
             fieldLabel: '<span style="color:red;">*</span> ชื่อแผนก'
             labelAlign: 'top'
             emptyText: 'กรุณากรอกชื่อแผนก'
-            allowBlank: no
+            required: yes
+            msgTarget: 'under'
             bind: '{record.title}'
         ,
             xtype: 'fieldset'

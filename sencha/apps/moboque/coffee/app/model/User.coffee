@@ -41,9 +41,6 @@ Ext.define 'Moboque.model.User',
             setterName: 'setCountry'
     ]
 
-    validators:
-        username: 'presence'
-
     isEnabled: -> @get('enabled')
 
     getReadableRoles: ->

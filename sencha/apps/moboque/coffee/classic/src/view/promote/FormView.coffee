@@ -12,20 +12,23 @@ Ext.define 'Moboque.view.promote.FormView',
         margin: '10 10 10 10'
         modelValidation: yes
 
-        # TODO allowBlank is not working !
         defaults:
             xtype: 'textfield'
-            anchor: '100%'
+            width: 360
             labelAlign: 'top'
-            allowBlank: no
 
         items: [
             fieldLabel: 'ชื่อสถานที่-แหล่งท่องเที่ยว'
             emptyText: 'กรุณาระบุชื่อสถานที่, ร้าน หรือ แหล่งท่องเที่ยว'
+            required: yes
+            msgTarget: 'under'
             bind: '{record.title}'
         ,
+            xtype: 'textareafield'
             fieldLabel: 'คำอธิบาย'
             emptyText: 'ระบุคำอธิบายสถานที่ หรือ แหล่งท่องเที่ยว'
+            required: yes
+            msgTarget: 'under'
             bind: '{record.description}'
         ,
             xtype: 'combobox'

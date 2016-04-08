@@ -27,6 +27,3 @@ Ext.define 'Moboque.model.District',
             data.province = data.province.id
 
         return data
-
-    validators:
-        name: 'presence'

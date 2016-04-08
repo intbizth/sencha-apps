@@ -19,11 +19,10 @@ Ext.define 'Moboque.view.link.FormView',
             xtype: 'textfield'
             anchor: '100%'
             labelAlign: 'top'
-            allowBlank: no
+            required: yes
             minLength: 2
             maxLength: 255
 
-        # TODO allowBlank is not working !
         items: [
             fieldLabel: '<span style="color:red;">*</span> ชื่อเว็บ'
             emptyText: 'กรุณาระบุชื่อหรือคำอธิบายเว็บ'

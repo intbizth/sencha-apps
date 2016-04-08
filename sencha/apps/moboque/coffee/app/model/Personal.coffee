@@ -53,7 +53,3 @@ Ext.define 'Moboque.model.Personal',
             data.personal_department = data.personal_department.id
 
         return data
-
-    validators:
-        title: 'presence'
-        description: 'presence'

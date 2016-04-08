@@ -16,7 +16,6 @@ Ext.define 'Moboque.view.report-image.FormView',
             xtype: 'textfield'
             anchor: '100%'
             labelAlign: 'top'
-            allowBlank: no
 
         items: [
             fieldLabel: 'คำอธิบายภาพ'

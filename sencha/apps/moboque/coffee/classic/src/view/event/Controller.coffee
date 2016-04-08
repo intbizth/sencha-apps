@@ -16,4 +16,3 @@ Ext.define 'Moboque.view.event.Controller',
                     record: record
 
         @callParent([record, options])
-

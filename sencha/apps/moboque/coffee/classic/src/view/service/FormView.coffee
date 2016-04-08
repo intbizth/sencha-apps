@@ -16,11 +16,12 @@ Ext.define 'Moboque.view.service.FormView',
             xtype: 'textfield'
             width: 360
             labelAlign: 'top'
-            allowBlank: no
+            required: yes
+            msgTarget: 'under'
 
         items: [
             xtype: 'combobox'
-            fieldLabel: '* ชื่อหมวดหมู่'
+            fieldLabel: '<span style="color:red;">*</span> ชื่อหมวดหมู่'
             displayField: 'title'
             valueField: 'id'
             editable: no
@@ -36,7 +37,7 @@ Ext.define 'Moboque.view.service.FormView',
             fieldLabel: 'หัวข้อย่อย'
             emptyText: 'กรุณาระบุหัวข้อย่อย'
             bind: '{record.sub_title}'
-            allowBlank: yes
+            required: no
         ,
             xtype: 'textareafield'
             fieldLabel: '<span style="color:red;">*</span> รายละเอียด'
@@ -46,6 +47,8 @@ Ext.define 'Moboque.view.service.FormView',
             fieldLabel: '<span style="color:red;">*</span> ราคา'
             emptyText: 'กรุณากรอกราคา'
             bind: '{record.price}'
+            regex: /^[0-9]*$/
+            invalidText: "It's must me a number."
         ,
             xtype: 'combo'
             fieldLabel: '<span style="color:red;">*</span> สกุลเงิน'
@@ -63,10 +66,11 @@ Ext.define 'Moboque.view.service.FormView',
             ]
             bind: '{record.price_currency}'
         ,
-            fieldLabel: '<span style="color:red;">*</span> ลิงก์'
-            emptyText: 'http://'
+            fieldLabel: 'ลิงก์'
+            emptyText: 'http://www.example.com'
             vtype: 'url'
             bind: '{record.link}'
+            required: no
         ]
 
         buttons: [

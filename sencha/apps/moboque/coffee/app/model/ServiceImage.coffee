@@ -24,9 +24,6 @@ Ext.define 'Moboque.model.ServiceImage',
         return service.get("title") if service
         return ''
 
-    validators:
-        description: 'presence'
-
     writerTransform: fn: (data) ->
         if data.service
             data.service = data.service.id

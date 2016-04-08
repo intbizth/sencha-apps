@@ -65,9 +65,3 @@ Ext.define 'Moboque.model.Profile',
                 data.groups.push group.id
 
         return data
-
-    validators:
-        first_name: 'presence'
-        last_name: 'presence'
-        email: 'presence'
-        gender: 'presence'

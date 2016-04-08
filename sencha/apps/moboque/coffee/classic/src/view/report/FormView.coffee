@@ -14,12 +14,12 @@ Ext.define 'Moboque.view.report.FormView',
         margin: '10 10 10 10'
         modelValidation: yes
 
-        # TODO allowBlank is not working !
         defaults:
             xtype: 'textfield'
             anchor: '100%'
             labelAlign: 'top'
-            allowBlank: no
+            xtype: 'textfield'
+            msgTarget: 'under'
 
         items: [
             fieldLabel: '<span style="color:red;">*</span> หัวข้อเหตุฉุกเฉิน'

@@ -19,6 +19,3 @@ Ext.define 'Moboque.model.Locale',
 
     getCode: -> @get 'code'
     getName: -> @get 'name'
-
-    validators:
-        code: 'presence'

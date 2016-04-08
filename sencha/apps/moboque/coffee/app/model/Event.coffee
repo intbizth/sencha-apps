@@ -17,9 +17,3 @@ Ext.define 'Moboque.model.Event',
         type: 'date'
         dateWriteFormat: 'Y-m-d H:i:s'
     ]
-
-    validators:
-        name: 'presence'
-        location: 'presence'
-        start_date: 'presence'
-        end_date: 'presence'
