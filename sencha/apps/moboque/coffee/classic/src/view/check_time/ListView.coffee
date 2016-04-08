@@ -1,0 +1,79 @@
+Ext.define 'Moboque.view.check_time.ListView',
+    extend: 'Ext.grid.Panel'
+    alias: 'widget.wg-check-time-list'
+
+    bind:
+        store: '{checkTimes}'
+
+    viewConfig:
+        preserveScrollOnRefresh: yes
+        preserveScrollOnReload: yes
+        emptyText: 'Empty Data'
+        deferEmptyText: no
+
+    title: 'ตารางเวลาเข้าออก'
+    reference: 'refCheckTimeList'
+    headerBorders: no
+
+    columns: [
+        text: 'ชื่อสมาชิก'
+        width: 300
+        renderer: (v, m, r) ->
+            return r.getMemberName()
+    ,
+        text: 'ประเภทการลงเวลา'
+        dataIndex: 'type'
+        flex: 1
+        minWidth: 200
+    ,
+        xtype: 'datecolumn'
+        text: 'เวลาเข้าออก'
+        dataIndex: 'checktime'
+        format: 'd-m-Y H:i'
+        width: 200
+    ]
+
+    tbar:
+        scrollable: yes
+        items: [
+            text: 'เพิ่มข้อมูลเวลาเข้าออก'
+            xtype: 'button'
+            iconCls: 'plus'
+            handler: 'onAddNew'
+        ,
+            '-'
+        ,
+            text: 'แก้ไข'
+            xtype: 'button'
+            reference: 'refEditButton'
+            iconCls: 'pencil-square-o'
+            bind: widgetRecord: '{refCheckTimeList.selection}'
+            handler: 'onEdit'
+            aclCheck: yes
+        ,
+            '-'
+        ,
+            text: 'ลบ'
+            xtype: 'button'
+            reference: 'refDeleteButton'
+            iconCls: 'trash-o'
+            bind: widgetRecord: '{refCheckTimeList.selection}'
+            handler: 'onDelete'
+            aclCheck: yes
+        ,
+            '->'
+        ,
+            fieldLabel: 'ค้นหา'
+            xtype: 'searchfield'
+            reference: 'refSearchField'
+            labelWidth: 50
+            bind: store: '{checkTimes}'
+            margin: '0 10 0 0'
+        ]
+
+    bbar:
+        xtype: 'pagingtoolbar'
+        scrollable: yes
+        pageSize: 25
+        bind: store: '{checkTimes}'
+        displayInfo: yes
