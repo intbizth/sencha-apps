@@ -35,6 +35,14 @@ Ext.define 'Vcare.view.order.Controller',
                 record.store.reload()
                 dialog.close()
 
+    onShow: (btn) ->
+        record = btn.getSingleWidgetRecord()
+        dialog = @getView().add
+            xtype: 'wg-order-show'
+            data: record
+
+        dialog.show()
+
     onUpdateState: (btn) ->
         view = @getView()
         store = @getViewModel().get('transitions')

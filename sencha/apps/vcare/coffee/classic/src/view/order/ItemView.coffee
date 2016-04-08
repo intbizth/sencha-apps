@@ -1,22 +1,23 @@
-Ext.define 'Vcare.view.shipment.Show',
+Ext.define 'Vcare.view.order.Show',
     extend: 'Ext.window.Window'
-    alias: 'widget.wg-shipment-show'
+    alias: 'widget.wg-order-show'
     modal: yes
+
     initComponent: ->
         @items = []
         data = @config.data
         @items.push({
             xtype: 'grid'
             region : 'center'
-            title : 'Shipment Units'
+            title : 'Order Items'
             width: 768
             scrollable: yes
             maxHeight: 768
-            reference: 'refShipmentUnitList'
+            reference: 'refOrderItemList'
             store: Ext.create 'Ext.data.Store',
-                data: data.data.units
+                data: data.getItems().data
                 fields: [
-                    'id', 'stockable', 'inventory_name', 'inventory_state', 'shipping_state'
+                    'id', 'variant', 'product', 'unit_price', 'total', 'quantity'
                 ]
 
             columns : [
@@ -24,19 +25,23 @@ Ext.define 'Vcare.view.shipment.Show',
                 dataIndex: 'id'
             ,
                 text: 'SKU'
-                dataIndex: 'stockable'
+                dataIndex: 'variant'
                 renderer: (v,m,r) -> return v.sku
             ,
                 text: 'Name'
-                dataIndex: 'inventory_name'
+                dataIndex: 'product'
                 flex: 1
             ,
-                text: 'Inventory State'
-                dataIndex: 'inventory_state'
+                text: 'Unit Price'
+                dataIndex: 'unit_price'
                 flex: 1
             ,
-                text: 'Shipment State'
-                dataIndex: 'shipping_state'
+                text: 'Qty'
+                dataIndex: 'quantity'
+                flex: 1
+            ,
+                text: 'Total'
+                dataIndex: 'total'
                 flex: 1
 
             ]

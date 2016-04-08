@@ -31,4 +31,3 @@ Ext.define 'Vcare.model.Shipment',
         locale = (data.translations[data.current_locale] = {}) if !locale
 
         return locale['name']
-
