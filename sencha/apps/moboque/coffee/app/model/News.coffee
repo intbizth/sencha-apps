@@ -1,6 +1,5 @@
 Ext.define 'Moboque.model.News',
     extend: 'Moboque.model.Translatable'
-
     api: '/api/news/'
 
     fields: [
