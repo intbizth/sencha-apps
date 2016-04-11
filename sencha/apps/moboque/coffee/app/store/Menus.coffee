@@ -43,7 +43,7 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'members'
             ,
                 text: 'CheckTimes'
-                view: 'check-time.LayoutView'
+                view: 'check_time.LayoutView'
                 iconCls: 'fa fa-clock-o'
                 leaf: true
                 routeId: 'check-times'
@@ -53,25 +53,25 @@ Ext.define 'Moboque.store.Menus',
             iconCls: 'fa fa-mobile'
             children: [
                 text: 'Events'
-                view: 'event-account.LayoutView'
+                view: 'event_account.LayoutView'
                 iconCls: 'fa fa-calendar'
                 leaf: true
                 routeId: 'account-events'
             ,
                 text: 'Groups'
-                view: 'group-account.LayoutView'
+                view: 'group_account.LayoutView'
                 iconCls: 'fa fa-cubes'
                 leaf: true
                 routeId: 'account-groups'
             ,
                 text: 'Members'
-                view: 'member-account.LayoutView'
+                view: 'member_account.LayoutView'
                 iconCls: 'fa fa-user'
                 leaf: true
                 routeId: 'account-members'
             ,
                 text: 'CheckTimes'
-                view: 'check-time-account.LayoutView'
+                view: 'check_time_account.LayoutView'
                 iconCls: 'fa fa-clock-o'
                 leaf: true
                 routeId: 'account-check-times'
@@ -87,7 +87,7 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'activities'
             ,
                 text: 'ActivityImages'
-                view: 'activity-image.LayoutView'
+                view: 'activity_image.LayoutView'
                 iconCls: 'fa fa-picture-o'
                 leaf: true
                 routeId: 'activity-images'
@@ -99,13 +99,13 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'services'
             ,
                 text: 'ServiceCategories'
-                view: 'service-category.LayoutView'
+                view: 'service_category.LayoutView'
                 iconCls: 'fa fa-cubes'
                 leaf: true
                 routeId: 'service-categories'
             ,
                 text: 'ServiceImages'
-                view: 'service-image.LayoutView'
+                view: 'service_image.LayoutView'
                 iconCls: 'fa fa-picture-o'
                 leaf: true
                 routeId: 'service-images'
@@ -115,7 +115,7 @@ Ext.define 'Moboque.store.Menus',
             iconCls: 'fa fa-book'
             children: [
                 text: 'เบอร์โทรฉุกเฉิน'
-                view: 'emergency-call.LayoutView'
+                view: 'emergency_call.LayoutView'
                 iconCls: 'fa fa-ambulance'
                 leaf: true
                 routeId: 'emergency-call'
@@ -139,13 +139,13 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'promotes'
             ,
                 text: 'หมวดหมู่แนะนำ'
-                view: 'promote-category.LayoutView'
+                view: 'promote_category.LayoutView'
                 iconCls: 'fa fa-slideshare'
                 leaf: true
                 routeId: 'promotes-category'
             ,
                 text: 'รูปภาพ'
-                view: 'promote-image.LayoutView'
+                view: 'promote_image.LayoutView'
                 iconCls: 'fa fa-photo'
                 leaf: true
                 routeId: 'promotes-image'
@@ -184,7 +184,7 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'districts'
             ,
                 text: 'SubDistricts'
-                view: 'sub-district.LayoutView'
+                view: 'sub_district.LayoutView'
                 iconCls: 'fa fa-street-view'
                 leaf: true
                 routeId: 'sub-districts'
@@ -194,7 +194,7 @@ Ext.define 'Moboque.store.Menus',
             iconCls: 'fa fa-camera-retro'
             children: [
                 text: 'GalleryCategories'
-                view: 'gallery-category.LayoutView'
+                view: 'gallery_category.LayoutView'
                 iconCls: 'fa fa-picture-o'
                 leaf: true
                 routeId: 'gallery-categories'
@@ -210,7 +210,7 @@ Ext.define 'Moboque.store.Menus',
             iconCls: 'fa fa-users'
             children: [
                 text: 'PersonalDepartments'
-                view: 'personal-department.LayoutView'
+                view: 'personal_department.LayoutView'
                 iconCls: 'fa fa-server'
                 leaf: true
                 routeId: 'personal-departments'
@@ -238,13 +238,13 @@ Ext.define 'Moboque.store.Menus',
                 routeId: 'news'
             ,
                 text: 'News Category'
-                view: 'news-category.LayoutView'
+                view: 'news_category.LayoutView'
                 iconCls: 'fa fa-newspaper-o'
                 leaf: true
                 routeId: 'new-category'
             ,
                 text: 'NewsImage'
-                view: 'news-image.LayoutView'
+                view: 'news_image.LayoutView'
                 iconCls: 'fa fa-newspaper-o'
                 leaf: true
                 routeId: 'news-image'
@@ -257,7 +257,7 @@ Ext.define 'Moboque.store.Menus',
             routeId: 'reports'
         ,
             text: 'Reports Image'
-            view: 'report-image.LayoutView'
+            view: 'report_image.LayoutView'
             iconCls: 'fa fa-file-text-o'
             leaf: true
             routeId: 'reports-images'
