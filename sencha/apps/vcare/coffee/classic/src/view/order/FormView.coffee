@@ -2,13 +2,16 @@ Ext.define 'Vcare.view.order.FormView',
     extend: 'Vcare.view.base.Window'
     alias: 'widget.wg-order-form'
 
+    width: 400
+    modal: yes
+
     bind:
         title: '{title}'
 
     items:
         xtype: 'form'
         layout: 'hbox'
-        bodyPadding: 10
+
 
         defaults:
             xtype: 'container'
@@ -31,18 +34,13 @@ Ext.define 'Vcare.view.order.FormView',
                 allowBlank: false
                 fieldLabel: 'First name'
                 bind: '{record.billing_address.first_name}'
-
             ,
-
                 allowBlank: false
                 fieldLabel: 'Last name'
                 bind: '{record.billing_address.last_name}'
-
             ,
-
                 fieldLabel: 'Phone number'
                 bind: '{record.billing_address.phone_number}'
-
             ,
 
                 fieldLabel: 'Company'

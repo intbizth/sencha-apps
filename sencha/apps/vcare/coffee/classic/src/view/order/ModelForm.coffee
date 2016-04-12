@@ -8,22 +8,15 @@ Ext.define 'Vcare.view.order.ModelForm',
 
     onSubmitSuccess: -> @get('orders').reload()
 
-    beforeSubmit: (record) ->
-        if record.phantom
-            record.getUser().set(
-                'plain_password',
-                Math.random().toString(36).slice(-10)
-            )
-
     isDirty: ->
-        @get('record').dirty
+        @get('record').dirty || @get('record.billing_address').dirty || @get('record.shipping_address').dirty
 
     commit: ->
-        # need to call user first
-        @get('record.user').commit()
+        @get('record.billing_address').commit()
+        @get('record.shipping_address').commit()
         @get('record').commit()
 
     reject: ->
-        # need to call user first
-        @get('record').getUser().reject()
+        @get('record.billing_address').reject()
+        @get('record.shipping_address').reject()
         @get('record').reject()

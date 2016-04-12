@@ -37,10 +37,13 @@ Ext.define 'Vcare.view.order.Controller',
 
     onShow: (btn) ->
         record = btn.getSingleWidgetRecord()
+        store = @getViewModel().get('currencies')
+        currency = store.findRecord('code', record.get 'currency')
+
         dialog = @getView().add
             xtype: 'wg-order-show'
             data: record
-
+            exchangeRate: currency.get 'exchange_rate'
         dialog.show()
 
     onUpdateState: (btn) ->

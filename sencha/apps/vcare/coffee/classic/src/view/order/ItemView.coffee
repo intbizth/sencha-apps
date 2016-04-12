@@ -6,6 +6,7 @@ Ext.define 'Vcare.view.order.Show',
     initComponent: ->
         @items = []
         data = @config.data
+        exchange = @config.exchangeRate
         @items.push({
             xtype: 'grid'
             region : 'center'
@@ -14,41 +15,48 @@ Ext.define 'Vcare.view.order.Show',
             scrollable: yes
             maxHeight: 768
             reference: 'refOrderItemList'
-            store: Ext.create 'Ext.data.Store',
+            store:
+                type: 'store-order-items'
                 data: data.getItems().data
-                fields: [
-                    'id', 'variant', 'product', 'unit_price', 'total', 'quantity'
-                ]
 
             columns : [
                 text: 'ID'
                 dataIndex: 'id'
+                width: 120
             ,
                 text: 'SKU'
                 dataIndex: 'variant'
                 renderer: (v,m,r) -> return v.sku
             ,
                 text: 'Name'
-                dataIndex: 'product'
+                dataIndex: 'variant'
                 flex: 1
+                renderer: (v,m,r) ->
+                    data = r.get('variant').product
+
+                    locale = data.translations[data.current_locale]
+                    locale = data.translations[data.fallback_locale] if !locale
+                    locale = (data.translations[data.current_locale] = {}) if !locale
+
+                    return locale['name']
+
             ,
                 text: 'Unit Price'
                 dataIndex: 'unit_price'
                 flex: 1
+                renderer: (v,m,r) -> return (r.getPrice(v) * exchange).toFixed(2)
             ,
                 text: 'Qty'
                 dataIndex: 'quantity'
                 flex: 1
+                align: 'center'
             ,
                 text: 'Total'
                 dataIndex: 'total'
                 flex: 1
-
+                renderer: (v,m,r) -> return (r.getPrice(v) * exchange).toFixed(2)
             ]
-
-
         })
-
 
         @callParent(arguments)
         @center()

@@ -52,6 +52,22 @@ Ext.define 'Vcare.model.Order',
             associationKey: 'customer'
             getterName: 'getCustomer'
             setterName: 'setCustomer'
+    ,
+        name: 'billing_address'
+        reference:
+            type: 'Address'
+            role: 'billing_address'
+            associationKey: 'billing_address'
+            getterName: 'getBillingAddress'
+            setterName: 'setBillingAddress'
+    ,
+        name: 'shipping_address'
+        reference:
+            type: 'Address'
+            role: 'shipping_address'
+            associationKey: 'shipping_address'
+            getterName: 'getShippingAddress'
+            setterName: 'setShippingAddress'
     ]
 
     hasMany: [
@@ -64,3 +80,14 @@ Ext.define 'Vcare.model.Order',
     ]
 
     getPrice: (number) -> number / 100
+
+    writerTransform: fn: (data) ->
+        delete data.customer
+        delete data.items
+
+        if data.billing_address
+            delete data.billing_address.id
+        if data.shipping_address
+            delete data.shipping_address.id
+
+        return data

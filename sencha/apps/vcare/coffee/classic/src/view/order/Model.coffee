@@ -3,6 +3,10 @@ Ext.define 'Vcare.view.order.Model',
     alias: 'viewmodel.vm-order'
 
     stores:
+        currencies:
+            type: 'store-currencies'
+            autoLoad: yes
+
         orders:
             type: 'store-orders'
             autoLoad: yes
@@ -10,17 +14,10 @@ Ext.define 'Vcare.view.order.Model',
         transitions:
             type: 'store-transitions'
 
-    createCustomer: (record) ->
-        if !record.getCustomer()
-            record.setCustomer @createNewCustomer()
-
-        return record.getCustomer()
-
     createRecord: (record) ->
         return record if record
 
         record = new (@data.orders.getModel())()
-        @createCustomer record
 
         return record
 
