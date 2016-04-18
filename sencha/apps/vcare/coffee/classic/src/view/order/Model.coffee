@@ -3,13 +3,17 @@ Ext.define 'Vcare.view.order.Model',
     alias: 'viewmodel.vm-order'
 
     stores:
-        currencies:
-            type: 'store-currencies'
-            autoLoad: yes
-
         orders:
             type: 'store-orders'
             autoLoad: yes
+
+        currencies:
+            type: 'store-currencies'
+
+        countries:
+            type: 'store-countries'
+            autoLoad: yes
+            pageSize: 250
 
         transitions:
             type: 'store-transitions'

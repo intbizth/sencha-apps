@@ -11,7 +11,6 @@ Ext.define 'Vcare.model.Country',
     ,
         name: 'name'
         type: 'string'
-        mapping: (data) -> data.code
     ,
         name: 'enabled'
         type: 'boolean'

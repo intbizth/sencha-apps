@@ -15,8 +15,10 @@ Ext.define 'Vcare.view.order.Controller',
                 type: 'vm-order-form'
                 data:
                     record: record
+        store = @getViewModel().get('countries')
 
         @callParent([record, options])
+
 
     onOrderTransitionUpdateButtonClick: (btn) ->
         dialog = btn.up('window')
@@ -38,13 +40,28 @@ Ext.define 'Vcare.view.order.Controller',
     onShow: (btn) ->
         record = btn.getSingleWidgetRecord()
         store = @getViewModel().get('currencies')
-        currency = store.findRecord('code', record.get 'currency')
+        view = @getView()
 
-        dialog = @getView().add
-            xtype: 'wg-order-show'
-            data: record
-            exchangeRate: currency.get 'exchange_rate'
-        dialog.show()
+        showOrder = ->
+            if store.getTotalCount() > 0
+                currency = store.findRecord('code', record.get 'currency')
+                dialog = view.add
+                    xtype: 'wg-order-show'
+                    data: record
+                    exchangeRate: currency.get 'exchange_rate'
+                dialog.show()
+
+        if store.getTotalCount() > 0
+            showOrder()
+        else
+            view.mask('Loading ...')
+            store.load  callback: (records, operation, success) ->
+                if success == true
+                    view.unmask()
+                    showOrder()
+                else
+                    view.unmask()
+                    alert('Cannot load !')
 
     onUpdateState: (btn) ->
         view = @getView()
