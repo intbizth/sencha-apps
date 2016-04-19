@@ -47,7 +47,7 @@ Ext.define 'Vcare.view.customer.FormView',
                 queryMode: 'local'
                 bind:
                     store: '{locales}'
-                    selection: '{record.user.id}'
+                    selection: '{record.user.locale}'
             ,
                 xtype: 'checkboxfield'
                 boxLabel: 'เปิดการใช้งาน '

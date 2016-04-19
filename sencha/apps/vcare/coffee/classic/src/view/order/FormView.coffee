@@ -56,8 +56,10 @@ Ext.define 'Vcare.view.order.FormView',
             ,
                 xtype: 'combobox'
                 fieldLabel: 'Country'
-                displayField: 'code'
+                displayField: 'name'
+                valueField: 'code'
                 queryMode: 'local'
+                forceSelection: yes
                 bind:
                     store: '{countries}'
                     selection: '{record.billing_address.country_code}'
@@ -100,7 +102,8 @@ Ext.define 'Vcare.view.order.FormView',
 
                 xtype: 'combobox'
                 fieldLabel: 'Country'
-                displayField: 'code'
+                displayField: 'name'
+                valueField: 'code'
                 queryMode: 'local'
                 bind:
                     store: '{countries}'

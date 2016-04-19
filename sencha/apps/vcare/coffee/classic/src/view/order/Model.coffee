@@ -12,11 +12,16 @@ Ext.define 'Vcare.view.order.Model',
 
         countries:
             type: 'store-countries'
-            autoLoad: yes
             pageSize: 250
 
         transitions:
             type: 'store-transitions'
+
+    createShippingAddress: (record) ->
+        return record.getShippingAddress() if record and record.getShippingAddress()
+
+    createBillingAddress: (record) ->
+        return record.getBillingAddress() if record and record.getBillingAddress()
 
     createRecord: (record) ->
         return record if record
@@ -26,6 +31,10 @@ Ext.define 'Vcare.view.order.Model',
         return record
 
     prepareData: (record) ->
+        billing = @createBillingAddress record
+        shipping = @createShippingAddress record
         record = @createRecord record
+        record.setBillingAddress billing
+        record.setShippingAddress shipping
 
         return record

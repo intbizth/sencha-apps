@@ -2,6 +2,23 @@ Ext.define 'Vcare.view.order.Controller',
     extend: 'Vcare.view.base.Controller'
     alias: 'controller.ctrl-order'
 
+    onEdit: (btn) ->
+        view = @getView()
+        store = @getViewModel().get('countries')
+        me = @
+
+        if store.getTotalCount() > 0
+            me.createDialog(btn.getSingleWidgetRecord())
+        else
+            view.mask('Loading ...')
+            store.load  callback: (records, operation, success) ->
+                if success == true
+                    view.unmask()
+                    me.createDialog(btn.getSingleWidgetRecord())
+                else
+                    view.unmask()
+                    alert('Cannot load !')
+
     # @private
     createDialog: (record) ->
         vm = @getViewModel()
@@ -15,10 +32,8 @@ Ext.define 'Vcare.view.order.Controller',
                 type: 'vm-order-form'
                 data:
                     record: record
-        store = @getViewModel().get('countries')
 
         @callParent([record, options])
-
 
     onOrderTransitionUpdateButtonClick: (btn) ->
         dialog = btn.up('window')
