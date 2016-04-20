@@ -99,7 +99,6 @@ Ext.define 'Vcare.view.order.FormView',
                 fieldLabel: 'City'
                 bind: '{record.shipping_address.city}'
             ,
-
                 xtype: 'combobox'
                 fieldLabel: 'Country'
                 displayField: 'name'
