@@ -91,6 +91,7 @@ Ext.define 'Vcare.model.Order',
             delete data.billing_address.id
         if data.shipping_address
             delete data.shipping_address.id
+
         if data.billing_address.country_code
             data.billing_address.country_code = store.findRecord('id', data.billing_address.country_code.id).get 'code'
         if data.shipping_address.country_code

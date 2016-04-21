@@ -39,7 +39,6 @@ Ext.define 'Vcare.view.order.Show',
                     locale = (data.translations[data.current_locale] = {}) if !locale
 
                     return locale['name']
-
             ,
                 text: 'Unit Price'
                 dataIndex: 'unit_price'

@@ -12,7 +12,6 @@ Ext.define 'Vcare.view.order.FormView',
         xtype: 'form'
         layout: 'hbox'
 
-
         defaults:
             xtype: 'container'
             layout: 'anchor'
@@ -59,20 +58,18 @@ Ext.define 'Vcare.view.order.FormView',
                 displayField: 'name'
                 valueField: 'code'
                 queryMode: 'local'
-                forceSelection: yes
                 bind:
                     store: '{countries}'
                     selection: '{record.billing_address.country_code}'
-
             ,
                 fieldLabel: 'Postcode',
                 bind: '{record.billing_address.postcode}'
 
             ]
         ,
-            xtype: 'fieldset',
-            title: 'Shipping Address',
-            defaultType: 'textfield',
+            xtype: 'fieldset'
+            title: 'Shipping Address'
+            defaultType: 'textfield'
             defaults: {
                 anchor: '100%'
             },
