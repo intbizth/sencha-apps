@@ -19,50 +19,45 @@ Ext.define 'Vcare.view.shipment.Controller',
         @callParent([record, options])
 
     onSplit: (btn) ->
-        shipment_id = @currentShipment
-        Ext.MessageBox.confirm 'Confirm', 'Are you sure you want to split these items?', (btnText) ->
-            if btnText == 'yes'
-                dialog = btn.up('window')
-                store = @getViewModel().get('shipments')
-                selModel = btn.up('grid').getSelectionModel()
-                items = []
+        shipmentId = @currentShipment
+        selModel = btn.up('grid').getSelectionModel()
+        unitStore = btn.up('grid').getStore()
 
-                for item in selModel.getSelection()
+        if unitStore.getTotalCount() <= selModel.getCount()
+            @failureAlert('Please remain at least one item for this shipment !')
+        else
+            Ext.MessageBox.confirm 'Confirm', 'Are you sure you want to split these items?', (btnText) ->
+                if btnText == 'yes'
+                    dialog = btn.up('window')
+                    store = @getViewModel().get('shipments')
+                    items = []
 
-                    items.push(item.id)
+                    for item in selModel.getSelection()
 
-                dialog.mask('Splitting the shipment ...')
+                        items.push(item.id)
 
-                store.splitShipment
-                    items: items
-                    params:
-                        id: shipment_id
-                    callback: (success) =>
-                        @successAlert('Split shipment completely !')
-                        dialog.close()
+                    dialog.mask('Splitting the shipment ...')
 
-        ,this
-
+                    store.splitShipment
+                        items: items
+                        params:
+                            id: shipmentId
+                        callback: (success) =>
+                            @successAlert('Split shipment completely !')
+                            dialog.close()
+            ,this
 
     onShow: (btn) ->
         record = btn.getSingleWidgetRecord()
+        @currentShipment = record.get 'id'
         dialog = @getView().add
             xtype: 'wg-shipment-show'
             data: record
 
         dialog.show()
 
-    onShowSplit: (btn) ->
-        record = btn.getSingleWidgetRecord()
-        if record.data.units.length > 1
-            @currentShipment = record.data.id
-            dialog = @getView().add
-                xtype: 'wg-shipment-split'
-                data: record
-
-            dialog.show()
-        else
-            alert('Not enough items to split !')
+    onSelectionChange: (sm, selections) ->
+        @getReferences().splitButton.setDisabled(selections.length == 0)
 
     onShipmentTransitionUpdateButtonClick: (btn) ->
         dialog = btn.up('window')

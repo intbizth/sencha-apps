@@ -72,14 +72,6 @@ Ext.define 'Vcare.view.shipment.ListView',
             handler: 'onUpdateState'
             aclCheck: yes
         ,
-            '-'
-        ,
-#            text: 'Split Shipment'
-#            iconCls:'check-square'
-#            bind: widgetRecord: '{refShipmentList.selection}'
-#            handler: 'onShowSplit'
-#            aclCheck: yes
-#        ,
             '->'
         ,
             fieldLabel: 'Search'

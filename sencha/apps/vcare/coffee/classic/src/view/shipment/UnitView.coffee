@@ -38,12 +38,27 @@ Ext.define 'Vcare.view.shipment.Show',
                 text: 'Shipment State'
                 dataIndex: 'shipping_state'
                 flex: 1
-
             ]
 
+            selModel:
+                type: 'checkboxmodel'
+                listeners:
+                    selectionchange: 'onSelectionChange'
+
+            tbar:
+                items: [
+                    reference: 'splitButton'
+                    disabled: yes
+                    text: 'Split items into a new shipment'
+                    iconCls:'external-link '
+                    handler: 'onSplit'
+                ]
 
         })
 
+        if data.data.units.length <= 1
+            delete @items[0].selModel
+            delete @items[0].tbar
 
         @callParent(arguments)
         @center()
