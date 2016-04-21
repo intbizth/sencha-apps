@@ -38,9 +38,11 @@ Ext.define 'Vcare.view.order.ListView',
 
     tbar:
         items: [
-            text: 'Add New'
-            iconCls: 'plus'
-            handler: 'onAddNew'
+            text: 'Show Items'
+            iconCls: 'list-alt'
+            bind: widgetRecord: '{refOrderList.selection}'
+            handler: 'onShow'
+            aclCheck: yes
         ,
             text: 'Edit'
             iconCls:'pencil-square-o '

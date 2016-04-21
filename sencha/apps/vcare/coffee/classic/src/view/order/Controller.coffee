@@ -2,6 +2,23 @@ Ext.define 'Vcare.view.order.Controller',
     extend: 'Vcare.view.base.Controller'
     alias: 'controller.ctrl-order'
 
+    onEdit: (btn) ->
+        view = @getView()
+        store = @getViewModel().get('countries')
+        me = @
+
+        if store.getTotalCount() > 0
+            me.createDialog(btn.getSingleWidgetRecord())
+        else
+            view.mask('Loading ...')
+            store.load  callback: (records, operation, success) ->
+                if success == true
+                    view.unmask()
+                    me.createDialog(btn.getSingleWidgetRecord())
+                else
+                    view.unmask()
+                    alert('Cannot load !')
+
     # @private
     createDialog: (record) ->
         vm = @getViewModel()
@@ -34,6 +51,32 @@ Ext.define 'Vcare.view.order.Controller',
                 # reload grid
                 record.store.reload()
                 dialog.close()
+
+    onShow: (btn) ->
+        record = btn.getSingleWidgetRecord()
+        store = @getViewModel().get('currencies')
+        view = @getView()
+
+        showOrder = ->
+            if store.getTotalCount() > 0
+                currency = store.findRecord('code', record.get 'currency')
+                dialog = view.add
+                    xtype: 'wg-order-show'
+                    data: record
+                    exchangeRate: currency.get 'exchange_rate'
+                dialog.show()
+
+        if store.getTotalCount() > 0
+            showOrder()
+        else
+            view.mask('Loading ...')
+            store.load  callback: (records, operation, success) ->
+                if success == true
+                    view.unmask()
+                    showOrder()
+                else
+                    view.unmask()
+                    alert('Cannot load !')
 
     onUpdateState: (btn) ->
         view = @getView()

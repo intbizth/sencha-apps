@@ -9,7 +9,9 @@ Ext.define 'Vcare.view.shipment.Show',
             xtype: 'grid'
             region : 'center'
             title : 'Shipment Units'
-            width: 800
+            width: 768
+            scrollable: yes
+            maxHeight: 768
             reference: 'refShipmentUnitList'
             store: Ext.create 'Ext.data.Store',
                 data: data.data.units
