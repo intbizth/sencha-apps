@@ -6,6 +6,7 @@ Ext.define 'Vcare.view.order.Model',
         orders:
             type: 'store-orders'
             autoLoad: yes
+            pageSize: 3
 
         currencies:
             type: 'store-currencies'
@@ -13,6 +14,9 @@ Ext.define 'Vcare.view.order.Model',
         countries:
             type: 'store-countries'
             pageSize: 250
+
+        payments:
+            type: 'store-payments'
 
         transitions:
             type: 'store-transitions'

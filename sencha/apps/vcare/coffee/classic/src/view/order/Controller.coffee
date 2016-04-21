@@ -76,7 +76,28 @@ Ext.define 'Vcare.view.order.Controller',
                     showOrder()
                 else
                     view.unmask()
-                    alert('Cannot load !')
+                    @failureAlert('Cannot load !')
+
+    onShowPayments: (btn) ->
+        record = btn.getSingleWidgetRecord()
+        store = @getViewModel().get('payments')
+        view = @getView()
+
+        showPayments = ->
+            dialog = view.add
+                xtype: 'wg-payments-show'
+                data: record
+
+            dialog.show()
+
+        view.mask('Loading ...')
+        store.load  callback: (records, operation, success) ->
+            if success == true
+                view.unmask()
+                showPayments()
+            else
+                view.unmask()
+                @failureAlert('Cannot load !')
 
     onUpdateState: (btn) ->
         view = @getView()

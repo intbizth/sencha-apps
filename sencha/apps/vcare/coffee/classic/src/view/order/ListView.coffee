@@ -44,6 +44,12 @@ Ext.define 'Vcare.view.order.ListView',
             handler: 'onShow'
             aclCheck: yes
         ,
+            text: 'Show Payments'
+            iconCls: 'credit-card-alt'
+            bind: widgetRecord: '{refOrderList.selection}'
+            handler: 'onShowPayments'
+            aclCheck: yes
+        ,
             text: 'Edit'
             iconCls:'pencil-square-o '
             bind: widgetRecord: '{refOrderList.selection}'
