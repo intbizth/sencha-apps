@@ -77,6 +77,13 @@ Ext.define 'Vcare.model.Order',
         associationKey: 'items'
         getterName: 'getItems'
         setterName: 'setItems'
+    ,
+        name: 'payments'
+        model: 'Payment'
+        role: 'payments'
+        associationKey: 'payments'
+        getterName: 'getPayments'
+        setterName: 'setPayments'
     ]
 
     getPrice: (number) -> number / 100
