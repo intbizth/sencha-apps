@@ -53,7 +53,7 @@ Ext.define 'Vcare.view.product.FormView',
             xtype: 'wg-product-form-main'
         ,
             itemId: 'attribute'
-            html: 'ATTRIBUTE'
+            xtype: 'wg-product-form-attribute'
         ,
             itemId: 'categorization'
             xtype: 'wg-product-form-categorization'
